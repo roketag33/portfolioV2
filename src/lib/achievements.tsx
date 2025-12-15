@@ -37,5 +37,13 @@ export const ACHIEVEMENTS: Record<string, Achievement> = {
         xp: 30,
         icon: '🖱️',
         secret: true
+    },
+    TIME_TRAVELER: {
+        id: 'TIME_TRAVELER',
+        title: 'Time Traveler',
+        description: 'You visited the beginning of my journey.',
+        xp: 50,
+        icon: '⏳',
+        secret: true
     }
 }
