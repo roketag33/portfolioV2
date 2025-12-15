@@ -25,9 +25,11 @@ export default function Header() {
 
             <div className="flex items-center gap-4">
                 {/* Gamification Badge Placeholder */}
-                <Button variant="outline" className="rounded-full hidden md:flex border-white/20 hover:bg-white/10 hover:text-white">
-                    Contact
-                </Button>
+                <Link href="/contact">
+                    <Button variant="outline" className="rounded-full hidden md:flex border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white hover:border-white/40">
+                        Contact
+                    </Button>
+                </Link>
             </div>
         </motion.header>
     )

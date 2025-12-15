@@ -6,6 +6,9 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { GamificationProvider } from "@/context/GamificationContext";
 
+import LiquidCursor from '@/components/ui/liquid-cursor'
+import { Toaster } from 'sonner'
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -37,6 +40,7 @@ export default function RootLayout({
             {children}
             <Footer />
           </SmoothScroll>
+          <Toaster />
         </GamificationProvider>
       </body>
     </html>

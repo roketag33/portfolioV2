@@ -1,6 +1,6 @@
-'use client'
 import { motion } from 'framer-motion'
-import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+import MagneticButton from '@/components/ui/magnetic-button'
 
 const title = "CREATIVE\nDEVELOPER"
 
@@ -39,14 +39,18 @@ export default function Hero() {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 1, duration: 0.5 }}
-                    className="mt-10 flex gap-4"
+                    className="mt-10 flex gap-6"
                 >
-                    <Button size="lg" className="rounded-full px-8 text-lg h-14 bg-foreground text-background hover:bg-foreground/90 transition-transform hover:scale-105 active:scale-95">
-                        My Works
-                    </Button>
-                    <Button variant="ghost" size="lg" className="rounded-full px-8 text-lg h-14 border border-white/10 hover:bg-white/5">
-                        Contact
-                    </Button>
+                    <Link href="/work" className="block">
+                        <MagneticButton variant="primary">
+                            My Works
+                        </MagneticButton>
+                    </Link>
+                    <Link href="/contact" className="block">
+                        <MagneticButton variant="secondary">
+                            Contact
+                        </MagneticButton>
+                    </Link>
                 </motion.div>
             </div>
         </section>
