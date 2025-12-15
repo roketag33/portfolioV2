@@ -20,8 +20,43 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Alexandre Sarrazin | Creative Developer",
-  description: "Portfolio développeur Fullstack créatif. Next.js, GSAP, 3D.",
+  title: {
+    default: "Alexandre Sarrazin | Creative Developer",
+    template: "%s | Alexandre Sarrazin"
+  },
+  description: "Creative Fullstack Developer specializing in Next.js, WebGL, 3D interactions, and modern UI design. Based in Bordeaux.",
+  keywords: ["Creative Developer", "Next.js", "React", "WebGL", "Three.js", "GSAP", "Frontend", "Fullstack", "Bordeaux"],
+  authors: [{ name: "Alexandre Sarrazin", url: "https://roketag.com" }],
+  creator: "Alexandre Sarrazin",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://roketag.com",
+    title: "Alexandre Sarrazin | Creative Developer",
+    description: "Creative Fullstack Developer specializing in Next.js, WebGL, and modern UI design.",
+    siteName: "Alexandre Sarrazin Portfolio",
+    images: [
+      {
+        url: "/og-image.jpg", // Needs to be added to public later or generated
+        width: 1200,
+        height: 630,
+        alt: "Alexandre Sarrazin Portfolio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Alexandre Sarrazin | Creative Developer",
+    description: "Creative Fullstack Developer specializing in Next.js, WebGL, and modern UI design.",
+    // images: ["/twitter-image.jpg"],
+    creator: "@roketag", // Placeholder
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+  metadataBase: new URL("https://roketag.com"),
 };
 
 export default function RootLayout({
