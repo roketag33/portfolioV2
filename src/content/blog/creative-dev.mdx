@@ -1,0 +1,30 @@
+---
+title: 'L''art du Creative Development'
+date: '2025-05-20'
+excerpt: 'Comment j''ai intégré un jeu Snake directement dans mon blog grâce à MDX et React.'
+tags: ['Next.js', 'MDX', 'GameDev']
+readTime: '6 min read'
+---
+
+# Introduction
+
+Bienvenue sur mon blog ! Ce n'est pas un blog classique. Grâce à **MDX**, je peux mélanger du contenu éditorial et des composants React interactifs.
+
+## La preuve par l'exemple
+
+Ci-dessous, ce n'est pas une image, c'est le composant `<SnakeGame />` que j'ai développé pour la section **Lab**, importé directement ici :
+
+<div className="my-12">
+  <SnakeGame />
+</div>
+
+## Comment ça marche ?
+
+Le code est très simple. J'utilise `next-mdx-remote` pour parser ce fichier Markdown et remplacer les balises HTML par mes composants custom.
+
+```javascript
+// C'est aussi simple que ça
+<MDXRemote source={source} components={{ SnakeGame }} />
+```
+
+C'est la puissance du **Creative Development** : briser la barrière entre le contenu statique et l'expérience utilisateur.
