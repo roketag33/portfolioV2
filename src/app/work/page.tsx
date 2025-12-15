@@ -16,7 +16,7 @@ export default function WorkPage() {
                     </h1>
                 </motion.div>
 
-                <WorkList />
+                <WorkList showHeader={false} />
             </div>
         </main>
     )

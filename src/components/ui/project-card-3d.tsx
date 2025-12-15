@@ -1,8 +1,6 @@
 'use client'
 import React, { useRef } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
-import { cn } from '@/lib/utils'
-
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -17,7 +15,7 @@ interface ProjectCard3DProps {
     href?: string;
 }
 
-export const ProjectCard33D = ({ title, category, image, year, desc, tags, priority = false, href }: ProjectCard3DProps) => {
+export const ProjectCard3D = ({ title, category, image, year, desc, tags, priority = false, href }: ProjectCard3DProps) => {
     const cardRef = useRef<HTMLDivElement>(null);
 
     // Mouse position state
@@ -107,34 +105,59 @@ export const ProjectCard33D = ({ title, category, image, year, desc, tags, prior
                     transition={{ duration: 0.3 }}
                 >
                     <div className="flex items-center justify-between mb-2">
-                        <span className="text-secondary-foreground/80 text-sm font-mono tracking-wider uppercase">{category}</span>
-                        <span className="text-white/50 text-xs font-mono border border-white/10 px-2 py-1 rounded-full">{year}</span>
+                        <span className="text-white/80 text-sm font-mono tracking-wider uppercase">{category}</span>
+                        <span className="text-white/60 text-xs font-mono border border-white/20 px-2 py-1 rounded-full">{year}</span>
                     </div>
 
-                    <h3 className="text-2xl font-bold text-white mb-2 leading-tight group-hover:text-primary transition-colors">
+                    <h3 className="text-2xl font-bold text-white mb-2 leading-tight group-hover:text-white transition-colors">
                         {title}
                     </h3>
-            </div>
-        </motion.div>
-    )
 
-    return (
-        <div
-            className={cn(
-                "group relative w-full aspect-[4/3] perspective-1000", // Perspective on PARENT
-                className
-            )}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            ref={ref}
-        >
-            {href ? (
-                <Link href={href} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
-                    {CardContent}
-                </Link>
-            ) : (
-                CardContent
-            )}
-        </div>
-    )
-}
+                    {/* Description and Tags Reveal on Hover */}
+                    {(desc || tags) && (
+                        <motion.div
+                            variants={{
+                                initial: { opacity: 0, height: 0, marginTop: 0 },
+                                hover: { opacity: 1, height: 'auto', marginTop: 8 }
+                            }}
+                            transition={{ duration: 0.3, delay: 0.1 }}
+                            className="overflow-hidden"
+                        >
+                            {desc && (
+                                <p className="text-sm text-gray-300 line-clamp-3 mb-3">
+                                    {desc}
+                                </p>
+                            )}
+
+                            {tags && tags.length > 0 && (
+                                <div className="flex flex-wrap gap-2">
+                                    {tags.slice(0, 3).map((tag, i) => (
+                                        <span key={i} className="text-[10px] uppercase tracking-wider text-white bg-white/10 px-2 py-1 rounded border border-white/20">
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
+                        </motion.div>
+                    )}
+                </motion.div>
+            </div>
+
+            {/* Border Glow - Depth 4 */}
+            <div
+                style={{ transform: 'translateZ(40px)' }}
+                className="absolute inset-0 rounded-xl ring-1 ring-white/10 group-hover:ring-primary/50 transition-all duration-300 pointer-events-none"
+            />
+        </motion.div>
+    );
+
+    if (href) {
+        return (
+            <Link href={href} className="block w-full h-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-xl">
+                {CardContent}
+            </Link>
+        )
+    }
+
+    return CardContent;
+};

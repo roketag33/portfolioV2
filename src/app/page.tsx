@@ -27,7 +27,7 @@ export default function Home() {
     <main className="min-h-screen bg-background text-foreground">
       <Hero />
       <About />
-      <WorkList limit={3} title="Recent Works" />
+      <WorkList limit={3} showHeader={false} />
     </main>
   )
 }

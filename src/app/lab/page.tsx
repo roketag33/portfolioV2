@@ -1,7 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import ProjectCard3D from '@/components/ui/project-card-3d'
+import { ProjectCard3D } from '@/components/ui/project-card-3d'
 
 const EXPERIMENTS = [
     {
@@ -10,7 +10,8 @@ const EXPERIMENTS = [
         category: 'Mini Game',
         image: 'https://images.unsplash.com/photo-1628260412297-a3377e45006f?w=800&q=80', // Arcade/Retro vibe placeholder
         href: '/lab/snake',
-        description: 'Classic Snake game with achievements and arcade mode.'
+        description: 'Classic Snake game with achievements and arcade mode.',
+        year: '2025'
     },
     {
         id: 'fractal',
@@ -18,7 +19,8 @@ const EXPERIMENTS = [
         category: 'WebGL Shader',
         image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80', // Abstract/Fractal vibe placeholder
         href: '/lab/fractal',
-        description: 'Real-time infinite zoom exploration of the Mandelbrot set.'
+        description: 'Real-time infinite zoom exploration of the Mandelbrot set.',
+        year: '2025'
     }
 ]
 
@@ -52,6 +54,9 @@ export default function LabPage() {
                                     title={exp.title}
                                     category={exp.category}
                                     image={exp.image}
+                                    year={exp.year}
+                                    href={exp.href}
+                                    desc={exp.description}
                                 />
                             </div>
                         </Link>

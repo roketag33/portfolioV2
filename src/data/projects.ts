@@ -14,48 +14,48 @@ export const PROJECTS: Project[] = [
     {
         id: 'fractal',
         title: 'Fractal Generator',
-        category: 'Systems Programming',
-        desc: 'High-performance fractal rendering CLI tool written in Rust. Generates Mandelbrot and Julia sets with parallel processing.',
+        category: 'Dev Tools',
+        desc: 'Interactive fractal explorer supporting Mandelbrot, Julia, and Newton sets. Features custom color palettes and high-performance Rust core.',
         image: '/images/projects/fractal.png',
         year: '2025',
         github: 'https://github.com/roketag33/FractalGenerator',
-        tags: ['Rust', 'CLI', 'Math', 'Performance']
+        tags: ['Rust', 'WASM', 'Math', 'Visualization']
     },
     {
         id: 'vaultword',
         title: 'VaultWord',
-        category: 'Web Game',
-        desc: 'A security-themed word puzzle game. Crack the vault code using logic and deduction. Built with TypeScript.',
+        category: 'Games & Creative',
+        desc: 'Security-themed word puzzle game built with Tauri and React. Crack the vault code using logic.',
         image: '/images/projects/vaultword.png',
         year: '2025',
         github: 'https://github.com/roketag33/VaultWord',
-        tags: ['TypeScript', 'GameDev', 'Puzzle']
+        tags: ['Tauri', 'React', 'TypeScript', 'Game']
     },
     {
         id: 'platformer',
         title: 'Platformer.js',
-        category: 'Game Engine',
-        desc: 'A modular, lightweight platformer engine. Features custom physics, collision detection, and entity management.',
+        category: 'Games & Creative',
+        desc: 'Modular 2D platformer engine built with PixiJS. Features physics, collision detection, and entity management.',
         image: '/images/projects/platformer.png',
         year: '2025',
         github: 'https://github.com/roketag33/platformer.js',
-        tags: ['TypeScript', 'Physics', 'Game Engine']
+        tags: ['PixiJS', 'TypeScript', 'Game Engine']
     },
     {
         id: 'hooly',
         title: 'Hooly',
-        category: 'Backend Tool',
-        desc: 'High-performance backend utility written in Go. Designed for microservices architecture and scalability.',
+        category: 'Web Apps',
+        desc: 'Reservation system for mobile shops and food truck locations. Simplifies spot management for street vendors.',
         image: '/images/projects/hooly.png',
         year: '2024',
         github: 'https://github.com/roketag33/hooly',
-        tags: ['Go', 'Backend', 'High Performance']
+        tags: ['Go', 'Backend', 'Geospatial']
     },
     {
         id: 'jeanneret',
         title: 'Jeanneret',
         category: 'Web Design',
-        desc: 'A tribute to modernist architecture. Minimalist design system and layout logic inspired by Le Corbusier.',
+        desc: 'A tribute to modernist architecture. Minimalist design system inspired by Le Corbusier.',
         image: '/images/projects/jeanneret.png',
         year: '2024',
         github: 'https://github.com/roketag33/jeanneret',
@@ -64,8 +64,8 @@ export const PROJECTS: Project[] = [
     {
         id: 'ponymarket',
         title: 'PonyMarket',
-        category: 'E-commerce',
-        desc: 'A vibrant marketplace platform with live auctions and inventory management. Pastel aesthetic.',
+        category: 'Web Apps',
+        desc: 'Marketplace platform for digital assets. Features live auctions and inventory management.',
         image: '/images/projects/ponymarket.png',
         year: '2025',
         github: 'https://github.com/roketag33/PonyMarket',
@@ -74,8 +74,8 @@ export const PROJECTS: Project[] = [
     {
         id: 'proposalspark',
         title: 'ProposalSpark',
-        category: 'Automation',
-        desc: 'Automated proposal generation tool for freelancers. AI-driven content suggestions and template management.',
+        category: 'Web Apps',
+        desc: 'Automated proposal generation tool for freelancers. AI-driven content suggestions.',
         image: '/images/projects/proposalspark.png',
         year: '2025',
         github: 'https://github.com/roketag33/ProposalSpark',
@@ -84,38 +84,38 @@ export const PROJECTS: Project[] = [
     {
         id: 'goop',
         title: 'GOOP',
-        category: 'Experiments',
-        desc: 'Fluid dynamics simulation and viscous material rendering experiment. Interactive slime physics.',
+        category: 'Dev Tools',
+        desc: 'Fullstack React-Express-MySQL starter template. Pre-configured with ESLint, Prettier, and Husky for rapid development.',
         image: '/images/projects/goop.png',
         year: '2024',
         github: 'https://github.com/roketag33/GOOP',
-        tags: ['JavaScript', 'Physics', 'Rendering']
+        tags: ['React', 'Express', 'MySQL', 'Template']
     },
     {
         id: 'cybertools',
         title: 'CyberTools',
-        category: 'Security',
-        desc: 'Suite of cybersecurity utilities for network analysis and vulnerability scanning. Built with TypeScript.',
+        category: 'Dev Tools',
+        desc: 'Comprehensive security suite: Network Mapper, Traffic Analyzer, SSL Checker, and Malware Scanner.',
         image: '/images/projects/cybertools.png',
         year: '2025',
         github: 'https://github.com/roketag33/CyberTools',
-        tags: ['TypeScript', 'Security', 'Network']
+        tags: ['Python', 'Security', 'Network Analysis']
     },
     {
         id: 'ponybook',
         title: 'PonyBook',
-        category: 'Social Network',
-        desc: 'A niche social media platform experiment. Features real-time interactions and a custom graph database.',
+        category: 'Web Apps',
+        desc: 'Equine digital health record and data aggregator. Centralizes veterinary and care information for horses.',
         image: '/images/projects/ponybook.png',
         year: '2025',
         github: 'https://github.com/roketag33/PonyBook',
-        tags: ['TypeScript', 'Social', 'Graph']
+        tags: ['TypeScript', 'Health', 'Data Aggregation']
     },
     {
         id: 'dogodex',
         title: 'DogoDex',
-        category: 'Mobile App',
-        desc: 'The ultimate Pokedex for dogs. Identify breeds and track your canine encounters. Responsive mobile-first design.',
+        category: 'Mobile',
+        desc: 'The ultimate Pokedex for dogs. Identify breeds and track canine encounters.',
         image: '/images/projects/dogodex.png',
         year: '2025',
         github: 'https://github.com/roketag33/DogoDex',
@@ -124,8 +124,8 @@ export const PROJECTS: Project[] = [
     {
         id: 'huge-workout',
         title: 'HugeWorkout',
-        category: 'Health & Fitness',
-        desc: 'Comprehensive workout tracker and analytics platform. Visualize your gains with interactive charts.',
+        category: 'Web Apps',
+        desc: 'Comprehensive workout tracker and analytics platform. Visualize gains with interactive charts.',
         image: '/images/projects/huge-workout.png',
         year: '2025',
         github: 'https://github.com/roketag33/HugeWorkout',
@@ -134,38 +134,38 @@ export const PROJECTS: Project[] = [
     {
         id: 'periodic-table',
         title: 'Periodic Table',
-        category: 'Education',
-        desc: 'Interactive 3D Periodic Table of Elements. Built with Svelte for smooth transitions and state management.',
+        category: 'Games & Creative',
+        desc: 'Interactive 3D Periodic Table of Elements. Built with Svelte, GSAP, and Tailwind for smooth animations.',
         image: '/images/projects/periodic-table.png',
         year: '2025',
         github: 'https://github.com/roketag33/PeriodicTable',
-        tags: ['Svelte', 'Education', '3D']
+        tags: ['Svelte', 'GSAP', 'Education']
     },
     {
         id: 'solidjs-draw',
         title: 'SolidJS Draw',
-        category: 'Creative Tool',
-        desc: 'Vector drawing application leveraging SolidJS fine-grained reactivity for high-performance rendering.',
+        category: 'Games & Creative',
+        desc: 'Vector drawing application experiment using SolidJS.',
         image: '/images/projects/solidjs-draw.png',
         year: '2025',
         github: 'https://github.com/roketag33/SolidJS-Draw',
         tags: ['SolidJS', 'Graphics', 'Tool']
     },
     {
-        id: 'scrapper-game',
-        title: 'Scrapper Game',
-        category: 'Game Development',
-        desc: 'A pixel-art survival game set in a robot junkyard. Craft, fight, and survive using scavenged parts.',
+        id: 'scrapper-tool',
+        title: 'Scrapper Config',
+        category: 'Dev Tools',
+        desc: 'NestJS Price Scraper using Playwright. Compares component prices from retailers like LDLC.',
         image: '/images/projects/scrapper.png',
         year: '2025',
         github: 'https://github.com/roketag33/ScrapperGame',
-        tags: ['TypeScript', 'GameDev', 'Pixel Art']
+        tags: ['NestJS', 'Playwright', 'Scraping']
     },
     {
         id: 'monotaskr',
         title: 'MonoTaskr',
-        category: 'Productivity Tool',
-        desc: 'A Chrome Extension designed to enforce single-tasking and deep focus. Using minimal UI to reduce cognitive load.',
+        category: 'Dev Tools',
+        desc: 'Chrome Extension designed to enforce single-tasking and deep focus.',
         image: '/images/projects/monotaskr.png',
         year: '2025',
         github: 'https://github.com/roketag33/MonoTaskr',
@@ -174,18 +174,18 @@ export const PROJECTS: Project[] = [
     {
         id: 'dasharchive',
         title: 'DashArchive',
-        category: 'Data Management',
-        desc: 'A comprehensive dashboard for archiving and visualizing digital assets. Features advanced filtering and sorting.',
+        category: 'Dev Tools',
+        desc: 'Local AI file organizer. Uses MobileBERT for auto-classification and OCR for document scanning.',
         image: '/images/projects/dasharchive.png',
         year: '2025',
         github: 'https://github.com/roketag33/DashArchive',
-        tags: ['TypeScript', 'Next.js', 'Data Viz']
+        tags: ['TypeScript', 'AI', 'MobileBERT', 'Local']
     },
     {
         id: 'wilda',
         title: 'Wilda Trattoria',
         category: 'Web Design',
-        desc: 'Elegant showcase website for an Italian restaurant. Focusing on premium aesthetics and responsive design.',
+        desc: 'Elegant showcase website for an Italian restaurant.',
         image: '/images/projects/wilda.png',
         year: '2024',
         github: 'https://github.com/roketag33/Wilda-Trattoria',
@@ -194,18 +194,18 @@ export const PROJECTS: Project[] = [
     {
         id: 'windastreet',
         title: 'Win Da Street',
-        category: 'Game Development',
-        desc: 'Retro-style arcade fighting game. Built with JavaScript and Kaboom.js for a nostalgic experience.',
+        category: 'Games & Creative',
+        desc: 'Artistic treasure hunt in the streets of Bordeaux. Gamified discovery of local street art.',
         image: '/images/projects/windastreet.png',
         year: '2024',
         github: 'https://github.com/roketag33/WIN-DA-STREET',
-        tags: ['JavaScript', 'GameDev', 'Kaboom.js']
+        tags: ['React', 'Gamification', 'Art']
     },
     {
         id: 'lootopia',
         title: 'Lootopia',
-        category: 'Augmented Reality',
-        desc: 'Platform for AR treasure hunts. Integrates geolocation and gamification for immersive outdoor experiences.',
+        category: 'Games & Creative',
+        desc: 'Platform for AR treasure hunts. Integrates geolocation and gamification.',
         image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=2070&auto=format&fit=crop',
         year: '2024',
         tags: ['AR', 'Geolocation', 'Gamification']
@@ -213,8 +213,8 @@ export const PROJECTS: Project[] = [
     {
         id: 'boby',
         title: 'Boby Solutions',
-        category: 'SaaS Architecture',
-        desc: 'Fullstack development and cloud architecture for a B2B SaaS solution. Optimized for scalability.',
+        category: 'Web Apps',
+        desc: 'Personal project based on professional work. Fullstack SaaS solution for business process management.',
         image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop',
         year: '2023-2024',
         tags: ['SaaS', 'Cloud', 'Fullstack']
