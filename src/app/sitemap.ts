@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/lab/fractal',
         '/blog',
         '/contact',
+        '/achievements',
     ].map((route) => ({
         url: `${baseUrl}${route}`,
         lastModified: new Date(),

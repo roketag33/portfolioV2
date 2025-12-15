@@ -3,45 +3,120 @@ import React, { useRef } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
+import Image from 'next/image';
+import Link from 'next/link';
+
 interface ProjectCard3DProps {
-    title: string
-    category: string
-    image?: string
-    className?: string
+    title: string;
+    category: string;
+    image: string;
+    year: string;
+    desc?: string;
+    tags?: string[];
+    priority?: boolean;
+    href?: string;
 }
 
-export default function ProjectCard3D({ title, category, image, className }: ProjectCard3DProps) {
-    const ref = useRef<HTMLDivElement>(null)
+export const ProjectCard33D = ({ title, category, image, year, desc, tags, priority = false, href }: ProjectCard3DProps) => {
+    const cardRef = useRef<HTMLDivElement>(null);
 
-    // Motion values
-    const x = useMotionValue(0)
-    const y = useMotionValue(0)
+    // Mouse position state
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
 
-    // Spring smoothing
-    const mouseX = useSpring(x, { stiffness: 150, damping: 15 })
-    const mouseY = useSpring(y, { stiffness: 150, damping: 15 })
-
-    // Transform for rotation (Outer container remains static, inner rotates)
-    const rotateX = useTransform(mouseY, [-0.5, 0.5], ["20deg", "-20deg"])
-    const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-20deg", "20deg"])
+    // Spring physics for smooth rotation
+    const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [25, -25]), { stiffness: 150, damping: 20 });
+    const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-25, 25]), { stiffness: 150, damping: 20 });
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (!ref.current) return
-        const rect = ref.current.getBoundingClientRect()
-        const width = rect.width
-        const height = rect.height
-        // Normalized coordinates -0.5 to 0.5
-        const normalizedX = (e.clientX - rect.left) / width - 0.5
-        const normalizedY = (e.clientY - rect.top) / height - 0.5
+        if (!cardRef.current) return;
 
-        x.set(normalizedX)
-        y.set(normalizedY)
-    }
+        const rect = cardRef.current.getBoundingClientRect();
+        const width = rect.width;
+        const height = rect.height;
+
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        const xPct = (mouseX / width) - 0.5;
+        const yPct = (mouseY / height) - 0.5;
+
+        x.set(xPct);
+        y.set(yPct);
+    };
 
     const handleMouseLeave = () => {
-        x.set(0)
-        y.set(0)
-    }
+        x.set(0);
+        y.set(0);
+    };
+
+    const CardContent = (
+        <motion.div
+            ref={cardRef}
+            style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            className="relative group w-full aspect-[4/5] md:aspect-[3/4] rounded-xl bg-secondary/20 backdrop-blur-sm border border-white/5 cursor-pointer perspective-1000"
+            initial="initial"
+            whileHover="hover"
+            whileTap="hover"
+        >
+            {/* Background Image Layer - Depth 1 */}
+            <div
+                style={{ transform: 'translateZ(-50px)' }}
+                className="absolute inset-0 rounded-xl overflow-hidden"
+            >
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10" />
+
+                {/* Image Scale and Blur on Hover */}
+                <motion.div
+                    className="w-full h-full"
+                    variants={{
+                        initial: { scale: 1, filter: 'blur(0px)' },
+                        hover: { scale: 1.1, filter: 'blur(4px)' }
+                    }}
+                    transition={{ duration: 0.4 }}
+                >
+                    <Image
+                        src={image}
+                        alt={title}
+                        fill
+                        className="object-cover transition-transform duration-500 will-change-transform"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        priority={priority}
+                    />
+                </motion.div>
+            </div>
+
+            {/* Reflection/Glare - Depth 2 */}
+            <div
+                style={{ transform: 'translateZ(20px)' }}
+                className="absolute inset-0 rounded-xl bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-20 mix-blend-overlay"
+            />
+
+            {/* Content Layer - Depth 3 (Floating) */}
+            <div
+                style={{ transform: 'translateZ(60px)' }}
+                className="absolute inset-0 p-6 flex flex-col justify-end z-30"
+            >
+                <motion.div
+                    variants={{
+                        initial: { y: 0 },
+                        hover: { y: -20 }
+                    }}
+                    transition={{ duration: 0.3 }}
+                >
+                    <div className="flex items-center justify-between mb-2">
+                        <span className="text-secondary-foreground/80 text-sm font-mono tracking-wider uppercase">{category}</span>
+                        <span className="text-white/50 text-xs font-mono border border-white/10 px-2 py-1 rounded-full">{year}</span>
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-white mb-2 leading-tight group-hover:text-primary transition-colors">
+                        {title}
+                    </h3>
+            </div>
+        </motion.div>
+    )
 
     return (
         <div
@@ -53,69 +128,13 @@ export default function ProjectCard3D({ title, category, image, className }: Pro
             onMouseLeave={handleMouseLeave}
             ref={ref}
         >
-            <motion.div
-                style={{
-                    rotateX,
-                    rotateY,
-                    transformStyle: "preserve-3d",
-                }}
-                className="w-full h-full relative rounded-xl transition-all duration-200 ease-linear"
-            >
-                {/* THICKNESS / SHADOW LAYER */}
-                {/* Creates a fake volume by placing a dark layer slightly behind */}
-                <div
-                    className="absolute inset-0 bg-black/50 rounded-xl translate-z-[-20px] blur-xl"
-                    style={{ transform: "translateZ(-40px)" }}
-                />
-
-                {/* MAIN CARD FACE */}
-                <div className="absolute inset-0 bg-card rounded-xl overflow-hidden border border-white/10 shadow-2xl">
-
-                    {/* Background Image Layer */}
-                    <div
-                        style={{ transform: "translateZ(-50px) scale(1.2)" }}
-                        className="absolute inset-0 bg-neutral-900"
-                    >
-                        {image && (
-                            <img
-                                src={image}
-                                alt={title}
-                                className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-500"
-                            />
-                        )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
-                    </div>
-
-                    {/* Content Layer (Parallax Pop) */}
-                    <div
-                        style={{ transform: "translateZ(50px)" }}
-                        className="absolute inset-x-0 bottom-0 p-8 z-20 pointer-events-none"
-                    >
-                        <h3 className="text-3xl font-black uppercase tracking-tighter text-white mb-2 leading-none drop-shadow-lg">
-                            {title}
-                        </h3>
-                        <p className="text-sm font-medium text-white/70 uppercase tracking-widest drop-shadow-md">
-                            {category}
-                        </p>
-                    </div>
-
-                    {/* Badge (Extreme Pop) */}
-                    <div
-                        style={{ transform: "translateZ(75px)" }}
-                        className="absolute top-6 right-6 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                    >
-                        <div className="bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 text-xs font-bold text-white uppercase shadow-lg">
-                            View Case
-                        </div>
-                    </div>
-
-                    {/* Lighting/Glare */}
-                    <div
-                        className="absolute inset-0 z-40 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 mix-blend-overlay pointer-events-none"
-                        style={{ transform: "translateZ(1px)" }}
-                    />
-                </div>
-            </motion.div>
+            {href ? (
+                <Link href={href} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
+                    {CardContent}
+                </Link>
+            ) : (
+                CardContent
+            )}
         </div>
     )
 }
