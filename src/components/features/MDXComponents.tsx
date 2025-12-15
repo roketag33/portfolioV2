@@ -1,10 +1,16 @@
 import SnakeGame from '@/components/features/SnakeGame'
+import FractalGenerator from '@/components/features/FractalGenerator'
+import ProjectCard3D from '@/components/ui/project-card-3d'
+import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 
 // Map HTML tags to custom styles or components
 export const MDXComponents = {
     // Custom Components
     SnakeGame,
+    FractalGenerator,
+    ProjectCard3D,
+    Button,
     Badge,
 
     // Styled HTML elements

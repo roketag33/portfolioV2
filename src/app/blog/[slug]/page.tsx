@@ -1,19 +1,19 @@
 import Link from 'next/link'
 import { Badge } from '@/components/ui/badge'
 import { ArrowLeft } from 'lucide-react'
-import SnakeGame from '@/components/features/SnakeGame'
+import { getPostBySlug } from '@/lib/mdx'
+import { notFound } from 'next/navigation'
+import { MDXRemote } from 'next-mdx-remote/rsc'
+import rehypeHighlight from 'rehype-highlight'
+import { MDXComponents } from '@/components/features/MDXComponents'
 
-// Mock Data Enhanced
-const POST = {
-    title: 'L\'art du Creative Development',
-    date: '2025-05-20',
-    readTime: '6 min read',
-    tags: ['Next.js', 'Creative', 'GameDev'],
-}
+export default async function BlogPost(props: { params: Promise<{ slug: string }> }) {
+    const params = await props.params;
+    const post = getPostBySlug(params.slug)
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
-    // In a real app with MDX working, we would fetch post by slug
-    // const post = getPostBySlug(params.slug)
+    if (!post) {
+        notFound()
+    }
 
     return (
         <article className="min-h-screen pt-32 pb-20 px-6 bg-background text-foreground">
@@ -25,7 +25,7 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
 
                 <div className="mb-12">
                     <div className="flex gap-2 mb-6">
-                        {POST.tags.map(tag => (
+                        {post.tags.map(tag => (
                             <Badge key={tag} variant="outline" className="text-primary border-primary/20">
                                 {tag}
                             </Badge>
@@ -33,32 +33,26 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
                     </div>
 
                     <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6 leading-tight">
-                        {POST.title}
+                        {post.title}
                     </h1>
 
                     <div className="flex items-center gap-4 text-sm text-muted-foreground uppercase tracking-widest border-y border-white/10 py-4">
-                        <span>{POST.date}</span>
+                        <span>{post.date}</span>
                         <span>•</span>
-                        <span>{POST.readTime}</span>
+                        <span>{post.readTime}</span>
                     </div>
                 </div>
 
                 <div className="prose prose-invert prose-lg max-w-none">
-                    <p>
-                        Bienvenue sur cet article de démonstration. L'objectif était de montrer comment intégrer des éléments interactifs au sein de contenu textuel.
-                    </p>
-                    <h2 className="text-2xl font-bold uppercase mt-8 mb-4">Demo Interactive</h2>
-                    <p>
-                        Voici une instance du jeu Snake exécutée directement dans la page de l'article :
-                    </p>
-
-                    <div className="my-12 not-prose">
-                        <SnakeGame />
-                    </div>
-
-                    <p>
-                        Cette approche permet de créer des tutoriels immersifs où le lecteur peut expérimenter directement les concepts expliqués.
-                    </p>
+                    <MDXRemote
+                        source={post.content}
+                        components={MDXComponents}
+                        options={{
+                            mdxOptions: {
+                                rehypePlugins: [rehypeHighlight],
+                            }
+                        }}
+                    />
                 </div>
 
             </div>
