@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import rehypeHighlight from 'rehype-highlight'
 import { MDXComponents } from '@/components/features/MDXComponents'
+import BookwormTracker from '@/components/features/BookwormTracker'
 
 export default async function BlogPost(props: { params: Promise<{ slug: string }> }) {
     const params = await props.params;
@@ -17,6 +18,7 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
 
     return (
         <article className="min-h-screen pt-32 pb-20 px-6 bg-background text-foreground">
+            <BookwormTracker />
             <div className="max-w-3xl mx-auto">
                 <Link href="/blog" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-8 transition-colors">
                     <ArrowLeft size={20} />

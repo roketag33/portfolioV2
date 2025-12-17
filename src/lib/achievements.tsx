@@ -59,5 +59,69 @@ export const ACHIEVEMENTS: Record<string, Achievement> = {
         description: 'You checked out my social networks.',
         xp: 15,
         icon: '🌐'
+    },
+    NOT_FOUND: {
+        id: 'NOT_FOUND',
+        title: '404 Hunter',
+        description: 'You wandered into the unknown.',
+        xp: 25,
+        icon: '🕵️‍♂️',
+        secret: true
+    },
+    NIGHT_OWL: {
+        id: 'NIGHT_OWL',
+        title: 'Night Owl',
+        description: 'Coding late? Visited between 1AM and 5AM.',
+        xp: 30,
+        icon: '🦉',
+        secret: true
+    },
+    QA_TESTER: {
+        id: 'QA_TESTER',
+        title: 'QA Tester',
+        description: 'You resized the window. testing responsive design?',
+        xp: 20,
+        icon: '📐',
+        secret: true
+    },
+    SPEED_RUNNER: {
+        id: 'SPEED_RUNNER',
+        title: 'Speed Runner',
+        description: 'Visited 3 pages in less than 10 seconds. Slow down!',
+        xp: 50,
+        icon: '⚡',
+        secret: true
+    },
+    COFFEE_ADDICT: {
+        id: 'COFFEE_ADDICT',
+        title: 'Caffeine Overload',
+        description: 'You really like coffee... maybe too much.',
+        xp: 15,
+        icon: '☕',
+        secret: true
+    },
+    BOOKWORM: {
+        id: 'BOOKWORM',
+        title: 'Bookworm',
+        description: 'You actually read an article! Thanks.',
+        xp: 30,
+        icon: '📚',
+        secret: true
+    },
+    SNAKE_MASTER: {
+        id: 'SNAKE_MASTER',
+        title: 'Snake Master',
+        description: 'Scored 10+ points in Snake.',
+        xp: 50,
+        icon: '🐍',
+        secret: true
+    },
+    WHO_AM_I: {
+        id: 'WHO_AM_I',
+        title: 'Who Am I',
+        description: 'You found my name. Nice to meet you!',
+        xp: 10,
+        icon: '👋',
+        secret: true
     }
 }

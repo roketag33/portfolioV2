@@ -4,7 +4,11 @@ import MagneticButton from '@/components/ui/magnetic-button'
 
 const title = "CREATIVE\nDEVELOPER"
 
+import { useGamification } from '@/context/GamificationContext'
+
 export default function Hero() {
+    const { unlock } = useGamification()
+
     return (
         <section className="h-screen w-full flex flex-col justify-center items-center relative overflow-hidden bg-background">
             {/* Ambient Glow */}
@@ -30,7 +34,8 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.8, duration: 0.8 }}
-                    className="mt-6 text-lg md:text-xl text-muted-foreground uppercase tracking-widest max-w-lg"
+                    className="mt-6 text-lg md:text-xl text-muted-foreground uppercase tracking-widest max-w-lg cursor-pointer"
+                    onClick={() => unlock('WHO_AM_I')}
                 >
                     Alexandre Sarrazin
                 </motion.p>

@@ -32,6 +32,11 @@ export default function SnakeGame() {
         if (saved) setHighScore(parseInt(saved))
     }, [])
 
+    // Achievement Check
+    useEffect(() => {
+        if (score >= 10) unlock('SNAKE_MASTER')
+    }, [score, unlock])
+
     const generateFood = useCallback(() => {
         return {
             x: Math.floor(Math.random() * GRID_SIZE),
@@ -66,7 +71,6 @@ export default function SnakeGame() {
                         setHighScore(score)
                         localStorage.setItem('snake_highscore', score.toString())
                     }
-                    if (score >= 10) unlock('SNAKE_MASTER')
                     return prev
                 }
 
