@@ -29,8 +29,19 @@ export default function Terminal() {
                 unlock('HACKERMAN')
             }
         }
+
+        const handleCustomToggle = () => {
+            setIsOpen(prev => !prev)
+            unlock('HACKERMAN')
+        }
+
         window.addEventListener('keydown', handleKeyDown)
-        return () => window.removeEventListener('keydown', handleKeyDown)
+        window.addEventListener('portfolio:toggle-terminal', handleCustomToggle)
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown)
+            window.removeEventListener('portfolio:toggle-terminal', handleCustomToggle)
+        }
     }, [unlock])
 
     // Auto-focus input
