@@ -39,12 +39,13 @@ export default function Footer() {
                     <button
                         onClick={() => window.dispatchEvent(new Event('portfolio:toggle-terminal'))}
                         className="text-[10px] items-center gap-2 text-muted-foreground/30 hover:text-primary transition-colors font-mono hidden md:flex"
-                        title="Press Ctrl+K"
+                        title="Press Ctrl+K to open terminal"
                     >
                         <span>v2.0.4</span>
                         <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
                         <span>SYSTEM READY</span>
-                        <span>{'>_'}</span>
+                        <span>::</span>
+                        <span>[CTRL + K]</span>
                     </button>
                 </div>
             </div>
