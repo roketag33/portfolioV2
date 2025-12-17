@@ -11,12 +11,18 @@ const SPEED = 100
 
 type Point = { x: number, y: number }
 
-export default function SnakeGame() {
+// ... imports
+
+interface SnakeGameProps {
+    fullScreen?: boolean
+}
+
+export default function SnakeGame({ fullScreen = false }: SnakeGameProps) {
     const { unlock } = useGamification()
     const canvasRef = useRef<HTMLCanvasElement>(null)
 
     // Game State
-    const [isArcadeOpen, setIsArcadeOpen] = useState(false)
+    const [isArcadeOpen, setIsArcadeOpen] = useState(fullScreen) // Default open if fullScreen
 
     const [snake, setSnake] = useState<Point[]>([{ x: 10, y: 10 }])
     const [food, setFood] = useState<Point>({ x: 15, y: 15 })
@@ -30,7 +36,14 @@ export default function SnakeGame() {
     useEffect(() => {
         const saved = localStorage.getItem('snake_highscore')
         if (saved) setHighScore(parseInt(saved))
-    }, [])
+
+        // Auto-start if fullscreen
+        if (fullScreen) {
+            setIsPlaying(true)
+            setIsArcadeOpen(true)
+            // Need to wait for canvas ref? loop handles logic.
+        }
+    }, [fullScreen])
 
     // Achievement Check
     useEffect(() => {
@@ -55,7 +68,9 @@ export default function SnakeGame() {
 
     // Game Loop
     useEffect(() => {
-        if (!isPlaying || gameOver || !isArcadeOpen) return
+        // Run if playing AND (arcade is open OR fullscreen)
+        const active = isPlaying && (isArcadeOpen || fullScreen)
+        if (!active || gameOver) return
 
         const moveSnake = () => {
             setSnake(prev => {
@@ -90,20 +105,21 @@ export default function SnakeGame() {
 
         const interval = setInterval(moveSnake, SPEED)
         return () => clearInterval(interval)
-    }, [isPlaying, gameOver, direction, food, score, highScore, unlock, generateFood, isArcadeOpen])
+    }, [isPlaying, gameOver, direction, food, score, highScore, generateFood, isArcadeOpen, fullScreen])
 
     // Controls
     useEffect(() => {
-        if (!isArcadeOpen) return
+        const active = isArcadeOpen || fullScreen
+        if (!active) return
 
         const handleKey = (e: KeyboardEvent) => {
-            // Prevent defaults ONLY when arcade is open
+            // Prevent defaults
             if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) {
                 e.preventDefault()
             }
 
-            // Close on Escape
-            if (e.key === 'Escape') {
+            // Close on Escape ONLY if NOT fullScreen (standalone page handles nav)
+            if (e.key === 'Escape' && !fullScreen) {
                 setIsArcadeOpen(false)
                 setIsPlaying(false)
             }
@@ -117,11 +133,13 @@ export default function SnakeGame() {
         }
         window.addEventListener('keydown', handleKey)
         return () => window.removeEventListener('keydown', handleKey)
-    }, [direction, isArcadeOpen])
+    }, [direction, isArcadeOpen, fullScreen])
 
     // Draw Canvas
     useEffect(() => {
-        if (!isArcadeOpen) return
+        const active = isArcadeOpen || fullScreen
+        if (!active) return
+
         const ctx = canvasRef.current?.getContext('2d')
         if (!ctx) return
 
@@ -153,11 +171,56 @@ export default function SnakeGame() {
             ctx.fillRect(segment.x * CELL_SIZE + 1, segment.y * CELL_SIZE + 1, CELL_SIZE - 2, CELL_SIZE - 2)
         })
 
-    }, [snake, food, isArcadeOpen])
+    }, [snake, food, isArcadeOpen, fullScreen])
 
     const openArcade = () => {
         setIsArcadeOpen(true)
         resetGame()
+    }
+
+    const GameInterface = (
+        <div className="flex flex-col items-center gap-8 max-w-lg w-full">
+            {/* Arcade Header */}
+            <div className="flex w-full justify-between items-end border-b border-white/10 pb-4">
+                <div>
+                    <h2 className="text-4xl font-black italic text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-500">ARCADE MODE</h2>
+                    <p className="text-xs font-mono text-muted-foreground mt-1">Use Arrow Keys to Move • ESC to Quit</p>
+                </div>
+                <div className="text-right">
+                    <p className="text-xs font-mono text-muted-foreground">SCORE</p>
+                    <p className="text-4xl font-mono font-bold text-white tabular-nums">{score.toString().padStart(3, '0')}</p>
+                </div>
+            </div>
+
+            {/* Game Area */}
+            <div className="relative p-2 bg-[#222] rounded-xl shadow-2xl ring-4 ring-white/10">
+                <canvas
+                    ref={canvasRef}
+                    width={GRID_SIZE * CELL_SIZE}
+                    height={GRID_SIZE * CELL_SIZE}
+                    className="rounded-lg bg-black"
+                />
+
+                {/* Game Over Screen */}
+                {gameOver && (
+                    <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm rounded-lg">
+                        <p className="text-red-500 text-5xl font-black italic mb-2 tracking-tighter">GAME OVER</p>
+                        <p className="text-white mb-8 font-mono">Score: {score}</p>
+                        <Button onClick={resetGame} size="lg" className="h-14 px-8 text-xl font-bold uppercase tracking-widest hover:scale-105 transition-transform">
+                            Retry
+                        </Button>
+                    </div>
+                )}
+            </div>
+        </div>
+    )
+
+    if (fullScreen) {
+        return (
+            <div className="w-full h-full flex items-center justify-center p-6">
+                {GameInterface}
+            </div>
+        )
     }
 
     return (
@@ -193,41 +256,7 @@ export default function SnakeGame() {
                             <span className="sr-only">Close Arcade</span>
                         </button>
 
-                        <div className="flex flex-col items-center gap-8 max-w-lg w-full">
-
-                            {/* Arcade Header */}
-                            <div className="flex w-full justify-between items-end border-b border-white/10 pb-4">
-                                <div>
-                                    <h2 className="text-4xl font-black italic text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-500">ARCADE MODE</h2>
-                                    <p className="text-xs font-mono text-muted-foreground mt-1">Use Arrow Keys to Move • ESC to Quit</p>
-                                </div>
-                                <div className="text-right">
-                                    <p className="text-xs font-mono text-muted-foreground">SCORE</p>
-                                    <p className="text-4xl font-mono font-bold text-white tabular-nums">{score.toString().padStart(3, '0')}</p>
-                                </div>
-                            </div>
-
-                            {/* Game Area */}
-                            <div className="relative p-2 bg-[#222] rounded-xl shadow-2xl ring-4 ring-white/10">
-                                <canvas
-                                    ref={canvasRef}
-                                    width={GRID_SIZE * CELL_SIZE}
-                                    height={GRID_SIZE * CELL_SIZE}
-                                    className="rounded-lg bg-black"
-                                />
-
-                                {/* Game Over Screen */}
-                                {gameOver && (
-                                    <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm rounded-lg">
-                                        <p className="text-red-500 text-5xl font-black italic mb-2 tracking-tighter">GAME OVER</p>
-                                        <p className="text-white mb-8 font-mono">Score: {score}</p>
-                                        <Button onClick={resetGame} size="lg" className="h-14 px-8 text-xl font-bold uppercase tracking-widest hover:scale-105 transition-transform">
-                                            Retry
-                                        </Button>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
+                        {GameInterface}
                     </motion.div>
                 )}
             </AnimatePresence>
