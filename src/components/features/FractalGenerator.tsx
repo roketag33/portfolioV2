@@ -3,9 +3,9 @@
 import { useRef, useMemo, useState } from 'react'
 import { Canvas, useFrame, useThree, ThreeEvent } from '@react-three/fiber'
 import * as THREE from 'three'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
-import { RefreshCcw, ZoomIn, ZoomOut } from 'lucide-react'
+import { RefreshCcw, ZoomIn, ZoomOut, Settings2, Palette } from 'lucide-react'
 
 // --- Shaders ---
 const vertexShader = `
@@ -24,54 +24,82 @@ uniform float uZoom;
 uniform vec3 uColor1;
 uniform vec3 uColor2;
 uniform vec3 uColor3;
+uniform int uType; // 0 = Mandelbrot, 1 = Julia
+uniform vec2 uJuliaC;
 
 varying vec2 vUv;
+
+vec2 complexMul(vec2 a, vec2 b) {
+    return vec2(a.x*b.x - a.y*b.y, a.x*b.y + a.y*b.x);
+}
 
 void main() {
     // Basic UV coordinates
     vec2 p = vUv * 2.0 - 1.0;
     
     // Fix Aspect Ratio
-    p.x *= uResolution.x / uResolution.y;
+    float aspect = uResolution.x / uResolution.y;
+    p.x *= aspect;
 
     // Apply Zoom and Center
-    vec2 c = uCenter + p / uZoom;
+    vec2 pos = uCenter + p / uZoom;
     
-    vec2 z = vec2(0.0);
+    vec2 z;
+    vec2 c;
+
+    if (uType == 0) {
+        // Mandelbrot: z starts at 0, c is position
+        z = vec2(0.0);
+        c = pos;
+    } else {
+        // Julia: z is position, c is constant
+        z = pos;
+        c = uJuliaC;
+    }
+    
     float iter = 0.0;
-    const float maxIter = 200.0; // Higher iterations for deeper zoom
+    const float maxIter = 300.0;
     
-    // Mandelbrot Loop
+    // Iteration Loop
     for(float i = 0.0; i < maxIter; i++) {
         z = vec2(z.x*z.x - z.y*z.y, 2.0*z.x*z.y) + c;
-        if(length(z) > 4.0) break;
+        if(dot(z,z) > 4.0) break;
         iter++;
     }
     
     // Coloring
     float t = iter / maxIter;
-    
     vec3 color = vec3(0.0);
     
     if(iter < maxIter) {
-        // Smooth coloring based on iteration
-        float smoothT = t + 0.1 * sin(uTime * 0.5); // Subtle animation
-        color = mix(uColor1, uColor2, sqrt(t));
-        color = mix(color, uColor3, t * t);
+        // Smooth coloring
+        float smoothT = t + 0.1 * sin(uTime * 0.2 + length(z)*0.1); 
+        
+        // Palette mixing
+        vec3 c1 = mix(uColor1, uColor2, sqrt(t));
+        color = mix(c1, uColor3, pow(t, 3.0));
+        
+        // Add glow
+        color += uColor3 * 0.05 * (1.0 - t);
     }
     
     gl_FragColor = vec4(color, 1.0);
 }
 `
 
-function FractalScene() {
+interface FractalSceneProps {
+    fractalType: 'mandelbrot' | 'julia'
+    zoom: number
+    center: { x: number, y: number }
+    juliaC: { x: number, y: number }
+    onPan: (dx: number, dy: number) => void
+    onZoom: (factor: number) => void
+}
+
+function FractalScene({ fractalType, zoom, center, juliaC, onPan, onZoom }: FractalSceneProps) {
     const meshWithMaterial = useRef<THREE.Mesh>(null)
     const { viewport, size } = useThree()
     const shaderRef = useRef<THREE.ShaderMaterial>(null)
-
-    // State for interaction
-    const [zoom, setZoom] = useState(0.8)
-    const [center, setCenter] = useState(new THREE.Vector2(-0.5, 0))
     const isDragging = useRef(false)
     const lastMousePos = useRef({ x: 0, y: 0 })
 
@@ -79,12 +107,13 @@ function FractalScene() {
         () => ({
             uTime: { value: 0 },
             uResolution: { value: new THREE.Vector2(size.width, size.height) },
-            uCenter: { value: center },
+            uCenter: { value: new THREE.Vector2(center.x, center.y) },
             uZoom: { value: zoom },
-            // Aesthetic Color Palette (Deep Space / Cyber)
-            uColor1: { value: new THREE.Color('#0a0a1a') }, // Dark Background
-            uColor2: { value: new THREE.Color('#4f46e5') }, // Indigo
-            uColor3: { value: new THREE.Color('#ec4899') }, // Pink/Magenta Accent
+            uType: { value: 0 },
+            uJuliaC: { value: new THREE.Vector2(juliaC.x, juliaC.y) },
+            uColor1: { value: new THREE.Color('#030712') }, // Dark Background
+            uColor2: { value: new THREE.Color('#6366f1') }, // Indigo
+            uColor3: { value: new THREE.Color('#a855f7') }, // Purple
         }),
         []
     )
@@ -92,8 +121,11 @@ function FractalScene() {
     useFrame((state) => {
         if (shaderRef.current) {
             shaderRef.current.uniforms.uTime.value = state.clock.elapsedTime
+            // Smooth transitions for uniforms
             shaderRef.current.uniforms.uZoom.value = THREE.MathUtils.lerp(shaderRef.current.uniforms.uZoom.value, zoom, 0.1)
-            shaderRef.current.uniforms.uCenter.value.lerp(center, 0.1)
+            shaderRef.current.uniforms.uCenter.value.lerp(new THREE.Vector2(center.x, center.y), 0.1)
+            shaderRef.current.uniforms.uJuliaC.value.lerp(new THREE.Vector2(juliaC.x, juliaC.y), 0.1)
+            shaderRef.current.uniforms.uType.value = fractalType === 'mandelbrot' ? 0 : 1
             shaderRef.current.uniforms.uResolution.value.set(size.width, size.height)
         }
     })
@@ -114,30 +146,13 @@ function FractalScene() {
         const dy = e.clientY - lastMousePos.current.y
         lastMousePos.current = { x: e.clientX, y: e.clientY }
 
-        // Calculate pan delta strictly based on Zoom level to keep movement consistent 
-        // dx is in screen pixels. Need to convert to fractal space.
-        // Approximate scaling factor derived from screen width and current zoom
-        const sensitivity = 0.002 / zoom
-
-        setCenter(prev => new THREE.Vector2(
-            prev.x - dx * sensitivity * (size.width / 500),
-            prev.y + dy * sensitivity * (size.width / 500)
-        ))
+        onPan(dx, dy)
     }
 
     const handleWheel = (e: any) => {
-        // Standard wheel delta is often +/- 100 or line height
-        const zoomFactor = 1.1
-        if (e.deltaY < 0) {
-            setZoom(z => z * zoomFactor)
-        } else {
-            setZoom(z => z / zoomFactor)
-        }
+        const factor = e.deltaY < 0 ? 1.1 : 0.9
+        onZoom(factor)
     }
-
-    // Expose interaction globally via DOM events attached to Canvas parent if needed, 
-    // but R3F events on mesh are easier for self-contained component
-    // Need a full screen plane to catch all events
 
     return (
         <mesh
@@ -161,21 +176,137 @@ function FractalScene() {
 }
 
 export default function FractalGenerator() {
+    const [fractalType, setFractalType] = useState<'mandelbrot' | 'julia'>('mandelbrot')
+    const [zoom, setZoom] = useState(0.8)
+    const [center, setCenter] = useState({ x: -0.5, y: 0 })
+    const [juliaC, setJuliaC] = useState({ x: -0.4, y: 0.6 })
+    const [showControls, setShowControls] = useState(true)
+
+    const handlePan = (dx: number, dy: number) => {
+        const sensitivity = 0.002 / zoom
+        setCenter(prev => ({
+            x: prev.x - dx * sensitivity,
+            y: prev.y + dy * sensitivity
+        }))
+    }
+
+    const handleZoom = (factor: number) => {
+        setZoom(z => Math.max(0.1, Math.min(z * factor, 100000)))
+    }
+
+    const resetView = () => {
+        setZoom(0.8)
+        setCenter({ x: -0.5, y: 0 })
+        setJuliaC({ x: -0.4, y: 0.6 })
+    }
+
     return (
-        <div className="w-full h-[600px] relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-black">
+        <div className="w-full h-[600px] relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-black group">
             <Canvas>
-                <FractalScene />
+                <FractalScene
+                    fractalType={fractalType}
+                    zoom={zoom}
+                    center={center}
+                    juliaC={juliaC}
+                    onPan={handlePan}
+                    onZoom={handleZoom}
+                />
             </Canvas>
 
-            {/* Overlay UI Controls */}
-            <div className="absolute bottom-6 left-6 flex gap-2">
-                <div className="px-4 py-2 bg-black/50 backdrop-blur-md rounded-lg border border-white/10 text-xs text-white/50 uppercase tracking-widest pointer-events-none">
-                    Drag to Pan • Scroll to Zoom
-                </div>
-            </div>
+            {/* Controls Toggle */}
+            <Button
+                size="icon"
+                variant="outline"
+                className="absolute top-4 right-4 z-10 bg-black/50 backdrop-blur border-white/10 hover:bg-white/10"
+                onClick={() => setShowControls(!showControls)}
+            >
+                <Settings2 className="w-4 h-4" />
+            </Button>
 
-            <div className="absolute top-6 right-6 flex flex-col gap-2">
-                {/*  Reset Button could go here if state was lifted up, keeping simple for now */}
+            {/* Main Controls Panel */}
+            <AnimatePresence>
+                {showControls && (
+                    <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 20 }}
+                        className="absolute right-4 top-16 w-64 bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl p-4 flex flex-col gap-6"
+                    >
+                        {/* Type Selection */}
+                        <div className="space-y-2">
+                            <label className="text-xs uppercase tracking-wider text-muted-foreground font-bold">Fractal Type</label>
+                            <div className="flex bg-white/5 p-1 rounded-lg">
+                                <button
+                                    onClick={() => setFractalType('mandelbrot')}
+                                    className={`flex-1 py-1.5 text-xs rounded-md transition-all ${fractalType === 'mandelbrot' ? 'bg-primary text-white shadow-lg' : 'text-muted-foreground hover:text-white'}`}
+                                >
+                                    Mandelbrot
+                                </button>
+                                <button
+                                    onClick={() => setFractalType('julia')}
+                                    className={`flex-1 py-1.5 text-xs rounded-md transition-all ${fractalType === 'julia' ? 'bg-primary text-white shadow-lg' : 'text-muted-foreground hover:text-white'}`}
+                                >
+                                    Julia
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Julia Controls (Conditional) */}
+                        {fractalType === 'julia' && (
+                            <div className="space-y-4">
+                                <label className="text-xs uppercase tracking-wider text-muted-foreground font-bold flex items-center gap-2">
+                                    <Palette className="w-3 h-3" /> Julia Constant (C)
+                                </label>
+                                <div className="space-y-1">
+                                    <div className="flex justify-between text-[10px] text-white/50">
+                                        <span>Real (X)</span>
+                                        <span>{juliaC.x.toFixed(2)}</span>
+                                    </div>
+                                    <input
+                                        type="range"
+                                        min="-1.5" max="1.5" step="0.01"
+                                        value={juliaC.x}
+                                        onChange={(e) => setJuliaC(prev => ({ ...prev, x: parseFloat(e.target.value) }))}
+                                        className="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer accent-primary"
+                                    />
+                                </div>
+                                <div className="space-y-1">
+                                    <div className="flex justify-between text-[10px] text-white/50">
+                                        <span>Imaginary (Y)</span>
+                                        <span>{juliaC.y.toFixed(2)}</span>
+                                    </div>
+                                    <input
+                                        type="range"
+                                        min="-1.5" max="1.5" step="0.01"
+                                        value={juliaC.y}
+                                        onChange={(e) => setJuliaC(prev => ({ ...prev, y: parseFloat(e.target.value) }))}
+                                        className="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer accent-primary"
+                                    />
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Zoom Controls */}
+                        <div className="space-y-2">
+                            <label className="text-xs uppercase tracking-wider text-muted-foreground font-bold">Zoom Level</label>
+                            <div className="flex items-center gap-2 text-white">
+                                <Button size="icon" variant="ghost" onClick={() => handleZoom(0.5)}><ZoomOut className="w-4 h-4" /></Button>
+                                <span className="text-xs font-mono flex-1 text-center">{zoom.toFixed(2)}x</span>
+                                <Button size="icon" variant="ghost" onClick={() => handleZoom(2.0)}><ZoomIn className="w-4 h-4" /></Button>
+                            </div>
+                        </div>
+
+                        <div className="pt-2 border-t border-white/10">
+                            <Button variant="secondary" size="sm" className="w-full text-xs" onClick={resetView}>
+                                <RefreshCcw className="w-3 h-3 mr-2" /> Reset View
+                            </Button>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            <div className="absolute bottom-6 left-6 px-4 py-2 bg-black/50 backdrop-blur-md rounded-lg border border-white/10 text-[10px] text-white/50 uppercase tracking-widest pointer-events-none">
+                Interactive WebGL Generator v2.0
             </div>
         </div>
     )
