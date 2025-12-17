@@ -186,7 +186,7 @@ function TimelineRow({ item, index, unlock }: { item: any, index: number, unlock
                         whileInView={{ scale: 1 }}
                         viewport={{ once: true, margin: "-10%" }}
                         className={cn(
-                            "w-4 h-4 rounded-full border-[3px] bg-background shadow-[0_0_0_4px_rgba(0,0,0,0.5)] transition-all duration-500",
+                            "w-4 h-4 rounded-full border-[3px] bg-background shadow-[0_0_0_4px_rgba(0,0,0,0.5)] transition-all duration-500 cursor-pointer",
                             isFirst ? "border-primary shadow-[0_0_20px_var(--primary)] animate-pulse" : "border-muted-foreground group-hover:border-primary group-hover:scale-150"
                         )}
                     />
