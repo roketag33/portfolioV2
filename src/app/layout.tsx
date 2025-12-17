@@ -6,6 +6,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { GamificationProvider } from "@/context/GamificationContext";
 
+import Terminal from '@/components/features/Terminal'
 import SpeedRunner from '@/components/features/SpeedRunner'
 import { Toaster } from 'sonner'
 
@@ -73,6 +74,7 @@ export default function RootLayout({
           <SmoothScroll>
             <Header />
             <SpeedRunner />
+            <Terminal />
             {children}
             <Footer />
           </SmoothScroll>

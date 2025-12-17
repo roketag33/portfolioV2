@@ -123,5 +123,29 @@ export const ACHIEVEMENTS: Record<string, Achievement> = {
         xp: 10,
         icon: '👋',
         secret: true
+    },
+    HACKERMAN: {
+        id: 'HACKERMAN',
+        title: 'Hackerman',
+        description: 'Access the secret terminal.',
+        xp: 50,
+        icon: '💻',
+        secret: true
+    },
+    SCRIPT_KIDDIE: {
+        id: 'SCRIPT_KIDDIE',
+        title: 'Script Kiddie',
+        description: 'Tried to use sudo? Nice try.',
+        xp: 20,
+        icon: '👶',
+        secret: true
+    },
+    DANGEROUS: {
+        id: 'DANGEROUS',
+        title: 'Living Dangerously',
+        description: 'Do not remove root!',
+        xp: 100,
+        icon: '☢️',
+        secret: true
     }
 }
