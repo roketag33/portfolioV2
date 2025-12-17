@@ -45,5 +45,19 @@ export const ACHIEVEMENTS: Record<string, Achievement> = {
         xp: 50,
         icon: '⏳',
         secret: true
+    },
+    COPYCAT: {
+        id: 'COPYCAT',
+        title: 'Copycat',
+        description: 'You copied my email. Write something nice!',
+        xp: 15,
+        icon: '📋'
+    },
+    SOCIALITE: {
+        id: 'SOCIALITE',
+        title: 'Socialite',
+        description: 'You checked out my social networks.',
+        xp: 15,
+        icon: '🌐'
     }
 }

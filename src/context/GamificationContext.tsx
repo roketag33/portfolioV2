@@ -46,7 +46,32 @@ export function GamificationProvider({ children }: { children: React.ReactNode }
         }
         window.addEventListener('keydown', handler)
         return () => window.removeEventListener('keydown', handler)
-    }, [unlocked]) // Re-bind if unlocked changes, though unlock reference is stable usually. Safe enough.
+    }, [unlocked])
+
+    // CLICK_FRENZY Logic
+    useEffect(() => {
+        let clicks = 0
+        let timeout: NodeJS.Timeout
+
+        const clickHandler = () => {
+            clicks++
+            if (clicks === 1) {
+                timeout = setTimeout(() => {
+                    clicks = 0
+                }, 2000) // Reset after 2s
+            }
+            if (clicks >= 10) { // 10 clicks in 2s
+                unlock('CLICK_FRENZY')
+                clicks = 0
+                clearTimeout(timeout)
+            }
+        }
+        window.addEventListener('click', clickHandler)
+        return () => {
+            window.removeEventListener('click', clickHandler)
+            clearTimeout(timeout)
+        }
+    }, [unlocked])
 
     const unlock = (id: string) => {
         if (unlocked.includes(id)) return // Already unlocked
