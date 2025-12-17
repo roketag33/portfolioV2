@@ -48,18 +48,16 @@ export default function LabPage() {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: index * 0.1 + 0.2 }}
                     >
-                        <Link href={exp.href} className="block group">
-                            <div className="h-[400px] w-full">
-                                <ProjectCard3D
-                                    title={exp.title}
-                                    category={exp.category}
-                                    image={exp.image}
-                                    year={exp.year}
-                                    href={exp.href}
-                                    desc={exp.description}
-                                />
-                            </div>
-                        </Link>
+                        <div className="h-[400px] w-full">
+                            <ProjectCard3D
+                                title={exp.title}
+                                category={exp.category}
+                                image={exp.image}
+                                year={exp.year}
+                                href={exp.href}
+                                desc={exp.description}
+                            />
+                        </div>
                     </motion.div>
                 ))}
             </div>
