@@ -20,14 +20,53 @@ export const useGamification = () => useContext(GamificationContext)
 export function GamificationProvider({ children }: { children: React.ReactNode }) {
     const [unlocked, setUnlocked] = useState<string[]>([])
     const [currentToast, setCurrentToast] = useState<Achievement | null>(null)
+    const [isLoaded, setIsLoaded] = useState(false)
 
     // Load from local storage
     useEffect(() => {
         const saved = localStorage.getItem('achievements')
         if (saved) {
-            setUnlocked(JSON.parse(saved))
+            setUnlocked(prev => {
+                const parsed = JSON.parse(saved)
+                // Merge with any achievements triggered before load
+                return Array.from(new Set([...prev, ...parsed]))
+            })
         }
+        setIsLoaded(true)
     }, [])
+
+    // ... (KONAMI and other effects unchanged) ...
+
+    const unlock = (id: string) => {
+        // If not loaded yet, retry shortly to avoid overwriting or missing checks
+        if (!isLoaded) {
+            setTimeout(() => unlock(id), 100)
+            return
+        }
+
+        if (unlocked.includes(id)) return // Already unlocked
+        if (!ACHIEVEMENTS[id]) return // Invalid ID
+
+        const newUnlocked = [...unlocked, id]
+        setUnlocked(newUnlocked)
+        localStorage.setItem('achievements', JSON.stringify(newUnlocked))
+
+        // Show toast
+        setCurrentToast(ACHIEVEMENTS[id])
+
+        // Play sound (optional)
+        try {
+            if (typeof window !== 'undefined') {
+                const audio = new Audio('/achievement.mp3')
+                audio.volume = 0.5
+                audio.play().catch(e => {
+                    // Ignore loading errors or autoplay policy blocks
+                })
+            }
+        } catch (e) {
+            // Ignore environment errors
+        }
+    }
 
     useEffect(() => {
         const konami = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a']
@@ -73,30 +112,39 @@ export function GamificationProvider({ children }: { children: React.ReactNode }
         }
     }, [unlocked])
 
-    const unlock = (id: string) => {
-        if (unlocked.includes(id)) return // Already unlocked
-        if (!ACHIEVEMENTS[id]) return // Invalid ID
-
-        const newUnlocked = [...unlocked, id]
-        setUnlocked(newUnlocked)
-        localStorage.setItem('achievements', JSON.stringify(newUnlocked))
-
-        // Show toast
-        setCurrentToast(ACHIEVEMENTS[id])
-
-        // Play sound (optional)
-        try {
-            if (typeof window !== 'undefined') {
-                const audio = new Audio('/achievement.mp3')
-                audio.volume = 0.5
-                audio.play().catch(e => {
-                    // Ignore loading errors or autoplay policy blocks
-                })
-            }
-        } catch (e) {
-            // Ignore environment errors
+    // NIGHT_OWL Logic
+    useEffect(() => {
+        const hour = new Date().getHours()
+        if (hour >= 1 && hour < 5) {
+            unlock('NIGHT_OWL')
         }
-    }
+    }, [])
+
+    // QA_TESTER Logic
+    useEffect(() => {
+        let resizeCount = 0
+        let timeout: NodeJS.Timeout
+        const handleResize = () => {
+            resizeCount++
+            clearTimeout(timeout)
+            timeout = setTimeout(() => { resizeCount = 0 }, 2000)
+
+            if (resizeCount > 20) { // Aggressive resizing
+                unlock('QA_TESTER')
+            }
+        }
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
+
+    // SPEED_RUNNER Logic
+    // We need to track page visits. Since we are in a Provider, we need access to pathname changes.
+    // However, usePathname usage here might trigger re-renders. 
+    // Ideally this logic sits in a component that uses usePathname and calls unlock.
+    // For now, let's keep it simple here if possible, but Context usually doesn't know about router unless imported.
+
+
+
 
     // Auto-hide toast
     useEffect(() => {
