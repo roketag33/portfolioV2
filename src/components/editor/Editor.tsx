@@ -53,6 +53,15 @@ export default function Editor({ content, onChange }: EditorProps) {
             const json = editor.getJSON()
             if (onChange) onChange(json)
         },
+        onCreate: ({ editor }) => {
+            if (content) {
+                try {
+                    editor.commands.setContent(content)
+                } catch (e) {
+                    console.error('Failed to set initial content:', e)
+                }
+            }
+        },
     })
 
     if (!editor) return null
