@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button'
 import { useEffect, useState } from 'react'
 import { getPosts } from '@/app/actions/blog'
 import { formatDistance } from 'date-fns'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Search, X } from 'lucide-react'
 
 /* Combined type for local + db posts */
 type Post = {
@@ -18,6 +20,21 @@ type Post = {
     readTime?: string
     tags?: string[]
     coverImage?: string
+}
+
+const container = {
+    hidden: { opacity: 0 },
+    show: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1
+        }
+    }
+}
+
+const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
 }
 
 export default function BlogList() {
@@ -58,134 +75,192 @@ export default function BlogList() {
     const totalPages = Math.ceil(filteredPosts.length / ITEMS_PER_PAGE)
     const paginatedPosts = filteredPosts.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE)
 
-    // Featured Article (First one of the filtered list, or absolute latest if no filter)
-    // If searching or filtering, we don't show specific "Featured", just the list
-    const featuredPost = !search && !selectedTag && page === 1 && posts.length > 0 ? posts[0] : null
-    const listPosts = featuredPost ? paginatedPosts.slice(1) : paginatedPosts
+    // Featured Article logic
+    const showFeatured = !search && !selectedTag && page === 1 && posts.length > 0
+    const featuredPost = showFeatured ? posts[0] : null
+    const listPosts = showFeatured ? paginatedPosts.slice(1) : paginatedPosts
 
     return (
         <div className="space-y-12">
-            {/* Filters */}
-            <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-                <Input
-                    placeholder="Search articles..."
-                    className="max-w-md bg-white/5 border-white/10"
-                    value={search}
-                    onChange={(e) => { setSearch(e.target.value); setPage(1) }}
-                />
-                <div className="flex gap-2 overflow-x-auto max-w-full pb-2 no-scrollbar">
-                    <Badge
-                        variant={selectedTag === null ? "default" : "outline"}
-                        className="cursor-pointer whitespace-nowrap"
-                        onClick={() => { setSelectedTag(null); setPage(1) }}
-                    >
-                        All
-                    </Badge>
-                    {Array.from(new Set(posts.flatMap(p => p.tags || []))).map(tag => (
-                        <Badge
-                            key={tag}
-                            variant={selectedTag === tag ? "default" : "outline"}
-                            className="cursor-pointer whitespace-nowrap"
-                            onClick={() => { setSelectedTag(tag); setPage(1) }}
+            {/* Search & Filters */}
+            <div className="space-y-6">
+                <div className="relative max-w-lg mx-auto md:mx-0 group">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
+                    <Input
+                        placeholder="Search for articles, insights..."
+                        className="pl-10 bg-white/5 border-white/10 focus-visible:ring-primary/50 focus-visible:border-primary transition-all rounded-full h-11"
+                        value={search}
+                        onChange={(e) => { setSearch(e.target.value); setPage(1) }}
+                    />
+                    {search && (
+                        <button
+                            onClick={() => setSearch('')}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-white/10 rounded-full transition-colors"
                         >
-                            {tag}
+                            <X className="w-3 h-3 text-muted-foreground" />
+                        </button>
+                    )}
+                </div>
+
+                <div className="flex flex-wrap gap-2 items-center">
+                    <span className="text-sm font-medium text-muted-foreground mr-2">Topics:</span>
+                    <motion.div className="flex flex-wrap gap-2">
+                        <Badge
+                            variant={selectedTag === null ? "default" : "secondary"}
+                            className={`cursor-pointer transition-all hover:scale-105 ${selectedTag === null ? 'bg-primary text-primary-foreground' : 'bg-white/5 hover:bg-white/10'}`}
+                            onClick={() => { setSelectedTag(null); setPage(1) }}
+                        >
+                            All
                         </Badge>
-                    ))}
+                        {Array.from(new Set(posts.flatMap(p => p.tags || []))).map(tag => (
+                            <Badge
+                                key={tag}
+                                variant={selectedTag === tag ? "default" : "secondary"}
+                                className={`cursor-pointer transition-all hover:scale-105 ${selectedTag === tag ? 'bg-primary text-primary-foreground' : 'bg-white/5 hover:bg-white/10'}`}
+                                onClick={() => { setSelectedTag(tag); setPage(1) }}
+                            >
+                                {tag}
+                            </Badge>
+                        ))}
+                    </motion.div>
                 </div>
             </div>
 
-            {/* Featured Post */}
-            {featuredPost && (
-                <article className="group relative grid md:grid-cols-2 gap-8 bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-colors">
-                    {featuredPost.coverImage && (
-                        <div className="aspect-video relative rounded-xl overflow-hidden bg-black/20">
-                            <img src={featuredPost.coverImage} alt={featuredPost.title} className="object-cover w-full h-full" />
-                        </div>
-                    )}
-                    <div className="flex flex-col justify-center">
-                        <div className="flex gap-2 mb-4">
-                            {featuredPost.tags?.map(tag => (
-                                <Badge key={tag} variant="secondary">{tag}</Badge>
-                            ))}
-                        </div>
-                        <h2 className="text-4xl font-bold mb-4 group-hover:text-primary transition-colors">
-                            <Link href={featuredPost.id ? `/blog/entry/${featuredPost.slug}` : `/blog/${featuredPost.slug}`}>
-                                <span className="absolute inset-0 z-10" />
-                                {featuredPost.title}
-                            </Link>
-                        </h2>
-                        <p className="text-lg text-muted-foreground mb-6">{featuredPost.excerpt}</p>
-                        <div className="text-sm text-muted-foreground">
-                            {typeof featuredPost.date === 'string' ? featuredPost.date : formatDistance(new Date(featuredPost.date!), new Date(), { addSuffix: true })} · {featuredPost.readTime}
-                        </div>
-                    </div>
-                </article>
-            )}
-
-            {/* Grid */}
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {listPosts.map((post) => (
-                    <article
-                        key={post.slug}
-                        className="group relative flex flex-col justify-between h-full bg-white/5 border border-white/10 p-6 rounded-2xl hover:bg-white/10 transition-colors"
+            <AnimatePresence mode="wait">
+                {/* Featured Post */}
+                {featuredPost && (
+                    <motion.div
+                        key="featured"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0 }}
                     >
-                        {post.coverImage && (
-                            <div className="aspect-video mb-4 rounded-lg overflow-hidden bg-black/20 relative">
-                                <img src={post.coverImage} alt={post.title} className="object-cover w-full h-full" />
+                        <article className="group relative grid md:grid-cols-2 gap-8 bg-gradient-to-br from-white/5 to-white/0 border border-white/10 p-8 rounded-3xl overflow-hidden hover:border-primary/20 transition-all duration-500">
+                            <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                            {featuredPost.coverImage && (
+                                <div className="aspect-video relative rounded-2xl overflow-hidden shadow-2xl">
+                                    <img
+                                        src={featuredPost.coverImage}
+                                        alt={featuredPost.title}
+                                        className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700"
+                                    />
+                                </div>
+                            )}
+                            <div className="flex flex-col justify-center relative z-10">
+                                <div className="flex gap-2 mb-6">
+                                    <Badge className="bg-primary/20 text-primary border-primary/50 hover:bg-primary/30">Latest</Badge>
+                                    {featuredPost.tags?.map(tag => (
+                                        <Badge key={tag} variant="secondary" className="bg-white/10 text-xs backdrop-blur-sm">{tag}</Badge>
+                                    ))}
+                                </div>
+                                <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight tracking-tight group-hover:text-primary transition-colors">
+                                    <Link href={featuredPost.id ? `/blog/entry/${featuredPost.slug}` : `/blog/${featuredPost.slug}`}>
+                                        <span className="absolute inset-0 z-10" />
+                                        {featuredPost.title}
+                                    </Link>
+                                </h2>
+                                <p className="text-lg text-muted-foreground mb-8 leading-relaxed">{featuredPost.excerpt}</p>
+                                <div className="flex items-center gap-4 text-sm text-muted-foreground font-medium">
+                                    <span>{typeof featuredPost.date === 'string' ? featuredPost.date : formatDistance(new Date(featuredPost.date!), new Date(), { addSuffix: true })}</span>
+                                    <span className="w-1 h-1 rounded-full bg-white/20" />
+                                    <span>{featuredPost.readTime}</span>
+                                </div>
                             </div>
-                        )}
-                        <div>
-                            <div className="flex justify-between items-center mb-4 text-xs uppercase tracking-wider text-muted-foreground">
-                                <span>
-                                    {typeof post.date === 'string'
-                                        ? post.date
-                                        : formatDistance(new Date(post.date!), new Date(), { addSuffix: true })}
-                                </span>
-                                <span>{post.readTime}</span>
+                        </article>
+                    </motion.div>
+                )}
+
+                {/* Grid */}
+                <motion.div
+                    key="grid"
+                    variants={container}
+                    initial="hidden"
+                    animate="show"
+                    layout
+                    className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+                >
+                    {listPosts.map((post) => (
+                        <motion.article
+                            key={post.slug}
+                            variants={item}
+                            layout
+                            className="group relative flex flex-col h-full bg-white/5 border border-white/10 p-5 rounded-2xl hover:bg-white/10 hover:border-white/20 hover:-translate-y-1 transition-all duration-300"
+                        >
+                            {post.coverImage && (
+                                <div className="aspect-[16/10] mb-5 rounded-xl overflow-hidden bg-black/20 relative">
+                                    <img
+                                        src={post.coverImage}
+                                        alt={post.title}
+                                        className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
+                                    />
+                                </div>
+                            )}
+                            <div className="flex-1 flex flex-col">
+                                <div className="flex justify-between items-center mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground/80">
+                                    <span>
+                                        {typeof post.date === 'string'
+                                            ? post.date
+                                            : formatDistance(new Date(post.date!), new Date(), { addSuffix: true })}
+                                    </span>
+                                    <span>{post.readTime}</span>
+                                </div>
+
+                                <h2 className="text-xl font-bold mb-3 leading-snug group-hover:text-primary transition-colors line-clamp-2">
+                                    <Link
+                                        href={post.id ? `/blog/entry/${post.slug}` : `/blog/${post.slug}`}
+                                        className="before:absolute before:inset-0"
+                                    >
+                                        {post.title}
+                                    </Link>
+                                </h2>
+
+                                <p className="text-muted-foreground text-sm line-clamp-3 mb-6">
+                                    {post.excerpt}
+                                </p>
+
+                                <div className="flex flex-wrap gap-2 mt-auto pt-4 border-t border-white/5">
+                                    {post.tags?.slice(0, 3).map(tag => (
+                                        <Badge key={tag} variant="secondary" className="bg-white/5 hover:bg-white/10 text-[10px] px-2 h-5 text-muted-foreground">
+                                            {tag}
+                                        </Badge>
+                                    ))}
+                                    {post.tags && post.tags.length > 3 && (
+                                        <span className="text-[10px] text-muted-foreground self-center">+{post.tags.length - 3}</span>
+                                    )}
+                                </div>
                             </div>
-
-                            <h2 className="text-2xl font-bold mb-3 leading-tight group-hover:text-primary transition-colors">
-                                <Link
-                                    href={post.id ? `/blog/entry/${post.slug}` : `/blog/${post.slug}`}
-                                    className="before:absolute before:inset-0"
-                                >
-                                    {post.title}
-                                </Link>
-                            </h2>
-
-                            <p className="text-muted-foreground line-clamp-3 mb-6">
-                                {post.excerpt}
-                            </p>
-                        </div>
-
-                        <div className="flex flex-wrap gap-2 mt-auto">
-                            {post.tags?.map(tag => (
-                                <Badge key={tag} variant="secondary" className="bg-white/5 hover:bg-white/10 text-xs text-white">
-                                    {tag}
-                                </Badge>
-                            ))}
-                        </div>
-                    </article>
-                ))}
-            </div>
+                        </motion.article>
+                    ))}
+                </motion.div>
+            </AnimatePresence>
 
             {/* Pagination Controls */}
             {totalPages > 1 && (
-                <div className="flex justify-center gap-2 mt-8">
+                <div className="flex justify-center gap-2 mt-12">
                     <Button
-                        variant="ghost"
+                        variant="outline"
+                        size="sm"
                         disabled={page === 1}
-                        onClick={() => setPage(p => p - 1)}
+                        onClick={() => { setPage(p => p - 1); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+                        className="rounded-full px-6"
                     >
                         Previous
                     </Button>
-                    <span className="flex items-center px-4 text-sm text-muted-foreground">
-                        Page {page} of {totalPages}
-                    </span>
+                    <div className="flex items-center gap-1 px-4">
+                        {Array.from({ length: totalPages }).map((_, i) => (
+                            <div
+                                key={i}
+                                className={`w-2 h-2 rounded-full transition-all ${page === i + 1 ? 'bg-primary scale-125' : 'bg-white/20'}`}
+                            />
+                        ))}
+                    </div>
                     <Button
-                        variant="ghost"
+                        variant="outline"
+                        size="sm"
                         disabled={page === totalPages}
-                        onClick={() => setPage(p => p + 1)}
+                        onClick={() => { setPage(p => p + 1); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+                        className="rounded-full px-6"
                     >
                         Next
                     </Button>
