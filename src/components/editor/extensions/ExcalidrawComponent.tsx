@@ -13,6 +13,8 @@ const Excalidraw = dynamic(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ) as React.ComponentType<any>
 
+import "@excalidraw/excalidraw/index.css";
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function ExcalidrawComponent({ node, updateAttributes }: any) {
     const [elements, setElements] = useState(node.attrs.elements || [])
@@ -55,16 +57,20 @@ export default function ExcalidrawComponent({ node, updateAttributes }: any) {
     }, [elements, appState, updateAttributes])
 
     return (
-        <NodeViewWrapper className="my-8">
-            <Card className="h-[600px] w-full border-2 border-dashed relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-full">
+        <NodeViewWrapper className="my-8 not-prose">
+            <Card className="h-[600px] w-full border-2 border-dashed relative overflow-hidden bg-white dark:bg-zinc-900">
+                <div className="absolute top-0 left-0 w-full h-full" style={{ isolation: 'isolate' }}>
                     {/*  Excalidraw needs an explicit width/height container usually */}
                     <Excalidraw
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         excalidrawAPI={(api: any) => setExcalidrawAPI(api)}
                         initialData={{
                             elements: elements,
-                            appState: { ...appState, isLoading: false },
+                            appState: {
+                                ...appState,
+                                isLoading: false,
+                                viewBackgroundColor: '#ffffff'
+                            },
                             scrollToContent: true
                         }}
                         onChange={onChange}
@@ -75,6 +81,7 @@ export default function ExcalidrawComponent({ node, updateAttributes }: any) {
                                 saveAsImage: true
                             }
                         }}
+                        theme="light"
                     />
                 </div>
             </Card>
