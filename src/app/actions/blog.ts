@@ -4,10 +4,12 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-export async function getPosts() {
+export async function getPosts(options: { includeDrafts?: boolean } = {}) {
     try {
+        const where = options.includeDrafts ? {} : { published: true }
+
         const posts = await prisma.post.findMany({
-            where: { published: true },
+            where,
             orderBy: { createdAt: 'desc' },
             select: {
                 id: true,
@@ -17,6 +19,7 @@ export async function getPosts() {
                 excerpt: true,
                 readTime: true,
                 tags: true,
+                published: true, // Needed for admin dashboard
                 // We don't fetch full content for list to save bandwidth
             }
         })

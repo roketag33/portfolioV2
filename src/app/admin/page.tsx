@@ -29,7 +29,7 @@ export default function AdminPage() {
     }, [])
 
     const loadPosts = async () => {
-        const dbPosts = await getPosts()
+        const dbPosts = await getPosts({ includeDrafts: true })
         setPosts(dbPosts as any) // Cast for simplicity in this iteration
     }
 

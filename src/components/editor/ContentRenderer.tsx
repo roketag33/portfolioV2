@@ -6,6 +6,8 @@ import StarterKit from '@tiptap/starter-kit'
 import { CalloutExtension } from '@/components/editor/extensions/CalloutExtension'
 import { HeroExtension } from '@/components/editor/extensions/HeroExtension'
 import { ImageExtension } from '@/components/editor/extensions/ImageExtension'
+import { StatsExtension } from '@/components/editor/extensions/StatsExtension'
+import { CodeBlockExtension } from '@/components/editor/extensions/CodeBlockExtension'
 
 interface ContentRendererProps {
     content: any
@@ -20,6 +22,9 @@ export default function ContentRenderer({ content }: ContentRendererProps) {
             CalloutExtension,
             HeroExtension,
             ImageExtension,
+            // Add missing extensions for preview
+            CodeBlockExtension,
+            StatsExtension,
         ])
     }, [content])
 

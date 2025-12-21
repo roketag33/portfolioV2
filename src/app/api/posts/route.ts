@@ -6,7 +6,7 @@ const prisma = new PrismaClient()
 export async function POST(req: Request) {
     try {
         const body = await req.json()
-        const { title, content, excerpt, readTime, tags } = body
+        const { title, content, excerpt, readTime, tags, published } = body
 
         // Simple slug generation
         const slug = title
@@ -22,7 +22,7 @@ export async function POST(req: Request) {
                 excerpt,
                 readTime,
                 tags,
-                published: true, // Default publish
+                published: published ?? false, // Default to draft if not specified
             },
         })
 
@@ -36,7 +36,7 @@ export async function POST(req: Request) {
 export async function PUT(req: Request) {
     try {
         const body = await req.json()
-        const { id, title, content, excerpt, readTime, tags } = body
+        const { id, title, content, excerpt, readTime, tags, published } = body
 
         if (!id) return NextResponse.json({ error: 'ID required' }, { status: 400 })
 
@@ -48,6 +48,7 @@ export async function PUT(req: Request) {
                 excerpt,
                 readTime,
                 tags,
+                published, // Allow updating published status
             },
         })
 
