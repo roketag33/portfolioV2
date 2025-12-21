@@ -23,6 +23,7 @@ function WriteContent() {
     const [tags, setTags] = useState('') // Comma separated (derived from selectedTags)
     const [readTime, setReadTime] = useState('') // (derived from readTimeValue and readTimeUnit)
     const [content, setContent] = useState<any>(undefined)
+    const [coverImage, setCoverImage] = useState('')
     const [loading, setLoading] = useState(false)
     const [fetching, setFetching] = useState(!!id)
 
@@ -50,6 +51,7 @@ function WriteContent() {
                 if (post) {
                     setTitle(post.title)
                     setExcerpt(post.excerpt || '')
+                    if (post.coverImage) setCoverImage(post.coverImage)
 
                     // Parse tags
                     if (post.tags && Array.isArray(post.tags)) {
@@ -121,6 +123,7 @@ function WriteContent() {
                     title,
                     excerpt,
                     tags: selectedTags,
+                    coverImage,
                     readTime: readTimeValue ? `${readTimeValue} ${readTimeUnit}` : '',
                     content,
                     published, // Use the passed published status
@@ -244,7 +247,25 @@ function WriteContent() {
 
                     {/* Metadata Box */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-6 border rounded-xl bg-card/50">
+                        <div className="space-y-3">
+                            <label className="text-sm font-medium text-muted-foreground">Cover Image (URL)</label>
+                            <Input
+                                placeholder="https://example.com/image.jpg"
+                                value={coverImage}
+                                onChange={(e) => setCoverImage(e.target.value)}
+                            />
+                        </div>
+
                         {/* ... (existing metadata inputs) ... */}
+                        <div className="space-y-3">
+                            <label className="text-sm font-medium text-muted-foreground">Cover Image (URL)</label>
+                            <Input
+                                placeholder="https://..."
+                                value={coverImage}
+                                onChange={(e) => setCoverImage(e.target.value)}
+                            />
+                        </div>
+
                         <div className="space-y-3">
                             <label className="text-sm font-medium text-muted-foreground">Read Time</label>
                             <div className="flex gap-2">

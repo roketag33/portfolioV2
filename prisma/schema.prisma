@@ -14,6 +14,7 @@ model Post {
   excerpt   String?
   readTime  String?
   tags      String[]
+  coverImage String?
   content   Json
   published Boolean  @default(false)
   createdAt DateTime @default(now())
