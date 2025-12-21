@@ -104,9 +104,27 @@ export async function ServerContentRenderer({ content }: ServerContentRendererPr
     return (
         <div
             className="prose prose-lg dark:prose-invert max-w-none 
-            [&_figure]:my-8 [&_figure]:mx-auto [&_figure]:block 
-            [&_img]:rounded-lg [&_img]:shadow-md 
-            [&_pre]:!bg-stone-900 [&_pre]:!p-4 [&_pre]:rounded-lg [&_pre]:overflow-x-auto [&_pre]:border [&_pre]:border-white/10"
+            /* Text content constraint (readability) */
+            [&>p]:max-w-3xl [&>p]:mx-auto 
+            [&>h1]:max-w-3xl [&>h1]:mx-auto 
+            [&>h2]:max-w-3xl [&>h2]:mx-auto 
+            [&>h3]:max-w-3xl [&>h3]:mx-auto 
+            [&>h4]:max-w-3xl [&>h4]:mx-auto 
+            [&>ul]:max-w-3xl [&>ul]:mx-auto 
+            [&>ol]:max-w-3xl [&>ol]:mx-auto 
+            [&>li]:max-w-3xl [&>li]:mx-auto 
+            [&>blockquote]:max-w-3xl [&>blockquote]:mx-auto
+
+            /* Media and Code expansion */
+            [&_figure]:my-8 [&_figure]:mx-auto [&_figure]:block [&_figure]:max-w-5xl
+            [&_img]:rounded-lg [&_img]:shadow-md [&_img]:w-full
+            
+            /* Code blocks */
+            [&_pre]:!bg-stone-900 [&_pre]:!p-6 [&_pre]:rounded-xl [&_pre]:overflow-x-auto 
+            [&_pre]:border [&_pre]:border-white/10 [&_pre]:max-w-5xl [&_pre]:mx-auto [&_pre]:my-8
+            
+            /* Custom blocks (Excalidraw, Flow, etc) */
+            [&>div[data-type]]:max-w-6xl [&>div[data-type]]:mx-auto [&>div[data-type]]:w-full"
             dangerouslySetInnerHTML={{ __html: htmlContent }}
         />
     )

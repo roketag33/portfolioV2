@@ -28,7 +28,7 @@ export default async function BlogPostPage({ params }: Props) {
     if (!post) notFound()
 
     return (
-        <article className="container mx-auto py-24 max-w-4xl px-6">
+        <article className="container mx-auto py-24 max-w-7xl px-4 sm:px-6">
             <Link href="/blog">
                 <Button variant="ghost" className="mb-8 hover:-translate-x-1 transition-transform group pl-0">
                     <ChevronLeft className="w-4 h-4 mr-2 group-hover:animate-pulse" />
