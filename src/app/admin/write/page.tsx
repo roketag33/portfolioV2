@@ -144,6 +144,7 @@ function WriteContent() {
     // Source Editor Logic
     const [showSource, setShowSource] = useState(false)
     const [sourceCode, setSourceCode] = useState('')
+    const [editorKey, setEditorKey] = useState(0)
 
     const openSource = () => {
         const fullArticle = {
@@ -172,7 +173,14 @@ function WriteContent() {
                 setReadTimeValue(val || '')
                 if (['s', 'min', 'h'].includes(unit)) setReadTimeUnit(unit)
             }
-            if (json.content) setContent(json.content)
+            if (json.content) {
+                if (!json.content.type) {
+                    toast.error('Invalid content: missing document type')
+                    return
+                }
+                setContent(json.content)
+                setEditorKey((prev) => prev + 1)
+            }
 
             setShowSource(false)
             toast.success('Full article imported successfully')
@@ -306,7 +314,7 @@ function WriteContent() {
                         </div>
                     </div>
 
-                    <Editor content={content} onChange={setContent} />
+                    <Editor key={editorKey} content={content} onChange={setContent} />
                 </div>
 
                 {/* Preview Column */}
