@@ -9,7 +9,8 @@ import {
     MessageSquare, Code,
     Type, CheckSquare,
     Quote, Image as ImageIcon, LayoutTemplate,
-    BarChart3
+    BarChart3,
+    Network
 } from 'lucide-react'
 
 const getSuggestionItems = ({ query }: { query: string }) => {
@@ -132,6 +133,15 @@ const getSuggestionItems = ({ query }: { query: string }) => {
                         }
                     })
                     .run()
+            },
+        },
+        {
+            title: 'Mermaid',
+            description: 'Diagrams & Charts',
+            searchTerms: ['mermaid', 'diagram', 'chart', 'graph'],
+            icon: Network,
+            command: ({ editor, range }: any) => {
+                editor.chain().focus().deleteRange(range).insertContent({ type: 'mermaid' }).run()
             },
         },
     ].filter((item) => {

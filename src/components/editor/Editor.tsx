@@ -10,6 +10,7 @@ import { SlashCommand } from '@/components/editor/extensions/slash-command'
 import { HeroExtension } from '@/components/editor/extensions/HeroExtension'
 import { ImageExtension } from '@/components/editor/extensions/ImageExtension'
 import { StatsExtension } from '@/components/editor/extensions/StatsExtension'
+import { MermaidExtension } from '@/components/editor/extensions/MermaidExtension'
 
 interface EditorProps {
     content?: string | object
@@ -35,6 +36,7 @@ export default function Editor({ content, onChange }: EditorProps) {
             HeroExtension,
             ImageExtension,
             StatsExtension,
+            MermaidExtension,
             SlashCommand,
         ],
         content: content || '',

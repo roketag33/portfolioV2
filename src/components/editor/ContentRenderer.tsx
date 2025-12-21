@@ -8,6 +8,9 @@ import { HeroExtension } from '@/components/editor/extensions/HeroExtension'
 import { ImageExtension } from '@/components/editor/extensions/ImageExtension'
 import { StatsExtension } from '@/components/editor/extensions/StatsExtension'
 import { CodeBlockExtension } from '@/components/editor/extensions/CodeBlockExtension'
+import { MermaidExtension } from '@/components/editor/extensions/MermaidExtension'
+
+// ... (in useMemo)
 
 interface ContentRendererProps {
     content: any
@@ -25,6 +28,7 @@ export default function ContentRenderer({ content }: ContentRendererProps) {
             // Add missing extensions for preview
             CodeBlockExtension,
             StatsExtension,
+            MermaidExtension,
         ])
     }, [content])
 

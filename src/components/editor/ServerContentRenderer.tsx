@@ -11,6 +11,7 @@ interface ServerContentRendererProps {
 }
 
 import { StatsDefinition } from '@/components/editor/extensions/definitions/Stats'
+import { MermaidDefinition } from '@/components/editor/extensions/definitions/Mermaid'
 
 // ...
 
@@ -27,6 +28,7 @@ export async function ServerContentRenderer({ content }: ServerContentRendererPr
         HeroDefinition,
         ImageDefinition,
         StatsDefinition,
+        MermaidDefinition,
     ])
 
     // 2. Process code blocks with Shiki
