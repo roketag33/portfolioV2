@@ -12,6 +12,7 @@ import { ImageExtension } from '@/components/editor/extensions/ImageExtension'
 import { StatsExtension } from '@/components/editor/extensions/StatsExtension'
 import { MermaidExtension } from '@/components/editor/extensions/MermaidExtension'
 import { FlowExtension } from '@/components/editor/extensions/FlowExtension'
+import { ExcalidrawExtension } from './extensions/ExcalidrawExtension'
 
 interface EditorProps {
     content?: string | object
@@ -39,6 +40,7 @@ export default function Editor({ content, onChange }: EditorProps) {
             StatsExtension,
             MermaidExtension,
             FlowExtension,
+            ExcalidrawExtension,
             SlashCommand,
         ],
         content: content || '',

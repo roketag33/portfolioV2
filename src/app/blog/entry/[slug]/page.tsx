@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { ChevronLeft } from 'lucide-react'
 import MermaidInitializer from '@/components/features/MermaidInitializer'
 import FlowHydrator from '@/components/features/FlowHydrator'
+import ExcalidrawHydrator from '@/components/features/ExcalidrawHydrator'
 
 /* 
   NOTE: In a real app we would use a singleton Prisma Client 
@@ -74,6 +75,7 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
             <MermaidInitializer />
             <FlowHydrator />
+            <ExcalidrawHydrator />
         </article>
     )
 }

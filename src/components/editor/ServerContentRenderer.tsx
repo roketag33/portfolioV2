@@ -4,17 +4,15 @@ import CodeBlock from '@tiptap/extension-code-block'
 import { CalloutDefinition } from '@/components/editor/extensions/definitions/Callout'
 import { HeroDefinition } from '@/components/editor/extensions/definitions/Hero'
 import { ImageDefinition } from '@/components/editor/extensions/definitions/Image'
+import { StatsDefinition } from '@/components/editor/extensions/definitions/Stats'
+import { MermaidDefinition } from '@/components/editor/extensions/definitions/Mermaid'
+import { FlowDefinition } from '@/components/editor/extensions/definitions/Flow'
+import { ExcalidrawDefinition } from '@/components/editor/extensions/definitions/Excalidraw'
 import { createHighlighter } from 'shiki'
 
 interface ServerContentRendererProps {
     content: any // Tiptap JSON content
 }
-
-import { StatsDefinition } from '@/components/editor/extensions/definitions/Stats'
-import { MermaidDefinition } from '@/components/editor/extensions/definitions/Mermaid'
-import { FlowDefinition } from '@/components/editor/extensions/definitions/Flow'
-
-// ...
 
 export async function ServerContentRenderer({ content }: ServerContentRendererProps) {
     if (!content) return null
@@ -31,6 +29,7 @@ export async function ServerContentRenderer({ content }: ServerContentRendererPr
         StatsDefinition,
         MermaidDefinition,
         FlowDefinition,
+        ExcalidrawDefinition
     ])
 
     // 2. Process code blocks with Shiki

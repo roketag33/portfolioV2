@@ -10,7 +10,8 @@ import {
     Type, CheckSquare,
     Quote, Image as ImageIcon, LayoutTemplate,
     BarChart3,
-    Network
+    Network,
+    PenTool
 } from 'lucide-react'
 
 const getSuggestionItems = ({ query }: { query: string }) => {
@@ -148,9 +149,23 @@ const getSuggestionItems = ({ query }: { query: string }) => {
             title: 'Flowchart',
             description: 'Interactive Drag & Drop Diagram',
             searchTerms: ['flow', 'chart', 'diagram', 'graph', 'node'],
-            icon: Network, // Using same icon or different one like Workflow
+            icon: Network,
             command: ({ editor, range }: any) => {
                 editor.chain().focus().deleteRange(range).insertContent({ type: 'flow' }).run()
+            },
+        },
+        {
+            title: 'Excalidraw',
+            description: 'Freehand sketch and diagrams',
+            searchTerms: ['sketch', 'draw', 'board'],
+            icon: PenTool,
+            command: ({ editor, range }: any) => {
+                editor
+                    .chain()
+                    .focus()
+                    .deleteRange(range)
+                    .insertContent({ type: 'excalidraw' })
+                    .run()
             },
         },
     ].filter((item) => {
