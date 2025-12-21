@@ -20,7 +20,7 @@ interface ContentRendererProps {
 
 export default function ContentRenderer({ content }: ContentRendererProps) {
     const output = useMemo(() => {
-        if (!content) return ''
+        if (!content || typeof content !== 'object' || !content.type) return ''
 
         return generateHTML(content, [
             StarterKit,
