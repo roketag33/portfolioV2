@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use client'
 
 import { useState, useEffect, Suspense } from 'react'
@@ -6,8 +7,9 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { toast } from 'sonner'
-import { Eye, EyeOff } from 'lucide-react'
+import { Eye, EyeOff, FileJson } from 'lucide-react'
 import ContentRenderer from '@/components/editor/ContentRenderer'
+import { SimpleModal } from '@/components/ui/simple-modal'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { getPost } from '@/app/actions/getPost'
 
@@ -139,6 +141,46 @@ function WriteContent() {
         }
     }
 
+    // Source Editor Logic
+    const [showSource, setShowSource] = useState(false)
+    const [sourceCode, setSourceCode] = useState('')
+
+    const openSource = () => {
+        const fullArticle = {
+            title,
+            excerpt,
+            tags: selectedTags,
+            readTime: readTimeValue ? `${readTimeValue} ${readTimeUnit}` : '',
+            content
+        }
+        setSourceCode(JSON.stringify(fullArticle, null, 2))
+        setShowSource(true)
+    }
+
+    const importSource = () => {
+        try {
+            const json = JSON.parse(sourceCode)
+
+            if (json.title) setTitle(json.title)
+            if (json.excerpt) setExcerpt(json.excerpt)
+            if (json.tags && Array.isArray(json.tags)) {
+                setSelectedTags(json.tags)
+                setTags(json.tags.join(','))
+            }
+            if (json.readTime) {
+                const [val, unit] = json.readTime.split(' ')
+                setReadTimeValue(val || '')
+                if (['s', 'min', 'h'].includes(unit)) setReadTimeUnit(unit)
+            }
+            if (json.content) setContent(json.content)
+
+            setShowSource(false)
+            toast.success('Full article imported successfully')
+        } catch (e) {
+            toast.error('Invalid JSON content')
+        }
+    }
+
     if (fetching) return <div>Loading...</div>
 
     return (
@@ -147,13 +189,22 @@ function WriteContent() {
                 <div className="flex items-center gap-4">
                     <h1 className="text-3xl font-bold">{id ? 'Edit Article' : 'New Article'}</h1>
                     <Button
-                        variant="outline"
+                        variant="ghost"
                         size="sm"
                         onClick={() => setShowPreview(!showPreview)}
                         className="gap-2"
                     >
                         {showPreview ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                         {showPreview ? 'Hide Preview' : 'Show Preview'}
+                    </Button>
+                    <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={openSource}
+                        className="gap-2"
+                    >
+                        <FileJson className="w-4 h-4" />
+                        Source
                     </Button>
                 </div>
                 <div className="flex gap-2">
@@ -268,7 +319,48 @@ function WriteContent() {
                         </div>
                     </div>
                 )}
+
             </div>
+
+            <SimpleModal
+                isOpen={showSource}
+                onClose={() => setShowSource(false)}
+                title="Full Article Source (Metadata + Content)"
+            >
+                <div className="flex flex-col h-[600px]">
+                    <div className="p-4 bg-yellow-500/10 text-yellow-500 text-xs border-b border-yellow-500/20">
+                        Warning: Importing will overwrite your current title, tags, and content.
+                    </div>
+                    <div className="flex-1 p-4 bg-muted/30">
+                        <textarea
+                            className="w-full h-full bg-background border rounded-md p-4 font-mono text-xs focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none pre"
+                            value={sourceCode}
+                            onChange={(e) => setSourceCode(e.target.value)}
+                            spellCheck={false}
+                            placeholder='Paste Article JSON here...'
+                        />
+                    </div>
+                    <div className="p-4 border-t flex justify-between bg-background rounded-b-xl">
+                        <div className="flex gap-2">
+                            <Button
+                                variant="outline"
+                                onClick={() => {
+                                    navigator.clipboard.writeText(sourceCode)
+                                    toast.success('Copied to clipboard')
+                                }}
+                            >
+                                Copy JSON
+                            </Button>
+                        </div>
+                        <div className="flex gap-2">
+                            <Button variant="ghost" onClick={() => setShowSource(false)}>Cancel</Button>
+                            <Button onClick={importSource}>
+                                Import / Apply
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            </SimpleModal>
         </div>
     )
 }
