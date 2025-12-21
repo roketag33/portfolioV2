@@ -2,7 +2,8 @@
 
 import { ReactFlow, Background, Controls } from '@xyflow/react'
 import '@xyflow/react/dist/style.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
+import CustomNode from '@/components/editor/extensions/CustomNode'
 
 interface ClientFlowRendererProps {
     nodes: any[]
@@ -12,6 +13,7 @@ interface ClientFlowRendererProps {
 export default function ClientFlowRenderer({ nodes: initialNodes, edges: initialEdges }: ClientFlowRendererProps) {
     // We need to ensure this only renders on client to avoid hydration mismatch
     const [isMounted, setIsMounted] = useState(false)
+    const nodeTypes = useMemo(() => ({ custom: CustomNode }), [])
 
     useEffect(() => {
         setIsMounted(true)
@@ -25,6 +27,7 @@ export default function ClientFlowRenderer({ nodes: initialNodes, edges: initial
             <ReactFlow
                 nodes={initialNodes}
                 edges={initialEdges}
+                nodeTypes={nodeTypes}
                 fitView
                 proOptions={{ hideAttribution: true }}
                 nodesDraggable={false}
