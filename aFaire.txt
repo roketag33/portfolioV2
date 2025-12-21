@@ -1,0 +1,5 @@
+transformer l'editeur d'article en librairie
+rajouter un embranchement p dans about pour le freelance
+rajouter des 
+ajouter des experimentations dans le labs
+voir si on peux faire un projet pour chaque experimentations dans le lab pour faire gonfler le nombre de repo et du coup d eprojet aussi
