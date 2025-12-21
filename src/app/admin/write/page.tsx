@@ -22,7 +22,7 @@ function WriteContent() {
     const [excerpt, setExcerpt] = useState('')
     const [tags, setTags] = useState('') // Comma separated (derived from selectedTags)
     const [readTime, setReadTime] = useState('') // (derived from readTimeValue and readTimeUnit)
-    const [content, setContent] = useState<object>({})
+    const [content, setContent] = useState<any>(undefined)
     const [loading, setLoading] = useState(false)
     const [fetching, setFetching] = useState(!!id)
 

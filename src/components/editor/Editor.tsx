@@ -43,7 +43,7 @@ export default function Editor({ content, onChange }: EditorProps) {
             ExcalidrawExtension,
             SlashCommand,
         ],
-        content: content || '',
+        content: (content && ((typeof content === 'object' && 'type' in content) || typeof content === 'string')) ? content as any : '',
         editorProps: {
             attributes: {
                 class: 'prose prose-lg dark:prose-invert max-w-none focus:outline-none min-h-[500px]',
@@ -54,9 +54,19 @@ export default function Editor({ content, onChange }: EditorProps) {
             if (onChange) onChange(json)
         },
         onCreate: ({ editor }) => {
-            if (content) {
+            const isValid = content && (
+                (typeof content === 'object' && 'type' in content) ||
+                typeof content === 'string'
+            )
+
+            if (isValid) {
                 try {
-                    editor.commands.setContent(content)
+                    // Defer to next tick to ensure editor is ready
+                    setTimeout(() => {
+                        if (editor.isEmpty && content) {
+                            editor.commands.setContent(content as any)
+                        }
+                    }, 0)
                 } catch (e) {
                     console.error('Failed to set initial content:', e)
                 }
