@@ -1,7 +1,7 @@
 import { Extension } from '@tiptap/core'
 import { Plugin, PluginKey } from '@tiptap/pm/state'
 import { Decoration, DecorationSet } from '@tiptap/pm/view'
-import { getHighlighter } from 'shiki'
+// import { getHighlighter } from 'shiki'
 
 // NOTE: Real-time Shiki in Tiptap is complex because it's async.
 // For simplicity in this iteration, we will use Tiptap's default CodeBlockLowlight

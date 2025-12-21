@@ -1,7 +1,9 @@
 import { PrismaClient } from '@prisma/client'
-import BlogContentWrapper from '@/components/editor/BlogContentWrapper'
+import { ServerContentRenderer } from '@/components/editor/ServerContentRenderer'
 import { notFound } from 'next/navigation'
-import { format } from 'date-fns'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { ChevronLeft } from 'lucide-react'
 
 /* 
   NOTE: In a real app we would use a singleton Prisma Client 
@@ -14,55 +16,60 @@ interface Props {
     params: Promise<{ slug: string }>
 }
 
-import { Badge } from '@/components/ui/badge'
-
 export default async function BlogPostPage({ params }: Props) {
     const { slug } = await params
     const post = await prisma.post.findUnique({
         where: { slug },
     })
 
-    if (!post) return notFound()
+    if (!post) notFound()
 
     return (
-        <article className="container py-24 max-w-4xl">
-            <header className="mb-12 border-b border-border/50 pb-8 space-y-6">
-                <div className="space-y-4">
-                    <h1 className="text-5xl font-black tracking-tight">{post.title}</h1>
-                    {post.excerpt && (
-                        <p className="text-xl text-muted-foreground">{post.excerpt}</p>
-                    )}
+        <article className="container mx-auto py-24 max-w-4xl px-6">
+            <Link href="/blog">
+                <Button variant="ghost" className="mb-8 hover:-translate-x-1 transition-transform group pl-0">
+                    <ChevronLeft className="w-4 h-4 mr-2 group-hover:animate-pulse" />
+                    Back to Blog
+                </Button>
+            </Link>
+
+            <header className="mb-12 text-center space-y-6">
+                <div className="flex items-center justify-center gap-4 text-sm text-foreground/60">
+                    <span className="px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
+                        {post.tags?.[0] || 'Uncategorized'}
+                    </span>
+                    <span>•</span>
+                    <time dateTime={post.createdAt.toISOString()}>
+                        {new Date(post.createdAt).toLocaleDateString('en-US', {
+                            weekday: 'long',
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                        })}
+                    </time>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                        <span>{format(post.createdAt, 'MMMM d, yyyy')}</span>
-                        {post.readTime && (
-                            <>
-                                <span>•</span>
-                                <span>{post.readTime} to read</span>
-                            </>
-                        )}
-                    </div>
+                <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70 tracking-tight">
+                    {post.title}
+                </h1>
 
-                    {post.tags && post.tags.length > 0 && (
-                        <div className="flex gap-2">
-                            {post.tags.map(tag => (
-                                <Badge key={tag} variant="outline">{tag}</Badge>
-                            ))}
-                        </div>
-                    )}
-                </div>
+                {post.excerpt && (
+                    <p className="text-xl text-foreground/60 max-w-2xl mx-auto leading-relaxed">
+                        {post.excerpt}
+                    </p>
+                )}
             </header>
 
-            {(post.content && typeof post.content === 'object') ? (
-                <BlogContentWrapper content={post.content as object} />
-            ) : (
-                <div className="prose dark:prose-invert">
-                    {/* Fallback for old content or empty */}
-                    <p>No content available.</p>
-                </div>
-            )}
+            <div className="bg-background/30 backdrop-blur-sm rounded-2xl border border-border/50 p-8 md:p-12 shadow-sm">
+                {typeof post.content === 'object' && post.content !== null ? (
+                    <ServerContentRenderer content={post.content} />
+                ) : (
+                    // Fallback for legacy content or simple strings
+                    <div className="prose prose-lg dark:prose-invert max-w-none">
+                        {String(post.content)}
+                    </div>
+                )}
+            </div>
         </article>
     )
 }

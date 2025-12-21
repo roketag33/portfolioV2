@@ -1,3 +1,5 @@
+'use client'
+
 import { NodeViewWrapper } from '@tiptap/react'
 import { Upload, X } from 'lucide-react'
 import { useCallback, useRef } from 'react'

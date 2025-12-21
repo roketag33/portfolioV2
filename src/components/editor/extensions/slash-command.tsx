@@ -8,7 +8,8 @@ import {
     List, ListOrdered,
     MessageSquare, Code,
     Type, CheckSquare,
-    Quote, Image as ImageIcon, LayoutTemplate
+    Quote, Image as ImageIcon, LayoutTemplate,
+    BarChart3
 } from 'lucide-react'
 
 const getSuggestionItems = ({ query }: { query: string }) => {
@@ -18,7 +19,7 @@ const getSuggestionItems = ({ query }: { query: string }) => {
             description: 'Upload an image with caption.',
             searchTerms: ['photo', 'picture', 'media'],
             icon: ImageIcon,
-            command: ({ editor, range }) => {
+            command: ({ editor, range }: any) => {
                 editor
                     .chain()
                     .focus()
@@ -99,6 +100,29 @@ const getSuggestionItems = ({ query }: { query: string }) => {
             icon: MessageSquare,
             command: ({ editor, range }: any) => {
                 editor.chain().focus().deleteRange(range).setCallout().run()
+            },
+        },
+        {
+            title: 'Stats',
+            description: 'Display 3 key metrics',
+            searchTerms: ['stats', 'metrics', 'numbers'],
+            icon: <BarChart3 className="w-4 h-4" />,
+            command: ({ editor, range }: any) => {
+                editor
+                    .chain()
+                    .focus()
+                    .deleteRange(range)
+                    .insertContent({
+                        type: 'stats',
+                        attrs: {
+                            items: [
+                                { label: 'Users', value: '10k+' },
+                                { label: 'Uptime', value: '99.9%' },
+                                { label: 'Countries', value: '25+' }
+                            ]
+                        }
+                    })
+                    .run()
             },
         },
     ].filter((item) => {

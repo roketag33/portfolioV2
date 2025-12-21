@@ -3,28 +3,38 @@
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Placeholder from '@tiptap/extension-placeholder'
+import { all, createLowlight } from 'lowlight'
+import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
+import { CalloutExtension } from '@/components/editor/extensions/CalloutExtension'
+import { SlashCommand } from '@/components/editor/extensions/slash-command'
+import { HeroExtension } from '@/components/editor/extensions/HeroExtension'
+import { ImageExtension } from '@/components/editor/extensions/ImageExtension'
+import { StatsExtension } from '@/components/editor/extensions/StatsExtension'
 
 interface EditorProps {
     content?: string | object
     onChange?: (content: object) => void
 }
 
-import { CalloutExtension } from '@/components/editor/extensions/CalloutExtension'
-import { SlashCommand } from '@/components/editor/extensions/slash-command'
-import { HeroExtension } from '@/components/editor/extensions/HeroExtension'
-import { ImageExtension } from '@/components/editor/extensions/ImageExtension'
+const lowlight = createLowlight(all)
 
 export default function Editor({ content, onChange }: EditorProps) {
     const editor = useEditor({
         immediatelyRender: false,
         extensions: [
-            StarterKit,
+            StarterKit.configure({
+                codeBlock: false,
+            }),
+            CodeBlockLowlight.configure({
+                lowlight,
+            }),
             Placeholder.configure({
                 placeholder: 'Write something amazing... Type / for commands',
             }),
             CalloutExtension,
             HeroExtension,
             ImageExtension,
+            StatsExtension,
             SlashCommand,
         ],
         content: content || '',
