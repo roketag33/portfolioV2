@@ -144,6 +144,15 @@ const getSuggestionItems = ({ query }: { query: string }) => {
                 editor.chain().focus().deleteRange(range).insertContent({ type: 'mermaid' }).run()
             },
         },
+        {
+            title: 'Flowchart',
+            description: 'Interactive Drag & Drop Diagram',
+            searchTerms: ['flow', 'chart', 'diagram', 'graph', 'node'],
+            icon: Network, // Using same icon or different one like Workflow
+            command: ({ editor, range }: any) => {
+                editor.chain().focus().deleteRange(range).insertContent({ type: 'flow' }).run()
+            },
+        },
     ].filter((item) => {
         if (typeof query === 'string' && query.length > 0) {
             const search = query.toLowerCase()

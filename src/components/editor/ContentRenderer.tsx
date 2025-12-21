@@ -9,6 +9,7 @@ import { ImageExtension } from '@/components/editor/extensions/ImageExtension'
 import { StatsExtension } from '@/components/editor/extensions/StatsExtension'
 import { CodeBlockExtension } from '@/components/editor/extensions/CodeBlockExtension'
 import { MermaidExtension } from '@/components/editor/extensions/MermaidExtension'
+import { FlowExtension } from '@/components/editor/extensions/FlowExtension'
 
 // ... (in useMemo)
 
@@ -29,6 +30,7 @@ export default function ContentRenderer({ content }: ContentRendererProps) {
             CodeBlockExtension,
             StatsExtension,
             MermaidExtension,
+            FlowExtension,
         ])
     }, [content])
 
