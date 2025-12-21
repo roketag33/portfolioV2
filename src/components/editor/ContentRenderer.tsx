@@ -10,6 +10,7 @@ import { StatsExtension } from '@/components/editor/extensions/StatsExtension'
 import { CodeBlockExtension } from '@/components/editor/extensions/CodeBlockExtension'
 import { MermaidExtension } from '@/components/editor/extensions/MermaidExtension'
 import { FlowExtension } from '@/components/editor/extensions/FlowExtension'
+import { ExcalidrawExtension } from '@/components/editor/extensions/ExcalidrawExtension'
 
 // ... (in useMemo)
 
@@ -31,6 +32,7 @@ export default function ContentRenderer({ content }: ContentRendererProps) {
             StatsExtension,
             MermaidExtension,
             FlowExtension,
+            ExcalidrawExtension // Add this
         ])
     }, [content])
 

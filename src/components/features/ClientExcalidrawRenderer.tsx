@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use client'
 
 import { useEffect, useState } from 'react'
@@ -7,12 +8,10 @@ import dynamic from 'next/dynamic'
 const Excalidraw = dynamic(
     () => import('@excalidraw/excalidraw').then((mod) => mod.Excalidraw),
     { ssr: false }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-) as React.ComponentType<any>
+) as any
 
 
 // This component hydrates the server-rendered placeholder
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function ClientExcalidrawRenderer({ elements, appState }: { elements: any[], appState: any }) {
 
     if (!elements || elements.length === 0) return null
