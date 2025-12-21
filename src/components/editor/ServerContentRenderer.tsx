@@ -1,5 +1,6 @@
 import { generateHTML } from '@tiptap/html'
 import StarterKit from '@tiptap/starter-kit'
+import CodeBlock from '@tiptap/extension-code-block'
 import { CalloutDefinition } from '@/components/editor/extensions/definitions/Callout'
 import { HeroDefinition } from '@/components/editor/extensions/definitions/Hero'
 import { ImageDefinition } from '@/components/editor/extensions/definitions/Image'
@@ -18,7 +19,10 @@ export async function ServerContentRenderer({ content }: ServerContentRendererPr
 
     // 1. Generate base HTML from Tiptap JSON
     let htmlContent = generateHTML(content, [
-        StarterKit,
+        StarterKit.configure({
+            codeBlock: false,
+        }),
+        CodeBlock,
         CalloutDefinition,
         HeroDefinition,
         ImageDefinition,
@@ -29,57 +33,32 @@ export async function ServerContentRenderer({ content }: ServerContentRendererPr
     // Find <pre><code class="language-xyz">...</code></pre> and replace with Shiki output
     try {
         const highlighter = await createHighlighter({
-            themes: ['github-dark', 'github-light'],
-            langs: ['javascript', 'typescript', 'css', 'html', 'json', 'bash', 'shell', 'python', 'java', 'c', 'cpp', 'sql', 'markdown', 'yaml'],
+            themes: ['one-dark-pro'],
+            langs: ['javascript', 'js', 'typescript', 'ts', 'css', 'html', 'json', 'bash', 'shell', 'python', 'java', 'c', 'cpp', 'sql', 'markdown', 'yaml', 'go', 'rust'],
         })
 
-        // Regex to match Tiptap's code block output: <pre><code class="language-js">content</code></pre>
-        // Note: Tiptap escapes content inside code blocks.
-        const codeBlockRegex = /<pre><code class="language-([^"]+)">([\s\S]*?)<\/code><\/pre>/g
+        // Match ALL pre > code blocks to ensure we don't miss any.
+        // Updated to handle attributes on <pre> and whitespace (e.g. <pre class="..."> <code>)
+        const codeBlockRegex = /<pre[^>]*>\s*<code([^>]*)>([\s\S]*?)<\/code>\s*<\/pre>/g
 
-        const replacements: Promise<string>[] = []
+        const matches: { full: string, attrs: string, code: string, index: number }[] = []
         let match
-
-        // We need to replace async, so we gather promises first? 
-        // String.replace doesn't support async replacer.
-        // We will match all, generate replacements, then replace.
-
-        const matches: { full: string, lang: string, code: string, index: number }[] = []
         while ((match = codeBlockRegex.exec(htmlContent)) !== null) {
-            matches.push({ full: match[0], lang: match[1], code: match[2], index: match.index })
+            matches.push({ full: match[0], attrs: match[1], code: match[2], index: match.index })
         }
 
         if (matches.length > 0) {
-            // Process all matches
-            for (const m of matches) {
-                // Decode HTML entities in the code content (e.g. &lt; to <) because Shiki expects raw text
-                const rawCode = m.code
-                    .replace(/&lt;/g, '<')
-                    .replace(/&gt;/g, '>')
-                    .replace(/&quot;/g, '"')
-                    .replace(/&#39;/g, "'")
-                    .replace(/&amp;/g, '&')
-
-                const highlighted = highlighter.codeToHtml(rawCode, {
-                    lang: m.lang,
-                    themes: {
-                        light: 'github-light',
-                        dark: 'github-dark',
-                    }
-                })
-
-                // Replace the specific occurrence in the string (handling potential duplicates carefully)
-                // A safer way is to split the string or use a library, but for this specific pattern, string replacement is acceptable if we are careful.
-                // However, doing global replace might replace identical blocks wrong. 
-                // Better to rebuild string.
-            }
-
-            // Rebuild string
             let newHtml = ''
             let lastIndex = 0
 
             for (const m of matches) {
+                // Append content before this block
                 newHtml += htmlContent.substring(lastIndex, m.index)
+
+                // Extract language from attributes
+                // class="language-xyz" or class='language-xyz'
+                const langMatch = m.attrs.match(/class=["'](?:[^"']*\s+)?language-([\w-]+)(?:\s+[^"']*)?["']/)
+                const lang = langMatch ? langMatch[1] : 'text'
 
                 const rawCode = m.code
                     .replace(/&lt;/g, '<')
@@ -90,16 +69,24 @@ export async function ServerContentRenderer({ content }: ServerContentRendererPr
 
                 try {
                     const highlighted = highlighter.codeToHtml(rawCode, {
-                        lang: m.lang,
-                        themes: {
-                            light: 'github-light',
-                            dark: 'github-dark',
-                        }
+                        lang,
+                        theme: 'one-dark-pro',
                     })
-                    newHtml += highlighted
+                    // Wrap in not-prose to avoid Tailwind Typography overriding styles
+                    newHtml += `<div class="not-prose">${highlighted}</div>`
                 } catch (e) {
-                    // Fallback if language not found
-                    newHtml += m.full
+                    console.error('Shiki highlighting failed for lang:', lang, e)
+                    // Fallback to plain text highlighting if specific lang fails
+                    try {
+                        const plain = highlighter.codeToHtml(rawCode, {
+                            lang: 'text',
+                            theme: 'one-dark-pro',
+                        })
+                        newHtml += `<div class="not-prose">${plain}</div>`
+                    } catch (e2) {
+                        // Ultimate fallback: original HTML but ensures dark theme somewhat via parent class
+                        newHtml += m.full
+                    }
                 }
 
                 lastIndex = m.index + m.full.length
@@ -107,10 +94,8 @@ export async function ServerContentRenderer({ content }: ServerContentRendererPr
             newHtml += htmlContent.substring(lastIndex)
             htmlContent = newHtml
         }
-
     } catch (e) {
-        console.error('Shiki highlighting failed:', e)
-        // Fallback to original HTML if Shiki fails
+        console.error('Shiki setup failed:', e)
     }
 
     return (
@@ -118,7 +103,7 @@ export async function ServerContentRenderer({ content }: ServerContentRendererPr
             className="prose prose-lg dark:prose-invert max-w-none 
             [&_figure]:my-8 [&_figure]:mx-auto [&_figure]:block 
             [&_img]:rounded-lg [&_img]:shadow-md 
-            [&_pre]:bg-transparent [&_pre]:p-0 [&_pre]:m-0"
+            [&_pre]:!bg-stone-900 [&_pre]:!p-4 [&_pre]:rounded-lg [&_pre]:overflow-x-auto [&_pre]:border [&_pre]:border-white/10"
             dangerouslySetInnerHTML={{ __html: htmlContent }}
         />
     )

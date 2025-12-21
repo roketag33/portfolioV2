@@ -40,6 +40,15 @@ const getSuggestionItems = ({ query }: { query: string }) => {
             },
         },
         {
+            title: 'Code Block',
+            description: 'Add a code block with syntax highlighting.',
+            searchTerms: ['code', 'snippet', 'dev'],
+            icon: Code,
+            command: ({ editor, range }: any) => {
+                editor.chain().focus().deleteRange(range).toggleCodeBlock().run()
+            },
+        },
+        {
             title: 'Text',
             description: 'Just start typing with plain text.',
             searchTerms: ['p', 'paragraph'],
@@ -106,7 +115,7 @@ const getSuggestionItems = ({ query }: { query: string }) => {
             title: 'Stats',
             description: 'Display 3 key metrics',
             searchTerms: ['stats', 'metrics', 'numbers'],
-            icon: <BarChart3 className="w-4 h-4" />,
+            icon: BarChart3,
             command: ({ editor, range }: any) => {
                 editor
                     .chain()

@@ -4,7 +4,7 @@ import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Placeholder from '@tiptap/extension-placeholder'
 import { all, createLowlight } from 'lowlight'
-import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
+import { CodeBlockExtension } from '@/components/editor/extensions/CodeBlockExtension'
 import { CalloutExtension } from '@/components/editor/extensions/CalloutExtension'
 import { SlashCommand } from '@/components/editor/extensions/slash-command'
 import { HeroExtension } from '@/components/editor/extensions/HeroExtension'
@@ -25,7 +25,7 @@ export default function Editor({ content, onChange }: EditorProps) {
             StarterKit.configure({
                 codeBlock: false,
             }),
-            CodeBlockLowlight.configure({
+            CodeBlockExtension.configure({
                 lowlight,
             }),
             Placeholder.configure({
