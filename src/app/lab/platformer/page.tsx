@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { Physics, RigidBody } from '@react-three/rapier'
 import Ecctrl from 'ecctrl'
 import { KeyboardControls, Environment } from '@react-three/drei'
@@ -40,7 +40,7 @@ function Player() {
     )
 }
 
-function Level() {
+function Level({ onWin }: { onWin: () => void }) {
     return (
         <group>
             {/* Floor */}
@@ -73,7 +73,19 @@ function Level() {
                 </mesh>
             </RigidBody>
 
-            {/* Moving Obstacles/Platforms could go here */}
+            {/* Win Zone */}
+            <RigidBody type="fixed" sensor position={[28, 10, -4]} onIntersectionEnter={() => onWin()}>
+                <mesh visible={false}>
+                    <boxGeometry args={[2, 2, 2]} />
+                </mesh>
+                <group position={[0, 0.5, 0]}>
+                    <mesh>
+                        <boxGeometry args={[0.5, 0.5, 0.5]} />
+                        <meshStandardMaterial color="#00ff00" emissive="#00ff00" emissiveIntensity={2} />
+                    </mesh>
+                    <pointLight color="#00ff00" distance={3} intensity={5} />
+                </group>
+            </RigidBody>
         </group>
     )
 }
@@ -94,8 +106,23 @@ function Lights() {
     )
 }
 
+function GameState({ setGameState }: { setGameState: (s: 'playing' | 'won' | 'lost') => void }) {
+    useFrame((state) => {
+        if (state.camera.position.y < -10) {
+            setGameState('lost')
+        }
+    })
+    return null
+}
+
 export default function PlatformerPage() {
-    const [started, setStarted] = useState(false)
+    const [gameState, setGameState] = useState<'start' | 'playing' | 'won' | 'lost'>('start')
+
+    const resetGame = () => {
+        setGameState('playing')
+        // In a real app, we'd reset the Ecctrl position here, possibly by remounting it
+        // For now, simple state toggle works if we conditionally render
+    }
 
     return (
         <main className="h-screen w-full bg-black text-white font-sans overflow-hidden select-none">
@@ -107,31 +134,38 @@ export default function PlatformerPage() {
                 </Link>
             </div>
 
-            {/* Start Overlay */}
-            {!started && (
+            {/* UI Overlays */}
+            {gameState !== 'playing' && (
                 <div className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm">
                     <h1 className="text-5xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.5)] mb-8">
-                        NEON RUNNER
+                        {gameState === 'start' && 'NEON RUNNER'}
+                        {gameState === 'won' && 'LEVEL COMPLETE'}
+                        {gameState === 'lost' && 'WASTED'}
                     </h1>
                     <button
-                        onClick={() => setStarted(true)}
+                        onClick={resetGame}
                         className="px-8 py-3 bg-white text-black font-bold text-xl rounded-full hover:scale-105 active:scale-95 transition-transform"
                     >
-                        START GAME
+                        {gameState === 'start' ? 'START GAME' : 'TRY AGAIN'}
                     </button>
                     <p className="mt-4 text-neutral-400">WASD / Arrows to Move • Space to Jump • Shift to Run</p>
                 </div>
             )}
 
             <KeyboardControls map={keyboardMap}>
-                <Canvas shadows camera={{ position: [0, 5, 10], fov: 60 }} className={started ? 'cursor-none' : ''}>
+                <Canvas shadows camera={{ position: [0, 5, 10], fov: 60 }} className={gameState === 'playing' ? 'cursor-none' : ''}>
                     <color attach="background" args={['#050505']} />
                     <Lights />
                     <Environment preset="night" />
 
                     <Physics timeStep="vary">
-                        {started && <Player />}
-                        <Level />
+                        {gameState === 'playing' && (
+                            <>
+                                <Player />
+                                <GameState setGameState={setGameState} />
+                            </>
+                        )}
+                        <Level onWin={() => setGameState('won')} />
                     </Physics>
                 </Canvas>
             </KeyboardControls>
