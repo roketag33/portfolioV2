@@ -7,7 +7,8 @@ export default function Footer() {
     const { unlock } = useGamification()
     const pathname = usePathname()
 
-    if (pathname?.startsWith('/lab')) return null
+    // Hide footer on lab experiments, but show on main lab archive
+    if (pathname?.startsWith('/lab/') && pathname !== '/lab') return null
 
     const handleCopyEmail = (e: React.MouseEvent) => {
         e.preventDefault()
