@@ -45,8 +45,18 @@ const EXPERIMENTS: Project[] = [
         year: '2025',
         tech: ['WebSocket', 'Recharts', 'Next.js'],
         link: '/lab/crypto',
-        image: '/images/crypto-pulse.png', // Copied from artifacts
+        image: '/images/crypto-pulse.png',
         color: '#10b981' // Emerald
+    },
+    {
+        id: 'knowledge-graph',
+        title: '3D Knowledge Graph',
+        description: 'Visualize Markdown notes as an interactive 3D force-directed universe.',
+        year: '2025',
+        tech: ['R3F', 'Force Graph', 'Markdown'],
+        link: '/lab/neural',
+        image: '/images/neural-nexus.png',
+        color: '#818cf8' // Indigo
     }
 ];
 
