@@ -12,7 +12,7 @@ interface LabListProps {
 
 export default function LabList({ projects, setHoveredProject }: LabListProps) {
     return (
-        <div className="relative z-10 flex flex-col justify-center min-h-screen container mx-auto px-6 py-24">
+        <div className="relative z-10 flex flex-col container mx-auto px-6 pt-32 pb-24">
             <div className="mb-12">
                 <span className="font-mono text-xs text-neutral-500 uppercase tracking-widest block mb-2">
                     The Archive

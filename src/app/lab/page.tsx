@@ -1,11 +1,11 @@
-import Footer from '@/components/layout/Footer';
 'use client';
+
+import Footer from '@/components/layout/Footer';
 
 import { useState } from 'react';
 import HoverPreview from '@/components/lab/HoverPreview';
 import LabList from '@/components/lab/LabList';
 import { Project } from '@/components/lab/types';
-import { AnimatePresence } from 'framer-motion';
 
 const EXPERIMENTS: Project[] = [
     {
@@ -54,15 +54,17 @@ export default function LabPage() {
     const [hoveredProject, setHoveredProject] = useState<Project | null>(null);
 
     return (
-        <main className="relative min-h-screen w-full bg-neutral-950 text-white overflow-x-hidden selection:bg-indigo-500/30">
+        <main className="relative min-h-screen w-full bg-neutral-950 text-white overflow-x-hidden selection:bg-indigo-500/30 flex flex-col">
             {/* Background Preview */}
             <HoverPreview project={hoveredProject} />
 
             {/* List Content */}
-            <LabList
-                projects={EXPERIMENTS}
-                setHoveredProject={setHoveredProject}
-            />
+            <div className="flex-grow">
+                <LabList
+                    projects={EXPERIMENTS}
+                    setHoveredProject={setHoveredProject}
+                />
+            </div>
 
             <div className="relative z-10">
                 <Footer />
