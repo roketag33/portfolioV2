@@ -40,9 +40,21 @@ export default function LabList({ projects, setHoveredProject }: LabListProps) {
                     >
                         <motion.div
                             className="grid grid-cols-12 gap-4 py-8 border-b border-white/5 items-center group-hover:border-white/20 transition-colors"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1 }}
+                            initial={{
+                                opacity: 0,
+                                x: index % 2 === 0 ? -50 : 50,
+                                filter: 'blur(10px)'
+                            }}
+                            animate={{
+                                opacity: 1,
+                                x: 0,
+                                filter: 'blur(0px)'
+                            }}
+                            transition={{
+                                duration: 0.8,
+                                delay: index * 0.15,
+                                ease: [0.22, 1, 0.36, 1] // Custom premium easing
+                            }}
                         >
                             <div className="col-span-1 font-mono text-sm text-neutral-600 group-hover:text-white transition-colors">
                                 {String(index + 1).padStart(2, '0')}
