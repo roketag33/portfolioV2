@@ -1,9 +1,13 @@
 'use client'
 import { useGamification } from '@/context/GamificationContext'
 import { toast } from 'sonner'
+import { usePathname } from 'next/navigation'
 
 export default function Footer() {
     const { unlock } = useGamification()
+    const pathname = usePathname()
+
+    if (pathname?.startsWith('/lab')) return null
 
     const handleCopyEmail = (e: React.MouseEvent) => {
         e.preventDefault()
@@ -21,7 +25,7 @@ export default function Footer() {
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-8">
                 <div>
                     <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4">
-                        Let's work <br /> together
+                        Let&apos;s work <br /> together
                     </h2>
                     <button onClick={handleCopyEmail} className="text-xl text-primary hover:underline text-left">
                         contact@roketag.com

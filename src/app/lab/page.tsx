@@ -1,25 +1,42 @@
 'use client'
 import { motion } from 'framer-motion'
-import Link from 'next/link'
 import { ProjectCard3D } from '@/components/ui/project-card-3d'
 
 const EXPERIMENTS = [
     {
-        id: 'snake',
-        title: 'Retro Snake',
-        category: 'Mini Game',
-        image: 'https://images.unsplash.com/photo-1628260412297-a3377e45006f?w=800&q=80', // Arcade/Retro vibe placeholder
-        href: '/lab/snake',
-        description: 'Classic Snake game with achievements and arcade mode.',
+        id: '3d-card',
+        title: 'Abstract Matter v3',
+        category: 'R3F / Material Editor',
+        image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80',
+        href: '/lab/3d-card',
+        description: 'Interactive object with real-time PBR material physics & code export.',
         year: '2025'
     },
     {
-        id: 'fractal',
-        title: 'Mandelbrot',
-        category: 'WebGL Shader',
-        image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80', // Abstract/Fractal vibe placeholder
-        href: '/lab/fractal',
-        description: 'Real-time infinite zoom exploration of the Mandelbrot set.',
+        id: 'crypto',
+        title: 'Crypto Pulse',
+        category: 'Real-time / WebSocket',
+        image: 'https://images.unsplash.com/photo-1642104704074-907c0698cbd9?w=800&q=80',
+        href: '/lab/crypto',
+        description: 'Live Bitcoin price dashboard with glassmorphism UI.',
+        year: '2025'
+    },
+    {
+        id: 'lumina',
+        title: 'Lumina Canvas',
+        category: 'Generative Art / Canvas',
+        image: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&q=80',
+        href: '/lab/lumina',
+        description: 'Neon particle system with fluid physics and image export.',
+        year: '2025'
+    },
+    {
+        id: 'echo',
+        title: 'Echo Grid',
+        category: 'Audio / R3F',
+        image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80',
+        href: '/lab/echo',
+        description: '3D music sequencer with reactive visuals and synth engine.',
         year: '2025'
     }
 ]
