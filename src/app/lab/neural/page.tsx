@@ -4,9 +4,13 @@ import React, { useMemo, useRef, useState, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Text, Environment, PerspectiveCamera } from '@react-three/drei'
 import * as THREE from 'three'
-import { ArrowLeft, Type, Info } from 'lucide-react'
+import { ArrowLeft, Type, Info, Box, Network } from 'lucide-react'
 import Link from 'next/link'
 import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
+import { Transformer } from 'markmap-lib'
+import { Markmap } from 'markmap-view'
+import { Toolbar } from 'markmap-toolbar'
+import 'markmap-toolbar/dist/style.css'
 
 // --- Types ---
 type GraphNode = {
@@ -90,6 +94,38 @@ const parseMarkdown = (text: string): GraphNode[] => {
     }]
 
     return nodes
+}
+
+// --- Markmap Component ---
+function MarkmapHooks({ markdown }: { markdown: string }) {
+    const ref = useRef<SVGSVGElement>(null)
+
+    useEffect(() => {
+        if (!ref.current) return
+        const transformer = new Transformer()
+        const { root } = transformer.transform(markdown)
+        const mm = Markmap.create(ref.current, undefined, root)
+
+        // Cleanup prev instance logic if needed, but create usually handles it by clearing innerHTML or similar if simple
+        // Actually Markmap.create appends g element. Better to clear or reuse.
+        // Documentation says create() returns a Markmap instance. 
+
+        // Add toolbar
+        if (mm) {
+            const { el } = Toolbar.create(mm)
+            el.style.position = 'absolute'
+            el.style.bottom = '1rem'
+            el.style.right = '1rem'
+            ref.current.parentElement?.append(el)
+
+            return () => {
+                mm.destroy()
+                el.remove()
+            }
+        }
+    }, [markdown])
+
+    return <svg ref={ref} className="w-full h-full text-white" />
 }
 
 // --- Simulation Component ---
@@ -269,6 +305,7 @@ function Labels({ graphData, nodesRef }: { graphData: GraphNode[], nodesRef: Rea
 export default function KnowledgeGraphPage() {
     const [markdown, setMarkdown] = useState(DEFAULT_MARKDOWN)
     const [graphData, setGraphData] = useState<GraphNode[]>([])
+    const [viewMode, setViewMode] = useState<'3d' | '2d'>('3d')
 
     useEffect(() => {
         setGraphData(parseMarkdown(markdown))
@@ -305,36 +342,64 @@ export default function KnowledgeGraphPage() {
                 </div>
             </div>
 
-            {/* RIGHT: 3D Canvas */}
+            {/* RIGHT: Visualization Area */}
             <div className="flex-grow relative bg-black">
-                {/* Overlay UI */}
-                <div className="absolute top-6 right-6 z-20 pointer-events-none text-right">
-                    <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-pink-400">Knowledge Graph</h1>
-                    <p className="text-sm text-neutral-500">Interactive 3D Visualization</p>
+                {/* View Toggle UI */}
+                <div className="absolute top-6 right-6 z-20 flex flex-col items-end gap-2">
+                    <div className="text-right pointer-events-none mb-2">
+                        <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-pink-400">Knowledge Graph</h1>
+                        <p className="text-sm text-neutral-500">Interactive Visualization</p>
+                    </div>
+
+                    <div className="flex bg-neutral-900/80 backdrop-blur-sm p-1 rounded-lg border border-white/10">
+                        <button
+                            onClick={() => setViewMode('3d')}
+                            className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm transition-all ${viewMode === '3d' ? 'bg-indigo-600 text-white shadow-lg' : 'hover:bg-white/10 text-neutral-400'}`}
+                        >
+                            <Box className="w-4 h-4" /> 3D View
+                        </button>
+                        <button
+                            onClick={() => setViewMode('2d')}
+                            className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm transition-all ${viewMode === '2d' ? 'bg-pink-600 text-white shadow-lg' : 'hover:bg-white/10 text-neutral-400'}`}
+                        >
+                            <Network className="w-4 h-4" /> 2D Map
+                        </button>
+                    </div>
                 </div>
 
-                <Canvas dpr={[1, 2]}>
-                    <PerspectiveCamera makeDefault position={[0, 0, 20]} fov={40} />
-                    <color attach="background" args={['#030712']} />
+                {viewMode === '3d' ? (
+                    <Canvas dpr={[1, 2]}>
+                        <PerspectiveCamera makeDefault position={[0, 0, 20]} fov={40} />
+                        <color attach="background" args={['#030712']} />
 
-                    <ambientLight intensity={0.5} />
-                    <pointLight position={[10, 10, 10]} intensity={1} color="#4f46e5" />
+                        <ambientLight intensity={0.5} />
+                        <pointLight position={[10, 10, 10]} intensity={1} color="#4f46e5" />
 
-                    <GraphSimulation graphData={graphData} />
+                        <GraphSimulation graphData={graphData} />
 
-                    <OrbitControls makeDefault autoRotate autoRotateSpeed={0.5} enablePan={true} maxDistance={50} minDistance={5} />
-                    <Environment preset="night" />
-                    <EffectComposer>
-                        <Bloom luminanceThreshold={0.5} mipmapBlur intensity={1.0} />
-                        <Vignette eskil={false} offset={0.1} darkness={1.1} />
-                    </EffectComposer>
-                </Canvas>
+                        <OrbitControls makeDefault autoRotate autoRotateSpeed={0.5} enablePan={true} maxDistance={50} minDistance={5} />
+                        <Environment preset="night" />
+                        <EffectComposer>
+                            <Bloom luminanceThreshold={0.5} mipmapBlur intensity={1.0} />
+                            <Vignette eskil={false} offset={0.1} darkness={1.1} />
+                        </EffectComposer>
+                    </Canvas>
+                ) : (
+                    <div className="w-full h-full bg-slate-900 flex items-center justify-center p-8 overflow-hidden">
+                        <div className="w-full h-full bg-slate-900 relative">
+                            <MarkmapHooks markdown={markdown} />
+                        </div>
+                    </div>
+                )}
             </div>
 
             <style jsx global>{`
                 .custom-scrollbar::-webkit-scrollbar { width: 6px; }
                 .custom-scrollbar::-webkit-scrollbar-track { background: #171717; }
                 .custom-scrollbar::-webkit-scrollbar-thumb { background: #404040; border-radius: 3px; }
+                /* Markmap overrides to fit dark theme */
+                .markmap-container svg { width: 100%; height: 100%; }
+                .markmap-foreign { display: inline-block; }
             `}</style>
         </main>
     )
