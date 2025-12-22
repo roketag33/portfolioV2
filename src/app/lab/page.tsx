@@ -1,3 +1,4 @@
+import Footer from '@/components/layout/Footer';
 'use client';
 
 import { useState } from 'react';
@@ -11,7 +12,7 @@ const EXPERIMENTS: Project[] = [
         id: 'abstract-matter',
         title: 'Abstract Matter',
         description: 'Interactive 3D geometry and material distortion experiment.',
-        year: '2024',
+        year: '2025',
         tech: ['R3F', 'Shaders', 'Physics'],
         link: '/lab/3d-card',
         image: '/images/abstract-matter.webp', // Copied from artifacts
@@ -21,7 +22,7 @@ const EXPERIMENTS: Project[] = [
         id: 'echo-grid',
         title: 'Echo Grid',
         description: '3D spatial music sequencer with visual feedback.',
-        year: '2024',
+        year: '2025',
         tech: ['Tone.js', 'Three.js', 'React'],
         link: '/lab/echo',
         image: '/images/echo-grid.png',
@@ -31,7 +32,7 @@ const EXPERIMENTS: Project[] = [
         id: 'lumina-canvas',
         title: 'Lumina Canvas',
         description: 'Generative particle art system with fluid dynamics.',
-        year: '2024',
+        year: '2025',
         tech: ['Canvas API', 'Physics', 'GenArt'],
         link: '/lab/lumina',
         image: '/images/lumina-canvas.png',
@@ -41,7 +42,7 @@ const EXPERIMENTS: Project[] = [
         id: 'crypto-pulse',
         title: 'Crypto Pulse',
         description: 'Real-time cryptocurrency dashboard with glassmorphism.',
-        year: '2024',
+        year: '2025',
         tech: ['WebSocket', 'Recharts', 'Next.js'],
         link: '/lab/crypto',
         image: '/images/crypto-pulse.png', // Copied from artifacts
@@ -62,6 +63,10 @@ export default function LabPage() {
                 projects={EXPERIMENTS}
                 setHoveredProject={setHoveredProject}
             />
+
+            <div className="relative z-10">
+                <Footer />
+            </div>
         </main>
     );
 }
