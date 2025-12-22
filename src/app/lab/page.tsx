@@ -67,6 +67,16 @@ const EXPERIMENTS: Project[] = [
         link: '/lab/gravity',
         image: '/images/gravity-playground.png',
         color: '#f97316' // Orange
+    },
+    {
+        id: 'neon-platformer',
+        title: 'Neon Platformer',
+        description: '2.5D Synthwave Platformer with physics.',
+        year: '2025',
+        tech: ['Rapier', 'Ecctrl', 'R3F'],
+        link: '/lab/platformer',
+        image: '/images/neon-platformer.png',
+        color: '#2dd4bf' // Teal
     }
 ];
 
