@@ -57,6 +57,16 @@ const EXPERIMENTS: Project[] = [
         link: '/lab/neural',
         image: '/images/neural-nexus.png',
         color: '#818cf8' // Indigo
+    },
+    {
+        id: 'gravity-playground',
+        title: 'Gravity Playground',
+        description: 'Interactive physics sandbox with dynamic gravity control.',
+        year: '2025',
+        tech: ['Cannon.js', 'React Physics', 'R3F'],
+        link: '/lab/gravity',
+        image: '/images/gravity-playground.png',
+        color: '#f97316' // Orange
     }
 ];
 
