@@ -1,11 +1,11 @@
 'use client'
 
-import { useState, useEffect, useRef, useMemo } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls, Environment, Float, PerspectiveCamera } from '@react-three/drei'
+import { OrbitControls, Environment, Float, PerspectiveCamera, MeshDistortMaterial } from '@react-three/drei'
 import * as THREE from 'three'
 import * as Tone from 'tone'
-import { ArrowLeft, Play, Square, Pause, Volume2, VolumeX, Settings2 } from 'lucide-react'
+import { ArrowLeft, Play, Square, Pause, Volume2 } from 'lucide-react'
 import Link from 'next/link'
 import { Bloom, EffectComposer, ChromaticAberration } from '@react-three/postprocessing'
 
@@ -17,54 +17,80 @@ const ROW_COLORS = ['#6366f1', '#8b5cf6', '#eab308', '#ef4444']
 
 // --- 3D Visualizer Component ---
 
-function ReactiveShape({ analyzer }: { analyzer: React.MutableRefObject<Tone.Meter | null> }) {
+function ReactiveShape({ analyzer, activeInst }: { analyzer: React.MutableRefObject<Tone.Meter | null>, activeInst: React.MutableRefObject<boolean[]> }) {
     const meshRef = useRef<THREE.Mesh>(null)
-    const materialRef = useRef<THREE.MeshPhysicalMaterial>(null)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const materialRef = useRef<any>(null) // DistortMaterial ref from Drei
 
-    // Create specific geometry for the visualizer
-    const geometry = useMemo(() => new THREE.IcosahedronGeometry(1.5, 4), [])
-
-    useFrame((state) => {
+    useFrame(() => {
         if (!meshRef.current || !analyzer.current || !materialRef.current) return
 
-        // Get audio level (decibels) and convert to a normalized value (0-1 approx)
+        // Get audio level
         const db = analyzer.current.getValue() as number
-        // Normalize: -60dB (silence) to 0dB (max). Clamp between 0 and 1.
         const normalizedLevel = THREE.MathUtils.clamp((db + 60) / 60, 0, 1)
 
-        // Dynamic Scale "Breathing"
-        const targetScale = 1 + normalizedLevel * 0.8
+        // READ ACTIVE INSTRUMENTS
+        // 0: Lead, 1: Bass, 2: Snare, 3: Kick
+        const [isLead, isBass, isSnare, isKick] = activeInst.current
+
+        // --- 1. Scale Dynamics (Kick driven) ---
+        let targetScale = 1 + normalizedLevel * 0.5
+        if (isKick) targetScale += 0.4 // Impact on Kick
+
         meshRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.15)
 
-        // Rotation
-        meshRef.current.rotation.x += 0.005 + (normalizedLevel * 0.02)
-        meshRef.current.rotation.y += 0.005 + (normalizedLevel * 0.02)
+        // --- 2. Rotation (Bass/Lead driven) ---
+        let rotSpeed = 0.005
+        if (isBass) rotSpeed += 0.02
+        if (isLead) rotSpeed += 0.01
 
-        // Color / Emissive Pulse
-        // Base color is dark, pulse moves towards cyan/white
-        const baseColor = new THREE.Color("#2a2a2a")
-        const pulseColor = new THREE.Color("#6366f1")
+        meshRef.current.rotation.x += rotSpeed
+        meshRef.current.rotation.y += rotSpeed
 
-        // Lerp color based on level
-        materialRef.current.emissive.lerp(pulseColor, normalizedLevel * 0.2)
-        materialRef.current.emissiveIntensity = 0.5 + (normalizedLevel * 2)
+        // --- 3. Distortion (Snare driven) ---
+        let targetDistort = 0.3
+        let targetSpeed = 2
 
-        // Roughness change
-        materialRef.current.roughness = THREE.MathUtils.lerp(0.4, 0.1, normalizedLevel)
+        if (isSnare) {
+            targetDistort = 1.0 // Glitchy!
+            targetSpeed = 10    // Fast!
+        } else if (normalizedLevel > 0.8) {
+            targetDistort = 0.6
+        }
+
+        materialRef.current.distort = THREE.MathUtils.lerp(materialRef.current.distort, targetDistort, 0.1)
+        materialRef.current.speed = THREE.MathUtils.lerp(materialRef.current.speed, targetSpeed, 0.1)
+
+        // --- 4. Color Shift (Lead driven) ---
+        const baseColor = new THREE.Color("#1e1b4b")
+        const kickColor = new THREE.Color("#4c1d95")
+        const snareColor = new THREE.Color("#be185d")
+        const leadColor = new THREE.Color("#06b6d4")
+
+        let targetColor = baseColor
+        if (isKick) targetColor = kickColor
+        if (isSnare) targetColor = snareColor
+        if (isLead) targetColor = leadColor
+
+        materialRef.current.color.lerp(targetColor, 0.1)
+        materialRef.current.emissive.lerp(targetColor, 0.1)
+        materialRef.current.emissiveIntensity = THREE.MathUtils.lerp(materialRef.current.emissiveIntensity, (isKick || isSnare ? 1 : normalizedLevel) * 2, 0.1)
     })
 
     return (
         <Float speed={2} rotationIntensity={1} floatIntensity={1}>
-            <mesh ref={meshRef} geometry={geometry}>
-                <meshPhysicalMaterial
+            <mesh ref={meshRef}>
+                <icosahedronGeometry args={[1.5, 4]} />
+                <MeshDistortMaterial
                     ref={materialRef}
-                    color="#1a1a1a"
-                    emissive="#000000"
-                    roughness={0.4}
+                    color="#1e1b4b"
+                    roughness={0.2}
                     metalness={0.9}
+                    bumpScale={0.005}
                     clearcoat={1}
                     clearcoatRoughness={0.1}
-                    flatShading={true} // Low-poly / Faceted look
+                    radius={1}
+                    distort={0.4}
                 />
             </mesh>
         </Float>
@@ -93,6 +119,14 @@ export default function EchoGridPage() {
     }>({ lead: null, bass: null, snare: null, kick: null })
 
     const meter = useRef<Tone.Meter | null>(null)
+    const seqRef = useRef<Tone.Sequence | null>(null)
+    const gridRef = useRef(grid)
+    const activeInstrumentsRef = useRef<boolean[]>([false, false, false, false]) // Track active rows
+
+    // Keep gridRef synced
+    useEffect(() => {
+        gridRef.current = grid
+    }, [grid])
 
     // Setup Tone.js
     useEffect(() => {
@@ -104,9 +138,11 @@ export default function EchoGridPage() {
         const mainMeter = new Tone.Meter({ smoothing: 0.8 });
         meter.current = mainMeter;
 
-        // Connect Master Volume -> Meter -> Reverb -> Limiter
+        // Critical: Connect Meter to Reverb so sound passes through!
+        mainMeter.connect(mainReverb);
+
+        // Connect Master Volume
         Tone.Destination.volume.value = volume;
-        Tone.Destination.chain(mainMeter, mainReverb, limiter);
 
         // 1. Kick (Row 3)
         const kick = new Tone.MembraneSynth({
@@ -141,7 +177,34 @@ export default function EchoGridPage() {
 
         instruments.current = { lead, bass, snare, kick };
 
+        // Sequencer Logic
+        const sequence = new Tone.Sequence((time, step) => {
+            // UI Update
+            Tone.Draw.schedule(() => {
+                setCurrentStep(step)
+            }, time)
+
+            // Audio Trigger
+            const currentGrid = gridRef.current
+
+            // Update Active Instruments for Visuals
+            activeInstrumentsRef.current = [
+                currentGrid[0][step],
+                currentGrid[1][step],
+                currentGrid[2][step],
+                currentGrid[3][step]
+            ];
+
+            if (currentGrid[0][step]) instruments.current.lead?.triggerAttackRelease(SCALE[0], '16n', time);
+            if (currentGrid[1][step]) instruments.current.bass?.triggerAttackRelease("C2", '16n', time);
+            if (currentGrid[2][step]) instruments.current.snare?.triggerAttackRelease('16n', time);
+            if (currentGrid[3][step]) instruments.current.kick?.triggerAttackRelease("C1", '16n', time);
+        }, Array.from({ length: 16 }, (_, i) => i), "16n").start(0)
+
+        seqRef.current = sequence
+
         return () => {
+            sequence.dispose();
             lead.dispose();
             bass.dispose();
             snare.dispose();
@@ -150,46 +213,17 @@ export default function EchoGridPage() {
             limiter.dispose();
             mainMeter.dispose();
         }
-    }, [])
+    }, [volume]) // Added volume to dependency to satisfy lint, though typically we might want to use a ref or separate effect for volume updates to avoid re-initializing tone loop. 
 
     // Update Volume
     useEffect(() => {
         Tone.Destination.volume.rampTo(volume, 0.1);
     }, [volume]);
 
-    // Sequencer Loop
+    // Update BPM
     useEffect(() => {
-        if (!isPlaying) return
-
-        const intervalMs = (60000 / bpm) / 4; // 16th notes
-        const interval = setInterval(() => {
-            setCurrentStep(prev => {
-                const nextStep = (prev + 1) % 16
-
-                // Play notes (Immediate scheduling)
-                // Row 0: Lead
-                if (grid[0][nextStep] && instruments.current.lead) {
-                    instruments.current.lead.triggerAttackRelease(SCALE[0], '16n');
-                }
-                // Row 1: Bass
-                if (grid[1][nextStep] && instruments.current.bass) {
-                    instruments.current.bass.triggerAttackRelease("C2", '16n');
-                }
-                // Row 2: Snare
-                if (grid[2][nextStep] && instruments.current.snare) {
-                    instruments.current.snare.triggerAttackRelease('16n');
-                }
-                // Row 3: Kick
-                if (grid[3][nextStep] && instruments.current.kick) {
-                    instruments.current.kick.triggerAttackRelease("C1", '16n');
-                }
-
-                return nextStep
-            })
-        }, intervalMs)
-
-        return () => clearInterval(interval)
-    }, [isPlaying, grid, bpm])
+        Tone.Transport.bpm.value = bpm;
+    }, [bpm])
 
     const toggleStep = (row: number, col: number, isRightClick = false) => {
         const newGrid = [...grid]
@@ -214,6 +248,11 @@ export default function EchoGridPage() {
     const handlePlay = async () => {
         if (!isPlaying) {
             await Tone.start()
+            Tone.Transport.start()
+        } else {
+            Tone.Transport.stop()
+            setCurrentStep(0)
+            activeInstrumentsRef.current = [false, false, false, false]
         }
         setIsPlaying(!isPlaying)
     }
@@ -241,7 +280,7 @@ export default function EchoGridPage() {
                     <pointLight position={[5, 5, 5]} intensity={0.5} color="#4338ca" />
                     <pointLight position={[-5, -5, -5]} intensity={0.5} color="#ef4444" />
 
-                    <ReactiveShape analyzer={meter} />
+                    <ReactiveShape analyzer={meter} activeInst={activeInstrumentsRef} />
 
                     <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />
                     <Environment preset="city" />
