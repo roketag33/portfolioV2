@@ -124,7 +124,7 @@ export default function AboutPage() {
                                     {/* FREELANCE BRANCH VISUALIZATION */}
                                     {/* 1. Parallel Track (for items AFTER Boby) */}
                                     {index > bobyIndex && (
-                                        <div className="absolute top-[-150%] bottom-[-150%] left-1/2 ml-8 w-px border-r-2 border-dashed border-purple-500/30 -z-10" />
+                                        <div className="absolute top-[-150%] bottom-[-150%] left-1/2 ml-[35px] w-px border-r-2 border-dashed border-purple-500/30 -z-10" />
                                     )}
 
                                     {/* 2. Branch Split (at Boby) */}
@@ -141,10 +141,10 @@ export default function AboutPage() {
                                                     className="opacity-50"
                                                 />
                                             </svg>
-                                            {/* Label */}
-                                            <div className="absolute left-full top-1/2 ml-12 -translate-y-1/2 bg-purple-900/40 backdrop-blur-sm border border-purple-500/30 px-3 py-1 rounded-full whitespace-nowrap">
-                                                <span className="text-[10px] font-bold text-purple-300 uppercase tracking-wider flex items-center gap-1">
-                                                    <Zap size={10} className="text-purple-400" /> Start Freelance
+                                            {/* Label - Positioned BELOW the node to avoid text overlap */}
+                                            <div className="absolute left-1/2 ml-[35px] top-16 -translate-x-1/2 bg-purple-900/80 backdrop-blur-md border border-purple-500/30 px-3 py-1 rounded-full whitespace-nowrap shadow-[0_0_15px_rgba(168,85,247,0.3)] z-20">
+                                                <span className="text-[10px] font-bold text-purple-200 uppercase tracking-wider flex items-center gap-1.5">
+                                                    <Zap size={10} className="text-purple-400 fill-purple-400" /> Start Freelance
                                                 </span>
                                             </div>
                                         </>
@@ -336,7 +336,7 @@ function SpotlightCard({ children, className = "" }: { children: React.ReactNode
             className={`relative ${className}`}
         >
             {/* Clipping Container for Glow - Ensures rounded corners for glow but allows content overflow */}
-            <div className="absolute inset-0 overflow-hidden rounded-[inherit] pointer-events-none">
+            <div className="absolute inset-0 overflow-hidden rounded-[inherit] pointer-events-none z-0">
                 <div
                     className="absolute -inset-px opacity-0 transition-opacity duration-300"
                     style={{
@@ -346,10 +346,8 @@ function SpotlightCard({ children, className = "" }: { children: React.ReactNode
                 />
             </div>
 
-            {/* Content Container - No overflow hidden to allow branch lines to extend */}
-            <div className="relative z-10">
-                {children}
-            </div>
+            {/* Direct Children for Grid Layout - Content must be direct descendant of grid container */}
+            {children}
         </div>
     );
 }
