@@ -23,11 +23,11 @@ export default function ContactPage() {
                         transition={{ duration: 0.8 }}
                     >
                         <h1 className="text-6xl md:text-8xl font-black uppercase leading-none mb-6">
-                            Let's <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">Talk</span>
+                            Let&apos;s <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">Talk</span>
                         </h1>
                         <p className="text-xl md:text-2xl text-white/60 font-light max-w-lg">
                             Have a project in mind or just want to chat?
-                            Feel free to reach out. I'm always open to discussing new ideas.
+                            Feel free to reach out. I&apos;m always open to discussing new ideas.
                         </p>
                     </motion.div>
 
@@ -64,10 +64,10 @@ export default function ContactPage() {
                         transition={{ delay: 0.6 }}
                         className="flex gap-4 pt-4"
                     >
-                        <a href="https://linkedin.com" target="_blank" className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                        <a href="https://www.linkedin.com/in/alexandre-sarrazin-344b98210/" target="_blank" className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all">
                             <Linkedin className="w-6 h-6" />
                         </a>
-                        <a href="https://github.com" target="_blank" className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                        <a href="https://github.com/roketag33" target="_blank" className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all">
                             <Github className="w-6 h-6" />
                         </a>
                     </motion.div>

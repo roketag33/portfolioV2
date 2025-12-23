@@ -36,7 +36,7 @@ export default function Footer() {
                 <div className="flex flex-col items-end gap-4">
                     <div className="flex gap-4">
                         <a href="https://github.com/roketag33" target="_blank" rel="noopener noreferrer" className="uppercase text-sm hover:text-primary transition-colors" onClick={handleSocial}>GitHub</a>
-                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="uppercase text-sm hover:text-primary transition-colors" onClick={handleSocial}>LinkedIn</a>
+                        <a href="https://www.linkedin.com/in/alexandre-sarrazin-344b98210/" target="_blank" rel="noopener noreferrer" className="uppercase text-sm hover:text-primary transition-colors" onClick={handleSocial}>LinkedIn</a>
                     </div>
                     <p className="text-xs text-muted-foreground uppercase opacity-50">
                         © {new Date().getFullYear()} Alexandre Sarrazin. All rights reserved.
