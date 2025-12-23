@@ -1,57 +1,43 @@
 'use client'
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
+import { motion, useScroll, useSpring } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
 import { TIMELINE_DATA } from '@/data/experience'
-import { useGamification } from '@/context/GamificationContext'
-import { cn } from '@/lib/utils'
-import { Briefcase, GraduationCap, Gamepad2, Code, Trophy, Star, Zap, Dumbbell, UtensilsCrossed, Atom, Cpu } from 'lucide-react'
+import { Briefcase, Zap, Trophy } from 'lucide-react'
 import { useRef } from 'react'
+import PassionsSection from '@/components/features/PassionsSection'
 
-const SKILLS_CATEGORIES = [
-    { name: "Frontend", skills: ["Next.js", "React", "TypeScript", "TailwindCSS", "GSAP", "Three.js"] },
-    { name: "Mobile", skills: ["React Native", "Flutter"] },
-    { name: "Backend", skills: ["Node.js", "NestJS", "Symfony", "PHP", "Go", "Rust", "C/C++", "PostgreSQL", "GraphQL"] },
-    { name: "DevOps & Cloud", skills: ["Docker", "Podman", "Kubernetes", "Portainer", "GitHub/GitLab Actions", "Git"] },
-    { name: "AI & Innovation", skills: ["LLMs", "Transformers", "MCP", "RAG", "Chainlit"] }
-]
+
 
 export default function AboutPage() {
-    const { unlock } = useGamification()
     const containerRef = useRef<HTMLDivElement>(null)
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start end", "end end"]
-    })
-
-    // Smooth scroll progress for the main line
-    const scaleY = useSpring(scrollYProgress, {
+    const { scrollYProgress } = useScroll({ target: containerRef })
+    const scaleX = useSpring(scrollYProgress, {
         stiffness: 100,
         damping: 30,
         restDelta: 0.001
     })
 
-    // Reverse to show Oldest -> Newest 
-    const orderedTimeline = [...TIMELINE_DATA].reverse()
-
     return (
-        <main className="min-h-screen pt-32 pb-40 px-6 bg-background text-foreground overflow-hidden relative" ref={containerRef}>
-            {/* Background Decoration - Subtler */}
-            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[120px] -translate-x-1/2 translate-y-1/2 pointer-events-none" />
+        <div ref={containerRef} className="relative min-h-screen bg-black text-white selection:bg-primary/30">
+            {/* Scroll Progress Bar */}
+            <motion.div
+                className="fixed top-0 left-0 right-0 h-1 bg-primary z-50 origin-left"
+                style={{ scaleX }}
+            />
 
-            <div className="max-w-7xl mx-auto w-full relative z-10">
-
-                {/* HERO */}
-                <div className="mb-40 text-center relative">
+            <div className="container mx-auto px-6 py-32 md:py-48 relative z-10">
+                {/* HEADER */}
+                <div className="mb-32">
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
+                        className="text-center"
                     >
-                        <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/40">
+                        <h1 className="text-6xl md:text-9xl font-black uppercase tracking-tighter mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/50">
                             About Me.
                         </h1>
-                        <p className="text-2xl md:text-3xl font-light text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                        <p className="text-2xl md:text-3xl font-light text-muted-foreground mb-4 max-w-2xl mx-auto leading-relaxed">
                             Le parcours d&apos;un <span className="text-primary font-medium">Alternant</span> passionné.
                             <br />
                             <span className="text-lg md:text-xl opacity-80 mt-2 block">Toujours un pied en entreprise, un pied à l&apos;école.</span>
@@ -59,309 +45,161 @@ export default function AboutPage() {
                     </motion.div>
                 </div>
 
-                {/* LUMINOUS TIMELINE */}
-                <div className="relative">
-                    <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground/50 mb-32 text-center">Chronological Journey</h2>
+                {/* TIMELINE SECTION */}
+                <div className="mb-40">
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl md:text-5xl font-black uppercase mb-6 flex items-center justify-center gap-3">
+                            <Briefcase className="text-primary w-8 h-8 md:w-12 md:h-12" /> Expérience
+                        </h2>
+                        <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+                            5 ans d&apos;expérience cumulée entre alternance, freelance et projets personnels. Une montée en compétence constante.
+                        </p>
+                    </div>
 
-                    <div className="relative">
-                        {/* Central Track (Background) */}
-                        <div className="absolute left-[20px] md:left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2 bg-white/5 hidden md:block" />
+                    <div className="relative max-w-5xl mx-auto">
+                        {/* Central Timeline Line (Desktop) */}
+                        <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent -translate-x-1/2" />
 
-                        {/* Progressive Fill Line (Foreground) */}
-                        <motion.div
-                            className="absolute left-[20px] md:left-1/2 top-0 w-[2px] -translate-x-1/2 bg-gradient-to-b from-primary via-purple-500 to-blue-500 hidden md:block origin-top shadow-[0_0_15px_rgba(var(--primary),0.5)]"
-                            style={{ scaleY, height: '100%' }}
-                        />
+                        {[...TIMELINE_DATA].reverse().map((item, index) => (
+                            <div key={index} className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-8 md:gap-16 items-center mb-16 md:mb-24 last:mb-0 group">
 
-                        {/* Mobile Line (Simple Guide) */}
-                        <div className="absolute left-[20px] top-0 bottom-0 w-[2px] bg-white/10 md:hidden" />
+                                {/* LEFT COLUMN: Work Experience */}
+                                <motion.div
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true, margin: "-100px" }}
+                                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                                    className="md:text-right"
+                                >
+                                    <div className="flex flex-col md:flex-row-reverse md:items-baseline gap-2 mb-2 justify-end">
+                                        <h3 className="text-2xl font-bold text-white group-hover:text-primary transition-colors">{item.work.role}</h3>
+                                        <span className="text-sm font-mono text-neutral-400 whitespace-nowrap">@ {item.work.company}</span>
+                                    </div>
+                                    <p className="text-neutral-300 leading-relaxed mb-4 ml-auto max-w-lg">
+                                        {item.work.desc}
+                                    </p>
+                                    <div className="flex flex-wrap gap-2 justify-start md:justify-end">
+                                        {item.work.stack.map((skill: string) => (
+                                            <Badge key={skill} variant="outline" className="text-xs bg-white/10 text-neutral-200 border-white/20 hover:bg-white/20 transition-colors">
+                                                {skill}
+                                            </Badge>
+                                        ))}
+                                    </div>
+                                </motion.div>
 
-                        <div className="space-y-24 pb-24">
-                            {orderedTimeline.map((item, i) => (
-                                <TimelineRow key={item.year} item={item} index={i} unlock={unlock} />
-                            ))}
-
-                            {/* Final Dot */}
-                            <div className="relative grid md:grid-cols-[1fr_auto_1fr] gap-8 items-center">
-                                <div className="hidden md:block" />
-                                <div className="absolute left-[20px] top-0 md:static md:w-16 flex justify-center -translate-x-1/2 md:translate-x-0">
-                                    <div className="w-3 h-3 rounded-full bg-white/20" />
+                                {/* CENTER: Timeline Point */}
+                                <div className="hidden md:flex flex-col items-center justify-center relative">
+                                    <div className="w-4 h-4 rounded-full bg-neutral-900 border-2 border-white/20 group-hover:border-primary group-hover:scale-125 transition-all duration-300 z-10 shadow-[0_0_10px_rgba(255,255,255,0.1)]" />
+                                    <div className="absolute top-1/2 left-8 md:left-auto md:top-auto md:translate-y-8 font-mono text-xs text-neutral-400 whitespace-nowrap bg-neutral-900/90 px-3 py-1.5 rounded-full border border-white/10 shadow-xl">
+                                        {item.year}
+                                    </div>
                                 </div>
-                                <div className="hidden md:block" />
+
+                                {/* RIGHT COLUMN: Education */}
+                                <motion.div
+                                    initial={{ opacity: 0, x: 20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true, margin: "-100px" }}
+                                    transition={{ duration: 0.5, delay: index * 0.1 + 0.1 }}
+                                    className="relative pl-8 md:pl-0 border-l md:border-l-0 border-white/10 md:border-none"
+                                >
+                                    {/* Mobile Timeline Dot */}
+                                    <div className="md:hidden absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-neutral-800 group-hover:bg-primary transition-colors" />
+
+                                    <div className="flex flex-col gap-1 mb-2">
+                                        <h3 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">{item.school.name}</h3>
+                                        <span className="text-sm font-mono text-purple-300">{item.school.degree}</span>
+                                    </div>
+                                    <p className="text-neutral-300 text-sm leading-relaxed mb-3 opacity-90 max-w-lg">
+                                        {item.school.desc}
+                                    </p>
+                                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-white/10 text-[10px] font-bold uppercase tracking-wider text-white border border-white/10">
+                                        {item.school.status}
+                                    </div>
+                                </motion.div>
                             </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
 
-                {/* SKILLS & FREELANCE */}
-                <div className="mt-32 grid md:grid-cols-2 gap-12 lg:gap-20 items-start">
-                    {/* Skills */}
+                {/* SKILLS SECTION (Only Tech Stack as standalone) */}
+                <div className="mt-32 grid grid-cols-1 lg:grid-cols-2 gap-20">
                     <div>
-                        <h3 className="text-2xl font-black uppercase mb-8 flex items-center gap-3">
-                            <Code className="text-primary" /> Stack
+                        <h3 className="text-2xl font-bold uppercase mb-12 flex items-center gap-3">
+                            <Zap className="text-yellow-500" /> Stack Technique
                         </h3>
                         <div className="space-y-8">
-                            {SKILLS_CATEGORIES.map((category, catIndex) => (
-                                <div key={category.name}>
-                                    <h4 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-4 pl-1">{category.name}</h4>
-                                    <div className="flex flex-wrap gap-2">
-                                        {category.skills.map((skill, i) => (
-                                            <motion.div
-                                                key={skill}
-                                                initial={{ opacity: 0, scale: 0.8 }}
-                                                whileInView={{ opacity: 1, scale: 1 }}
-                                                viewport={{ once: true }}
-                                                transition={{ delay: (catIndex * 0.2) + (i * 0.05) }}
-                                            >
-                                                <Badge variant="secondary" className="px-3 py-1 bg-white/5 hover:bg-white/10 transition-colors text-sm font-normal text-muted-foreground hover:text-foreground cursor-default border border-white/5">
-                                                    {skill}
-                                                </Badge>
-                                            </motion.div>
+                            {[
+                                { name: "Frontend & CMS", skills: ["Next.js", "React", "Vue.js", "TypeScript", "TailwindCSS", "GSAP", "Three.js", "WordPress", "Shopify"] },
+                                { name: "Backend", skills: ["Node.js", "NestJS", "Express", "Rust", "Go", "PostgreSQL", "Prisma"] },
+                                { name: "DevOps & Quality", skills: ["Docker", "Vercel", "Git", "Figma", "Suite Atlassian", "Linear", "CI/CD", "Testing E2E/Unit"] }
+                            ].map((cat, i) => (
+                                <div key={i}>
+                                    <h4 className="text-sm font-mono text-neutral-500 uppercase tracking-wider mb-4">{cat.name}</h4>
+                                    <div className="flex flex-wrap gap-3">
+                                        {cat.skills.map(skill => (
+                                            <Badge key={skill} className="bg-neutral-900 hover:bg-white hover:text-black py-2 px-4 border-white/10 transition-all cursor-default">
+                                                {skill}
+                                            </Badge>
                                         ))}
                                     </div>
                                 </div>
                             ))}
                         </div>
                     </div>
+                </div>
 
-                    {/* Freelance & Services */}
-                    <div className="bg-gradient-to-br from-white/5 to-transparent p-8 rounded-3xl border border-white/5 relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 p-4 opacity-50">
-                            <Briefcase className="w-24 h-24 text-white/5 -rotate-12 transform translate-x-8 -translate-y-8" />
-                        </div>
-
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="bg-green-500/10 text-green-500 p-2 rounded-lg">
-                                <Zap size={20} />
+                {/* FREELANCE SECTION */}
+                <div className="mb-40 mt-32 border-y border-white/10 py-24 bg-white/[0.02]">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                        <div className="pl-4 lg:pl-0">
+                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 text-green-500 text-xs font-bold uppercase tracking-widest mb-8 animate-pulse border border-green-500/20">
+                                <span className="w-2 h-2 rounded-full bg-green-500" /> Open to Work
                             </div>
-                            <h3 className="text-xl font-bold uppercase tracking-tight">Freelance</h3>
-                            <Badge className="ml-auto bg-green-500/20 text-green-500 border-green-500/30 hover:bg-green-500/30">Open to Work</Badge>
-                        </div>
-
-                        <p className="text-muted-foreground leading-relaxed mb-8">
-                            En parallèle de mon alternance, j'accompagne startups et entreprises dans leurs défis techniques.
-                        </p>
-
-                        <div className="space-y-4">
-                            {[
-                                { title: "Fullstack Dev", desc: "React, Next.js, Node.js" },
-                                { title: "MVP & SaaS", desc: "De l'idée au produit" },
-                                { title: "UI/UX Design", desc: "Interfaces modernes & fluides" },
-                                { title: "Tech Consulting", desc: "Audit & Architecture" }
-                            ].map((s, i) => (
-                                <div key={i} className="flex items-center gap-4 p-3 rounded-xl bg-white/5 border border-white/5 hover:border-primary/30 transition-colors">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                                    <div>
-                                        <div className="font-bold text-sm">{s.title}</div>
-                                        <div className="text-xs text-muted-foreground">{s.desc}</div>
+                            <h2 className="text-4xl md:text-5xl font-black uppercase mb-8 leading-tight">
+                                Freelance <span className="text-primary">&</span> Consulting
+                            </h2>
+                            <p className="text-lg text-neutral-300 leading-relaxed mb-10 max-w-lg">
+                                Je mets mon expertise technique au service de vos projets. Disponible pour des missions courtes ou de l&apos;accompagnement long terme.
+                            </p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
+                                {[
+                                    { title: "Fullstack Dev", desc: "React, Next.js, Node.js" },
+                                    { title: "App. Mobile", desc: "React Native, Expo" },
+                                    { title: "IoT & Embarqué", desc: "C++, Python, Arduino" },
+                                    { title: "Tech Consulting", desc: "Audit & Architecture" }
+                                ].map((service, i) => (
+                                    <div key={i} className="flex flex-col group">
+                                        <h4 className="font-bold text-white flex items-center gap-3 text-lg mb-2 group-hover:text-primary transition-colors">
+                                            <Zap size={18} className="text-yellow-500" /> {service.title}
+                                        </h4>
+                                        <p className="text-sm text-neutral-400 pl-8 leading-relaxed">{service.desc}</p>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
+                        </div>
+                        <div className="relative h-full min-h-[400px] rounded-3xl bg-gradient-to-br from-neutral-900 to-black border border-white/10 p-10 flex items-center justify-center overflow-hidden group hover:border-primary/50 transition-colors duration-500">
+                            <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20" />
+                            <div className="relative z-10 text-center">
+                                <h3 className="text-4xl font-bold mb-4">Un projet en tête ?</h3>
+                                <p className="text-neutral-400 mb-10 max-w-xs mx-auto text-lg">Discutons de vos besoins et construisons quelque chose d&apos;unique.</p>
+                                <a href="/contact" className="inline-block bg-white text-black px-10 py-4 rounded-full font-black uppercase hover:scale-105 transition-transform hover:bg-primary shadow-lg shadow-white/10">
+                                    Me contacter
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 {/* PASSIONS */}
-                <div className="mt-32">
+                <div className="mt-40 mb-20">
                     <h3 className="text-2xl font-black uppercase mb-12 flex items-center gap-3 justify-center md:justify-start">
-                        <Trophy className="text-yellow-500" /> Autres Univers
+                        <Trophy className="text-yellow-500" /> Passions & Intérêts
                     </h3>
-
-                    {/* PASSIONS - Minimalist Accent Design */}
-                    <div className="mt-32">
-                        <h3 className="text-2xl font-black uppercase mb-16 flex items-center gap-3 justify-center md:justify-start">
-                            <Trophy className="text-yellow-500" /> Autres Univers
-                        </h3>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-                            {/* Sport */}
-                            <div className="group">
-                                <div className="flex items-start gap-6">
-                                    <div className="hidden md:block w-px h-24 bg-gradient-to-b from-red-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity" />
-                                    <div className="flex-1">
-                                        <div className="flex items-center gap-4 mb-4">
-                                            <Dumbbell className="text-red-500 w-6 h-6" />
-                                            <h4 className="text-xl font-bold uppercase tracking-tight">Sport & Discipline</h4>
-                                        </div>
-                                        <div className="space-y-4 text-neutral-400">
-                                            <div className="flex flex-col sm:flex-row sm:items-baseline gap-2">
-                                                <span className="text-xs font-bold text-red-400 uppercase tracking-widest min-w-[100px]">Pratiquant</span>
-                                                <p className="text-sm text-neutral-300">Streetlifting, Powerlifting, Calisthénie.</p>
-                                            </div>
-                                            <div className="flex flex-col sm:flex-row sm:items-baseline gap-2">
-                                                <span className="text-xs font-bold text-red-500/60 uppercase tracking-widest min-w-[100px]">Fan</span>
-                                                <p className="text-sm text-neutral-400">MMA (UFC), Boxe Anglaise.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Gaming */}
-                            <div className="group">
-                                <div className="flex items-start gap-6">
-                                    <div className="hidden md:block w-px h-24 bg-gradient-to-b from-purple-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity" />
-                                    <div className="flex-1">
-                                        <div className="flex items-center gap-4 mb-4">
-                                            <Gamepad2 className="text-purple-500 w-6 h-6" />
-                                            <h4 className="text-xl font-bold uppercase tracking-tight">Gaming</h4>
-                                        </div>
-                                        <p className="text-sm text-neutral-300 leading-relaxed mb-4">
-                                            Exploration de mécaniques complexes et d'univers immersifs. Le gaming affûte ma curiosité et ma résolution de problèmes.
-                                        </p>
-                                        <div className="flex flex-wrap gap-2">
-                                            {['Rogue-like', 'RPG', 'FPS Competitif', 'Indie Gems'].map(g => (
-                                                <span key={g} className="text-xs font-mono text-purple-400/80 border border-purple-500/20 px-2 py-1 rounded">
-                                                    {g}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Tech */}
-                            <div className="group">
-                                <div className="flex items-start gap-6">
-                                    <div className="hidden md:block w-px h-24 bg-gradient-to-b from-blue-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity" />
-                                    <div className="flex-1">
-                                        <div className="flex items-center gap-4 mb-4">
-                                            <Cpu className="text-blue-500 w-6 h-6" />
-                                            <h4 className="text-xl font-bold uppercase tracking-tight">Tech & Hardware</h4>
-                                        </div>
-                                        <ul className="text-sm text-neutral-300 space-y-2 font-light">
-                                            <li className="flex items-center gap-3">
-                                                <span className="w-1 h-1 bg-blue-500 rounded-full" /> Montage PC & Optimisation
-                                            </li>
-                                            <li className="flex items-center gap-3">
-                                                <span className="w-1 h-1 bg-blue-500 rounded-full" /> IoT & Domotique (Home Assistant)
-                                            </li>
-                                            <li className="flex items-center gap-3">
-                                                <span className="w-1 h-1 bg-blue-500 rounded-full" /> Veille IA & Ecosystème Tech
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Science & Cuisine (Merged Row for balance) */}
-                            <div className="group">
-                                <div className="flex items-start gap-6">
-                                    <div className="hidden md:block w-px h-24 bg-gradient-to-b from-cyan-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity" />
-                                    <div className="flex-1">
-                                        <div className="flex items-center gap-4 mb-4">
-                                            <Atom className="text-cyan-500 w-6 h-6" />
-                                            <h4 className="text-xl font-bold uppercase tracking-tight">Sciences & Création</h4>
-                                        </div>
-                                        <div className="space-y-6">
-                                            <p className="text-sm text-neutral-300 leading-relaxed">
-                                                <strong className="text-white font-medium">Sciences :</strong> Fascination pour la Physique/Chimie. Comprendre le &quot;pourquoi&quot; des choses.
-                                            </p>
-                                            <div className="flex items-start gap-3 pt-2 text-sm text-neutral-300">
-                                                <UtensilsCrossed className="text-orange-500 w-4 h-4 mt-1 shrink-0" />
-                                                <p className="leading-relaxed">
-                                                    <strong className="text-white font-medium">Gastronomie :</strong> Cuisiner, c'est comme coder : de la rigueur technique pour un résultat créatif.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+                    <PassionsSection />
                 </div>
 
             </div>
-        </main>
-    )
-}
-
-// Sub-component for better performance & clean code
-function TimelineRow({ item, index, unlock }: { item: any, index: number, unlock: any }) {
-    const isFirst = index === 0
-    return (
-        <div className="relative grid md:grid-cols-[1fr_auto_1fr] gap-8 items-center group">
-
-            {/* LEFT: WORK */}
-            <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-20%" }}
-                transition={{ duration: 0.5 }}
-                className="pl-12 md:pl-0 md:text-right w-full"
-            >
-                <div className="relative p-6 rounded-3xl transition-all duration-300 hover:bg-white/5 border border-transparent hover:border-white/10 group-hover:translate-x-2 md:group-hover:-translate-x-2">
-                    <div className="flex flex-col md:flex-row-reverse items-center md:items-start gap-4">
-                        <div className="p-3 rounded-2xl bg-primary/10 text-primary shrink-0 shadow-[0_0_15px_rgba(var(--primary),0.3)]">
-                            <Briefcase size={20} />
-                        </div>
-                        <div className="flex-1">
-                            <h3 className="text-xl font-bold tracking-tight mb-1">{item.work.company}</h3>
-                            <div className="text-xs font-mono text-primary uppercase tracking-wider mb-3">{item.work.role}</div>
-                            <p className="text-muted-foreground text-sm leading-relaxed mb-4">{item.work.desc}</p>
-
-                            {/* Tags */}
-                            <div className="flex flex-wrap justify-center md:justify-end gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">
-                                {item.work.stack.map((t: string) => (
-                                    <span key={t} className="px-2 py-0.5 rounded text-[10px] font-medium bg-primary/10 text-primary border border-primary/20">
-                                        {t}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </motion.div>
-
-            {/* CENTER: YEAR NODULE */}
-            <div className="absolute left-[20px] top-0 md:static md:w-16 flex justify-center -translate-x-1/2 md:translate-x-0 h-full">
-                <div className="absolute top-1/2 -translate-y-1/2 z-20" onClick={() => isFirst && unlock('TIME_TRAVELER')}>
-                    <motion.div
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
-                        viewport={{ once: true, margin: "-10%" }}
-                        className={cn(
-                            "w-4 h-4 rounded-full border-[3px] bg-background shadow-[0_0_0_4px_rgba(0,0,0,0.5)] transition-all duration-500 cursor-pointer",
-                            isFirst ? "border-primary shadow-[0_0_20px_var(--primary)] animate-pulse" : "border-muted-foreground group-hover:border-primary group-hover:scale-150"
-                        )}
-                    />
-                    {/* Year Label - Always visible now for clarity */}
-                    <div className={cn(
-                        "absolute top-1/2 -translate-y-1/2 px-2 py-1 rounded border backdrop-blur text-[10px] font-mono whitespace-nowrap transition-all duration-500",
-                        "left-8 md:left-auto md:right-full md:mr-6",
-                        "bg-background/80 border-border text-muted-foreground group-hover:text-foreground group-hover:border-primary/50"
-                    )}>
-                        {item.year}
-                    </div>
-                </div>
-            </div>
-
-            {/* RIGHT: SCHOOL */}
-            <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-20%" }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="pl-12 md:pl-0 md:text-left w-full"
-            >
-                <div className="relative p-6 rounded-3xl transition-all duration-300 hover:bg-white/5 border border-transparent hover:border-white/10 group-hover:translate-x-2">
-                    <div className="flex flex-col md:flex-row items-center md:items-start gap-4">
-                        <div className="p-3 rounded-2xl bg-purple-500/10 text-purple-500 shrink-0 shadow-[0_0_15px_rgba(168,85,247,0.3)]">
-                            <GraduationCap size={20} />
-                        </div>
-                        <div className="flex-1">
-                            <h3 className="text-xl font-bold tracking-tight mb-1">{item.school.name}</h3>
-                            <div className="text-xs font-mono text-purple-400 uppercase tracking-wider mb-3">{item.school.degree}</div>
-                            <p className="text-muted-foreground text-sm leading-relaxed mb-2 opacity-80">{item.school.desc}</p>
-                            <div className="opacity-60 text-[10px] uppercase tracking-widest font-semibold text-purple-300 mt-2">
-                                {item.school.status}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </motion.div>
-
         </div>
     )
 }

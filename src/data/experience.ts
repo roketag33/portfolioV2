@@ -21,7 +21,7 @@ export const TIMELINE_DATA: TimelineItem[] = [
             company: 'BPCE Solutions',
             role: 'Alternant Expert SI & Ops InnoLab',
             desc: 'DevOps & IA : Gestion Conteneurs/Déploiement (Docker/Podman), Dev d\'interfaces (Chainlit) & Outils InnoLab.',
-            stack: ['Chainlit', 'Python', 'Docker', 'Podman', 'AI/LLM', 'Ops']
+            stack: ['Chainlit', 'Python', 'Docker', 'Podman', 'AI/LLM', 'Ops', 'MCP']
         },
         school: {
             name: 'Sup de Vinci',
