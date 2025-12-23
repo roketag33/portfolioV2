@@ -1,0 +1,87 @@
+'use client'
+
+import { motion, AnimatePresence } from 'framer-motion'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { X } from 'lucide-react'
+import ClientPortal from '@/components/ui/client-portal'
+import { useEffect } from 'react'
+
+interface MobileMenuOverlayProps {
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+export default function MobileMenuOverlay({ isOpen, onClose }: MobileMenuOverlayProps) {
+    // Lock scroll when open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => { document.body.style.overflow = 'unset' };
+    }, [isOpen]);
+
+    return (
+        <ClientPortal>
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+                        animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                        exit={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+                        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                        className="fixed inset-0 bg-neutral-950/98 backdrop-blur-xl z-[9999] flex flex-col items-center justify-center md:hidden text-white overflow-hidden"
+                    >
+                        {/* Close Button Inside Overlay */}
+                        <button
+                            className="absolute top-6 right-6 p-2 rounded-full hover:bg-white/10 transition-colors z-50 cursor-pointer"
+                            onClick={onClose}
+                            aria-label="Close Menu"
+                        >
+                            <X size={32} className="text-white" />
+                        </button>
+
+                        {/* Logo in Overlay */}
+                        <div className="absolute top-6 left-6 text-xl font-bold tracking-tighter opacity-50 select-none">
+                            ALEXANDRE.S
+                        </div>
+
+                        <nav className="flex flex-col items-center gap-8 md:gap-10 w-full px-6">
+                            {['Work', 'About', 'Lab', 'Blog', 'Achievements'].map((item, index) => (
+                                <motion.div
+                                    key={item}
+                                    initial={{ opacity: 0, y: 40 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.1 + index * 0.1, duration: 0.5, ease: "easeOut" }}
+                                    className="w-full flex justify-center"
+                                >
+                                    <Link
+                                        href={`/${item.toLowerCase()}`}
+                                        className="text-4xl md:text-5xl font-bold tracking-tighter text-white/70 hover:text-white transition-colors relative group py-2"
+                                        onClick={onClose}
+                                    >
+                                        {item}
+                                        <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[3px] bg-indigo-500 transition-all duration-300 group-hover:w-full" />
+                                    </Link>
+                                </motion.div>
+                            ))}
+                            <motion.div
+                                initial={{ opacity: 0, y: 40 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.6 }}
+                            >
+                                <Link href="/contact" onClick={onClose}>
+                                    <Button size="lg" className="rounded-full text-xl px-10 py-6 mt-6 bg-white text-black hover:bg-white/90">
+                                        Let&apos;s Talk
+                                    </Button>
+                                </Link>
+                            </motion.div>
+                        </nav>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </ClientPortal>
+    )
+}
