@@ -28,10 +28,10 @@ export default function MobileMenuOverlay({ isOpen, onClose }: MobileMenuOverlay
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
-                        animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                        exit={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
-                        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                        initial={{ y: '100%' }}
+                        animate={{ y: 0 }}
+                        exit={{ y: '100%' }}
+                        transition={{ duration: 0.5, ease: [0.19, 1, 0.22, 1] }}
                         className="fixed inset-0 bg-neutral-950/98 backdrop-blur-xl z-[9999] flex flex-col items-center justify-center md:hidden text-white overflow-hidden"
                     >
                         {/* Close Button Inside Overlay */}
