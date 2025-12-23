@@ -52,9 +52,9 @@ export default function AboutPage() {
                             About Me.
                         </h1>
                         <p className="text-2xl md:text-3xl font-light text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                            Le parcours d'un <span className="text-primary font-medium">Alternant</span> passionné.
+                            Le parcours d&apos;un <span className="text-primary font-medium">Alternant</span> passionné.
                             <br />
-                            <span className="text-lg md:text-xl opacity-80 mt-2 block">Toujours un pied en entreprise, un pied à l'école.</span>
+                            <span className="text-lg md:text-xl opacity-80 mt-2 block">Toujours un pied en entreprise, un pied à l&apos;école.</span>
                         </p>
                     </motion.div>
                 </div>
@@ -167,79 +167,107 @@ export default function AboutPage() {
                         <Trophy className="text-yellow-500" /> Autres Univers
                     </h3>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {/* Sport */}
-                        <div className="p-6 rounded-3xl bg-neutral-900/40 border border-white/10 hover:border-primary/50 transition-all group">
-                            <div className="mb-4 bg-red-500/10 w-fit p-3 rounded-2xl text-red-500 group-hover:scale-110 transition-transform">
-                                <Dumbbell size={24} />
-                            </div>
-                            <h4 className="text-lg font-bold mb-3 text-white">Sport & Discipline</h4>
-                            <div className="space-y-3">
-                                <div>
-                                    <div className="text-xs font-bold text-red-400 uppercase tracking-wider mb-1">Pratiquant</div>
-                                    <p className="text-sm text-neutral-400">Streetlifting, Powerlifting, Calisthénie, Bodybuilding.</p>
-                                </div>
-                                <div>
-                                    <div className="text-xs font-bold text-red-400 uppercase tracking-wider mb-1">Amateur</div>
-                                    <p className="text-sm text-neutral-400">MMA, Boxe Anglaise, Muay Thaï.</p>
-                                </div>
-                            </div>
-                        </div>
+                    {/* PASSIONS - Minimalist Accent Design */}
+                    <div className="mt-32">
+                        <h3 className="text-2xl font-black uppercase mb-16 flex items-center gap-3 justify-center md:justify-start">
+                            <Trophy className="text-yellow-500" /> Autres Univers
+                        </h3>
 
-                        {/* Gaming */}
-                        <div className="p-6 rounded-3xl bg-neutral-900/40 border border-white/10 hover:border-purple-500/50 transition-all group">
-                            <div className="mb-4 bg-purple-500/10 w-fit p-3 rounded-2xl text-purple-500 group-hover:scale-110 transition-transform">
-                                <Gamepad2 size={24} />
-                            </div>
-                            <h4 className="text-lg font-bold mb-3 text-white">Gaming</h4>
-                            <p className="text-sm text-neutral-400 leading-relaxed mb-4">
-                                Gros joueur de RPG, Rogue-likes et FPS.
-                            </p>
-                            <div className="flex flex-wrap gap-2">
-                                {['Roguelike', 'RPG', 'FPS', 'Indie'].map(g => (
-                                    <span key={g} className="px-2 py-1 rounded-md bg-purple-500/10 text-purple-400 text-xs font-medium">{g}</span>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Tech & Hardware */}
-                        <div className="p-6 rounded-3xl bg-neutral-900/40 border border-white/10 hover:border-blue-500/50 transition-all group">
-                            <div className="mb-4 bg-blue-500/10 w-fit p-3 rounded-2xl text-blue-500 group-hover:scale-110 transition-transform">
-                                <Cpu size={24} />
-                            </div>
-                            <h4 className="text-lg font-bold mb-3 text-white">Tech Enthusiast</h4>
-                            <ul className="text-sm text-neutral-400 space-y-2">
-                                <li className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-blue-500"></span>Hardware & Montage PC</li>
-                                <li className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-blue-500"></span>IoT & Objets Connectés</li>
-                                <li className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-blue-500"></span>DevOps & Tech Ops</li>
-                                <li className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-blue-500"></span>IA & Fintech</li>
-                            </ul>
-                        </div>
-
-                        {/* Cuisine */}
-                        <div className="p-6 rounded-3xl bg-neutral-900/40 border border-white/10 hover:border-orange-500/50 transition-all group lg:col-span-2">
-                            <div className="flex flex-col md:flex-row gap-6 items-start">
-                                <div className="bg-orange-500/10 w-fit p-3 rounded-2xl text-orange-500 shrink-0 group-hover:scale-110 transition-transform">
-                                    <UtensilsCrossed size={24} />
-                                </div>
-                                <div>
-                                    <h4 className="text-lg font-bold mb-2 text-white">Cuisine & Pâtisserie</h4>
-                                    <p className="text-sm text-neutral-400 leading-relaxed max-w-xl">
-                                        Un terrain de jeu créatif où la précision technique rencontre le goût. La chimie de la pâtisserie me fascine tout autant que celle du code.
-                                    </p>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+                            {/* Sport */}
+                            <div className="group">
+                                <div className="flex items-start gap-6">
+                                    <div className="hidden md:block w-px h-24 bg-gradient-to-b from-red-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity" />
+                                    <div className="flex-1">
+                                        <div className="flex items-center gap-4 mb-4">
+                                            <Dumbbell className="text-red-500 w-6 h-6" />
+                                            <h4 className="text-xl font-bold uppercase tracking-tight">Sport & Discipline</h4>
+                                        </div>
+                                        <div className="space-y-4 text-neutral-400">
+                                            <div className="flex flex-col sm:flex-row sm:items-baseline gap-2">
+                                                <span className="text-xs font-bold text-red-400 uppercase tracking-widest min-w-[100px]">Pratiquant</span>
+                                                <p className="text-sm text-neutral-300">Streetlifting, Powerlifting, Calisthénie.</p>
+                                            </div>
+                                            <div className="flex flex-col sm:flex-row sm:items-baseline gap-2">
+                                                <span className="text-xs font-bold text-red-500/60 uppercase tracking-widest min-w-[100px]">Fan</span>
+                                                <p className="text-sm text-neutral-400">MMA (UFC), Boxe Anglaise.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        {/* Science */}
-                        <div className="p-6 rounded-3xl bg-neutral-900/40 border border-white/10 hover:border-cyan-500/50 transition-all group">
-                            <div className="mb-4 bg-cyan-500/10 w-fit p-3 rounded-2xl text-cyan-500 group-hover:scale-110 transition-transform">
-                                <Atom size={24} />
+                            {/* Gaming */}
+                            <div className="group">
+                                <div className="flex items-start gap-6">
+                                    <div className="hidden md:block w-px h-24 bg-gradient-to-b from-purple-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity" />
+                                    <div className="flex-1">
+                                        <div className="flex items-center gap-4 mb-4">
+                                            <Gamepad2 className="text-purple-500 w-6 h-6" />
+                                            <h4 className="text-xl font-bold uppercase tracking-tight">Gaming</h4>
+                                        </div>
+                                        <p className="text-sm text-neutral-300 leading-relaxed mb-4">
+                                            Exploration de mécaniques complexes et d'univers immersifs. Le gaming affûte ma curiosité et ma résolution de problèmes.
+                                        </p>
+                                        <div className="flex flex-wrap gap-2">
+                                            {['Rogue-like', 'RPG', 'FPS Competitif', 'Indie Gems'].map(g => (
+                                                <span key={g} className="text-xs font-mono text-purple-400/80 border border-purple-500/20 px-2 py-1 rounded">
+                                                    {g}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <h4 className="text-lg font-bold mb-3 text-white">Sciences</h4>
-                            <p className="text-sm text-neutral-400 leading-relaxed">
-                                Grand intérêt pour la <strong>Physique</strong> et la <strong>Chimie</strong>. Comprendre les lois fondamentales de l'univers.
-                            </p>
+
+                            {/* Tech */}
+                            <div className="group">
+                                <div className="flex items-start gap-6">
+                                    <div className="hidden md:block w-px h-24 bg-gradient-to-b from-blue-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity" />
+                                    <div className="flex-1">
+                                        <div className="flex items-center gap-4 mb-4">
+                                            <Cpu className="text-blue-500 w-6 h-6" />
+                                            <h4 className="text-xl font-bold uppercase tracking-tight">Tech & Hardware</h4>
+                                        </div>
+                                        <ul className="text-sm text-neutral-300 space-y-2 font-light">
+                                            <li className="flex items-center gap-3">
+                                                <span className="w-1 h-1 bg-blue-500 rounded-full" /> Montage PC & Optimisation
+                                            </li>
+                                            <li className="flex items-center gap-3">
+                                                <span className="w-1 h-1 bg-blue-500 rounded-full" /> IoT & Domotique (Home Assistant)
+                                            </li>
+                                            <li className="flex items-center gap-3">
+                                                <span className="w-1 h-1 bg-blue-500 rounded-full" /> Veille IA & Ecosystème Tech
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Science & Cuisine (Merged Row for balance) */}
+                            <div className="group">
+                                <div className="flex items-start gap-6">
+                                    <div className="hidden md:block w-px h-24 bg-gradient-to-b from-cyan-500 to-transparent opacity-50 group-hover:opacity-100 transition-opacity" />
+                                    <div className="flex-1">
+                                        <div className="flex items-center gap-4 mb-4">
+                                            <Atom className="text-cyan-500 w-6 h-6" />
+                                            <h4 className="text-xl font-bold uppercase tracking-tight">Sciences & Création</h4>
+                                        </div>
+                                        <div className="space-y-6">
+                                            <p className="text-sm text-neutral-300 leading-relaxed">
+                                                <strong className="text-white font-medium">Sciences :</strong> Fascination pour la Physique/Chimie. Comprendre le &quot;pourquoi&quot; des choses.
+                                            </p>
+                                            <div className="flex items-start gap-3 pt-2 text-sm text-neutral-300">
+                                                <UtensilsCrossed className="text-orange-500 w-4 h-4 mt-1 shrink-0" />
+                                                <p className="leading-relaxed">
+                                                    <strong className="text-white font-medium">Gastronomie :</strong> Cuisiner, c'est comme coder : de la rigueur technique pour un résultat créatif.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
