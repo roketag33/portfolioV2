@@ -12,6 +12,11 @@ import PassionsSection from '@/components/features/PassionsSection'
 export default function AboutPage() {
     const containerRef = useRef<HTMLDivElement>(null)
     const timelineRef = useRef<HTMLDivElement>(null)
+
+    // Data prep for Freelance Branch logic
+    const reversedTimeline = [...TIMELINE_DATA].reverse()
+    const bobyIndex = reversedTimeline.findIndex(item => item.work.company === 'Boby')
+
     const { scrollYProgress } = useScroll({
         target: timelineRef,
         offset: ["start end", "end center"]
@@ -76,7 +81,7 @@ export default function AboutPage() {
                             />
                         </div>
 
-                        {[...TIMELINE_DATA].reverse().map((item, index) => (
+                        {reversedTimeline.map((item, index) => (
                             <SpotlightCard key={index} className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-8 md:gap-16 items-center mb-16 md:mb-24 last:mb-0 group rounded-3xl p-6 md:p-0 bg-white/[0.02] md:bg-transparent border border-white/5 md:border-none">
 
                                 {/* LEFT COLUMN: Work Experience */}
@@ -115,13 +120,48 @@ export default function AboutPage() {
 
                                 {/* CENTER: Timeline Point */}
                                 <div className="hidden md:flex flex-col items-center justify-center relative z-20">
+
+                                    {/* FREELANCE BRANCH VISUALIZATION */}
+                                    {/* 1. Parallel Track (for items AFTER Boby) */}
+                                    {index > bobyIndex && (
+                                        <div className="absolute top-[-150%] bottom-[-150%] left-1/2 ml-8 w-px border-r-2 border-dashed border-purple-500/30 -z-10" />
+                                    )}
+
+                                    {/* 2. Branch Split (at Boby) */}
+                                    {index === bobyIndex && (
+                                        <>
+                                            {/* Curved Line */}
+                                            <svg className="absolute left-1/2 top-1/2 ml-[2px] -translate-y-[1px] overflow-visible w-[40px] h-[80px]" style={{ zIndex: -1 }}>
+                                                <path
+                                                    d="M 0 0 Q 35 0 35 35 L 35 100"
+                                                    fill="none"
+                                                    stroke="#a855f7"
+                                                    strokeWidth="2"
+                                                    strokeDasharray="4 2"
+                                                    className="opacity-50"
+                                                />
+                                            </svg>
+                                            {/* Label */}
+                                            <div className="absolute left-full top-1/2 ml-12 -translate-y-1/2 bg-purple-900/40 backdrop-blur-sm border border-purple-500/30 px-3 py-1 rounded-full whitespace-nowrap">
+                                                <span className="text-[10px] font-bold text-purple-300 uppercase tracking-wider flex items-center gap-1">
+                                                    <Zap size={10} className="text-purple-400" /> Start Freelance
+                                                </span>
+                                            </div>
+                                        </>
+                                    )}
+
                                     <motion.div
                                         initial={{ scale: 0 }}
                                         whileInView={{ scale: 1 }}
                                         viewport={{ once: true }}
                                         transition={{ type: "spring", stiffness: 300, damping: 20, delay: index * 0.1 }}
-                                        className="w-4 h-4 rounded-full bg-neutral-900 border-2 border-white/20 group-hover:border-primary group-hover:scale-125 transition-all duration-300 z-10 shadow-[0_0_10px_rgba(255,255,255,0.1)]"
-                                    />
+                                        className="w-4 h-4 rounded-full bg-neutral-900 border-2 border-white/20 group-hover:border-primary group-hover:scale-125 transition-all duration-300 z-10 shadow-[0_0_10px_rgba(255,255,255,0.1)] relative"
+                                    >
+                                        {/* Pulse for Boby/Freelance start */}
+                                        {index === bobyIndex && (
+                                            <div className="absolute inset-0 rounded-full animate-ping bg-purple-500/50" />
+                                        )}
+                                    </motion.div>
                                     <div className="absolute top-1/2 left-8 md:left-auto md:top-auto md:translate-y-8 font-mono text-xs text-neutral-400 whitespace-nowrap bg-neutral-900/90 px-3 py-1.5 rounded-full border border-white/10 shadow-xl">
                                         {item.year}
                                     </div>
@@ -267,7 +307,6 @@ export default function AboutPage() {
     )
 }
 
-// Helper for Spotlight Effect (3 - Spotlight Hover)
 function SpotlightCard({ children, className = "" }: { children: React.ReactNode, className?: string }) {
     const divRef = useRef<HTMLDivElement>(null);
     const [position, setPosition] = React.useState({ x: 0, y: 0 });
@@ -294,16 +333,23 @@ function SpotlightCard({ children, className = "" }: { children: React.ReactNode
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className={`relative overflow-hidden ${className}`}
+            className={`relative ${className}`}
         >
-            <div
-                className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300"
-                style={{
-                    opacity,
-                    background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(255,255,255,0.06), transparent 40%)`
-                }}
-            />
-            {children}
+            {/* Clipping Container for Glow - Ensures rounded corners for glow but allows content overflow */}
+            <div className="absolute inset-0 overflow-hidden rounded-[inherit] pointer-events-none">
+                <div
+                    className="absolute -inset-px opacity-0 transition-opacity duration-300"
+                    style={{
+                        opacity,
+                        background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(255,255,255,0.06), transparent 40%)`
+                    }}
+                />
+            </div>
+
+            {/* Content Container - No overflow hidden to allow branch lines to extend */}
+            <div className="relative z-10">
+                {children}
+            </div>
         </div>
     );
 }
