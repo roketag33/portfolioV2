@@ -121,8 +121,20 @@
     text-wrap: balance;
   }
 
-  .animate-shake {
-    animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
+  @layer utilities {
+    .animate-border-spin {
+      animation: border-spin 4s linear infinite;
+    }
+  }
+
+  @keyframes border-spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   @keyframes shake {
