@@ -8,4 +8,4 @@ ajouter un petit click me sur les experiences qui en parle plus
 mettre a jour les liens comme le github et le linkedin et l'email de contact
 ajouter des metrics pour savoir qui est aller sur mon site combien de personnet et pendant combien de temps
 mettre en place un systeme de newsletter pour recevoir les derniers articles
-deployer sur vercel 
+deployer sur vercel     

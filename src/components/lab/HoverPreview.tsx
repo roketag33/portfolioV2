@@ -3,6 +3,12 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { Project } from './types';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+
+// Dynamic imports to keep initial load light
+const GravityPreview = dynamic(() => import('./previews/GravityPreview'), { ssr: false });
+const PlatformerPreview = dynamic(() => import('./previews/PlatformerPreview'), { ssr: false });
+const EchoPreview = dynamic(() => import('./previews/EchoPreview'), { ssr: false });
 
 interface HoverPreviewProps {
     project: Project | null;
@@ -32,15 +38,24 @@ export default function HoverPreview({ project }: HoverPreviewProps) {
                             style={{ backgroundColor: project.color }}
                         />
 
-                        {/* Image */}
                         <div className="relative w-full h-full">
-                            <Image
-                                src={project.image}
-                                alt={project.title}
-                                fill
-                                className="object-cover object-center"
-                                priority
-                            />
+                            {/* Dynamic Previews */}
+                            {project.id === 'gravity-playground' ? (
+                                <GravityPreview />
+                            ) : project.id === 'neon-platformer' ? (
+                                <PlatformerPreview />
+                            ) : project.id === 'echo-grid' ? (
+                                <EchoPreview />
+                            ) : (
+                                /* Default Image Fallback */
+                                <Image
+                                    src={project.image}
+                                    alt={project.title}
+                                    fill
+                                    className="object-cover object-center"
+                                    priority
+                                />
+                            )}
                         </div>
 
                         {/* Radial Gradient for focus */}
