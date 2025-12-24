@@ -121,34 +121,7 @@ export default function AboutPage() {
                                 {/* CENTER: Timeline Point */}
                                 <div className="hidden md:flex flex-col items-center justify-center relative z-20">
 
-                                    {/* FREELANCE BRANCH VISUALIZATION */}
-                                    {/* 1. Parallel Track (for items AFTER Boby) */}
-                                    {index > bobyIndex && (
-                                        <div className="absolute top-[-150%] bottom-[-150%] left-1/2 ml-[260px] w-px border-r-2 border-dashed border-purple-500/30 -z-10" />
-                                    )}
 
-                                    {/* 2. Branch Split (at Boby) */}
-                                    {index === bobyIndex && (
-                                        <>
-                                            {/* Curved Line */}
-                                            <svg className="absolute left-1/2 top-1/2 ml-[2px] -translate-y-[1px] overflow-visible w-[280px] h-[200px]" style={{ zIndex: -1 }}>
-                                                <path
-                                                    d="M 0 0 H 220 Q 260 0 260 40 L 260 200"
-                                                    fill="none"
-                                                    stroke="#a855f7"
-                                                    strokeWidth="2"
-                                                    strokeDasharray="4 2"
-                                                    className="opacity-50"
-                                                />
-                                            </svg>
-                                            {/* Label - Positioned wide and below */}
-                                            <div className="absolute left-1/2 ml-[260px] top-48 -translate-x-1/2 bg-purple-900/80 backdrop-blur-md border border-purple-500/30 px-3 py-1 rounded-full whitespace-nowrap shadow-[0_0_15px_rgba(168,85,247,0.3)] z-20">
-                                                <span className="text-[10px] font-bold text-purple-200 uppercase tracking-wider flex items-center gap-1.5">
-                                                    <Zap size={10} className="text-purple-400 fill-purple-400" /> Start Freelance
-                                                </span>
-                                            </div>
-                                        </>
-                                    )}
 
                                     <motion.div
                                         initial={{ scale: 0 }}
