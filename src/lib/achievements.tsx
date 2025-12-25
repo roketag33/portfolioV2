@@ -225,5 +225,21 @@ export const ACHIEVEMENTS: Record<string, Achievement> = {
         xp: 20,
         icon: '💡',
         secret: true
+    },
+    MAGPIE: {
+        id: 'MAGPIE',
+        title: 'Magpie',
+        description: 'Oooh, shiny! You really like that trophy.',
+        xp: 15,
+        icon: '💍',
+        secret: true
+    },
+    LOCKSMITH: {
+        id: 'LOCKSMITH',
+        title: 'Locksmith',
+        description: 'Nice try, but you can\'t pick these locks.',
+        xp: 25,
+        icon: '🔐',
+        secret: true
     }
 }
