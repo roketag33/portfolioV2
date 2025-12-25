@@ -37,11 +37,53 @@ const item = {
     show: { opacity: 1, y: 0 }
 }
 
+import { useGamification } from '@/context/GamificationContext'
+import { cn } from '@/lib/utils'
+
+// ... (existing types)
+
 export default function BlogList() {
+    const { unlock } = useGamification()
     const [posts, setPosts] = useState<Post[]>([])
     const [search, setSearch] = useState('')
     const [selectedTag, setSelectedTag] = useState<string | null>(null)
     const [page, setPage] = useState(1)
+
+    // Achievement States
+    const [searchedTags, setSearchedTags] = useState<Set<string>>(new Set())
+    const [isOracleMode, setIsOracleMode] = useState(false)
+
+    // ... (useEffect for loading posts)
+
+    // Handle Search Change (Oracle)
+    const handleSearchChange = (value: string) => {
+        setSearch(value)
+        setPage(1)
+
+        if (value.trim() === '42') {
+            setIsOracleMode(true)
+            unlock('THE_ORACLE')
+        } else {
+            setIsOracleMode(false)
+        }
+    }
+
+    // Handle Tag Click (Topic Hunter)
+    const handleTagClick = (tag: string | null) => {
+        setSelectedTag(tag)
+        setPage(1)
+
+        if (tag) {
+            const newTags = new Set(searchedTags)
+            newTags.add(tag)
+            setSearchedTags(newTags)
+
+            if (newTags.size >= 3) {
+                unlock('TOPIC_HUNTER')
+            }
+        }
+    }
+
     const ITEMS_PER_PAGE = 6
 
     useEffect(() => {
@@ -85,16 +127,24 @@ export default function BlogList() {
             {/* Search & Filters */}
             <div className="space-y-6">
                 <div className="relative max-w-lg mx-auto md:mx-0 group">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
+                    <Search className={cn(
+                        "absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors",
+                        isOracleMode ? "text-purple-400 animate-pulse" : "text-muted-foreground group-focus-within:text-primary"
+                    )} />
                     <Input
-                        placeholder="Search for articles, insights..."
-                        className="pl-10 bg-white/5 border-white/10 focus-visible:ring-primary/50 focus-visible:border-primary transition-all rounded-full h-11"
+                        placeholder={isOracleMode ? "The answer to everything..." : "Search for articles, insights..."}
+                        className={cn(
+                            "pl-10 transition-all rounded-full h-11 border-white/10",
+                            isOracleMode
+                                ? "bg-purple-950/30 border-purple-500/50 text-purple-200 focus-visible:ring-purple-500 shadow-[0_0_15px_rgba(168,85,247,0.3)]"
+                                : "bg-white/5 focus-visible:ring-primary/50 focus-visible:border-primary"
+                        )}
                         value={search}
-                        onChange={(e) => { setSearch(e.target.value); setPage(1) }}
+                        onChange={(e) => handleSearchChange(e.target.value)}
                     />
                     {search && (
                         <button
-                            onClick={() => setSearch('')}
+                            onClick={() => handleSearchChange('')}
                             className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-white/10 rounded-full transition-colors"
                         >
                             <X className="w-3 h-3 text-muted-foreground" />
@@ -108,7 +158,7 @@ export default function BlogList() {
                         <Badge
                             variant={selectedTag === null ? "default" : "secondary"}
                             className={`cursor-pointer transition-all hover:scale-105 ${selectedTag === null ? 'bg-primary text-primary-foreground' : 'bg-white/5 hover:bg-white/10'}`}
-                            onClick={() => { setSelectedTag(null); setPage(1) }}
+                            onClick={() => handleTagClick(null)}
                         >
                             All
                         </Badge>
@@ -117,7 +167,7 @@ export default function BlogList() {
                                 key={tag}
                                 variant={selectedTag === tag ? "default" : "secondary"}
                                 className={`cursor-pointer transition-all hover:scale-105 ${selectedTag === tag ? 'bg-primary text-primary-foreground' : 'bg-white/5 hover:bg-white/10'}`}
-                                onClick={() => { setSelectedTag(tag); setPage(1) }}
+                                onClick={() => handleTagClick(tag)}
                             >
                                 {tag}
                             </Badge>

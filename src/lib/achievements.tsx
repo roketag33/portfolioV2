@@ -201,5 +201,29 @@ export const ACHIEVEMENTS: Record<string, Achievement> = {
         xp: 100,
         icon: '👑',
         secret: true
+    },
+    THE_ORACLE: {
+        id: 'THE_ORACLE',
+        title: 'The Oracle',
+        description: 'You found the answer to Life, the Universe, and Everything.',
+        xp: 42,
+        icon: '🔮',
+        secret: true
+    },
+    TOPIC_HUNTER: {
+        id: 'TOPIC_HUNTER',
+        title: 'Topic Hunter',
+        description: 'You explored 3 different topics. Curious mind!',
+        xp: 30,
+        icon: '🧭',
+        secret: true
+    },
+    NEON_VIBES: {
+        id: 'NEON_VIBES',
+        title: 'Neon Vibes',
+        description: 'You lit up the blog. Groovy!',
+        xp: 20,
+        icon: '💡',
+        secret: true
     }
 }
