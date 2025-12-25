@@ -12,274 +12,274 @@ export const ACHIEVEMENTS: Record<string, Achievement> = {
     FIRST_VISIT: {
         id: 'FIRST_VISIT',
         title: 'Hello World',
-        description: 'Welcome to my digital playground.',
+        description: 'Bienvenue dans mon terrain de jeu numérique.',
         xp: 10,
         icon: '👋',
-        unlockHint: 'Autoconnected on first visit.'
+        unlockHint: 'Se débloque automatiquement à la première visite.'
     },
     KONAMI_CODE: {
         id: 'KONAMI_CODE',
-        title: 'Cheater!',
-        description: 'You entered the legendary Konami Code.',
+        title: 'Petit Tricheur !',
+        description: 'Vous avez entré le légendaire Code Konami.',
         xp: 50,
         icon: '🎮',
         secret: true,
-        unlockHint: 'Type the Konami Code (↑↑↓↓←→←→BA) anywhere.'
+        unlockHint: 'Entrez le Code Konami (↑↑↓↓←→←→BA) n’importe où.'
     },
     SCROLL_MASTER: {
         id: 'SCROLL_MASTER',
-        title: 'Explorer',
-        description: 'You scrolled to the very bottom.',
+        title: 'Explorateur',
+        description: 'Vous avez scrollé jusqu’au tout en bas.',
         xp: 20,
         icon: '📜',
-        unlockHint: 'Scroll to the end of any page.'
+        unlockHint: 'Faites défiler n’importe quelle page jusqu’à la fin.'
     },
     CLICK_FRENZY: {
         id: 'CLICK_FRENZY',
-        title: 'Rage Clicker',
-        description: 'Clicked 50 times in a row. Are you okay?',
+        title: 'Cliquage Compulsif',
+        description: 'Cliqué 50 fois de suite. Ça va ?',
         xp: 30,
         icon: '🖱️',
         secret: true,
-        unlockHint: 'Click 50 times rapidly on any page.'
+        unlockHint: 'Cliquez 50 fois rapidement sur n’importe quelle page.'
     },
     TIME_TRAVELER: {
         id: 'TIME_TRAVELER',
-        title: 'Time Traveler',
-        description: 'You visited the beginning of my journey.',
+        title: 'Voyageur Temporel',
+        description: 'Vous avez visité le début de mon aventure.',
         xp: 50,
         icon: '⏳',
         secret: true,
-        unlockHint: 'Go to the very first item in the About Timeline.'
+        unlockHint: 'Allez au tout premier élément de la Timeline dans "À propos".'
     },
     COPYCAT: {
         id: 'COPYCAT',
-        title: 'Copycat',
-        description: 'You copied my email. Write something nice!',
+        title: 'Copieur',
+        description: 'Vous avez copié mon email. Écrivez-moi quelque chose de sympa !',
         xp: 15,
         icon: '📋',
-        unlockHint: 'Copy the email address from the Contact footer.'
+        unlockHint: 'Copiez l’adresse email depuis le pied de page Contact.'
     },
     SOCIALITE: {
         id: 'SOCIALITE',
-        title: 'Socialite',
-        description: 'You checked out my social networks.',
+        title: 'Être Social',
+        description: 'Vous avez jeté un œil à mes réseaux sociaux.',
         xp: 15,
         icon: '🌐',
-        unlockHint: 'Click on any social media link in the Contact footer.'
+        unlockHint: 'Cliquez sur n’importe quel lien de réseau social dans le pied de page.'
     },
     NOT_FOUND: {
         id: 'NOT_FOUND',
-        title: '404 Hunter',
-        description: 'You wandered into the unknown.',
+        title: 'Chasseur de 404',
+        description: 'Vous vous êtes égaré dans l’inconnu.',
         xp: 25,
         icon: '🕵️‍♂️',
         secret: true,
-        unlockHint: 'Visit a page that doesn\'t exist (e.g., /404).'
+        unlockHint: 'Visitez une page qui n’existe pas (ex: /404).'
     },
     NIGHT_OWL: {
         id: 'NIGHT_OWL',
-        title: 'Night Owl',
-        description: 'Coding late? Visited between 1AM and 5AM.',
+        title: 'Oiseau de Nuit',
+        description: 'Vous codez tard ? Visité entre 1h et 5h du matin.',
         xp: 30,
         icon: '🦉',
         secret: true,
-        unlockHint: 'Visit the site between 1 AM and 5 AM.'
+        unlockHint: 'Visitez le site entre 1h et 5h du matin.'
     },
     QA_TESTER: {
         id: 'QA_TESTER',
-        title: 'QA Tester',
-        description: 'You resized the window. testing responsive design?',
+        title: 'Testeur QA',
+        description: 'Vous avez redimensionné la fenêtre. On teste le responsive ?',
         xp: 20,
         icon: '📐',
         secret: true,
-        unlockHint: 'Manually resize your browser window.'
+        unlockHint: 'Redimensionnez manuellement la fenêtre de votre navigateur.'
     },
     SPEED_RUNNER: {
         id: 'SPEED_RUNNER',
         title: 'Speed Runner',
-        description: 'Visited 3 pages in less than 10 seconds. Slow down!',
+        description: '3 pages visitées en moins de 10 secondes. Doucement !',
         xp: 50,
         icon: '⚡',
         secret: true,
-        unlockHint: 'Navigate to 3 different pages within 10 seconds.'
+        unlockHint: 'Naviguez sur 3 pages différentes en moins de 10 secondes.'
     },
     COFFEE_ADDICT: {
         id: 'COFFEE_ADDICT',
-        title: 'Caffeine Overload',
-        description: 'You really like coffee... maybe too much.',
+        title: 'Overdose de Caféine',
+        description: 'Vous aimez vraiment le café... peut-être un peu trop.',
         xp: 15,
         icon: '☕',
         secret: true,
-        unlockHint: 'Click the Coffee icon 10 times.'
+        unlockHint: 'Cliquez 10 fois sur l’icône de Café.'
     },
     BOOKWORM: {
         id: 'BOOKWORM',
-        title: 'Bookworm',
-        description: 'You actually read an article! Thanks.',
+        title: 'Rat de Bibliothèque',
+        description: 'Vous avez vraiment lu un article ! Merci.',
         xp: 30,
         icon: '📚',
         secret: true,
-        unlockHint: 'Stay on a blog article page for more than 2 minutes.'
+        unlockHint: 'Restez sur une page d’article pendant plus de 2 minutes.'
     },
     SNAKE_MASTER: {
         id: 'SNAKE_MASTER',
-        title: 'Snake Master',
-        description: 'Scored 10+ points in Snake.',
+        title: 'Maître du Serpent',
+        description: 'Score de 10+ dans Snake.',
         xp: 50,
         icon: '🐍',
         secret: true,
-        unlockHint: 'Reach a score of at least 10 in the Snake game (Lab).'
+        unlockHint: 'Atteignez un score d’au moins 10 au jeu Snake (Lab).'
     },
     WHO_AM_I: {
         id: 'WHO_AM_I',
-        title: 'Who Am I',
-        description: 'You found my name. Nice to meet you!',
+        title: 'Qui suis-je ?',
+        description: 'Vous avez trouvé mon nom. Ravi de vous rencontrer !',
         xp: 10,
         icon: '👋',
         secret: true,
-        unlockHint: 'Type "whoami" in the secret terminal.'
+        unlockHint: 'Tapez "whoami" dans le terminal secret.'
     },
     HACKERMAN: {
         id: 'HACKERMAN',
         title: 'Hackerman',
-        description: 'Access the secret terminal.',
+        description: 'Accès au terminal secret.',
         xp: 50,
         icon: '💻',
         secret: true,
-        unlockHint: 'Open the Terminal in the Lab section.'
+        unlockHint: 'Ouvrez le Terminal dans la section Lab.'
     },
     SCRIPT_KIDDIE: {
         id: 'SCRIPT_KIDDIE',
         title: 'Script Kiddie',
-        description: 'Tried to use sudo? Nice try.',
+        description: 'Vous avez essayé sudo ? Bien tenté.',
         xp: 20,
         icon: '👶',
         secret: true,
-        unlockHint: 'Try running a "sudo" command in the terminal.'
+        unlockHint: 'Essayez de lancer une commande "sudo" dans le terminal.'
     },
     DANGEROUS: {
         id: 'DANGEROUS',
-        title: 'Living Dangerously',
-        description: 'Do not remove root!',
+        title: 'Vivre Dangereusement',
+        description: 'Ne supprimez pas le root !',
         xp: 100,
         icon: '☢️',
         secret: true,
-        unlockHint: 'Try to delete the root directory in the terminal.'
+        unlockHint: 'Essayez de supprimer le dossier racine (root) dans le terminal.'
     },
     GYM_RAT: {
         id: 'GYM_RAT',
-        title: 'Gym Rat',
-        description: 'You did 10 reps on the Sport card. Light weight baby!',
+        title: 'Rat de Salle',
+        description: '10 répétitions sur la carte Sport. Light weight baby !',
         xp: 30,
         icon: '💪',
-        unlockHint: 'Hover the Sport card 10 times (About page).'
+        unlockHint: 'Survolez la carte Sport 10 fois (page À propos).'
     },
     CHAOS_ENGINEER: {
         id: 'CHAOS_ENGINEER',
-        title: 'Chaos Engineer',
-        description: 'You broke gravity. Newton is not happy.',
+        title: 'Ingénieur du Chaos',
+        description: 'Vous avez brisé la gravité. Newton n’est pas content.',
         xp: 30,
         icon: '🍎',
-        unlockHint: 'Click the Gravity Lab title 5 times.'
+        unlockHint: 'Cliquez 5 fois sur le titre du Lab Gravity.'
     },
     RETRO_VISION: {
         id: 'RETRO_VISION',
-        title: 'Retro Vision',
-        description: 'You traveled back to the 8-bit era.',
+        title: 'Vision Rétro',
+        description: 'Retour à l’ère 8-bit.',
         xp: 20,
         icon: '👾',
         secret: true,
-        unlockHint: 'Hover the Retro Gaming card in About.'
+        unlockHint: 'Survolez la carte Retro Gaming dans À propos.'
     },
     MAD_SCIENTIST: {
         id: 'MAD_SCIENTIST',
-        title: 'Mad Scientist',
-        description: 'You inspected every single experiment.',
+        title: 'Savant Fou',
+        description: 'Vous avez inspecté chaque expérience.',
         xp: 40,
         icon: '👨‍🔬',
         secret: true,
-        unlockHint: 'Hover every item in the Lab experiment list.'
+        unlockHint: 'Survolez chaque élément de la liste d’expériences du Lab.'
     },
     SYSTEM_MELTDOWN: {
         id: 'SYSTEM_MELTDOWN',
-        title: 'System Meltdown',
-        description: 'You broke the simulation.',
+        title: 'Fusion du Système',
+        description: 'Vous avez brisé la simulation.',
         xp: 50,
         icon: '💥',
         secret: true,
-        unlockHint: 'Click the "Lab" page title 5 times.'
+        unlockHint: 'Cliquez 5 fois sur le titre de la page "Lab".'
     },
     THE_ARCHIVIST: {
         id: 'THE_ARCHIVIST',
-        title: 'The Archivist',
-        description: 'Access denied. Security Clearance Required.',
+        title: 'L’Archiviste',
+        description: 'Accès refusé. Accréditation de sécurité requise.',
         xp: 50,
         icon: '📂',
         secret: true,
-        unlockHint: 'Click on a "Declassified" tag in the Lab.'
+        unlockHint: 'Cliquez sur un tag "Déclassifié" dans le Lab.'
     },
     LAB_MASTER: {
         id: 'LAB_MASTER',
-        title: 'Lab Master',
-        description: 'You discovered every secret in the Lab. Pure genius.',
+        title: 'Maître du Lab',
+        description: 'Vous avez découvert tous les secrets du Lab. Pur génie.',
         xp: 100,
         icon: '👑',
         secret: true,
-        unlockHint: 'Unlock all other Lab achievements.'
+        unlockHint: 'Débloquez tous les autres succès du Lab.'
     },
     THE_ORACLE: {
         id: 'THE_ORACLE',
-        title: 'The Oracle',
-        description: 'You found the answer to Life, the Universe, and Everything.',
+        title: 'L’Oracle',
+        description: 'Vous avez trouvé la réponse à la Vie, l’Univers et Reste.',
         xp: 42,
         icon: '🔮',
         secret: true,
-        unlockHint: 'Search for "42" in the blog search bar.'
+        unlockHint: 'Recherchez "42" dans la barre de recherche du blog.'
     },
     TOPIC_HUNTER: {
         id: 'TOPIC_HUNTER',
-        title: 'Topic Hunter',
-        description: 'You explored 3 different topics. Curious mind!',
+        title: 'Chasseur de Sujets',
+        description: 'Vous avez exploré 3 sujets différents. Esprit curieux !',
         xp: 30,
         icon: '🧭',
         secret: true,
-        unlockHint: 'Select 3 different tags in the blog filter.'
+        unlockHint: 'Sélectionnez 3 tags différents dans le filtre du blog.'
     },
     NEON_VIBES: {
         id: 'NEON_VIBES',
-        title: 'Neon Vibes',
-        description: 'You lit up the blog. Groovy!',
+        title: 'Ambiance Néon',
+        description: 'Vous avez illuminé le blog. Stylé !',
         xp: 20,
         icon: '💡',
         secret: true,
-        unlockHint: 'Click the "&" character in the Blog page title.'
+        unlockHint: 'Cliquez sur le caractère "&" dans le titre de la page Blog.'
     },
     MAGPIE: {
         id: 'MAGPIE',
-        title: 'Magpie',
-        description: 'Oooh, shiny! You really like that trophy.',
+        title: 'La Pie',
+        description: 'Oh, ça brille ! Vous aimez vraiment ce trophée.',
         xp: 15,
         icon: '💍',
         secret: true,
-        unlockHint: 'Click the main trophy icon 5 times on the Achievements page.'
+        unlockHint: 'Cliquez 5 fois sur l’icône du trophée principal sur la page Succès.'
     },
     LOCKSMITH: {
         id: 'LOCKSMITH',
-        title: 'Locksmith',
-        description: 'Nice try, but you can\'t pick these locks.',
+        title: 'Serrurier',
+        description: 'Bien tenté, mais on ne crochète pas ces verrous.',
         xp: 25,
         icon: '🔐',
         secret: true,
-        unlockHint: 'Click any locked achievement card 10 times.'
+        unlockHint: 'Cliquez 10 fois sur n’importe quelle carte de succès verrouillée.'
     },
     DECODER: {
         id: 'DECODER',
-        title: 'The Decoder',
-        description: 'You tried to read the redacted text. Clever!',
+        title: 'Le Décodeur',
+        description: 'Vous avez essayé de lire le texte censuré. Malin !',
         xp: 30,
         icon: '🕵️‍♀️',
         secret: true,
-        unlockHint: 'Select (highlight) the blurred text on a hidden achievement card.'
+        unlockHint: 'Sélectionnez (surlignez) le texte flouté sur une carte de succès cachée.'
     }
 }

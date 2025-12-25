@@ -59,20 +59,20 @@ export default function AdminPage() {
                             onClick={() => setActiveTab('posts')}
                             className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'posts' ? 'bg-background shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
                         >
-                            Posts
+                            Articles
                         </button>
                         <button
                             onClick={() => setActiveTab('achievements')}
                             className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'achievements' ? 'bg-background shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
                         >
-                            Achievements
+                            Succès
                         </button>
                     </div>
                     {activeTab === 'posts' && (
                         <Link href="/admin/write">
                             <Button>
                                 <Plus className="mr-2 h-4 w-4" />
-                                New Article
+                                Nouvel Article
                             </Button>
                         </Link>
                     )}
@@ -86,7 +86,7 @@ export default function AdminPage() {
                             <div>
                                 <div className="font-semibold">{post.title}</div>
                                 <div className="text-sm text-muted-foreground flex gap-4">
-                                    <span>{post.published ? 'Published' : 'Draft'}</span>
+                                    <span>{post.published ? 'Publié' : 'Brouillon'}</span>
                                     <span>{format(new Date(post.createdAt), 'MMM d, yyyy')}</span>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@ export default function AdminPage() {
                     ))}
                     {posts.length === 0 && (
                         <div className="p-8 text-center text-muted-foreground">
-                            No posts found. Start writing!
+                            Aucun article trouvé. Commencez à écrire !
                         </div>
                     )}
                 </div>
@@ -119,10 +119,10 @@ export default function AdminPage() {
                         <table className="w-full text-sm text-left">
                             <thead className="bg-muted/50 border-b">
                                 <tr>
-                                    <th className="p-4 font-medium">Icon</th>
+                                    <th className="p-4 font-medium">Icône</th>
                                     <th className="p-4 font-medium">ID</th>
-                                    <th className="p-4 font-medium">Title</th>
-                                    <th className="p-4 font-medium">Unlock Guide</th>
+                                    <th className="p-4 font-medium">Titre</th>
+                                    <th className="p-4 font-medium">Guide de Déblocage</th>
                                     <th className="p-4 font-medium">XP</th>
                                     <th className="p-4 font-medium">Secret</th>
                                 </tr>
@@ -138,11 +138,11 @@ export default function AdminPage() {
                                         <td className="p-4">
                                             {ach.secret ? (
                                                 <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-500/10 text-yellow-500 border border-yellow-500/20">
-                                                    Yes
+                                                    Oui
                                                 </span>
                                             ) : (
                                                 <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-500/10 text-green-500 border border-green-500/20">
-                                                    No
+                                                    Non
                                                 </span>
                                             )}
                                         </td>
