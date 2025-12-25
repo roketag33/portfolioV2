@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion'
 import BlogList from '@/components/features/BlogList'
 import { useGamification } from '@/context/GamificationContext'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { cn } from '@/lib/utils'
 
 export default function BlogPage() {
@@ -10,6 +10,7 @@ export default function BlogPage() {
     const [neonColor, setNeonColor] = useState<string>('')
 
     const [isFlickering, setIsFlickering] = useState(false)
+    const timeoutRef = useRef<NodeJS.Timeout>(null)
 
     const handleAmpersandClick = () => {
         setIsFlickering(true)
@@ -22,7 +23,7 @@ export default function BlogPage() {
         ]
         const randomColor = colors[Math.floor(Math.random() * colors.length)]
 
-        // Simulating sputter start
+        // Flicker effect logic
         setTimeout(() => setNeonColor(randomColor), 100)
         setTimeout(() => setNeonColor(''), 200)
         setTimeout(() => setNeonColor(randomColor), 300)
@@ -33,6 +34,12 @@ export default function BlogPage() {
         }, 500)
 
         unlock('NEON_VIBES')
+
+        // Auto-off after 3 seconds
+        if (timeoutRef.current) clearTimeout(timeoutRef.current)
+        timeoutRef.current = setTimeout(() => {
+            setNeonColor('')
+        }, 3500) // 500ms flicker + 3000ms on
     }
 
     return (

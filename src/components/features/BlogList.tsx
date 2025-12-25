@@ -151,12 +151,13 @@ export default function BlogList() {
                 <div className="relative max-w-lg mx-auto md:mx-0 group">
                     <Search className={cn(
                         "absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors",
-                        isOracleMode ? "text-cyan-400 animate-pulse" : "text-muted-foreground group-focus-within:text-primary"
+                        isOracleMode ? "text-green-500 animate-pulse" : "text-muted-foreground group-focus-within:text-primary"
                     )} />
 
+                    {/* Matrix Glitch Overlay - Replaced Galaxy */}
                     <div className={cn(
-                        "absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-cyan-500 to-purple-500 blur opacity-0 transition-all duration-3000",
-                        isOracleMode && "opacity-40 animate-pulse bg-[length:200%_200%] animate-gradient-xy"
+                        "absolute inset-0 rounded-full border border-green-500/50 opacity-0 transition-opacity duration-300",
+                        isOracleMode && "opacity-100 shadow-[0_0_10px_rgba(34,197,94,0.3)] bg-black"
                     )} />
 
                     <Input
@@ -164,18 +165,23 @@ export default function BlogList() {
                         className={cn(
                             "pl-10 transition-all rounded-full h-11 border-white/10 relative z-10",
                             isOracleMode
-                                ? "bg-black/80 border-cyan-500/50 text-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.4)] placeholder:text-cyan-400/50"
+                                ? "bg-black text-green-500 font-mono tracking-wider border-green-500/50 focus-visible:ring-green-500/50 placeholder:text-green-700"
                                 : "bg-white/5 focus-visible:ring-primary/50 focus-visible:border-primary"
                         )}
                         value={search}
                         onChange={(e) => handleSearchChange(e.target.value)}
                     />
+                    {isOracleMode && (
+                        <div className="absolute right-12 top-1/2 -translate-y-1/2 text-[10px] font-mono text-green-700 animate-pulse pointer-events-none">
+                            SYSTEM_OVERRIDE
+                        </div>
+                    )}
                     {search && (
                         <button
                             onClick={() => handleSearchChange('')}
                             className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-white/10 rounded-full transition-colors"
                         >
-                            <X className="w-3 h-3 text-muted-foreground" />
+                            <X className={cn("w-3 h-3", isOracleMode ? "text-green-500" : "text-muted-foreground")} />
                         </button>
                     )}
                 </div>
