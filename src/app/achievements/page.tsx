@@ -13,6 +13,18 @@ export default function AchievementsPage() {
     const { unlocked, score, unlock } = useGamification()
     const allAchievements = Object.values(ACHIEVEMENTS)
 
+    React.useEffect(() => {
+        const handleSelection = () => {
+            const selection = window.getSelection()?.toString()
+            if (selection && (selection.includes('Hidden Achievement') || selection.includes('???'))) {
+                unlock('DECODER')
+            }
+        }
+
+        document.addEventListener('selectionchange', handleSelection)
+        return () => document.removeEventListener('selectionchange', handleSelection)
+    }, [unlock])
+
     return (
         <main className="min-h-screen pt-32 pb-20 px-6 bg-background text-foreground flex flex-col items-center">
 
@@ -131,7 +143,7 @@ export default function AchievementsPage() {
                             {/* Content */}
                             <div className="flex-1">
                                 <div className="flex justify-between items-start mb-1">
-                                    <h3 className={`font-bold text-lg ${isSecret ? 'blur-sm select-none' : ''}`}>
+                                    <h3 className={`font-bold text-lg ${isSecret ? 'blur-sm' : ''}`}>
                                         {isSecret ? 'Hidden Achievement' : achievement.title}
                                     </h3>
                                     {isUnlocked && (
@@ -140,7 +152,7 @@ export default function AchievementsPage() {
                                         </Badge>
                                     )}
                                 </div>
-                                <p className={`text-sm text-muted-foreground ${isSecret ? 'blur-sm select-none' : ''}`}>
+                                <p className={`text-sm text-muted-foreground ${isSecret ? 'blur-sm' : ''}`}>
                                     {isSecret ? '???' : achievement.description}
                                 </p>
                             </div>

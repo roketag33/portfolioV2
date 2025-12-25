@@ -241,5 +241,13 @@ export const ACHIEVEMENTS: Record<string, Achievement> = {
         xp: 25,
         icon: '🔐',
         secret: true
+    },
+    DECODER: {
+        id: 'DECODER',
+        title: 'The Decoder',
+        description: 'You tried to read the redacted text. Clever!',
+        xp: 30,
+        icon: '🕵️‍♀️',
+        secret: true
     }
 }
