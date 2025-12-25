@@ -172,7 +172,7 @@ export default function BlogList() {
                         onChange={(e) => handleSearchChange(e.target.value)}
                     />
                     {isOracleMode && (
-                        <div className="absolute right-12 top-1/2 -translate-y-1/2 text-[10px] font-mono text-green-700 animate-pulse pointer-events-none">
+                        <div className="absolute right-12 top-1/2 -translate-y-1/2 text-[10px] font-mono text-green-700 animate-pulse pointer-events-none z-20">
                             SYSTEM_OVERRIDE
                         </div>
                     )}
