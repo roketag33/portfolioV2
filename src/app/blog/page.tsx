@@ -9,16 +9,29 @@ export default function BlogPage() {
     const { unlock } = useGamification()
     const [neonColor, setNeonColor] = useState<string>('')
 
+    const [isFlickering, setIsFlickering] = useState(false)
+
     const handleAmpersandClick = () => {
+        setIsFlickering(true)
         const colors = [
-            'text-pink-500 drop-shadow-[0_0_10px_rgba(236,72,153,0.8)]',
-            'text-cyan-500 drop-shadow-[0_0_10px_rgba(6,182,212,0.8)]',
-            'text-green-500 drop-shadow-[0_0_10px_rgba(34,197,94,0.8)]',
-            'text-yellow-500 drop-shadow-[0_0_10px_rgba(234,179,8,0.8)]',
-            'text-purple-500 drop-shadow-[0_0_10px_rgba(168,85,247,0.8)]'
+            'text-pink-500 drop-shadow-[0_0_15px_rgba(236,72,153,1)]',
+            'text-cyan-500 drop-shadow-[0_0_15px_rgba(6,182,212,1)]',
+            'text-green-500 drop-shadow-[0_0_15px_rgba(34,197,94,1)]',
+            'text-yellow-500 drop-shadow-[0_0_15px_rgba(234,179,8,1)]',
+            'text-purple-500 drop-shadow-[0_0_15px_rgba(168,85,247,1)]'
         ]
         const randomColor = colors[Math.floor(Math.random() * colors.length)]
-        setNeonColor(randomColor)
+
+        // Simulating sputter start
+        setTimeout(() => setNeonColor(randomColor), 100)
+        setTimeout(() => setNeonColor(''), 200)
+        setTimeout(() => setNeonColor(randomColor), 300)
+        setTimeout(() => setNeonColor(''), 350)
+        setTimeout(() => {
+            setNeonColor(randomColor)
+            setIsFlickering(false)
+        }, 500)
+
         unlock('NEON_VIBES')
     }
 
@@ -30,15 +43,26 @@ export default function BlogPage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="mb-16"
                 >
-                    <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-4">
+                    <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-4 group relative">
+                        {/* Ambient Glow Reflection */}
+                        {neonColor && (
+                            <div
+                                className="absolute -inset-10 bg-current opacity-10 blur-[100px] pointer-events-none transition-colors duration-1000"
+                                style={{ color: neonColor.includes('pink') ? '#ec4899' : neonColor.includes('cyan') ? '#06b6d4' : neonColor.includes('green') ? '#22c55e' : neonColor.includes('yellow') ? '#eab308' : '#a855f7' }}
+                            />
+                        )}
+
                         Thoughts <br className="md:hidden" />
                         <span
                             onClick={handleAmpersandClick}
                             className={cn(
                                 "cursor-pointer transition-all duration-300 inline-block hover:scale-110 select-none",
-                                neonColor || "text-foreground hover:text-primary"
+                                neonColor || "text-foreground hover:text-primary",
+                                isFlickering && "animate-flicker"
                             )}
-                            style={neonColor ? { textShadow: '0 0 20px currentColor' } : undefined}
+                            style={neonColor ? {
+                                textShadow: '0 0 20px currentColor, 0 0 40px currentColor, 0 0 80px currentColor'
+                            } : undefined}
                         >
                             <span className={neonColor}>&</span>
                         </span>

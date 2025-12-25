@@ -9,6 +9,7 @@ import { getPosts } from '@/app/actions/blog'
 import { formatDistance } from 'date-fns'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, X } from 'lucide-react'
+import confetti from 'canvas-confetti'
 
 /* Combined type for local + db posts */
 type Post = {
@@ -52,8 +53,23 @@ export default function BlogList() {
     // Achievement States
     const [searchedTags, setSearchedTags] = useState<Set<string>>(new Set())
     const [isOracleMode, setIsOracleMode] = useState(false)
+    const [placeholderIndex, setPlaceholderIndex] = useState(0)
+    const oraclePlaceholders = [
+        "Computing...",
+        "The Answer is...",
+        "Don't Panic...",
+        "Life, Universe, Everything...",
+        "42"
+    ]
 
-    // ... (useEffect for loading posts)
+    useEffect(() => {
+        if (isOracleMode) {
+            const interval = setInterval(() => {
+                setPlaceholderIndex(prev => (prev + 1) % oraclePlaceholders.length)
+            }, 2000)
+            return () => clearInterval(interval)
+        }
+    }, [isOracleMode])
 
     // Handle Search Change (Oracle)
     const handleSearchChange = (value: string) => {
@@ -78,8 +94,14 @@ export default function BlogList() {
             newTags.add(tag)
             setSearchedTags(newTags)
 
-            if (newTags.size >= 3) {
+            if (newTags.size === 3) {
                 unlock('TOPIC_HUNTER')
+                confetti({
+                    particleCount: 150,
+                    spread: 80,
+                    origin: { y: 0.6 },
+                    colors: ['#FFD700', '#FFA500', '#ffffff'] // Gold theme
+                })
             }
         }
     }
@@ -129,14 +151,20 @@ export default function BlogList() {
                 <div className="relative max-w-lg mx-auto md:mx-0 group">
                     <Search className={cn(
                         "absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors",
-                        isOracleMode ? "text-purple-400 animate-pulse" : "text-muted-foreground group-focus-within:text-primary"
+                        isOracleMode ? "text-cyan-400 animate-pulse" : "text-muted-foreground group-focus-within:text-primary"
                     )} />
+
+                    <div className={cn(
+                        "absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-cyan-500 to-purple-500 blur opacity-0 transition-opacity duration-500",
+                        isOracleMode && "opacity-40 animate-pulse"
+                    )} />
+
                     <Input
-                        placeholder={isOracleMode ? "The answer to everything..." : "Search for articles, insights..."}
+                        placeholder={isOracleMode ? oraclePlaceholders[placeholderIndex] : "Search for articles, insights..."}
                         className={cn(
-                            "pl-10 transition-all rounded-full h-11 border-white/10",
+                            "pl-10 transition-all rounded-full h-11 border-white/10 relative z-10",
                             isOracleMode
-                                ? "bg-purple-950/30 border-purple-500/50 text-purple-200 focus-visible:ring-purple-500 shadow-[0_0_15px_rgba(168,85,247,0.3)]"
+                                ? "bg-black/80 border-cyan-500/50 text-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.4)] placeholder:text-cyan-400/50"
                                 : "bg-white/5 focus-visible:ring-primary/50 focus-visible:border-primary"
                         )}
                         value={search}
@@ -162,16 +190,23 @@ export default function BlogList() {
                         >
                             All
                         </Badge>
-                        {Array.from(new Set(posts.flatMap(p => p.tags || []))).map(tag => (
-                            <Badge
-                                key={tag}
-                                variant={selectedTag === tag ? "default" : "secondary"}
-                                className={`cursor-pointer transition-all hover:scale-105 ${selectedTag === tag ? 'bg-primary text-primary-foreground' : 'bg-white/5 hover:bg-white/10'}`}
-                                onClick={() => handleTagClick(tag)}
-                            >
-                                {tag}
-                            </Badge>
-                        ))}
+                        {Array.from(new Set(posts.flatMap(p => p.tags || []))).map(tag => {
+                            const isHunted = searchedTags.has(tag)
+                            return (
+                                <Badge
+                                    key={tag}
+                                    variant={selectedTag === tag ? "default" : "secondary"}
+                                    className={cn(
+                                        "cursor-pointer transition-all hover:scale-105",
+                                        selectedTag === tag ? 'bg-primary text-primary-foreground' : 'bg-white/5 hover:bg-white/10',
+                                        isHunted && "border-yellow-500/50 shadow-[0_0_10px_rgba(234,179,8,0.2)] text-yellow-500"
+                                    )}
+                                    onClick={() => handleTagClick(tag)}
+                                >
+                                    {tag}
+                                </Badge>
+                            )
+                        })}
                     </motion.div>
                 </div>
             </div>
