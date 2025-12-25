@@ -167,6 +167,39 @@ export const ACHIEVEMENTS: Record<string, Achievement> = {
         title: 'Retro Vision',
         description: 'You traveled back to the 8-bit era.',
         xp: 20,
-        icon: '👾'
+        icon: '👾',
+        secret: true
+    },
+    MAD_SCIENTIST: {
+        id: 'MAD_SCIENTIST',
+        title: 'Mad Scientist',
+        description: 'You inspected every single experiment.',
+        xp: 40,
+        icon: '👨‍🔬',
+        secret: true
+    },
+    SYSTEM_MELTDOWN: {
+        id: 'SYSTEM_MELTDOWN',
+        title: 'System Meltdown',
+        description: 'You broke the simulation.',
+        xp: 50,
+        icon: '💥',
+        secret: true
+    },
+    THE_ARCHIVIST: {
+        id: 'THE_ARCHIVIST',
+        title: 'The Archivist',
+        description: 'Access denied. Security Clearance Required.',
+        xp: 50,
+        icon: '📂',
+        secret: true
+    },
+    LAB_MASTER: {
+        id: 'LAB_MASTER',
+        title: 'Lab Master',
+        description: 'You discovered every secret in the Lab. Pure genius.',
+        xp: 100,
+        icon: '👑',
+        secret: true
     }
 }
