@@ -122,7 +122,7 @@ export default function AdminPage() {
                                     <th className="p-4 font-medium">Icon</th>
                                     <th className="p-4 font-medium">ID</th>
                                     <th className="p-4 font-medium">Title</th>
-                                    <th className="p-4 font-medium">Description (Solution)</th>
+                                    <th className="p-4 font-medium">Unlock Guide</th>
                                     <th className="p-4 font-medium">XP</th>
                                     <th className="p-4 font-medium">Secret</th>
                                 </tr>
@@ -133,7 +133,7 @@ export default function AdminPage() {
                                         <td className="p-4 text-2xl">{ach.icon}</td>
                                         <td className="p-4 font-mono text-xs">{ach.id}</td>
                                         <td className="p-4 font-semibold">{ach.title}</td>
-                                        <td className="p-4 text-muted-foreground">{ach.description}</td>
+                                        <td className="p-4 text-muted-foreground whitespace-pre-wrap max-w-xs">{ach.unlockHint || ach.description}</td>
                                         <td className="p-4 font-mono">+{ach.xp}</td>
                                         <td className="p-4">
                                             {ach.secret ? (
