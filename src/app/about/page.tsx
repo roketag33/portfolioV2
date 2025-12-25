@@ -119,25 +119,81 @@ export default function AboutPage() {
                                 </motion.div>
 
                                 {/* CENTER: Timeline Point */}
-                                <div className="hidden md:flex flex-col items-center justify-center relative z-20">
+                                <div className="hidden md:flex flex-col items-center justify-center relative z-20 h-full">
 
 
 
-                                    <motion.div
-                                        initial={{ scale: 0 }}
-                                        whileInView={{ scale: 1 }}
-                                        viewport={{ once: true }}
-                                        transition={{ type: "spring", stiffness: 300, damping: 20, delay: index * 0.1 }}
-                                        className="w-4 h-4 rounded-full bg-neutral-900 border-2 border-white/20 group-hover:border-primary group-hover:scale-125 transition-all duration-300 z-10 shadow-[0_0_10px_rgba(255,255,255,0.1)] relative"
-                                    >
-                                        {/* Pulse for Boby/Freelance start */}
-                                        {index === bobyIndex && (
-                                            <div className="absolute inset-0 rounded-full animate-ping bg-purple-500/50" />
-                                        )}
-                                    </motion.div>
-                                    <div className="absolute top-1/2 left-8 md:left-auto md:top-auto md:translate-y-8 font-mono text-xs text-neutral-400 whitespace-nowrap bg-neutral-900/90 px-3 py-1.5 rounded-full border border-white/10 shadow-xl">
-                                        {item.year}
-                                    </div>
+                                    {/* FREELANCE PERIOD GLOW LINE (Future Direction: Boby -> Present) */}
+                                    {index >= bobyIndex && (
+                                        <div
+                                            className="absolute w-[3px] border-x border-purple-500/60 bg-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.4)] left-1/2 -translate-x-1/2 z-0"
+                                            style={{
+                                                top: '50%',
+                                                bottom: index === reversedTimeline.length - 1 ? '0' : '-50vh'
+                                            }}
+                                        />
+                                    )}
+
+                                    {/* ARROW HEAD AT CURRENT/PRESENT NODE - Pointing DOWN (End of Line) */}
+                                    {index === reversedTimeline.length - 1 && index >= bobyIndex && (
+                                        <>
+                                            <div className="absolute top-full left-1/2 -translate-x-1/2 w-4 h-96 bg-black z-10" />
+                                            <div className="absolute top-full left-1/2 -translate-x-1/2 z-50">
+                                                <div className="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[10px] border-t-purple-500 drop-shadow-[0_0_8px_rgba(168,85,247,1)]" />
+                                            </div>
+                                        </>
+                                    )}
+
+                                    {/* NODE RENDERING: Special Freelance Icon or Standard Dot */}
+                                    {index === bobyIndex ? (
+                                        <div className="relative flex items-center justify-center group/node z-40 w-8 h-8">
+                                            {/* Glowing Pulse Halo */}
+                                            <div className="absolute inset-0 bg-purple-500/50 rounded-full blur-md animate-pulse" />
+
+                                            {/* LEFT WING: Start Year (Absolute) */}
+                                            <div className="absolute right-[calc(100%-10px)] bg-neutral-900 border border-purple-500/30 px-3 py-1 rounded-l-full border-r-0 text-[10px] font-mono font-bold text-purple-200 z-10 pr-4 whitespace-nowrap">
+                                                {item.year.split(' - ')[0]}
+                                            </div>
+
+                                            {/* CENTER: Zap Icon Orb */}
+                                            <div className="w-8 h-8 flex items-center justify-center bg-purple-900 rounded-full border border-purple-400/50 relative shadow-[0_0_15px_rgba(168,85,247,0.5)] transition-transform duration-300 group-hover/node:scale-110 z-30">
+                                                <Zap size={14} className="text-purple-300 fill-purple-300" />
+                                            </div>
+
+                                            {/* RIGHT WING: End Year (Absolute) */}
+                                            <div className="absolute left-[calc(100%-10px)] bg-neutral-900 border border-purple-500/30 px-3 py-1 rounded-r-full border-l-0 text-[10px] font-mono font-bold text-purple-200 z-10 pl-4 whitespace-nowrap">
+                                                {item.year.split(' - ')[1]}
+                                            </div>
+
+                                            {/* Tooltip Label */}
+                                            <div className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-neutral-900/90 text-purple-300 text-[10px] font-bold uppercase tracking-wider rounded-lg border border-purple-500/30 whitespace-nowrap opacity-0 group-hover/node:opacity-100 transition-all duration-300 pointer-events-none translate-y-2 group-hover/node:translate-y-0 shadow-lg backdrop-blur-sm z-30 origin-bottom">
+                                                Start Freelance 🚀
+                                                <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-neutral-900/90" />
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="flex items-center justify-center relative z-20 group/node w-6 h-6">
+                                            {/* LEFT WING: Start Year (Absolute) */}
+                                            <div className="absolute right-[calc(100%-10px)] bg-neutral-900 border border-white/10 px-3 py-1 rounded-l-full border-r-0 text-[10px] font-mono text-neutral-400 z-10 pr-4 whitespace-nowrap group-hover/node:border-primary/50 group-hover/node:text-white transition-colors">
+                                                {item.year.split(' - ')[0]}
+                                            </div>
+
+                                            {/* CENTER: Standard Dot */}
+                                            <motion.div
+                                                initial={{ scale: 0 }}
+                                                whileInView={{ scale: 1 }}
+                                                viewport={{ once: true }}
+                                                transition={{ type: "spring", stiffness: 300, damping: 20, delay: index * 0.1 }}
+                                                className="w-6 h-6 rounded-full bg-neutral-900 border-2 border-white/20 group-hover/node:border-primary group-hover/node:scale-125 transition-all duration-300 z-30 shadow-[0_0_10px_rgba(255,255,255,0.1)] relative"
+                                            />
+
+                                            {/* RIGHT WING: End Year (Absolute) */}
+                                            <div className="absolute left-[calc(100%-10px)] bg-neutral-900 border border-white/10 px-3 py-1 rounded-r-full border-l-0 text-[10px] font-mono text-neutral-400 z-10 pl-4 whitespace-nowrap group-hover/node:border-primary/50 group-hover/node:text-white transition-colors">
+                                                {item.year.split(' - ')[1]}
+                                            </div>
+                                        </div>
+                                    )}
+
                                 </div>
 
                                 {/* RIGHT COLUMN: Education */}
