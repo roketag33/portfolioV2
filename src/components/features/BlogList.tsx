@@ -218,7 +218,7 @@ export default function BlogList() {
                 </div>
             </div>
 
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
                 {/* Featured Post */}
                 {featuredPost && (
                     <motion.div
