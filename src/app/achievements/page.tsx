@@ -28,15 +28,19 @@ export default function AchievementsPage() {
                         const newClicks = (Number(sessionStorage.getItem('trophyClicks') || 0)) + 1
                         sessionStorage.setItem('trophyClicks', String(newClicks))
 
-                        // Visual feedback
+                        // Visual feedback: SUPER SPECTACULAR SPIN
                         const icon = document.getElementById('header-trophy')
                         if (icon) {
                             icon.animate([
-                                { transform: 'rotate(0deg) scale(1)' },
-                                { transform: 'rotate(-20deg) scale(1.2)' },
-                                { transform: 'rotate(20deg) scale(1.2)' },
-                                { transform: 'rotate(0deg) scale(1)' }
-                            ], { duration: 400 })
+                                { transform: 'scale(1) rotate(0deg)', filter: 'brightness(1) drop-shadow(0 0 0 rgba(234, 179, 8, 0))' },
+                                { transform: 'scale(1.5) rotate(-20deg)', offset: 0.2 },
+                                { transform: 'scale(1.5) rotate(360deg)', filter: 'brightness(2) drop-shadow(0 0 20px rgba(234, 179, 8, 0.8))', offset: 0.6 },
+                                { transform: 'scale(1.2) rotate(380deg)', offset: 0.8 },
+                                { transform: 'scale(1) rotate(0deg)', filter: 'brightness(1) drop-shadow(0 0 0 rgba(234, 179, 8, 0))' }
+                            ], {
+                                duration: 800,
+                                easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)' // BackOut casing
+                            })
                         }
 
                         if (newClicks >= 5) {
@@ -80,16 +84,25 @@ export default function AchievementsPage() {
                                     const newClicks = (Number(sessionStorage.getItem('lockClicks') || 0)) + 1
                                     sessionStorage.setItem('lockClicks', String(newClicks))
 
-                                    // Visual feedback (shake)
+                                    // Visual feedback: VIOLENT SHAKE & ERROR
                                     const card = document.getElementById(`achievement-${achievement.id}`)
                                     if (card) {
+                                        // Reset style first just in case
+                                        card.style.transform = 'none'
+
                                         card.animate([
-                                            { transform: 'translateX(0)' },
-                                            { transform: 'translateX(-5px)' },
-                                            { transform: 'translateX(5px)' },
-                                            { transform: 'translateX(-5px)' },
-                                            { transform: 'translateX(0)' }
-                                        ], { duration: 300 })
+                                            { transform: 'translateX(0) rotate(0)', borderColor: 'rgba(255,255,255,0.05)', backgroundColor: 'transparent' },
+                                            { transform: 'translateX(-10px) rotate(-5deg)', borderColor: 'rgba(239, 68, 68, 0.8)', backgroundColor: 'rgba(239, 68, 68, 0.1)', offset: 0.1 },
+                                            { transform: 'translateX(10px) rotate(5deg)', offset: 0.2 },
+                                            { transform: 'translateX(-10px) rotate(-5deg)', offset: 0.3 },
+                                            { transform: 'translateX(10px) rotate(5deg)', offset: 0.4 },
+                                            { transform: 'translateX(-5px) rotate(-2deg)', offset: 0.5 },
+                                            { transform: 'translateX(5px) rotate(2deg)', offset: 0.6 },
+                                            { transform: 'translateX(0) rotate(0)', borderColor: 'rgba(255,255,255,0.05)', backgroundColor: 'transparent' }
+                                        ], {
+                                            duration: 500,
+                                            easing: 'ease-in-out'
+                                        })
                                     }
 
                                     if (newClicks >= 10) {
