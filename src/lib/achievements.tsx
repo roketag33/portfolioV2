@@ -147,5 +147,26 @@ export const ACHIEVEMENTS: Record<string, Achievement> = {
         xp: 100,
         icon: '☢️',
         secret: true
+    },
+    GYM_RAT: {
+        id: 'GYM_RAT',
+        title: 'Gym Rat',
+        description: 'You did 10 reps on the Sport card. Light weight baby!',
+        xp: 30,
+        icon: '💪'
+    },
+    CHAOS_ENGINEER: {
+        id: 'CHAOS_ENGINEER',
+        title: 'Chaos Engineer',
+        description: 'You broke gravity. Newton is not happy.',
+        xp: 30,
+        icon: '🍎'
+    },
+    RETRO_VISION: {
+        id: 'RETRO_VISION',
+        title: 'Retro Vision',
+        description: 'You traveled back to the 8-bit era.',
+        xp: 20,
+        icon: '👾'
     }
 }

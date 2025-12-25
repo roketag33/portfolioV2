@@ -6,6 +6,7 @@ import { Briefcase, Zap, Trophy } from 'lucide-react'
 import { useRef } from 'react'
 import React from 'react'
 import PassionsSection from '@/components/features/PassionsSection'
+import StackSection from '@/components/features/StackSection'
 
 
 
@@ -224,46 +225,8 @@ export default function AboutPage() {
                 </div>
 
                 {/* SKILLS SECTION (Only Tech Stack as standalone) */}
-                <div className="mt-32 grid grid-cols-1 lg:grid-cols-2 gap-20">
-                    <div>
-                        <h3 className="text-2xl font-bold uppercase mb-12 flex items-center gap-3">
-                            <Zap className="text-yellow-500" /> Stack Technique
-                        </h3>
-                        <div className="space-y-8">
-                            {[
-                                { name: "Frontend & CMS", skills: ["Next.js", "React", "Vue.js", "TypeScript", "TailwindCSS", "GSAP", "Three.js", "WordPress", "Shopify"] },
-                                { name: "Backend", skills: ["Node.js", "NestJS", "Express", "Rust", "Go", "PostgreSQL", "Prisma"] },
-                                { name: "DevOps & Quality", skills: ["Docker", "Vercel", "Git", "Figma", "Suite Atlassian", "Linear", "CI/CD", "Testing E2E/Unit"] }
-                            ].map((cat, i) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: i * 0.1 }}
-                                >
-                                    <h4 className="text-sm font-mono text-neutral-500 uppercase tracking-wider mb-4">{cat.name}</h4>
-                                    <motion.div
-                                        className="flex flex-wrap gap-3"
-                                        initial="hidden"
-                                        whileInView="visible"
-                                        viewport={{ once: true }}
-                                        variants={{
-                                            visible: { transition: { staggerChildren: 0.05 } }
-                                        }}
-                                    >
-                                        {cat.skills.map(skill => (
-                                            <motion.div key={skill} variants={{ hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1 } }}>
-                                                <Badge className="bg-neutral-900 hover:bg-white hover:text-black py-2 px-4 border-white/10 transition-all cursor-default">
-                                                    {skill}
-                                                </Badge>
-                                            </motion.div>
-                                        ))}
-                                    </motion.div>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
+                <div className="mt-32">
+                    <StackSection />
                 </div>
 
                 {/* FREELANCE SECTION */}

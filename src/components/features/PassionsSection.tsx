@@ -52,43 +52,107 @@ const PASSIONS = [
 ]
 
 // --- PASSIONS SECTION (Neon Bento) ---
+// --- PASSIONS SECTION (Neon Bento) ---
+import { useGamification } from '@/context/GamificationContext'
+import { useState } from 'react'
+
 function PassionsGrid() {
+    const { unlock } = useGamification()
+    const [gymReps, setGymReps] = useState(0)
+    const [retroMode, setRetroMode] = useState(false)
+
+    const handleCardClick = (id: string) => {
+        if (id === 'sport') {
+            const newReps = gymReps + 1
+            setGymReps(newReps)
+            if (newReps >= 10) {
+                unlock('GYM_RAT')
+            }
+        }
+        if (id === 'gaming') {
+            const newMode = !retroMode
+            setRetroMode(newMode)
+            if (newMode) unlock('RETRO_VISION')
+        }
+    }
+
     return (
         <div className="w-full">
             <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
-                {PASSIONS.map((item, i) => (
-                    <motion.div
-                        key={item.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.1 }}
-                        className={cn(
-                            "relative overflow-hidden rounded-3xl border border-white/5 bg-neutral-900/40 p-6 group hover:bg-neutral-900/60 transition-colors",
-                            i === 0 || i === 1 ? "md:col-span-3" : "md:col-span-2"
-                        )}
-                    >
-                        {/* Glow Effect - ensuring 'from-color' works for all */}
-                        <div className={cn("absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 bg-gradient-to-br", item.color.replace('text-', 'from-'), "to-transparent")} />
+                {PASSIONS.map((item, i) => {
+                    const isRetro = retroMode && item.id === 'gaming'
+                    const isGym = item.id === 'sport'
 
-                        {/* Interactive Border Glow (optional, if enabled) */}
-                        <div className={cn("absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 border-2", item.color.replace('text-', 'border-').replace('500', '500/20'))} />
+                    return (
+                        <motion.div
+                            key={item.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: i * 0.1 }}
+                            onClick={() => handleCardClick(item.id)}
+                            whileTap={isGym ? { scale: 0.95 } : undefined}
+                            className={cn(
+                                "relative overflow-hidden rounded-3xl border border-white/5 bg-neutral-900/40 p-6 group hover:bg-neutral-900/60 transition-all cursor-pointer select-none",
+                                i === 0 || i === 1 ? "md:col-span-3" : "md:col-span-2",
+                                isRetro && "font-mono border-green-500/50 bg-black",
+                                isGym && gymReps > 0 && "active:border-red-500/50"
+                            )}
+                            style={isRetro ? { imageRendering: 'pixelated' } : undefined}
+                        >
+                            {/* Glow Effect */}
+                            {!isRetro && (
+                                <div className={cn("absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 bg-gradient-to-br", item.color.replace('text-', 'from-'), "to-transparent")} />
+                            )}
+                            {isRetro && (
+                                <div className="absolute inset-0 bg-green-900/10 pointer-events-none" style={{ backgroundImage: 'linear-gradient(transparent 50%, rgba(0, 50, 0, 0.5) 50%)', backgroundSize: '100% 4px' }} />
+                            )}
 
-                        <div className="relative z-10">
-                            <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110", item.bg, item.color)}>
-                                <item.icon size={24} />
+                            {/* Border Glow */}
+                            <div className={cn("absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 border-2", item.color.replace('text-', 'border-').replace('500', '500/20'))} />
+
+                            <div className="relative z-10 flex flex-col h-full">
+                                <div className="flex justify-between items-start">
+                                    <div className={cn(
+                                        "w-12 h-12 rounded-2xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110",
+                                        item.bg,
+                                        item.color,
+                                        isRetro && "rounded-none bg-green-700 text-black animate-pulse"
+                                    )}>
+                                        <item.icon size={24} />
+                                    </div>
+
+                                    {isGym && gymReps > 0 && (
+                                        <motion.span
+                                            key={gymReps}
+                                            initial={{ scale: 1.5, opacity: 0 }}
+                                            animate={{ scale: 1, opacity: 1 }}
+                                            className="font-black text-red-500 text-xl font-mono"
+                                        >
+                                            {gymReps}
+                                        </motion.span>
+                                    )}
+                                </div>
+
+                                <h3 className={cn("text-xl font-bold mb-2 text-white group-hover:translate-x-1 transition-transform", isRetro && "uppercase tracking-widest text-green-500")}>
+                                    {item.title}
+                                </h3>
+                                <p className={cn("text-sm text-neutral-300 mb-4 font-medium", isRetro && "text-green-400/70")}>
+                                    {item.desc}
+                                </p>
+                                <div className="flex flex-wrap gap-2 mt-auto">
+                                    {item.tags.map(tag => (
+                                        <span key={tag} className={cn(
+                                            "text-[10px] uppercase font-bold px-2 py-1 rounded bg-white/10 text-white/90 border border-white/10 group-hover:border-white/20 transition-colors",
+                                            isRetro && "rounded-none border-green-500/50 bg-black text-green-500"
+                                        )}>
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
-                            <h3 className="text-xl font-bold mb-2 text-white group-hover:translate-x-1 transition-transform">{item.title}</h3>
-                            <p className="text-sm text-neutral-300 mb-4 font-medium">{item.desc}</p>
-                            <div className="flex flex-wrap gap-2">
-                                {item.tags.map(tag => (
-                                    <span key={tag} className="text-[10px] uppercase font-bold px-2 py-1 rounded bg-white/10 text-white/90 border border-white/10 group-hover:border-white/20 transition-colors">
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    </motion.div>
-                ))}
+                        </motion.div>
+                    )
+                })}
             </div>
         </div>
     )
