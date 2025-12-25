@@ -155,8 +155,8 @@ export default function BlogList() {
                     )} />
 
                     <div className={cn(
-                        "absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-cyan-500 to-purple-500 blur opacity-0 transition-opacity duration-500",
-                        isOracleMode && "opacity-40 animate-pulse"
+                        "absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-cyan-500 to-purple-500 blur opacity-0 transition-all duration-3000",
+                        isOracleMode && "opacity-40 animate-pulse bg-[length:200%_200%] animate-gradient-xy"
                     )} />
 
                     <Input
@@ -191,7 +191,8 @@ export default function BlogList() {
                             All
                         </Badge>
                         {Array.from(new Set(posts.flatMap(p => p.tags || []))).map(tag => {
-                            const isHunted = searchedTags.has(tag)
+                            // Don't show gold border if we've already hit the target
+                            const isHunted = searchedTags.has(tag) && searchedTags.size < 3
                             return (
                                 <Badge
                                     key={tag}

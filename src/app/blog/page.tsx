@@ -44,29 +44,28 @@ export default function BlogPage() {
                     className="mb-16"
                 >
                     <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-4 group relative">
-                        {/* Ambient Glow Reflection */}
                         {neonColor && (
                             <div
-                                className="absolute -inset-10 bg-current opacity-10 blur-[100px] pointer-events-none transition-colors duration-1000"
+                                className="absolute -inset-10 bg-current opacity-5 blur-[80px] pointer-events-none transition-colors duration-1000 z-0"
                                 style={{ color: neonColor.includes('pink') ? '#ec4899' : neonColor.includes('cyan') ? '#06b6d4' : neonColor.includes('green') ? '#22c55e' : neonColor.includes('yellow') ? '#eab308' : '#a855f7' }}
                             />
                         )}
 
-                        Thoughts <br className="md:hidden" />
+                        <span className="relative z-10">Thoughts</span> <br className="md:hidden" />
                         <span
                             onClick={handleAmpersandClick}
                             className={cn(
-                                "cursor-pointer transition-all duration-300 inline-block hover:scale-110 select-none",
+                                "cursor-pointer transition-all duration-300 inline-block hover:scale-110 select-none relative z-10",
                                 neonColor || "text-foreground hover:text-primary",
                                 isFlickering && "animate-flicker"
                             )}
                             style={neonColor ? {
-                                textShadow: '0 0 20px currentColor, 0 0 40px currentColor, 0 0 80px currentColor'
+                                textShadow: '0 0 5px currentColor, 0 0 10px currentColor'
                             } : undefined}
                         >
                             <span className={neonColor}>&</span>
                         </span>
-                        <br />Insights
+                        <br /><span className="relative z-10">Insights</span>
                     </h1>
                     <p className="text-xl text-muted-foreground max-w-2xl">
                         Partage d'expériences sur le développement web, le design et l'architecture logicielle.
