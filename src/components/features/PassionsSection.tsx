@@ -11,7 +11,7 @@ const PASSIONS = [
         color: "text-red-500",
         bg: "bg-red-500/10",
         desc: "Passionné par l'intensité et la discipline.",
-        tags: ["Streetlifting", "Powerlifting", "MMA", "Boxe Anglaise", "Muay Thaï", "Bodybuilding"]
+        tags: ["Streetlifting", "Powerlifting", "MMA", "Boxe Anglaise", "Bodybuilding"]
     },
     {
         id: 'gaming',
@@ -95,20 +95,23 @@ function PassionsGrid() {
                                 "relative overflow-hidden rounded-3xl border border-white/5 bg-neutral-900/40 p-6 group hover:bg-neutral-900/60 transition-all cursor-pointer select-none",
                                 i === 0 || i === 1 ? "md:col-span-3" : "md:col-span-2",
                                 isRetro && "font-mono border-green-500/50 bg-black",
-                                isGym && gymReps > 0 && "active:border-red-500/50"
+                                isGym && gymReps > 0 && "active:border-red-500/50",
+                                isGym && gymReps >= 10 && "bg-red-900/40 border-red-500/50 hover:bg-red-900/50 border-4 p-8" /* increased padding to compensate border */
                             )}
                             style={isRetro ? { imageRendering: 'pixelated' } : undefined}
                         >
                             {/* Glow Effect */}
-                            {!isRetro && (
+                            {!isRetro && !(isGym && gymReps >= 10) && (
                                 <div className={cn("absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 bg-gradient-to-br", item.color.replace('text-', 'from-'), "to-transparent")} />
                             )}
                             {isRetro && (
                                 <div className="absolute inset-0 bg-green-900/10 pointer-events-none" style={{ backgroundImage: 'linear-gradient(transparent 50%, rgba(0, 50, 0, 0.5) 50%)', backgroundSize: '100% 4px' }} />
                             )}
 
-                            {/* Border Glow */}
-                            <div className={cn("absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 border-2", item.color.replace('text-', 'border-').replace('500', '500/20'))} />
+                            {/* Border Glow for normal state */}
+                            {!(isGym && gymReps >= 10) && (
+                                <div className={cn("absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 border-2", item.color.replace('text-', 'border-').replace('500', '500/20'))} />
+                            )}
 
                             <div className="relative z-10 flex flex-col h-full">
                                 <div className="flex justify-between items-start">
@@ -116,7 +119,8 @@ function PassionsGrid() {
                                         "w-12 h-12 rounded-2xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110",
                                         item.bg,
                                         item.color,
-                                        isRetro && "rounded-none bg-green-700 text-black animate-pulse"
+                                        isRetro && "rounded-none bg-green-700 text-black animate-pulse",
+                                        isGym && gymReps >= 10 && "bg-red-500 text-white animate-bounce"
                                     )}>
                                         <item.icon size={24} />
                                     </div>
@@ -126,24 +130,29 @@ function PassionsGrid() {
                                             key={gymReps}
                                             initial={{ scale: 1.5, opacity: 0 }}
                                             animate={{ scale: 1, opacity: 1 }}
-                                            className="font-black text-red-500 text-xl font-mono"
+                                            className={cn("font-black font-mono relative z-30", gymReps >= 10 ? "text-yellow-400 text-2xl tracking-tighter drop-shadow-md" : "text-red-500 text-xl")}
                                         >
-                                            {gymReps}
+                                            {gymReps >= 10 ? "MAXED OUT 😤" : gymReps}
                                         </motion.span>
                                     )}
                                 </div>
 
-                                <h3 className={cn("text-xl font-bold mb-2 text-white group-hover:translate-x-1 transition-transform", isRetro && "uppercase tracking-widest text-green-500")}>
-                                    {item.title}
+                                <h3 className={cn(
+                                    "text-xl font-bold mb-2 text-white group-hover:translate-x-1 transition-transform relative z-30",
+                                    isRetro && "uppercase tracking-widest text-green-500",
+                                    isGym && gymReps >= 10 && "text-white uppercase tracking-tighter italic scale-110 origin-left ml-2"
+                                )}>
+                                    {isGym && gymReps >= 10 ? "GIGACHAD MODE" : item.title}
                                 </h3>
-                                <p className={cn("text-sm text-neutral-300 mb-4 font-medium", isRetro && "text-green-400/70")}>
-                                    {item.desc}
+                                <p className={cn("text-sm text-neutral-300 mb-4 font-medium relative z-30", isRetro && "text-green-400/70", isGym && gymReps >= 10 && "text-white/90 font-bold")}>
+                                    {isGym && gymReps >= 10 ? "LIGHT WEIGHT BABY! (Tu as cassé la carte)" : item.desc}
                                 </p>
-                                <div className="flex flex-wrap gap-2 mt-auto">
+                                <div className="flex flex-wrap gap-2 mt-auto relative z-30">
                                     {item.tags.map(tag => (
                                         <span key={tag} className={cn(
                                             "text-[10px] uppercase font-bold px-2 py-1 rounded bg-white/10 text-white/90 border border-white/10 group-hover:border-white/20 transition-colors",
-                                            isRetro && "rounded-none border-green-500/50 bg-black text-green-500"
+                                            isRetro && "rounded-none border-green-500/50 bg-black text-green-500",
+                                            isGym && gymReps >= 10 && "bg-red-600 text-white border-red-400 animate-pulse"
                                         )}>
                                             {tag}
                                         </span>
