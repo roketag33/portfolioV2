@@ -13,7 +13,7 @@ const BentoCard = ({ children, className, delay = 0 }: { children: React.ReactNo
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay }}
-        className={`group relative overflow-hidden rounded-3xl bg-card/30 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-colors ${className}`}
+        className={`group relative overflow-hidden rounded-3xl bg-secondary/50 backdrop-blur-md border border-foreground/10 hover:border-primary/50 hover:shadow-lg transition-all duration-300 ${className}`}
     >
         {children}
     </motion.div>
