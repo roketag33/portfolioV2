@@ -79,7 +79,7 @@ export default function About() {
 
                     {/* Image/Visual - Placeholder for now using colors */}
                     {/* Image/Visual - Tech Profile Card */}
-                    <div className="w-full flex justify-center">
+                    <div className="w-full relative">
                         <TechProfileCard />
                     </div>
                 </div>

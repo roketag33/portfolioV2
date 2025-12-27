@@ -47,13 +47,16 @@ export default function TechProfileCard() {
             style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className="relative w-full aspect-[4/5] md:aspect-square max-w-sm mx-auto rounded-3xl bg-neutral-900/50 backdrop-blur-xl border border-white/10 shadow-2xl cursor-pointer group"
+            className="relative w-full aspect-[4/5] md:aspect-square rounded-3xl bg-card/30 backdrop-blur-xl border border-border/50 shadow-2xl cursor-pointer group"
         >
+            {/* Ambient Glow */}
+            <div className="absolute -inset-4 bg-primary/20 rounded-[2rem] blur-3xl -z-10 opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
+
             {/* Holographic Gradient Overlay */}
             <motion.div
-                className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none z-10"
+                className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-40 transition-opacity duration-500 pointer-events-none z-10"
                 style={{
-                    background: `radial-gradient(circle at ${shineX}% ${shineY}%, rgba(255,255,255,0.8), transparent 50%)`
+                    background: `radial-gradient(circle at ${shineX}% ${shineY}%, var(--primary), transparent 60%)`
                 }}
             />
 
@@ -65,14 +68,14 @@ export default function TechProfileCard() {
 
                 {/* Header */}
                 <div className="flex justify-between items-start">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-2xl font-bold text-white shadow-lg">
+                    <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-2xl font-bold text-primary shadow-sm border border-primary/20">
                         AS
                     </div>
                     <div className="flex flex-col items-end">
-                        <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase flex items-center gap-1.5">
+                        <div className="bg-primary/10 border border-primary/20 text-primary px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase flex items-center gap-1.5">
                             <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                             </span>
                             Selected for Hire
                         </div>
@@ -82,21 +85,21 @@ export default function TechProfileCard() {
                 {/* Identity Info */}
                 <div className="space-y-4 my-auto">
                     <div>
-                        <h3 className="text-2xl font-bold text-white tracking-tight">Alexandre Sarrazin</h3>
-                        <p className="text-neutral-400 font-medium">Software Engineer & Architect</p>
+                        <h3 className="text-3xl font-black text-foreground tracking-tighter uppercase">Alexandre<br />Sarrazin</h3>
+                        <p className="text-muted-foreground font-medium text-lg">Software Engineer<br />& Architect</p>
                     </div>
 
-                    <div className="space-y-2 pt-4 border-t border-white/5">
-                        <div className="flex items-center gap-3 text-sm text-neutral-300">
-                            <MapPin className="w-4 h-4 text-neutral-500" />
+                    <div className="space-y-2 pt-4 border-t border-border/50">
+                        <div className="flex items-center gap-3 text-sm text-foreground/80">
+                            <MapPin className="w-4 h-4 text-primary" />
                             <span>Bordeaux, France</span>
                         </div>
-                        <div className="flex items-center gap-3 text-sm text-neutral-300">
-                            <Briefcase className="w-4 h-4 text-neutral-500" />
+                        <div className="flex items-center gap-3 text-sm text-foreground/80">
+                            <Briefcase className="w-4 h-4 text-primary" />
                             <span>Senior Fullstack (5+ Years)</span>
                         </div>
-                        <div className="flex items-center gap-3 text-sm text-neutral-300">
-                            <Globe className="w-4 h-4 text-neutral-500" />
+                        <div className="flex items-center gap-3 text-sm text-foreground/80">
+                            <Globe className="w-4 h-4 text-primary" />
                             <span>English & French</span>
                         </div>
                     </div>
@@ -104,26 +107,26 @@ export default function TechProfileCard() {
 
                 {/* Tech Stack Footer */}
                 <div className="space-y-3">
-                    <p className="text-[10px] uppercase tracking-widest text-neutral-500 font-bold">Core Stack</p>
+                    <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Core Architecture Stack</p>
                     <div className="flex gap-3">
-                        <div className="p-2 rounded-lg bg-white/5 border border-white/5 group-hover:bg-blue-500/20 group-hover:border-blue-500/30 transition-colors" title="React / Next.js">
-                            <Cpu className="w-5 h-5 text-neutral-300 group-hover:text-blue-400 transition-colors" />
+                        <div className="p-3 rounded-xl bg-background/50 border border-border/50 shadow-sm group-hover:border-primary/50 transition-colors" title="React / Next.js">
+                            <Cpu className="w-5 h-5 text-foreground/80 group-hover:text-primary transition-colors" />
                         </div>
-                        <div className="p-2 rounded-lg bg-white/5 border border-white/5 group-hover:bg-green-500/20 group-hover:border-green-500/30 transition-colors" title="Node.js">
-                            <Server className="w-5 h-5 text-neutral-300 group-hover:text-green-400 transition-colors" />
+                        <div className="p-3 rounded-xl bg-background/50 border border-border/50 shadow-sm group-hover:border-primary/50 transition-colors" title="Node.js">
+                            <Server className="w-5 h-5 text-foreground/80 group-hover:text-primary transition-colors" />
                         </div>
-                        <div className="p-2 rounded-lg bg-white/5 border border-white/5 group-hover:bg-purple-500/20 group-hover:border-purple-500/30 transition-colors" title="Cloud / Database">
-                            <Database className="w-5 h-5 text-neutral-300 group-hover:text-purple-400 transition-colors" />
+                        <div className="p-3 rounded-xl bg-background/50 border border-border/50 shadow-sm group-hover:border-primary/50 transition-colors" title="Cloud / Database">
+                            <Database className="w-5 h-5 text-foreground/80 group-hover:text-primary transition-colors" />
                         </div>
-                        <div className="p-2 rounded-lg bg-white/5 border border-white/5 group-hover:bg-orange-500/20 group-hover:border-orange-500/30 transition-colors" title="Architecture">
-                            <Layers className="w-5 h-5 text-neutral-300 group-hover:text-orange-400 transition-colors" />
+                        <div className="p-3 rounded-xl bg-background/50 border border-border/50 shadow-sm group-hover:border-primary/50 transition-colors" title="Architecture">
+                            <Layers className="w-5 h-5 text-foreground/80 group-hover:text-primary transition-colors" />
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* Glossy Border */}
-            <div className="absolute inset-0 rounded-3xl border border-white/10 pointer-events-none group-hover:border-white/20 transition-colors" />
+            <div className="absolute inset-0 rounded-3xl border border-white/20 pointer-events-none group-hover:border-primary/50 transition-colors" />
         </motion.div>
     )
 }
