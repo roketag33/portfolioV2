@@ -1,32 +1,33 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { MapPin, Calendar, Briefcase, Database, Coffee, ArrowUpRight, CheckCircle2 } from 'lucide-react'
 
-// --- Sub-Components ---
+// --- Design System: Swiss Minimalist ---
+// Principles: Grid based, High Contrast, Typography biased, geometric.
 
 const BentoCard = ({ children, className, delay = 0 }: { children: React.ReactNode, className?: string, delay?: number }) => (
     <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5, delay }}
-        className={`group relative overflow-hidden rounded-3xl bg-secondary/50 backdrop-blur-md border border-foreground/10 hover:border-primary/50 hover:shadow-lg transition-all duration-300 ${className}`}
+        transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }} // Exponential easing for "Swiss" feel
+        className={`group relative overflow-hidden rounded-none bg-neutral-900/80 backdrop-blur-md border border-white/5 hover:border-white/20 transition-colors duration-500 ${className}`}
     >
         {children}
     </motion.div>
 )
 
 const MarqueeRow = ({ items, reverse = false }: { items: string[], reverse?: boolean }) => (
-    <div className="relative flex overflow-hidden mask-linear-fade">
+    <div className="relative flex overflow-hidden mask-linear-fade py-2">
         <motion.div
-            className="flex gap-4 whitespace-nowrap"
+            className="flex gap-8 whitespace-nowrap"
             animate={{ x: reverse ? [-500, 0] : [0, -500] }}
-            transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+            transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
         >
             {[...items, ...items, ...items].map((tech, i) => (
-                <div key={i} className="px-3 py-1.5 rounded-lg bg-background/50 border border-border/50 text-xs font-medium text-foreground/80 hover:bg-primary/10 hover:border-primary/30 transition-colors">
+                <div key={i} className="text-sm font-mono text-neutral-400 uppercase tracking-widest hover:text-white transition-colors">
                     {tech}
                 </div>
             ))}
@@ -35,20 +36,18 @@ const MarqueeRow = ({ items, reverse = false }: { items: string[], reverse?: boo
 )
 
 const StackMarquee = () => {
-    const stackBack = ["Node.js", "PostgreSQL", "Docker", "AWS", "Redis", "GraphQL", "Python"]
-    const stackFront = ["React", "Next.js", "TypeScript", "Tailwind", "React Native", "Framer Motion", "Three.js"]
-    const stackTools = ["Git", "Linux", "Figma", "Kubernetes", "Vercel", "Jest", "CI/CD"]
+    const stackBack = ["Node.js", "Postgres", "Docker", "AWS", "Redis", "GraphQL"]
+    const stackFront = ["React", "Next.js", "TypeScript", "Tailwind", "Three.js"]
+    const stackTools = ["Git", "Linux", "Figma", "K8s", "CI/CD"]
 
     return (
-        <div className="flex flex-col h-full p-6">
-            <div className="flex justify-between items-start mb-6">
-                <div className="p-2 rounded-xl bg-primary/10 text-primary">
-                    <Database className="w-5 h-5" />
-                </div>
-                <span className="text-xs text-muted-foreground font-mono uppercase tracking-widest">Tech Stack</span>
+        <div className="flex flex-col h-full p-8 justify-between">
+            <div className="flex items-center gap-3 mb-6">
+                <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                <span className="text-xs text-neutral-500 font-mono uppercase tracking-[0.2em]">Technology</span>
             </div>
 
-            <div className="flex flex-col justify-center flex-1 gap-4">
+            <div className="flex flex-col justify-center flex-1 gap-6 opacity-80 group-hover:opacity-100 transition-opacity">
                 <MarqueeRow items={stackBack} />
                 <MarqueeRow items={stackFront} reverse />
                 <MarqueeRow items={stackTools} />
@@ -57,80 +56,64 @@ const StackMarquee = () => {
     )
 }
 
-const LocationBlock = () => (
-    <div className="h-full flex flex-col justify-between p-6 relative group">
-        <motion.div
-            className="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale mix-blend-luminosity"
-            animate={{ scale: [1, 1.5] }}
-            transition={{ duration: 15, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+const MinimalMap = () => (
+    <div className="h-full flex flex-col justify-between p-8 relative">
+        {/* Abstract Dot Grid Map */}
+        <div className="absolute inset-0 bg-[radial-gradient(#ffffff1a_1px,transparent_1px)] [background-size:20px_20px] opacity-30 group-hover:opacity-50 transition-opacity duration-700" />
 
         <div className="relative z-10 flex justify-between items-start">
-            <div className="p-2 rounded-xl bg-primary/10 text-primary backdrop-blur-md">
-                <MapPin className="w-5 h-5" />
+            <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center bg-black/50 overflow-hidden">
+                <div className="w-full h-full bg-white/5 rounded-full flex items-center justify-center">
+                    <div className="w-1.5 h-1.5 bg-white rounded-full animate-ping absolute" />
+                    <div className="w-1.5 h-1.5 bg-white rounded-full relative" />
+                </div>
             </div>
-            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-background/50 backdrop-blur-md border border-border/50 text-xs">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+            <div className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest px-2 py-1 border border-white/5 rounded">
                 GMT+1
             </div>
         </div>
 
-        <div className="relative z-10">
-            <h4 className="text-2xl font-bold text-foreground">Bordeaux</h4>
-            <p className="text-muted-foreground text-sm">France</p>
+        <div className="relative z-10 pt-8">
+            <h4 className="text-3xl font-light tracking-tighter text-white">Bordeaux</h4>
+            <div className="w-8 h-[1px] bg-white/20 my-3" />
+            <p className="text-neutral-500 text-xs font-mono uppercase tracking-widest">France</p>
         </div>
     </div>
 )
 
 const StatusBlock = () => (
-    <div className="h-full flex items-center justify-between p-6 bg-gradient-to-br from-primary/5 to-transparent relative overflow-hidden">
-        {/* Shimmer Effect */}
-        <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent skew-x-12"
-            animate={{ x: ['-100%', '200%'] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", repeatDelay: 1 }}
-        />
-
-        <div className="flex items-center gap-4 relative z-10">
-            <div className="relative">
-                <div className="w-3 h-3 rounded-full bg-emerald-500 animate-ping absolute inset-0 opacity-75" />
-                <div className="w-3 h-3 rounded-full bg-emerald-500 relative" />
+    <div className="h-full flex items-center justify-between p-8">
+        <div className="flex items-center gap-6">
+            <div className="relative flex items-center justify-center">
+                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <div className="absolute w-8 h-8 border border-emerald-500/20 rounded-full animate-[spin_4s_linear_infinite]" />
             </div>
             <div>
-                <div className="text-sm font-bold text-emerald-500 uppercase tracking-wider">Available for Hire</div>
-                <div className="text-xs text-muted-foreground">Open to new opportunities</div>
+                <div className="text-sm font-medium text-white tracking-wide">Available for Hire</div>
+                <div className="text-[10px] text-neutral-500 font-mono uppercase tracking-widest mt-1">Open to opportunities</div>
             </div>
         </div>
-        <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors relative z-10" />
+        <ArrowUpRight className="w-5 h-5 text-neutral-600 group-hover:text-white transition-colors duration-500" />
     </div>
 )
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const StatItem = ({ label, value, icon: Icon, isElectric = false }: { label: string, value: string, icon: any, isElectric?: boolean }) => (
-    <div className="h-full flex flex-col justify-between p-5 hover:bg-white/5 transition-colors group cursor-default">
-        <div className="flex justify-between items-start">
-            <div className="p-2 rounded-lg bg-primary/10 text-primary group-hover:scale-110 transition-transform duration-300">
-                <Icon className="w-5 h-5" />
-            </div>
-            {isElectric && (
-                <motion.div
-                    animate={{ opacity: [0, 1, 0, 1, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-                >
-                    <div className="text-yellow-400">⚡</div>
-                </motion.div>
-            )}
-        </div>
-
+const SwissStat = ({ label, value, icon: Icon }: { label: string, value: string, icon: any }) => (
+    <div className="h-full flex flex-col justify-between p-6 hover:bg-white/[0.02] transition-colors cursor-default">
         <div>
-            <div className="flex items-baseline gap-1">
-                <span className={`text-2xl font-bold tracking-tight ${isElectric ? 'text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/50' : 'text-foreground'}`}>
+            <div className="flex items-baseline gap-1 overflow-hidden">
+                <motion.span
+                    initial={{ y: "100%" }}
+                    whileInView={{ y: 0 }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                    className="block text-4xl font-light tracking-tighter text-white"
+                >
                     {value}
-                </span>
+                </motion.span>
             </div>
-            <div className="text-xs text-muted-foreground uppercase tracking-wider font-medium mt-1">{label}</div>
+            <div className="w-4 h-[1px] bg-white/20 my-3 group-hover:w-full transition-all duration-700 delay-100" />
+            <div className="text-[10px] text-neutral-500 font-mono uppercase tracking-widest">{label}</div>
         </div>
+        <Icon className="w-4 h-4 text-neutral-700 group-hover:text-white/50 transition-colors self-end" />
     </div>
 )
 
@@ -138,25 +121,25 @@ const StatItem = ({ label, value, icon: Icon, isElectric = false }: { label: str
 
 export default function BentoGrid() {
     return (
-        <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-4 md:grid-rows-3 gap-4 h-[600px] md:h-[500px]">
+        <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-4 md:grid-rows-3 gap-3 h-[600px] md:h-[500px]">
 
             {/* 1. Large Stack Block (2x2) */}
-            <BentoCard className="col-span-2 row-span-2 md:col-span-2 md:row-span-2 bg-gradient-to-br from-card/30 to-card/10">
+            <BentoCard className="col-span-2 row-span-2 md:col-span-2 md:row-span-2">
                 <StackMarquee />
             </BentoCard>
 
-            {/* 2. Location (1x2) */}
+            {/* 2. Minimal Map (1x2) */}
             <BentoCard className="col-span-1 row-span-2" delay={0.1}>
-                <LocationBlock />
+                <MinimalMap />
             </BentoCard>
 
             {/* 3. Exp & Projects (Split Vertical 1x2) */}
-            <div className="col-span-1 row-span-2 flex flex-col gap-4">
+            <div className="col-span-1 row-span-2 flex flex-col gap-3">
                 <BentoCard className="flex-1" delay={0.2}>
-                    <StatItem label="Years Exp." value="5+" icon={Calendar} isElectric />
+                    <SwissStat label="Years Exp." value="5+" icon={Calendar} />
                 </BentoCard>
                 <BentoCard className="flex-1" delay={0.3}>
-                    <StatItem label="Projects" value="15+" icon={Briefcase} isElectric />
+                    <SwissStat label="Projects" value="15+" icon={Briefcase} />
                 </BentoCard>
             </div>
 
@@ -165,23 +148,29 @@ export default function BentoGrid() {
                 <StatusBlock />
             </BentoCard>
 
-            {/* 5. Coffee & Fun (2x1 Split) */}
+            {/* 5. Minimal Coffee (2x1 Split) */}
             <BentoCard className="col-span-1" delay={0.5}>
-                <StatItem
-                    label="Coffee"
-                    value="∞"
-                    icon={Coffee}
-                />
-            </BentoCard>
-            <BentoCard className="col-span-1 bg-primary/10 border-primary/20" delay={0.6}>
-                <div className="h-full flex flex-col justify-center items-center text-center p-4">
+                <div className="h-full flex flex-col justify-between p-6 relative group hover:bg-white/[0.02] transition-colors">
+                    <Coffee className="w-5 h-5 text-neutral-600 group-hover:text-white transition-colors" />
+                    {/* Steam Animation */}
                     <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    >
-                        <CheckCircle2 className="w-8 h-8 text-primary mb-2" />
-                    </motion.div>
-                    <div className="text-xs font-bold text-primary">Clean Code</div>
+                        className="absolute top-4 left-7 w-px h-3 bg-white/50 blur-[1px]"
+                        animate={{ opacity: [0, 1, 0], y: -5 }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    />
+                    <div>
+                        <div className="text-2xl font-light text-white">∞</div>
+                        <div className="text-[10px] text-neutral-500 font-mono uppercase tracking-widest mt-1">Refills</div>
+                    </div>
+                </div>
+            </BentoCard>
+
+            <BentoCard className="col-span-1" delay={0.6}>
+                <div className="h-full flex flex-col justify-center items-center text-center p-4 group">
+                    <div className="p-3 rounded-full border border-dashed border-white/20 group-hover:border-white/50 group-hover:rotate-90 transition-all duration-700">
+                        <div className="w-2 h-2 bg-white rounded-full" />
+                    </div>
+                    <div className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest mt-4 group-hover:text-white transition-colors">Clean Code</div>
                 </div>
             </BentoCard>
 
