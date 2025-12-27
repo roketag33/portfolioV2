@@ -1,8 +1,7 @@
 'use client'
 
-import React from 'react'
-import { motion, useInView } from 'framer-motion'
-import { MapPin, Calendar, Briefcase, Database, Coffee, ArrowUpRight, CheckCircle2 } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { Calendar, Briefcase, Coffee, ArrowUpRight } from 'lucide-react'
 
 // --- Design System: Swiss Minimalist ---
 // Principles: Grid based, High Contrast, Typography biased, geometric.
@@ -13,7 +12,7 @@ const BentoCard = ({ children, className, delay = 0 }: { children: React.ReactNo
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }} // Exponential easing for "Swiss" feel
-        className={`group relative overflow-hidden rounded-none bg-neutral-900/80 backdrop-blur-md border border-white/5 hover:border-white/20 transition-colors duration-500 ${className}`}
+        className={`group relative overflow-hidden rounded-none bg-black border border-white/10 hover:border-white/20 transition-colors duration-500 ${className}`}
     >
         {children}
     </motion.div>
@@ -27,7 +26,7 @@ const MarqueeRow = ({ items, reverse = false }: { items: string[], reverse?: boo
             transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
         >
             {[...items, ...items, ...items].map((tech, i) => (
-                <div key={i} className="text-sm font-mono text-neutral-400 uppercase tracking-widest hover:text-white transition-colors">
+                <div key={i} className="text-sm font-mono text-neutral-300 uppercase tracking-widest hover:text-white transition-colors">
                     {tech}
                 </div>
             ))}
@@ -44,7 +43,7 @@ const StackMarquee = () => {
         <div className="flex flex-col h-full p-8 justify-between">
             <div className="flex items-center gap-3 mb-6">
                 <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                <span className="text-xs text-neutral-500 font-mono uppercase tracking-[0.2em]">Technology</span>
+                <span className="text-xs text-neutral-400 font-mono uppercase tracking-[0.2em]">Technology</span>
             </div>
 
             <div className="flex flex-col justify-center flex-1 gap-6 opacity-80 group-hover:opacity-100 transition-opacity">
@@ -76,7 +75,7 @@ const MinimalMap = () => (
         <div className="relative z-10 pt-8">
             <h4 className="text-3xl font-light tracking-tighter text-white">Bordeaux</h4>
             <div className="w-8 h-[1px] bg-white/20 my-3" />
-            <p className="text-neutral-500 text-xs font-mono uppercase tracking-widest">France</p>
+            <p className="text-neutral-400 text-xs font-mono uppercase tracking-widest">France</p>
         </div>
     </div>
 )
@@ -90,7 +89,7 @@ const StatusBlock = () => (
             </div>
             <div>
                 <div className="text-sm font-medium text-white tracking-wide">Available for Hire</div>
-                <div className="text-[10px] text-neutral-500 font-mono uppercase tracking-widest mt-1">Open to opportunities</div>
+                <div className="text-[10px] text-neutral-400 font-mono uppercase tracking-widest mt-1">Open to opportunities</div>
             </div>
         </div>
         <ArrowUpRight className="w-5 h-5 text-neutral-600 group-hover:text-white transition-colors duration-500" />
@@ -111,7 +110,7 @@ const SwissStat = ({ label, value, icon: Icon }: { label: string, value: string,
                 </motion.span>
             </div>
             <div className="w-4 h-[1px] bg-white/20 my-3 group-hover:w-full transition-all duration-700 delay-100" />
-            <div className="text-[10px] text-neutral-500 font-mono uppercase tracking-widest">{label}</div>
+            <div className="text-[10px] text-neutral-400 font-mono uppercase tracking-widest">{label}</div>
         </div>
         <Icon className="w-4 h-4 text-neutral-700 group-hover:text-white/50 transition-colors self-end" />
     </div>
