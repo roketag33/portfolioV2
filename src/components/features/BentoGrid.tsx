@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { Calendar, Briefcase, Coffee, ArrowUpRight } from 'lucide-react'
 
 // --- Design System: Swiss Minimalist ---
@@ -81,19 +82,19 @@ const MinimalMap = () => (
 )
 
 const StatusBlock = () => (
-    <div className="h-full flex items-center justify-between p-8">
+    <Link href="/contact" className="h-full flex items-center justify-between p-8 group cursor-pointer">
         <div className="flex items-center gap-6">
             <div className="relative flex items-center justify-center">
                 <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <div className="absolute w-8 h-8 border border-emerald-500/20 rounded-full animate-[spin_4s_linear_infinite]" />
             </div>
             <div>
-                <div className="text-sm font-medium text-white tracking-wide">Available for Hire</div>
+                <div className="text-sm font-medium text-white tracking-wide group-hover:text-emerald-400 transition-colors">Available for Hire</div>
                 <div className="text-[10px] text-neutral-400 font-mono uppercase tracking-widest mt-1">Open to opportunities</div>
             </div>
         </div>
-        <ArrowUpRight className="w-5 h-5 text-neutral-600 group-hover:text-white transition-colors duration-500" />
-    </div>
+        <ArrowUpRight className="w-5 h-5 text-neutral-600 group-hover:text-emerald-400 transition-colors duration-500 transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+    </Link>
 )
 
 const SwissStat = ({ label, value, icon: Icon }: { label: string, value: string, icon: any }) => (
@@ -165,11 +166,36 @@ export default function BentoGrid() {
             </BentoCard>
 
             <BentoCard className="col-span-1" delay={0.6}>
-                <div className="h-full flex flex-col justify-center items-center text-center p-4 group">
-                    <div className="p-3 rounded-full border border-dashed border-white/20 group-hover:border-white/50 group-hover:rotate-90 transition-all duration-700">
-                        <div className="w-2 h-2 bg-white rounded-full" />
+                <div className="h-full flex flex-col justify-center items-center text-center p-4 group hover:bg-white/[0.02] transition-colors cursor-default">
+                    <div className="relative w-8 h-8 mb-4">
+                        {/* Abstract Code Lines - Self Correcting */}
+                        <motion.div
+                            className="absolute inset-0 flex flex-col justify-center gap-1.5"
+                        >
+                            <motion.div
+                                className="h-0.5 bg-neutral-600 rounded-full"
+                                animate={{ width: ["60%", "100%", "100%"], backgroundColor: ["#525252", "#ffffff", "#525252"] }}
+                                transition={{ duration: 4, repeat: Infinity, repeatDelay: 1 }}
+                            />
+                            <motion.div
+                                className="h-0.5 bg-neutral-600 rounded-full"
+                                animate={{ width: ["40%", "70%", "70%"], backgroundColor: ["#525252", "#ffffff", "#525252"] }}
+                                transition={{ duration: 4, repeat: Infinity, delay: 0.2, repeatDelay: 1 }}
+                            />
+                            <motion.div
+                                className="h-0.5 bg-neutral-600 rounded-full"
+                                animate={{ width: ["80%", "40%", "40%"], backgroundColor: ["#525252", "#ffffff", "#525252"] }}
+                                transition={{ duration: 4, repeat: Infinity, delay: 0.4, repeatDelay: 1 }}
+                            />
+                        </motion.div>
+                        {/* Scan Line */}
+                        <motion.div
+                            className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-white/10 to-transparent"
+                            animate={{ y: [-10, 32] }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                        />
                     </div>
-                    <div className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest mt-4 group-hover:text-white transition-colors">Clean Code</div>
+                    <div className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest group-hover:text-white transition-colors">Clean Code</div>
                 </div>
             </BentoCard>
 
