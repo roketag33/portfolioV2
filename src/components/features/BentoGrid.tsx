@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
+import { motion, useSpring, useMotionValue, useTransform, useMotionValueEvent } from 'framer-motion'
 import { MapPin, Calendar, Briefcase, Database, Coffee, ArrowUpRight, CheckCircle2 } from 'lucide-react'
 import { useGamification } from '@/context/GamificationContext'
 
@@ -61,9 +61,9 @@ const StackMarquee = () => {
 const LocationBlock = () => (
     <div className="h-full flex flex-col justify-between p-6 relative group">
         <motion.div
-            className="absolute inset-0 opacity-20 bg-[url('https://api.mapbox.com/styles/v1/mapbox/dark-v11/static/2.4438,44.8378,13,0/600x600?access_token=pk.eyJ1Ijoicm9rZXRhZyIsImEiOiJjbHZzeXJ6ODQwMG5zMmptd3B6dG56dG56In0.abcdef')] bg-cover bg-center"
-            animate={{ scale: [1, 1.2], rotate: [0, 5] }}
-            transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
+            className="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale mix-blend-luminosity"
+            animate={{ scale: [1, 1.15], rotate: [0, 2] }}
+            transition={{ duration: 25, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
 
@@ -107,15 +107,45 @@ const StatusBlock = () => (
     </div>
 )
 
+const Counter = ({ value }: { value: string }) => {
+    const numericValue = parseInt(value.replace(/\D/g, '')) || 0
+    const suffix = value.replace(/[0-9]/g, '')
+    const motionValue = useMotionValue(0)
+    const springValue = useSpring(motionValue, { stiffness: 40, damping: 20, duration: 2 })
+    const rounded = useTransform(springValue, (latest) => Math.round(latest))
+
+    React.useEffect(() => {
+        motionValue.set(numericValue)
+    }, [motionValue, numericValue])
+
+    const ref = React.useRef<HTMLSpanElement>(null)
+
+    // Sync motion value to text content for hydration safety
+    useMotionValueEvent(rounded, "change", (latest) => {
+        if (ref.current) {
+            ref.current.textContent = latest.toString() + suffix
+        }
+    })
+
+    return <span ref={ref}>{value}</span>
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const StatItem = ({ label, value, icon: Icon, onClick }: { label: string, value: string, icon: any, onClick?: () => void }) => (
     <div
         onClick={onClick}
         className={`h-full flex flex-col justify-between p-5 hover:bg-white/5 transition-colors cursor-pointer ${onClick ? 'active:scale-95 transition-transform' : ''}`}
     >
-        <Icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+        <motion.div
+            whileHover={{ rotate: [0, -10, 10, 0] }}
+            transition={{ duration: 0.5 }}
+        >
+            <Icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+        </motion.div>
         <div>
-            <div className="text-2xl font-bold text-foreground">{value}</div>
+            <div className="text-2xl font-bold text-foreground">
+                <Counter value={value} />
+            </div>
             <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">{label}</div>
         </div>
     </div>
@@ -167,7 +197,7 @@ export default function BentoGrid() {
             <BentoCard className="col-span-1" delay={0.5}>
                 <StatItem
                     label="Coffee"
-                    value={coffeeCount > 0 ? "∞" : "∞"}
+                    value={coffeeCount.toString()}
                     icon={Coffee}
                     onClick={handleCoffeeClick}
                 />
