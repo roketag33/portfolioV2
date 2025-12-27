@@ -2,9 +2,8 @@
 import { motion } from 'framer-motion'
 import { useGamification } from '@/context/GamificationContext'
 import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
-import { ArrowRight, Code, Trophy, Coffee, Calendar } from 'lucide-react'
+import { Trophy, Code, Coffee, Calendar } from 'lucide-react'
+import CreativeShapes from '@/components/features/CreativeShapes'
 
 const STATS = [
     { label: "Years Exp.", value: "5+", icon: Calendar },
@@ -47,7 +46,7 @@ export default function About() {
 
                         <div className="space-y-4 text-muted-foreground text-lg leading-relaxed">
                             <p>
-                                I'm a creative developer who bridges the gap between design and engineering.
+                                I&apos;m a creative developer who bridges the gap between design and engineering.
                                 My mission is to build digital experiences that are not just functional,
                                 but memorable and engaging.
                             </p>
@@ -79,36 +78,10 @@ export default function About() {
                     </div>
 
                     {/* Image/Visual - Placeholder for now using colors */}
-                    <div className="relative font-mono">
-                        <motion.div
-                            initial={{ opacity: 0, x: 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="relative z-10 aspect-square rounded-3xl overflow-hidden bg-gradient-to-tr from-primary to-background p-[1px]"
-                        >
-                            <div className="w-full h-full bg-background/90 backdrop-blur-sm rounded-3xl flex items-center justify-center p-8">
-                                <div className="space-y-4 w-full text-sm">
-                                    <div className="flex justify-between">
-                                        <span className="text-muted-foreground">01</span>
-                                        <span className="text-primary">Creative.ts</span>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span className="text-muted-foreground">02</span>
-                                        <span className="text-primary">Problem_Solver.tsx</span>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span className="text-muted-foreground">03</span>
-                                        <span className="text-primary">Pixel_Perfect.css</span>
-                                    </div>
-                                    <div className="h-px bg-border my-4" />
-                                    <div className="font-bold text-center text-primary/80 animate-pulse">
-                                        &lt;AvailableForHire /&gt;
-                                    </div>
-                                </div>
-                            </div>
-                        </motion.div>
-                        {/* Decorative blob behind */}
-                        <div className="absolute -inset-4 bg-primary/20 rounded-3xl blur-2xl -z-10" />
+                    {/* Image/Visual - 3D Abstract Art */}
+                    <div className="relative h-[500px] w-full rounded-3xl overflow-hidden bg-gradient-to-tr from-secondary/10 to-background border border-white/5">
+                        <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:32px_32px]" />
+                        <CreativeShapes />
                     </div>
                 </div>
             </div>
