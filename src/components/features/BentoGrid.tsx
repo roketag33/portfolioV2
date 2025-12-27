@@ -19,30 +19,40 @@ const BentoCard = ({ children, className, delay = 0 }: { children: React.ReactNo
     </motion.div>
 )
 
+const MarqueeRow = ({ items, reverse = false }: { items: string[], reverse?: boolean }) => (
+    <div className="relative flex overflow-hidden mask-linear-fade">
+        <motion.div
+            className="flex gap-4 whitespace-nowrap"
+            animate={{ x: reverse ? [-500, 0] : [0, -500] }}
+            transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+        >
+            {[...items, ...items, ...items].map((tech, i) => (
+                <div key={i} className="px-3 py-1.5 rounded-lg bg-background/50 border border-border/50 text-xs font-medium text-foreground/80 hover:bg-primary/10 hover:border-primary/30 transition-colors">
+                    {tech}
+                </div>
+            ))}
+        </motion.div>
+    </div>
+)
+
 const StackMarquee = () => {
-    const stack = ["React", "Next.js", "Node.js", "TypeScript", "Tailwind", "PostgreSQL", "Docker", "AWS", "Three.js", "GraphQL"]
+    const stackBack = ["Node.js", "PostgreSQL", "Docker", "AWS", "Redis", "GraphQL", "Python"]
+    const stackFront = ["React", "Next.js", "TypeScript", "Tailwind", "React Native", "Framer Motion", "Three.js"]
+    const stackTools = ["Git", "Linux", "Figma", "Kubernetes", "Vercel", "Jest", "CI/CD"]
 
     return (
-        <div className="flex flex-col h-full justify-between p-6">
-            <div className="flex justify-between items-start mb-4">
+        <div className="flex flex-col h-full p-6">
+            <div className="flex justify-between items-start mb-6">
                 <div className="p-2 rounded-xl bg-primary/10 text-primary">
                     <Database className="w-5 h-5" />
                 </div>
-                <span className="text-xs text-muted-foreground font-mono uppercase tracking-widest">Stack</span>
+                <span className="text-xs text-muted-foreground font-mono uppercase tracking-widest">Tech Stack</span>
             </div>
 
-            <div className="relative flex overflow-hidden mask-linear-fade">
-                <motion.div
-                    className="flex gap-4 whitespace-nowrap"
-                    animate={{ x: [0, -500] }}
-                    transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-                >
-                    {[...stack, ...stack, ...stack].map((tech, i) => (
-                        <div key={i} className="px-4 py-2 rounded-lg bg-background/50 border border-border/50 text-sm font-medium text-foreground/80">
-                            {tech}
-                        </div>
-                    ))}
-                </motion.div>
+            <div className="flex flex-col justify-center flex-1 gap-4">
+                <MarqueeRow items={stackBack} />
+                <MarqueeRow items={stackFront} reverse />
+                <MarqueeRow items={stackTools} />
             </div>
         </div>
     )
