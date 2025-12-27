@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { useGamification } from '@/context/GamificationContext'
 import { useState } from 'react'
 import { Trophy, Code, Coffee, Calendar } from 'lucide-react'
-import SystemMonitor from '@/components/features/SystemMonitor'
+import TechProfileCard from '@/components/features/TechProfileCard'
 
 const STATS = [
     { label: "Years Exp.", value: "5+", icon: Calendar },
@@ -78,9 +78,9 @@ export default function About() {
                     </div>
 
                     {/* Image/Visual - Placeholder for now using colors */}
-                    {/* Image/Visual - System Monitor (2D) */}
-                    <div className="w-full">
-                        <SystemMonitor />
+                    {/* Image/Visual - Tech Profile Card */}
+                    <div className="w-full flex justify-center">
+                        <TechProfileCard />
                     </div>
                 </div>
             </div>
