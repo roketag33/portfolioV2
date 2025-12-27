@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { useGamification } from '@/context/GamificationContext'
 import { useState } from 'react'
 import { Trophy, Code, Coffee, Calendar } from 'lucide-react'
-import SystemBlueprint from '@/components/features/SystemBlueprint'
+import SystemMonitor from '@/components/features/SystemMonitor'
 
 const STATS = [
     { label: "Years Exp.", value: "5+", icon: Calendar },
@@ -78,9 +78,9 @@ export default function About() {
                     </div>
 
                     {/* Image/Visual - Placeholder for now using colors */}
-                    {/* Image/Visual - System Blueprint */}
-                    <div className="relative h-[500px] w-full rounded-3xl overflow-hidden bg-black/40 border border-white/5 backdrop-blur-sm">
-                        <SystemBlueprint />
+                    {/* Image/Visual - System Monitor (2D) */}
+                    <div className="w-full">
+                        <SystemMonitor />
                     </div>
                 </div>
             </div>

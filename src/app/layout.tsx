@@ -22,19 +22,19 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Alexandre Sarrazin | Creative Developer",
+    default: "Alexandre Sarrazin | Software Engineer & Architect",
     template: "%s | Alexandre Sarrazin"
   },
-  description: "Creative Fullstack Developer specializing in Next.js, WebGL, 3D interactions, and modern UI design. Based in Bordeaux.",
-  keywords: ["Creative Developer", "Next.js", "React", "WebGL", "Three.js", "GSAP", "Frontend", "Fullstack", "Bordeaux"],
+  description: "Senior Software Engineer & Architect specializing in Cloud, IoT, Mobile, and Fullstack systems. Building scalable solutions from hardware to cloud.",
+  keywords: ["Software Engineer", "Solutions Architect", "Fullstack", "IoT", "Cloud Computing", "DevOps", "Mobile Development", "React", "Node.js"],
   authors: [{ name: "Alexandre Sarrazin", url: "https://roketag.com" }],
   creator: "Alexandre Sarrazin",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://roketag.com",
-    title: "Alexandre Sarrazin | Creative Developer",
-    description: "Creative Fullstack Developer specializing in Next.js, WebGL, and modern UI design.",
+    title: "Alexandre Sarrazin | Software Engineer & Architect",
+    description: "Senior Software Engineer & Architect specializing in Cloud, IoT, Mobile, and Fullstack systems.",
     siteName: "Alexandre Sarrazin Portfolio",
     images: [
       {
@@ -47,8 +47,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Alexandre Sarrazin | Creative Developer",
-    description: "Creative Fullstack Developer specializing in Next.js, WebGL, and modern UI design.",
+    title: "Alexandre Sarrazin | Software Engineer & Architect",
+    description: "Senior Software Engineer & Architect specializing in Cloud, IoT, Mobile, and Fullstack systems.",
     // images: ["/twitter-image.jpg"],
     creator: "@roketag", // Placeholder
   },
