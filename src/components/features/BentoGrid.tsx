@@ -1,9 +1,8 @@
 'use client'
 
 import React from 'react'
-import { motion, useSpring, useMotionValue, useTransform, useMotionValueEvent } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { MapPin, Calendar, Briefcase, Database, Coffee, ArrowUpRight, CheckCircle2 } from 'lucide-react'
-import { useGamification } from '@/context/GamificationContext'
 
 // --- Sub-Components ---
 
@@ -62,8 +61,8 @@ const LocationBlock = () => (
     <div className="h-full flex flex-col justify-between p-6 relative group">
         <motion.div
             className="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale mix-blend-luminosity"
-            animate={{ scale: [1, 1.15], rotate: [0, 2] }}
-            transition={{ duration: 25, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
+            animate={{ scale: [1, 1.5] }}
+            transition={{ duration: 15, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
 
@@ -107,46 +106,30 @@ const StatusBlock = () => (
     </div>
 )
 
-const Counter = ({ value }: { value: string }) => {
-    const numericValue = parseInt(value.replace(/\D/g, '')) || 0
-    const suffix = value.replace(/[0-9]/g, '')
-    const motionValue = useMotionValue(0)
-    const springValue = useSpring(motionValue, { stiffness: 40, damping: 20, duration: 2 })
-    const rounded = useTransform(springValue, (latest) => Math.round(latest))
-
-    React.useEffect(() => {
-        motionValue.set(numericValue)
-    }, [motionValue, numericValue])
-
-    const ref = React.useRef<HTMLSpanElement>(null)
-
-    // Sync motion value to text content for hydration safety
-    useMotionValueEvent(rounded, "change", (latest) => {
-        if (ref.current) {
-            ref.current.textContent = latest.toString() + suffix
-        }
-    })
-
-    return <span ref={ref}>{value}</span>
-}
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const StatItem = ({ label, value, icon: Icon, onClick }: { label: string, value: string, icon: any, onClick?: () => void }) => (
-    <div
-        onClick={onClick}
-        className={`h-full flex flex-col justify-between p-5 hover:bg-white/5 transition-colors cursor-pointer ${onClick ? 'active:scale-95 transition-transform' : ''}`}
-    >
-        <motion.div
-            whileHover={{ rotate: [0, -10, 10, 0] }}
-            transition={{ duration: 0.5 }}
-        >
-            <Icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-        </motion.div>
-        <div>
-            <div className="text-2xl font-bold text-foreground">
-                <Counter value={value} />
+const StatItem = ({ label, value, icon: Icon, isElectric = false }: { label: string, value: string, icon: any, isElectric?: boolean }) => (
+    <div className="h-full flex flex-col justify-between p-5 hover:bg-white/5 transition-colors group cursor-default">
+        <div className="flex justify-between items-start">
+            <div className="p-2 rounded-lg bg-primary/10 text-primary group-hover:scale-110 transition-transform duration-300">
+                <Icon className="w-5 h-5" />
             </div>
-            <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">{label}</div>
+            {isElectric && (
+                <motion.div
+                    animate={{ opacity: [0, 1, 0, 1, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                >
+                    <div className="text-yellow-400">⚡</div>
+                </motion.div>
+            )}
+        </div>
+
+        <div>
+            <div className="flex items-baseline gap-1">
+                <span className={`text-2xl font-bold tracking-tight ${isElectric ? 'text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/50' : 'text-foreground'}`}>
+                    {value}
+                </span>
+            </div>
+            <div className="text-xs text-muted-foreground uppercase tracking-wider font-medium mt-1">{label}</div>
         </div>
     </div>
 )
@@ -154,17 +137,6 @@ const StatItem = ({ label, value, icon: Icon, onClick }: { label: string, value:
 // --- Main Grid Component ---
 
 export default function BentoGrid() {
-    const { unlock } = useGamification()
-    const [coffeeCount, setCoffeeCount] = React.useState(0)
-
-    const handleCoffeeClick = () => {
-        setCoffeeCount(prev => {
-            const newCount = prev + 1
-            if (newCount === 5) unlock('COFFEE_ADDICT')
-            return newCount
-        })
-    }
-
     return (
         <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-4 md:grid-rows-3 gap-4 h-[600px] md:h-[500px]">
 
@@ -181,10 +153,10 @@ export default function BentoGrid() {
             {/* 3. Exp & Projects (Split Vertical 1x2) */}
             <div className="col-span-1 row-span-2 flex flex-col gap-4">
                 <BentoCard className="flex-1" delay={0.2}>
-                    <StatItem label="Years Exp." value="5+" icon={Calendar} />
+                    <StatItem label="Years Exp." value="5+" icon={Calendar} isElectric />
                 </BentoCard>
                 <BentoCard className="flex-1" delay={0.3}>
-                    <StatItem label="Projects" value="15+" icon={Briefcase} />
+                    <StatItem label="Projects" value="15+" icon={Briefcase} isElectric />
                 </BentoCard>
             </div>
 
@@ -197,9 +169,8 @@ export default function BentoGrid() {
             <BentoCard className="col-span-1" delay={0.5}>
                 <StatItem
                     label="Coffee"
-                    value={coffeeCount.toString()}
+                    value="∞"
                     icon={Coffee}
-                    onClick={handleCoffeeClick}
                 />
             </BentoCard>
             <BentoCard className="col-span-1 bg-primary/10 border-primary/20" delay={0.6}>
