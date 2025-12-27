@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { useGamification } from '@/context/GamificationContext'
 import { useState } from 'react'
 import { Trophy, Code, Coffee, Calendar } from 'lucide-react'
-import CreativeShapes from '@/components/features/CreativeShapes'
+import SystemBlueprint from '@/components/features/SystemBlueprint'
 
 const STATS = [
     { label: "Years Exp.", value: "5+", icon: Calendar },
@@ -46,14 +46,14 @@ export default function About() {
 
                         <div className="space-y-4 text-muted-foreground text-lg leading-relaxed">
                             <p>
-                                I&apos;m a creative developer who bridges the gap between design and engineering.
-                                My mission is to build digital experiences that are not just functional,
-                                but memorable and engaging.
+                                I&apos;m a software engineer passionate about building robust, scalable systems.
+                                My mission is to solve complex problems by bridging the gap between
+                                hardware and the cloud.
                             </p>
                             <p>
-                                With a background in both UI design and full-stack development,
-                                I bring a holistic perspective to every project. I obsess over details,
-                                interaction design, and performance.
+                                From low-level IoT firmware to distributed microservices and mobile apps,
+                                I design end-to-end architectures. I obsesse over performance,
+                                security, and clean code.
                             </p>
                         </div>
 
@@ -78,10 +78,9 @@ export default function About() {
                     </div>
 
                     {/* Image/Visual - Placeholder for now using colors */}
-                    {/* Image/Visual - 3D Abstract Art */}
-                    <div className="relative h-[500px] w-full rounded-3xl overflow-hidden bg-gradient-to-tr from-secondary/10 to-background border border-white/5">
-                        <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:32px_32px]" />
-                        <CreativeShapes />
+                    {/* Image/Visual - System Blueprint */}
+                    <div className="relative h-[500px] w-full rounded-3xl overflow-hidden bg-black/40 border border-white/5 backdrop-blur-sm">
+                        <SystemBlueprint />
                     </div>
                 </div>
             </div>

@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import MagneticButton from '@/components/ui/magnetic-button'
 
-const title = "CREATIVE\nDEVELOPER"
+const title = "SOFTWARE\nENGINEER"
 
 import { useGamification } from '@/context/GamificationContext'
 
