@@ -60,7 +60,11 @@ const StackMarquee = () => {
 
 const LocationBlock = () => (
     <div className="h-full flex flex-col justify-between p-6 relative group">
-        <div className="absolute inset-0 opacity-20 bg-[url('https://api.mapbox.com/styles/v1/mapbox/dark-v11/static/2.4438,44.8378,13,0/600x600?access_token=pk.eyJ1Ijoicm9rZXRhZyIsImEiOiJjbHZzeXJ6ODQwMG5zMmptd3B6dG56dG56In0.abcdef')] bg-cover bg-center transition-opacity group-hover:opacity-40" />
+        <motion.div
+            className="absolute inset-0 opacity-20 bg-[url('https://api.mapbox.com/styles/v1/mapbox/dark-v11/static/2.4438,44.8378,13,0/600x600?access_token=pk.eyJ1Ijoicm9rZXRhZyIsImEiOiJjbHZzeXJ6ODQwMG5zMmptd3B6dG56dG56In0.abcdef')] bg-cover bg-center"
+            animate={{ scale: [1, 1.2], rotate: [0, 5] }}
+            transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
 
         <div className="relative z-10 flex justify-between items-start">
@@ -81,8 +85,15 @@ const LocationBlock = () => (
 )
 
 const StatusBlock = () => (
-    <div className="h-full flex items-center justify-between p-6 bg-gradient-to-br from-primary/5 to-transparent">
-        <div className="flex items-center gap-4">
+    <div className="h-full flex items-center justify-between p-6 bg-gradient-to-br from-primary/5 to-transparent relative overflow-hidden">
+        {/* Shimmer Effect */}
+        <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent skew-x-12"
+            animate={{ x: ['-100%', '200%'] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", repeatDelay: 1 }}
+        />
+
+        <div className="flex items-center gap-4 relative z-10">
             <div className="relative">
                 <div className="w-3 h-3 rounded-full bg-emerald-500 animate-ping absolute inset-0 opacity-75" />
                 <div className="w-3 h-3 rounded-full bg-emerald-500 relative" />
@@ -92,7 +103,7 @@ const StatusBlock = () => (
                 <div className="text-xs text-muted-foreground">Open to new opportunities</div>
             </div>
         </div>
-        <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+        <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors relative z-10" />
     </div>
 )
 
@@ -163,7 +174,12 @@ export default function BentoGrid() {
             </BentoCard>
             <BentoCard className="col-span-1 bg-primary/10 border-primary/20" delay={0.6}>
                 <div className="h-full flex flex-col justify-center items-center text-center p-4">
-                    <CheckCircle2 className="w-8 h-8 text-primary mb-2" />
+                    <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    >
+                        <CheckCircle2 className="w-8 h-8 text-primary mb-2" />
+                    </motion.div>
                     <div className="text-xs font-bold text-primary">Clean Code</div>
                 </div>
             </BentoCard>
