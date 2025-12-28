@@ -281,5 +281,23 @@ export const ACHIEVEMENTS: Record<string, Achievement> = {
         icon: '🕵️‍♀️',
         secret: true,
         unlockHint: 'Sélectionnez (surlignez) le texte flouté sur une carte de succès cachée.'
+    },
+    DEBUG_MASTER: {
+        id: 'DEBUG_MASTER',
+        title: 'Debug Master',
+        description: 'Vous avez activé le mode de débogage visuel. La matrice est à nu.',
+        xp: 50,
+        icon: '🐛',
+        secret: true,
+        unlockHint: 'Cliquez 5 fois sur le bloc "Clean Code" dans la grille Bento.'
+    },
+    ARCHITECT_VISION: {
+        id: 'ARCHITECT_VISION',
+        title: 'Vision d\'Architecte',
+        description: 'Vous avez révélé la structure cachée du site.',
+        xp: 100,
+        icon: '📐',
+        secret: true,
+        unlockHint: 'Trouvez et cliquez sur le mot "Architect" dans la description.'
     }
 }

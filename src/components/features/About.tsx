@@ -1,9 +1,14 @@
 'use client'
 import { motion } from 'framer-motion'
 import BentoGrid from '@/components/features/BentoGrid'
+import { useGamification } from '@/context/GamificationContext'
+import { useVisualEffects } from '@/context/VisualEffectsContext'
 
 
 export default function About() {
+    const { unlock } = useGamification()
+    const { toggleXRay } = useVisualEffects()
+
     return (
         <section className="py-20 md:py-32 relative overflow-hidden">
             {/* Background elements */}
@@ -30,7 +35,7 @@ export default function About() {
                             </p>
                             <p>
                                 From low-level IoT firmware to distributed microservices and mobile apps,
-                                I design end-to-end architectures. I obsesse over performance,
+                                I work as a Software <span onClick={() => { unlock('ARCHITECT_VISION'); toggleXRay() }} className="font-bold text-white cursor-help hover:text-blue-500 transition-colors">Architect</span> designing end-to-end systems. I obsesse over performance,
                                 security, and clean code.
                             </p>
                             <p className="text-foreground font-medium">

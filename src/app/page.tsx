@@ -4,6 +4,7 @@ import About from '@/components/features/About'
 import WorkList from '@/components/features/WorkList'
 import { useEffect } from 'react'
 import { useGamification } from '@/context/GamificationContext'
+import { VisualEffectsProvider } from '@/context/VisualEffectsContext'
 
 export default function Home() {
   const { unlock } = useGamification()
@@ -25,9 +26,11 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <Hero />
-      <About />
-      <WorkList limit={3} showHeader={false} />
+      <VisualEffectsProvider>
+        <Hero />
+        <About />
+        <WorkList limit={3} showHeader={false} />
+      </VisualEffectsProvider>
     </main>
   )
 }

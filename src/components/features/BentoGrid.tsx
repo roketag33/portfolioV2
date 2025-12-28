@@ -3,6 +3,9 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Calendar, Briefcase, Coffee, ArrowUpRight } from 'lucide-react'
+import { useState } from 'react'
+import { useGamification } from '@/context/GamificationContext'
+import { useVisualEffects } from '@/context/VisualEffectsContext'
 
 // --- Design System: Swiss Minimalist ---
 // Principles: Grid based, High Contrast, Typography biased, geometric.
@@ -97,7 +100,7 @@ const StatusBlock = () => (
     </Link>
 )
 
-const SwissStat = ({ label, value, icon: Icon }: { label: string, value: string, icon: any }) => (
+const SwissStat = ({ label, value, icon: Icon }: { label: string, value: string, icon: React.ElementType }) => (
     <div className="h-full flex flex-col justify-between p-6 hover:bg-white/[0.02] transition-colors cursor-default">
         <div>
             <div className="flex items-baseline gap-1 overflow-hidden">
@@ -116,6 +119,59 @@ const SwissStat = ({ label, value, icon: Icon }: { label: string, value: string,
         <Icon className="w-4 h-4 text-neutral-700 group-hover:text-white/50 transition-colors self-end" />
     </div>
 )
+
+const CleanCodeBlock = () => {
+    const { unlock } = useGamification()
+    const { toggleDebug } = useVisualEffects()
+    const [clicks, setClicks] = useState(0)
+
+    const handleClick = () => {
+        const newClicks = clicks + 1
+        setClicks(newClicks)
+        if (newClicks === 5) {
+            unlock('DEBUG_MASTER')
+            toggleDebug()
+            setClicks(0)
+        }
+    }
+
+    return (
+        <div
+            onClick={handleClick}
+            className="h-full flex flex-col justify-center items-center text-center p-4 group hover:bg-white/[0.02] transition-colors cursor-pointer select-none"
+        >
+            <div className="relative w-8 h-8 mb-4">
+                {/* Abstract Code Lines - Self Correcting */}
+                <motion.div
+                    className="absolute inset-0 flex flex-col justify-center gap-1.5"
+                >
+                    <motion.div
+                        className="h-0.5 bg-neutral-600 rounded-full"
+                        animate={{ width: ["60%", "100%", "100%"], backgroundColor: ["#525252", "#ffffff", "#525252"] }}
+                        transition={{ duration: 4, repeat: Infinity, repeatDelay: 1 }}
+                    />
+                    <motion.div
+                        className="h-0.5 bg-neutral-600 rounded-full"
+                        animate={{ width: ["40%", "70%", "70%"], backgroundColor: ["#525252", "#ffffff", "#525252"] }}
+                        transition={{ duration: 4, repeat: Infinity, delay: 0.2, repeatDelay: 1 }}
+                    />
+                    <motion.div
+                        className="h-0.5 bg-neutral-600 rounded-full"
+                        animate={{ width: ["80%", "40%", "40%"], backgroundColor: ["#525252", "#ffffff", "#525252"] }}
+                        transition={{ duration: 4, repeat: Infinity, delay: 0.4, repeatDelay: 1 }}
+                    />
+                </motion.div>
+                {/* Scan Line */}
+                <motion.div
+                    className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-white/10 to-transparent"
+                    animate={{ y: [-10, 32] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                />
+            </div>
+            <div className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest group-hover:text-white transition-colors">Clean Code</div>
+        </div>
+    )
+}
 
 // --- Main Grid Component ---
 
@@ -166,37 +222,7 @@ export default function BentoGrid() {
             </BentoCard>
 
             <BentoCard className="col-span-1" delay={0.6}>
-                <div className="h-full flex flex-col justify-center items-center text-center p-4 group hover:bg-white/[0.02] transition-colors cursor-default">
-                    <div className="relative w-8 h-8 mb-4">
-                        {/* Abstract Code Lines - Self Correcting */}
-                        <motion.div
-                            className="absolute inset-0 flex flex-col justify-center gap-1.5"
-                        >
-                            <motion.div
-                                className="h-0.5 bg-neutral-600 rounded-full"
-                                animate={{ width: ["60%", "100%", "100%"], backgroundColor: ["#525252", "#ffffff", "#525252"] }}
-                                transition={{ duration: 4, repeat: Infinity, repeatDelay: 1 }}
-                            />
-                            <motion.div
-                                className="h-0.5 bg-neutral-600 rounded-full"
-                                animate={{ width: ["40%", "70%", "70%"], backgroundColor: ["#525252", "#ffffff", "#525252"] }}
-                                transition={{ duration: 4, repeat: Infinity, delay: 0.2, repeatDelay: 1 }}
-                            />
-                            <motion.div
-                                className="h-0.5 bg-neutral-600 rounded-full"
-                                animate={{ width: ["80%", "40%", "40%"], backgroundColor: ["#525252", "#ffffff", "#525252"] }}
-                                transition={{ duration: 4, repeat: Infinity, delay: 0.4, repeatDelay: 1 }}
-                            />
-                        </motion.div>
-                        {/* Scan Line */}
-                        <motion.div
-                            className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-white/10 to-transparent"
-                            animate={{ y: [-10, 32] }}
-                            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                        />
-                    </div>
-                    <div className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest group-hover:text-white transition-colors">Clean Code</div>
-                </div>
+                <CleanCodeBlock />
             </BentoCard>
 
         </div>
