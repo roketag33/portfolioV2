@@ -5,6 +5,8 @@ import { useGamification } from '@/context/GamificationContext'
 import { useVisualEffects } from '@/context/VisualEffectsContext'
 
 
+import TextRevealByWord from '@/components/ui/text-reveal-by-word'
+
 export default function About() {
     const { unlock } = useGamification()
     const { toggleXRay } = useVisualEffects()
@@ -28,11 +30,10 @@ export default function About() {
                         </motion.h2>
 
                         <div className="space-y-6 text-muted-foreground text-lg leading-relaxed">
-                            <p>
-                                I&apos;m a software engineer passionate about building robust, scalable systems.
-                                My mission is to solve complex problems by bridging the gap between
-                                hardware and the cloud.
-                            </p>
+                            <TextRevealByWord
+                                text="I'm a software engineer passionate about building robust, scalable systems. My mission is to solve complex problems by bridging the gap between hardware and the cloud."
+                                className="text-muted-foreground"
+                            />
                             <p>
                                 From low-level IoT firmware to distributed microservices and mobile apps,
                                 I work as a Software <span onClick={() => { unlock('ARCHITECT_VISION'); toggleXRay() }} className="font-bold text-foreground cursor-help hover:text-blue-500 transition-colors">Architect</span> designing end-to-end systems. I obsesse over performance,

@@ -36,10 +36,10 @@ export default function Hero() {
                 </h1>
 
                 <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8, duration: 0.8 }}
-                    className="mt-6 text-lg md:text-xl text-muted-foreground uppercase tracking-widest max-w-lg cursor-pointer"
+                    initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
+                    animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+                    transition={{ delay: 0.8, duration: 1 }}
+                    className="mt-6 text-lg md:text-xl text-muted-foreground uppercase tracking-widest max-w-lg cursor-pointer hover:text-primary transition-colors duration-300"
                     onClick={() => unlock('WHO_AM_I')}
                 >
                     Alexandre Sarrazin
@@ -63,6 +63,21 @@ export default function Hero() {
                     </Link>
                 </motion.div>
             </div>
+
+            {/* Scroll Indicator */}
+            <motion.div
+                className="absolute bottom-10 flex flex-col items-center gap-2 text-muted-foreground"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 2, duration: 1 }}
+            >
+                <span className="text-xs uppercase tracking-widest font-light">Scroll</span>
+                <motion.div
+                    animate={{ y: [0, 5, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    className="w-[1px] h-10 bg-gradient-to-b from-transparent via-primary to-transparent"
+                />
+            </motion.div>
         </section>
     )
 }
