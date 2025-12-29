@@ -85,35 +85,58 @@ function ProjectCard({ project, index, variant = 0 }: { project: Project, index:
             <Link
                 href={project.link || project.github || '#'}
                 target="_blank"
-                className="block group/card relative aspect-[3/4] overflow-hidden bg-neutral-900 transition-all duration-500 group-hover/grid:contrast-50 group-hover/grid:brightness-50 group-hover/grid:hover:contrast-100 group-hover/grid:hover:brightness-100 group-hover/grid:hover:scale-[1.02] group-hover/grid:hover:z-10 shadow-2xl rounded-sm"
+                className="block group/card"
             >
-                <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover/card:scale-110"
-                />
+                {/* Image Container */}
+                <div className="relative aspect-[3/4] overflow-hidden bg-neutral-900 transition-all duration-500 group-hover/grid:contrast-50 group-hover/grid:brightness-50 group-hover/grid:hover:contrast-100 group-hover/grid:hover:brightness-100 group-hover/grid:hover:scale-[1.02] group-hover/grid:hover:z-10 shadow-2xl rounded-sm">
+                    <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover/card:scale-110"
+                    />
 
-                {/* Overlay Info - High Contrast */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                    <div className="transform translate-y-4 group-hover/card:translate-y-0 transition-transform duration-300">
-                        <div className="flex justify-between items-end mb-2">
-                            <h3 className="text-xl font-bold text-white uppercase tracking-tight">{project.title}</h3>
-                            <ArrowUpRight className="text-emerald-400 w-5 h-5 mb-1 opacity-0 group-hover/card:opacity-100 transition-opacity delay-100" />
+                    {/* Desktop Overlay - Hidden on Mobile */}
+                    <div className="hidden md:flex absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex-col justify-end p-6">
+                        <div className="transform translate-y-4 group-hover/card:translate-y-0 transition-transform duration-300">
+                            <div className="flex justify-between items-end mb-2">
+                                <h3 className="text-xl font-bold text-white uppercase tracking-tight">{project.title}</h3>
+                                <ArrowUpRight className="text-emerald-400 w-5 h-5 mb-1 opacity-0 group-hover/card:opacity-100 transition-opacity delay-100" />
+                            </div>
+
+                            <div className="flex flex-wrap gap-2 mb-3">
+                                {project.tags.slice(0, 3).map((tag) => (
+                                    <span key={tag} className="text-[10px] font-mono uppercase tracking-wider text-black bg-white px-2 py-1 rounded font-bold">
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+
+                            <p className="text-xs text-neutral-200 line-clamp-3 leading-relaxed font-medium">
+                                {project.desc}
+                            </p>
                         </div>
-
-                        <div className="flex flex-wrap gap-2 mb-3">
-                            {project.tags.slice(0, 3).map((tag) => (
-                                <span key={tag} className="text-[10px] font-mono uppercase tracking-wider text-black bg-white px-2 py-1 rounded font-bold">
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
-
-                        <p className="text-xs text-neutral-200 line-clamp-3 leading-relaxed font-medium">
-                            {project.desc}
-                        </p>
                     </div>
+                </div>
+
+                {/* Mobile Content - Visible only on Mobile */}
+                <div className="md:hidden flex flex-col pt-4 space-y-3">
+                    <div className="flex justify-between items-center">
+                        <h3 className="text-2xl font-black text-white uppercase tracking-tighter">{project.title}</h3>
+                        <ArrowUpRight className="text-emerald-500 w-5 h-5" />
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                        {project.tags.slice(0, 3).map((tag) => (
+                            <span key={tag} className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 border border-emerald-400/20 bg-emerald-400/10 px-2 py-1 rounded">
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+
+                    <p className="text-sm text-neutral-400 leading-relaxed line-clamp-3">
+                        {project.desc}
+                    </p>
                 </div>
             </Link>
         </motion.div>
