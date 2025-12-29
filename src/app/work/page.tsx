@@ -20,7 +20,7 @@ export default function WorkPage() {
                     </h1>
 
                     <div className="space-y-6">
-                        <p className="text-xl md:text-2xl font-light leading-relaxed text-neutral-200">
+                        <p className="text-xl md:text-2xl font-light leading-relaxed text-neutral-600">
                             A collection of digital architectures and robust systems.
                             Engineered for <span className="text-emerald-500">performance</span>,
                             designed for <span className="text-white">humans</span>.
