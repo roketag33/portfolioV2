@@ -5,6 +5,7 @@ import { TIMELINE_DATA } from '@/data/experience'
 import { Briefcase, Zap, Trophy } from 'lucide-react'
 import { useRef } from 'react'
 import React from 'react'
+import ShimmerText from '@/components/ui/shimmer-text'
 import PassionsSection from '@/components/features/PassionsSection'
 import StackSection from '@/components/features/StackSection'
 
@@ -251,7 +252,8 @@ export default function AboutPage() {
                                 ].map((service, i) => (
                                     <div key={i} className="flex flex-col group">
                                         <h4 className="font-bold text-white flex items-center gap-3 text-lg mb-2 group-hover:text-primary transition-colors">
-                                            <Zap size={18} className="text-yellow-500" /> {service.title}
+                                            <Zap size={18} className="text-yellow-500" />
+                                            <ShimmerText text={service.title} />
                                         </h4>
                                         <p className="text-sm text-neutral-400 pl-8 leading-relaxed">{service.desc}</p>
                                     </div>

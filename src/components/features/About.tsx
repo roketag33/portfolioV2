@@ -35,7 +35,7 @@ export default function About() {
                             </p>
                             <p>
                                 From low-level IoT firmware to distributed microservices and mobile apps,
-                                I work as a Software <span onClick={() => { unlock('ARCHITECT_VISION'); toggleXRay() }} className="font-bold text-white cursor-help hover:text-blue-500 transition-colors">Architect</span> designing end-to-end systems. I obsesse over performance,
+                                I work as a Software <span onClick={() => { unlock('ARCHITECT_VISION'); toggleXRay() }} className="font-bold text-foreground cursor-help hover:text-blue-500 transition-colors">Architect</span> designing end-to-end systems. I obsesse over performance,
                                 security, and clean code.
                             </p>
                             <p className="text-foreground font-medium">

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import MagneticButton from '@/components/ui/magnetic-button'
+import HyperText from '@/components/ui/hyper-text'
 
 const title = "SOFTWARE\nENGINEER"
 
@@ -17,14 +18,18 @@ export default function Hero() {
             <div className="z-10 text-center flex flex-col items-center">
                 <h1 className="text-[12vw] leading-[0.85] font-black tracking-tighter uppercase text-foreground mix-blend-overlay md:mix-blend-normal">
                     {title.split('\n').map((line, i) => (
-                        <div key={i} className="overflow-hidden">
+                        <div key={i} className="overflow-hidden flex justify-center">
                             <motion.div
                                 initial={{ y: "100%" }}
                                 animate={{ y: 0 }}
                                 transition={{ duration: 1.2, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
                                 className="block"
                             >
-                                {line}
+                                <HyperText
+                                    text={line}
+                                    className="text-[12vw] leading-[0.85] font-black tracking-tighter uppercase text-foreground mix-blend-overlay md:mix-blend-normal"
+                                    animateOnLoad={true}
+                                />
                             </motion.div>
                         </div>
                     ))}

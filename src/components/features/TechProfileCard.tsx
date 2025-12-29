@@ -1,6 +1,8 @@
 'use client'
 
 import React, { useRef } from 'react'
+import Link from 'next/link'
+import GlitchText from '@/components/ui/glitch-text'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { MapPin, Briefcase, Layers, Cpu, Globe, Server, Database } from 'lucide-react'
 
@@ -66,27 +68,34 @@ export default function TechProfileCard() {
             {/* Content Container */}
             <div style={{ transform: 'translateZ(20px)' }} className="relative z-20 h-full p-8 flex flex-col justify-between">
 
+
                 {/* Header */}
                 <div className="flex justify-between items-start">
                     <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-2xl font-bold text-primary shadow-sm border border-primary/20">
                         AS
                     </div>
                     <div className="flex flex-col items-end">
-                        <div className="bg-primary/10 border border-primary/20 text-primary px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase flex items-center gap-1.5">
+                        <Link href="/contact" className="bg-primary/10 border border-primary/20 text-primary px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase flex items-center gap-1.5 hover:bg-primary/20 transition-colors cursor-pointer">
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                             </span>
                             Selected for Hire
-                        </div>
+                        </Link>
                     </div>
                 </div>
 
                 {/* Identity Info */}
                 <div className="space-y-4 my-auto">
                     <div>
-                        <h3 className="text-3xl font-black text-foreground tracking-tighter uppercase">Alexandre<br />Sarrazin</h3>
-                        <p className="text-muted-foreground font-medium text-lg">Software Engineer<br />& Architect</p>
+                        <h3 className="text-3xl font-black text-foreground tracking-tighter uppercase">
+                            <GlitchText text="Alexandre" /><br />
+                            <GlitchText text="Sarrazin" />
+                        </h3>
+                        <p className="text-muted-foreground font-medium text-lg">
+                            <GlitchText text="Software Engineer" className="text-muted-foreground" /><br />
+                            & <GlitchText text="Architect" className="text-muted-foreground" />
+                        </p>
                     </div>
 
                     <div className="space-y-2 pt-4 border-t border-border/50">

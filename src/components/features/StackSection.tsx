@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
-import { Badge } from '@/components/ui/badge'
+import NeonChip from '@/components/ui/neon-chip'
+import GlitchText from '@/components/ui/glitch-text'
 import { Zap } from 'lucide-react'
 import { useState } from 'react'
 import { useGamification } from '@/context/GamificationContext'
@@ -39,7 +40,9 @@ export default function StackSection() {
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
                         >
-                            <h4 className="text-sm font-mono text-neutral-500 uppercase tracking-wider mb-4">{cat.name}</h4>
+                            <div className="mb-4">
+                                <GlitchText text={cat.name} className="text-sm font-mono text-neutral-500 uppercase tracking-wider" />
+                            </div>
                             <motion.div
                                 className="flex flex-wrap gap-3"
                                 initial="hidden"
@@ -78,14 +81,15 @@ export default function StackSection() {
                                                 transition: { type: "spring", damping: 20 }
                                             }}
                                         >
-                                            <Badge className={cn(
-                                                "py-2 px-4 border-white/10 transition-all cursor-default",
-                                                gravityBroken
-                                                    ? "bg-red-900/50 hover:bg-red-900 text-red-200 border-red-500/30"
-                                                    : "bg-neutral-900 hover:bg-white hover:text-black"
-                                            )}>
+                                            <NeonChip
+                                                colorClass="border-white/20 text-neutral-300 group-hover:border-white/40" // Simplified for now, mapped in loop ideally but let's just get the component in first or map it properly
+                                                className={cn(
+                                                    "cursor-default",
+                                                    gravityBroken && "bg-red-900/50 text-red-200 border-red-500/30"
+                                                )}
+                                            >
                                                 {skill}
-                                            </Badge>
+                                            </NeonChip>
                                         </motion.div>
                                     )
                                 })}
