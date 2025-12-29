@@ -58,6 +58,15 @@ export default function HoverPreview({ project }: HoverPreviewProps) {
                             )}
                         </div>
 
+                        {/* Static Burst Transition */}
+                        <motion.div
+                            initial={{ opacity: 0.5 }}
+                            animate={{ opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="absolute inset-0 z-30 pointer-events-none mix-blend-overlay"
+                            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
+                        />
+
                         {/* Radial Gradient for focus */}
                         <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-neutral-950/50 z-10" />
                         <div className="absolute inset-0 bg-gradient-to-r from-neutral-950 via-transparent to-neutral-950/50 z-10" />
@@ -78,6 +87,6 @@ export default function HoverPreview({ project }: HoverPreviewProps) {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </div>
+        </div >
     );
 }

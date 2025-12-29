@@ -33,3 +33,4 @@
 
 
 - [ ] [site] reflehcir au nom de domaines que je vais acheter et mettre en place un emails personnalisé avec le nom de domaines pour recevoir les demandes
+- [ ] [site] changer toute les images par des images propres 

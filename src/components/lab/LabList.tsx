@@ -91,11 +91,35 @@ export default function LabList({ projects, setHoveredProject }: LabListProps) {
         }
     }
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.3
+            }
+        }
+    }
+
+    const itemVariants = {
+        hidden: { opacity: 0, x: -20, filter: 'blur(10px)' },
+        visible: {
+            opacity: 1,
+            x: 0,
+            filter: 'blur(0px)',
+            transition: { duration: 0.5, ease: "easeOut" }
+        }
+    }
+
     return (
         <div className="relative z-10 flex flex-col container mx-auto px-6 pt-32 pb-24">
-            <div className="mb-12 relative">
+            <div className="mb-12 relative flex flex-col">
                 <div className="flex items-center justify-between">
                     <motion.span
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
                         onDoubleClick={handleArchiveDbClick}
                         className={cn(
                             "font-mono text-xs uppercase tracking-widest block mb-2 cursor-pointer select-none transition-colors",
@@ -117,24 +141,52 @@ export default function LabList({ projects, setHoveredProject }: LabListProps) {
                     )}
                 </div>
 
-                <h1
-                    onClick={handleTitleClick}
-                    className={cn(
-                        "text-4xl md:text-5xl font-bold text-white tracking-tight cursor-default select-none transition-colors",
-                        titleClicks > 0 && "text-red-500/80 font-mono"
-                    )}
+                {/* Ghost Blur Title Effect */}
+                <motion.div
+                    className="relative inline-block"
                 >
-                    {glitchText}
-                </h1>
+                    <motion.h1
+                        onClick={handleTitleClick}
+                        initial={{ opacity: 0, filter: 'blur(20px)', scale: 1.1 }}
+                        animate={{ opacity: 1, filter: 'blur(0px)', scale: 1 }}
+                        transition={{ duration: 1, ease: "circOut" }}
+                        className={cn(
+                            "text-4xl md:text-5xl font-bold text-white tracking-tight cursor-default select-none transition-colors relative z-10",
+                            titleClicks > 0 && "text-red-500/80 font-mono"
+                        )}
+                    >
+                        {glitchText}
+                    </motion.h1>
+
+                    {/* Ghost Layer */}
+                    <motion.h1
+                        initial={{ opacity: 0, x: 10, filter: 'blur(10px)' }}
+                        animate={{ opacity: [0, 0.4, 0], x: [10, 0, -5], filter: ['blur(10px)', 'blur(2px)', 'blur(10px)'] }}
+                        transition={{ duration: 1.5, ease: "easeInOut", delay: 0.1 }}
+                        className={cn(
+                            "absolute top-0 left-0 text-4xl md:text-5xl font-bold text-indigo-500/50 tracking-tight cursor-default select-none pointer-events-none mix-blend-screen",
+                        )}
+                    >
+                        {glitchText}
+                    </motion.h1>
+                </motion.div>
             </div>
 
-            <div className="flex flex-col">
-                <div className="grid grid-cols-12 gap-4 pb-4 border-b border-white/10 text-xs font-mono text-neutral-500 uppercase tracking-wider mb-2">
+            <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className="flex flex-col"
+            >
+                <motion.div
+                    variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
+                    className="grid grid-cols-12 gap-4 pb-4 border-b border-white/10 text-xs font-mono text-neutral-500 uppercase tracking-wider mb-2"
+                >
                     <div className="col-span-1">Idx</div>
                     <div className="col-span-5 md:col-span-6">Project</div>
                     <div className="col-span-3 md:col-span-2 text-right">Tech</div>
                     <div className="col-span-3 text-right">Year</div>
-                </div>
+                </motion.div>
 
                 {projects.map((project, index) => (
                     <Link
@@ -142,29 +194,17 @@ export default function LabList({ projects, setHoveredProject }: LabListProps) {
                         href={project.link}
                         onMouseEnter={() => handleProjectHover(project)}
                         onMouseLeave={() => setHoveredProject(null)}
-                        className="group relative"
+                        className="group relative block"
                     >
+                        {/* Hover Gradient Scanline */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.03] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none" />
+
                         <motion.div
+                            variants={itemVariants}
                             className={cn(
-                                "grid grid-cols-12 gap-4 py-8 border-b items-center transition-colors",
+                                "grid grid-cols-12 gap-4 py-8 border-b items-center transition-colors relative",
                                 isClassified ? "border-red-500/20 bg-red-950/10" : "border-white/5 group-hover:border-white/20"
                             )}
-                            initial={{
-                                opacity: 0,
-                                x: index % 2 === 0 ? -50 : 50,
-                                filter: 'blur(10px)'
-                            }}
-                            animate={{
-                                opacity: 1,
-                                x: 0,
-                                filter: isClassified ? 'blur(4px)' : 'blur(0px)' // Blur effect when classified
-                            }}
-                            whileHover={isClassified ? { filter: 'blur(0px)' } : undefined}
-                            transition={{
-                                duration: 0.8,
-                                delay: index * 0.15,
-                                ease: [0.22, 1, 0.36, 1]
-                            }}
                         >
                             <div className={cn("col-span-1 font-mono text-sm transition-colors", isClassified ? "text-red-500" : "text-neutral-600 group-hover:text-white")}>
                                 {isClassified ? ((index + 13) * 7919).toString(16).slice(-4).toUpperCase() : String(index + 1).padStart(2, '0')}
@@ -202,7 +242,7 @@ export default function LabList({ projects, setHoveredProject }: LabListProps) {
                         </motion.div>
                     </Link>
                 ))}
-            </div>
+            </motion.div>
         </div >
     );
 }
