@@ -1,12 +1,13 @@
 'use client'
 
+import { useRef, useMemo, useEffect, useState } from 'react'
 import { motion, useScroll, useTransform, MotionValue } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
+import { cn } from '@/lib/utils'
 import { ArrowUpRight } from 'lucide-react'
 import { PROJECTS, Project } from '@/data/projects'
-import { useRef, useMemo } from 'react'
-import { cn } from '@/lib/utils'
+import { useGamification } from '@/context/GamificationContext'
 
 export default function WorkCatalog() {
     const containerRef = useRef<HTMLDivElement>(null)
@@ -14,13 +15,38 @@ export default function WorkCatalog() {
         target: containerRef,
         offset: ["start end", "end start"]
     })
+    const { unlock } = useGamification()
+    const [lastBottomReach, setLastBottomReach] = useState<number>(0)
 
     // Parallax transforms for columns
     const y1 = useTransform(scrollYProgress, [0, 1], [0, 0])
     const y2 = useTransform(scrollYProgress, [0, 1], [0, -100])
     const y3 = useTransform(scrollYProgress, [0, 1], [0, -50])
 
-    // Split projects into 3 columns using useMemo
+    // Visionary Achievement Logic
+    useEffect(() => {
+        const handleScroll = () => {
+            const isBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100
+            const isTop = window.scrollY < 100
+
+            if (isBottom) {
+                setLastBottomReach(Date.now())
+            }
+
+            if (isTop && lastBottomReach > 0) {
+                const timeDiff = Date.now() - lastBottomReach
+                if (timeDiff < 5000) { // < 5 seconds round trip
+                    unlock('THE_VISIONARY')
+                    setLastBottomReach(0) // Reset to prevent double trigger
+                }
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [lastBottomReach, unlock])
+
+    // Distribute projects into 3 columns for desktop
     const columns = useMemo(() => {
         const cols: Project[][] = [[], [], []]
         PROJECTS.forEach((project, i) => {

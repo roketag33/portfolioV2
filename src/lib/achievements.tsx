@@ -299,5 +299,14 @@ export const ACHIEVEMENTS: Record<string, Achievement> = {
         icon: '📐',
         secret: true,
         unlockHint: 'Trouvez et cliquez sur le mot "Architect" dans la description.'
-    }
+    },
+    THE_VISIONARY: {
+        id: 'THE_VISIONARY',
+        title: 'Le Visionnaire',
+        description: 'Vu d\'ensemble. Bas en haut en un éclair.',
+        xp: 100,
+        icon: '⚡',
+        secret: true,
+        unlockHint: 'Scrollez tout en bas puis remontez tout en haut très vite.'
+    },
 }
