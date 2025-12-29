@@ -32,39 +32,55 @@ export default function WorkCatalog() {
     return (
         <div ref={containerRef} className="pb-40">
             {/* Desktop Grid (3 Cols) */}
-            <div className="hidden md:flex gap-8 group/grid px-8 md:px-12 lg:px-20 -mt-20">
-                <Column projects={columns[0]} y={y1} className="mt-0" delay={0} />
-                <Column projects={columns[1]} y={y2} className="-mt-12" delay={0.1} />
-                <Column projects={columns[2]} y={y3} className="mt-12" delay={0.2} />
+            <div className="hidden md:flex gap-8 group/grid px-8 md:px-12 lg:px-20 mt-12">
+                <Column projects={columns[0]} y={y1} className="mt-0" colIndex={0} />
+                <Column projects={columns[1]} y={y2} className="-mt-12" colIndex={1} />
+                <Column projects={columns[2]} y={y3} className="mt-12" colIndex={2} />
             </div>
 
             {/* Mobile/Tablet Grid (1 Col) */}
-            <div className="md:hidden flex flex-col gap-8 px-8">
+            <div className="md:hidden flex flex-col gap-8 px-8 mt-12">
                 {PROJECTS.map((project, i) => (
-                    <ProjectCard key={project.id} project={project} index={i} />
+                    <ProjectCard key={project.id} project={project} index={i} variant={i % 4} />
                 ))}
             </div>
         </div>
     )
 }
 
-function Column({ projects, y, className, delay }: { projects: Project[], y: MotionValue<number>, className?: string, delay: number }) {
+function Column({ projects, y, className, colIndex }: { projects: Project[], y: MotionValue<number>, className?: string, colIndex: number }) {
     return (
         <motion.div style={{ y }} className={cn("flex flex-col gap-8 w-1/3", className)}>
             {projects.map((project, i) => (
-                <ProjectCard key={project.id} project={project} index={i} columnDelay={delay} />
+                <ProjectCard
+                    key={project.id}
+                    project={project}
+                    index={i}
+                    variant={(i + colIndex) % 4} // Organic variation pattern
+                />
             ))}
         </motion.div>
     )
 }
 
-function ProjectCard({ project, index, columnDelay = 0 }: { project: Project, index: number, columnDelay?: number }) {
+function ProjectCard({ project, index, variant = 0 }: { project: Project, index: number, variant?: number }) {
+
+    // Define organic entry variants
+    const variants = [
+        { initial: { opacity: 0, y: 100 }, whileInView: { opacity: 1, y: 0 } }, // Deep Slide Up
+        { initial: { opacity: 0, x: -50, y: 50 }, whileInView: { opacity: 1, x: 0, y: 0 } }, // Diagonal Left
+        { initial: { opacity: 0, scale: 0.8 }, whileInView: { opacity: 1, scale: 1 } }, // Zoom In
+        { initial: { opacity: 0, x: 50, y: 50 }, whileInView: { opacity: 1, x: 0, y: 0 } }, // Diagonal Right
+    ]
+
+    const selectedVariant = variants[variant]
+
     return (
         <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, delay: columnDelay + (index * 0.1), ease: "easeOut" }}
+            initial={selectedVariant.initial}
+            whileInView={selectedVariant.whileInView}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, delay: index * 0.05, ease: [0.21, 0.47, 0.32, 0.98] }} // Smooth spring-like ease
         >
             <Link
                 href={project.link || project.github || '#'}
