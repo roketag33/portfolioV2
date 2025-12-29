@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useMemo, useEffect, useState } from 'react'
+import { useRef, useMemo, useEffect } from 'react'
 import { motion, useScroll, useTransform, MotionValue } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -16,35 +16,44 @@ export default function WorkCatalog() {
         offset: ["start end", "end start"]
     })
     const { unlock } = useGamification()
-    const [lastBottomReach, setLastBottomReach] = useState<number>(0)
+    const lastBottomReach = useRef<number>(0)
 
     // Parallax transforms for columns
     const y1 = useTransform(scrollYProgress, [0, 1], [0, 0])
     const y2 = useTransform(scrollYProgress, [0, 1], [0, -100])
     const y3 = useTransform(scrollYProgress, [0, 1], [0, -50])
 
-    // Visionary Achievement Logic
+    // Visionary & Art Critic Logic
     useEffect(() => {
+        // Art Critic: Time on page
+        const timer = setTimeout(() => {
+            unlock('ART_CRITIC')
+        }, 120000) // 2 minutes
+
+        // Visionary: Fast Scroll Loop
         const handleScroll = () => {
             const isBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100
             const isTop = window.scrollY < 100
 
             if (isBottom) {
-                setLastBottomReach(Date.now())
+                lastBottomReach.current = Date.now()
             }
 
-            if (isTop && lastBottomReach > 0) {
-                const timeDiff = Date.now() - lastBottomReach
+            if (isTop && lastBottomReach.current > 0) {
+                const timeDiff = Date.now() - lastBottomReach.current
                 if (timeDiff < 5000) { // < 5 seconds round trip
                     unlock('THE_VISIONARY')
-                    setLastBottomReach(0) // Reset to prevent double trigger
+                    lastBottomReach.current = 0 // Reset
                 }
             }
         }
 
         window.addEventListener('scroll', handleScroll)
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [lastBottomReach, unlock])
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+            clearTimeout(timer)
+        }
+    }, [unlock])
 
     // Distribute projects into 3 columns for desktop
     const columns = useMemo(() => {

@@ -309,4 +309,13 @@ export const ACHIEVEMENTS: Record<string, Achievement> = {
         secret: true,
         unlockHint: 'Scrollez tout en bas puis remontez tout en haut très vite.'
     },
+    ART_CRITIC: {
+        id: 'ART_CRITIC',
+        title: 'Critique d\'Art',
+        description: 'Vous prenez le temps d\'apprécier les œuvres.',
+        xp: 30,
+        icon: '🧐',
+        secret: true,
+        unlockHint: 'Restez sur la page Work pendant plus de 2 minutes.'
+    },
 }
