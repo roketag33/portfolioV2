@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useMemo, useEffect } from 'react'
+import { useRef, useMemo, useEffect, useState } from 'react'
 import { motion, useScroll, useTransform, MotionValue } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -55,19 +55,46 @@ export default function WorkCatalog() {
         }
     }, [unlock])
 
-    // Distribute projects into 3 columns for desktop
+    // Filter Logic
+    const [activeCategory, setActiveCategory] = useState<string>("All")
+    const categories = ["All", "Web Apps", "Dev Tools", "Games & Creative", "Web Design", "Mobile"]
+
+    const filteredProjects = useMemo(() => {
+        if (activeCategory === "All") return PROJECTS
+        return PROJECTS.filter(p => p.category === activeCategory)
+    }, [activeCategory])
+
+    // Distribute projects into 3 columns for desktop (using filtered projects)
     const columns = useMemo(() => {
         const cols: Project[][] = [[], [], []]
-        PROJECTS.forEach((project, i) => {
+        filteredProjects.forEach((project, i) => {
             cols[i % 3].push(project)
         })
         return cols
-    }, [])
+    }, [filteredProjects])
 
     return (
         <div ref={containerRef} className="pb-40">
+            {/* Filter Bar */}
+            <div className="flex flex-wrap justify-center gap-4 mb-16 px-6">
+                {categories.map((cat) => (
+                    <button
+                        key={cat}
+                        onClick={() => setActiveCategory(cat)}
+                        className={cn(
+                            "px-4 py-2 rounded-full text-sm font-mono uppercase tracking-wider border transition-all duration-300",
+                            activeCategory === cat
+                                ? "bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.3)] scale-105"
+                                : "bg-transparent text-neutral-500 border-neutral-800 hover:border-neutral-500 hover:text-white"
+                        )}
+                    >
+                        {cat}
+                    </button>
+                ))}
+            </div>
+
             {/* Desktop Grid (3 Cols) */}
-            <div className="hidden md:flex gap-8 group/grid px-8 md:px-12 lg:px-20 mt-12">
+            <div className="hidden md:flex gap-8 group/grid px-8 md:px-12 lg:px-20 mt-12 min-h-[50vh]">
                 <Column projects={columns[0]} y={y1} className="mt-0" colIndex={0} />
                 <Column projects={columns[1]} y={y2} className="-mt-12" colIndex={1} />
                 <Column projects={columns[2]} y={y3} className="mt-12" colIndex={2} />
@@ -75,7 +102,7 @@ export default function WorkCatalog() {
 
             {/* Mobile/Tablet Grid (1 Col) */}
             <div className="md:hidden flex flex-col gap-8 px-8 mt-12">
-                {PROJECTS.map((project, i) => (
+                {filteredProjects.map((project, i) => (
                     <ProjectCard key={project.id} project={project} index={i} variant={i % 4} />
                 ))}
             </div>
@@ -91,7 +118,7 @@ function Column({ projects, y, className, colIndex }: { projects: Project[], y: 
                     key={project.id}
                     project={project}
                     index={i}
-                    variant={(i + colIndex) % 4} // Organic variation pattern
+                    variant={(i + colIndex) % 4}
                 />
             ))}
         </motion.div>
@@ -99,40 +126,41 @@ function Column({ projects, y, className, colIndex }: { projects: Project[], y: 
 }
 
 function ProjectCard({ project, index, variant = 0 }: { project: Project, index: number, variant?: number }) {
-
-    // Define organic entry variants
     const variants = [
-        { initial: { opacity: 0, y: 100 }, whileInView: { opacity: 1, y: 0 } }, // Deep Slide Up
-        { initial: { opacity: 0, x: -50, y: 50 }, whileInView: { opacity: 1, x: 0, y: 0 } }, // Diagonal Left
-        { initial: { opacity: 0, scale: 0.8 }, whileInView: { opacity: 1, scale: 1 } }, // Zoom In
-        { initial: { opacity: 0, x: 50, y: 50 }, whileInView: { opacity: 1, x: 0, y: 0 } }, // Diagonal Right
+        { initial: { opacity: 0, y: 100 }, whileInView: { opacity: 1, y: 0 } },
+        { initial: { opacity: 0, x: -50, y: 50 }, whileInView: { opacity: 1, x: 0, y: 0 } },
+        { initial: { opacity: 0, scale: 0.8 }, whileInView: { opacity: 1, scale: 1 } },
+        { initial: { opacity: 0, x: 50, y: 50 }, whileInView: { opacity: 1, x: 0, y: 0 } },
     ]
-
     const selectedVariant = variants[variant]
 
     return (
         <motion.div
+            layout // Enable layout animation for shuffling
             initial={selectedVariant.initial}
             whileInView={selectedVariant.whileInView}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, delay: index * 0.05, ease: [0.21, 0.47, 0.32, 0.98] }} // Smooth spring-like ease
+            transition={{ duration: 0.8, delay: index * 0.05, ease: [0.21, 0.47, 0.32, 0.98] }}
         >
             <Link
                 href={project.link || project.github || '#'}
                 target="_blank"
                 className="block group/card"
             >
-                {/* Image Container */}
-                <div className="relative aspect-[3/4] overflow-hidden bg-neutral-900 transition-all duration-500 group-hover/grid:contrast-50 group-hover/grid:brightness-50 group-hover/grid:hover:contrast-100 group-hover/grid:hover:brightness-100 group-hover/grid:hover:scale-[1.02] group-hover/grid:hover:z-10 shadow-2xl rounded-sm">
+                {/* Image Container with Grayscale Effect */}
+                <div className="relative aspect-[3/4] overflow-hidden bg-neutral-900 transition-all duration-500 shadow-2xl rounded-sm">
                     <Image
                         src={project.image}
                         alt={project.title}
                         fill
-                        className="object-cover transition-transform duration-700 group-hover/card:scale-110"
+                        className="object-cover transition-all duration-700 group-hover/card:scale-110 grayscale group-hover/card:grayscale-0"
                     />
 
-                    {/* Desktop Overlay - Hidden on Mobile */}
-                    <div className="hidden md:flex absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex-col justify-end p-6">
+                    {/* Dark Overlay that fades out on hover to reveal color */}
+                    <div className="absolute inset-0 bg-black/40 group-hover/card:bg-transparent transition-colors duration-500" />
+
+                    {/* Desktop Overlay - Info on Hover */}
+                    <div className="hidden md:flex absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex-col justify-end p-6">
                         <div className="transform translate-y-4 group-hover/card:translate-y-0 transition-transform duration-300">
                             <div className="flex justify-between items-end mb-2">
                                 <h3 className="text-xl font-bold text-white uppercase tracking-tight">{project.title}</h3>
@@ -154,7 +182,7 @@ function ProjectCard({ project, index, variant = 0 }: { project: Project, index:
                     </div>
                 </div>
 
-                {/* Mobile Content - Visible only on Mobile */}
+                {/* Mobile Content */}
                 <div className="md:hidden flex flex-col pt-4 space-y-3">
                     <div className="flex justify-between items-center">
                         <h3 className="text-2xl font-black text-white uppercase tracking-tighter">{project.title}</h3>
