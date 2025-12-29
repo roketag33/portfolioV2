@@ -177,6 +177,12 @@ export default function LabList({ projects, setHoveredProject }: LabListProps) {
                                     {isClassified ? "REDACTED" : project.title}
                                     {!isClassified && <ArrowUpRight className="w-5 h-5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-neutral-400" />}
                                 </h3>
+                                {/* Mobile Description */}
+                                <div className="block md:hidden mt-2">
+                                    <p className="text-sm text-neutral-400 font-light leading-relaxed">
+                                        {project.description}
+                                    </p>
+                                </div>
                             </div>
                             <div className="col-span-3 md:col-span-2 text-right hidden md:block">
                                 <div className="flex flex-col items-end gap-1">
@@ -197,6 +203,6 @@ export default function LabList({ projects, setHoveredProject }: LabListProps) {
                     </Link>
                 ))}
             </div>
-        </div>
+        </div >
     );
 }

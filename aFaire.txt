@@ -1,9 +1,19 @@
-transformer l'editeur d'article en librairie
 
-ajouter un petit click me sur les experiences qui en parle plus
+dans le lab en mobile il faut  ajouter une description car le hover ne marche pas en mobile 
+ndas le lab le footer est en double regler car
 ajouter des metrics pour savoir qui est aller sur mon site combien de personnet et pendant combien de temps
 mettre en place un systeme de newsletter pour recevoir les derniers articles
-deployer sur vercel     
-
-
+ajouter i18n pour avoir les trads fr/en 
+uniformiser les skills partout sur l'app (about et page d'accueil)
 verifier le responsive de toutes les apges 
+ajouter des animations sur les boutons  et peux etre a d'autres endroits(on en veux des nouvelles pour que c a soit pas redondant)
+ajouter des experiences dans le lab pour  avoir plus de chose (arreter la 3d y'en as assez (penser Jeux comme le snake ou morpion et des experiences comme le fractale c'etrais cool)
+penser aussi a ajouter des  sets d'animations  dans le lab (par exemple un projet annimation scroll ou autres dedans (il faut toujours que les experiences dans le labn soit des repos a la fin vori si on peux pas definir des sous repo dans le repo comme des odules ou autres
+et pareils pensé a ajouters des fakes interafces mais pour montrer des skills ces interfaces doivent etre cool car je les mettrais dans mes profils sur malte ou fiver ou autre pour trouver du travials ces interfaces auront pous seul but d'en mettre pleins les yeux en terme d'animations de couleurs techno ect...
+)))
+
+transformer l'editeur d'article en librairie
+deployer sur vercel 
+reflechir a des optiomisation seo
+
+améliorer le systeme d'article

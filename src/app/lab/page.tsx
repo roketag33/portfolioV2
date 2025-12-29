@@ -1,6 +1,6 @@
 'use client';
 
-import Footer from '@/components/layout/Footer';
+
 
 import { useState } from 'react';
 import HoverPreview from '@/components/lab/HoverPreview';
@@ -96,9 +96,7 @@ export default function LabPage() {
                 />
             </div>
 
-            <div className="relative z-10">
-                <Footer />
-            </div>
+
         </main>
     );
 }
