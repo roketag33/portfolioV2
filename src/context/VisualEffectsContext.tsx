@@ -35,9 +35,9 @@ export function VisualEffectsProvider({ children }: { children: React.ReactNode 
         setMode('NONE')
     }
 
-    // Auto-disable debug after 10s
+    // Auto-disable effects after 10s
     useEffect(() => {
-        if (mode === 'DEBUG') {
+        if (mode !== 'NONE') {
             const timer = setTimeout(() => setMode('NONE'), 10000)
             return () => clearTimeout(timer)
         }

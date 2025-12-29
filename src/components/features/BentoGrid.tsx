@@ -100,7 +100,7 @@ const StatusBlock = () => (
     </Link>
 )
 
-const SwissStat = ({ label, value, icon: Icon }: { label: string, value: string, icon: React.ElementType }) => (
+const SwissStat = ({ label, value, icon: Icon }: { label: string, value: string, icon: any }) => (
     <div className="h-full flex flex-col justify-between p-6 hover:bg-white/[0.02] transition-colors cursor-default">
         <div>
             <div className="flex items-baseline gap-1 overflow-hidden">
