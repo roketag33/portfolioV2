@@ -8,6 +8,8 @@ import React from 'react'
 import ShimmerText from '@/components/ui/shimmer-text'
 import PassionsSection from '@/components/features/PassionsSection'
 import StackSection from '@/components/features/StackSection'
+import GlitchText from '@/components/ui/glitch-text'
+import TextRevealByWord from '@/components/ui/text-reveal-by-word'
 
 
 
@@ -65,13 +67,15 @@ export default function AboutPage() {
 
                 {/* TIMELINE SECTION */}
                 <div className="mb-40" ref={timelineRef}>
-                    <div className="text-center mb-16">
+                    <div className="text-center mb-16 flex flex-col items-center">
                         <h2 className="text-4xl md:text-5xl font-black uppercase mb-6 flex items-center justify-center gap-3">
-                            <Briefcase className="text-primary w-8 h-8 md:w-12 md:h-12" /> Expérience
+                            <Briefcase className="text-primary w-8 h-8 md:w-12 md:h-12" />
+                            <GlitchText text="Expérience" />
                         </h2>
-                        <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-                            5 ans d&apos;expérience cumulée entre alternance, freelance et projets personnels. Une montée en compétence constante.
-                        </p>
+                        <TextRevealByWord
+                            text="5 ans d'expérience cumulée entre alternance, freelance et projets personnels. Une montée en compétence constante."
+                            className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto"
+                        />
                     </div>
 
                     <div className="relative max-w-5xl mx-auto">
