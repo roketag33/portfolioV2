@@ -13,20 +13,21 @@ export default function WorkPage() {
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                     className="grid grid-cols-1 md:grid-cols-2 gap-12 items-end"
                 >
-                    <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-[0.8]">
+                    <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-[0.8] relative">
                         Selected<br />
-                        <span className="text-neutral-700">Works</span><br />
-                        <span className="text-xs font-mono tracking-widest text-neutral-500 align-top ml-2 mt-2 block md:inline border border-neutral-800 rounded px-2 py-1 bg-neutral-950 w-fit">2020 — 2025</span>
+                        <span className="text-neutral-400">Works</span>
+                        <span className="absolute -top-4 -right-4 md:right-auto md:left-full md:top-2 text-xs font-mono tracking-widest text-neutral-500 border border-neutral-200 rounded px-2 py-1 bg-white/50 backdrop-blur-sm -rotate-12 transform origin-bottom-left">2020—2025</span>
                     </h1>
 
                     <div className="space-y-6">
                         <p className="text-xl md:text-2xl font-light leading-relaxed text-neutral-600">
                             A collection of digital architectures and robust systems.
-                            Engineered for <span className="text-emerald-500">performance</span>,
-                            designed for <span className="text-white">humans</span>.
+                            Engineered for <span className="text-emerald-600 font-medium">performance</span>,
+                            designed for <span className="text-black font-medium">humans</span>.
                         </p>
-                        <div className="h-px w-full bg-gradient-to-r from-white/20 to-transparent" />
-                        <p className="text-sm font-mono text-neutral-500 uppercase tracking-widest">
+                        <div className="h-px w-full bg-gradient-to-r from-neutral-200 to-transparent" />
+                        <p className="text-sm font-mono text-neutral-400 uppercase tracking-widest flex items-center gap-2">
+                            <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                             Scroll to explore the catalog
                         </p>
                     </div>

@@ -75,20 +75,27 @@ export default function WorkCatalog() {
 
     return (
         <div ref={containerRef} className="pb-40">
-            {/* Filter Bar */}
-            <div className="flex flex-wrap justify-center gap-4 mb-16 px-6">
+            {/* Filter Bar - Premium Minimal Design */}
+            <div className="flex flex-wrap justify-center gap-6 mb-20 px-6">
                 {categories.map((cat) => (
                     <button
                         key={cat}
                         onClick={() => setActiveCategory(cat)}
                         className={cn(
-                            "px-4 py-2 rounded-full text-sm font-mono uppercase tracking-wider border transition-all duration-300",
+                            "relative px-2 py-1 text-sm font-mono uppercase tracking-wider transition-colors duration-300",
                             activeCategory === cat
-                                ? "bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.3)] scale-105"
-                                : "bg-transparent text-neutral-500 border-neutral-800 hover:border-neutral-500 hover:text-white"
+                                ? "text-black font-bold"
+                                : "text-neutral-400 hover:text-neutral-600"
                         )}
                     >
                         {cat}
+                        {activeCategory === cat && (
+                            <motion.div
+                                layoutId="activeFilter"
+                                className="absolute -bottom-2 left-0 right-0 h-0.5 bg-black"
+                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                            />
+                        )}
                     </button>
                 ))}
             </div>
@@ -145,22 +152,19 @@ function ProjectCard({ project, index, variant = 0 }: { project: Project, index:
             <Link
                 href={project.link || project.github || '#'}
                 target="_blank"
-                className="block group/card"
+                className="block group/card relative"
             >
-                {/* Image Container with Grayscale Effect */}
-                <div className="relative aspect-[3/4] overflow-hidden bg-neutral-900 transition-all duration-500 shadow-2xl rounded-sm">
+                {/* Image Container - Colors Restored, Clean Shadow */}
+                <div className="relative aspect-[3/4] overflow-hidden bg-neutral-100 transition-all duration-700 shadow-sm group-hover/card:shadow-xl rounded-sm">
                     <Image
                         src={project.image}
                         alt={project.title}
                         fill
-                        className="object-cover transition-all duration-700 group-hover/card:scale-110 grayscale group-hover/card:grayscale-0"
+                        className="object-cover transition-transform duration-1000 group-hover/card:scale-105"
                     />
 
-                    {/* Dark Overlay that fades out on hover to reveal color */}
-                    <div className="absolute inset-0 bg-black/40 group-hover/card:bg-transparent transition-colors duration-500" />
-
-                    {/* Desktop Overlay - Info on Hover */}
-                    <div className="hidden md:flex absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex-col justify-end p-6">
+                    {/* Desktop Overlay - Dark Gradient for Text Contrast */}
+                    <div className="hidden md:flex absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex-col justify-end p-8">
                         <div className="transform translate-y-4 group-hover/card:translate-y-0 transition-transform duration-300">
                             <div className="flex justify-between items-end mb-2">
                                 <h3 className="text-xl font-bold text-white uppercase tracking-tight">{project.title}</h3>
