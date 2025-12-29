@@ -3,131 +3,98 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowUpRight, Github } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { PROJECTS, Project } from '@/data/projects'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
+import { cn } from '@/lib/utils'
 
 export default function WorkCatalog() {
-    return (
-        <div className="flex flex-col gap-0 bg-background">
-            {PROJECTS.map((project, index) => (
-                <ProjectSection key={project.id} project={project} index={index} />
-            ))}
-        </div>
-    )
-}
-
-function ProjectSection({ project, index }: { project: Project, index: number }) {
     const containerRef = useRef<HTMLDivElement>(null)
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start end", "end start"]
     })
 
-    const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.1])
-    const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.6, 1, 1, 0.6])
+    // Parallax transforms for columns
+    const y1 = useTransform(scrollYProgress, [0, 1], [0, 0])
+    const y2 = useTransform(scrollYProgress, [0, 1], [0, -100])
+    const y3 = useTransform(scrollYProgress, [0, 1], [0, -50])
+
+    // Split projects into 3 columns
+    const [columns, setColumns] = useState<Project[][]>([[], [], []])
+
+    useEffect(() => {
+        const cols: Project[][] = [[], [], []]
+        PROJECTS.forEach((project, i) => {
+            cols[i % 3].push(project)
+        })
+        setColumns(cols)
+    }, [])
 
     return (
-        <section
-            ref={containerRef}
-            className="relative min-h-screen flex flex-col md:flex-row w-full border-t border-white/10"
+        <div ref={containerRef} className="pb-40">
+            {/* Desktop Grid (3 Cols) */}
+            <div className="hidden md:flex gap-8 group/grid">
+                <Column projects={columns[0]} y={y1} className="mt-0" />
+                <Column projects={columns[1]} y={y2} className="-mt-12" />
+                <Column projects={columns[2]} y={y3} className="mt-12" />
+            </div>
+
+            {/* Mobile/Tablet Grid (1 Col) - No Parallax/Complexity */}
+            <div className="md:hidden flex flex-col gap-8">
+                {PROJECTS.map((project) => (
+                    <ProjectCard key={project.id} project={project} />
+                ))}
+            </div>
+        </div>
+    )
+}
+
+function Column({ projects, y, className }: { projects: Project[], y: any, className?: string }) {
+    return (
+        <motion.div style={{ y }} className={cn("flex flex-col gap-8 w-1/3", className)}>
+            {projects.map((project) => (
+                <ProjectCard key={project.id} project={project} />
+            ))}
+        </motion.div>
+    )
+}
+
+function ProjectCard({ project }: { project: Project }) {
+    return (
+        <Link
+            href={project.link || project.github || '#'}
+            target="_blank"
+            className="block group/card relative aspect-[3/4] overflow-hidden bg-neutral-900 transition-all duration-500 group-hover/grid:contrast-50 group-hover/grid:brightness-50 group-hover/grid:hover:contrast-100 group-hover/grid:hover:brightness-100 group-hover/grid:hover:scale-[1.02] group-hover/grid:hover:z-10 shadow-2xl"
         >
-            {/* --- Sticky Title Column (Left on Desktop) --- */}
-            <div className="w-full md:w-1/2 h-[50vh] md:h-screen sticky top-0 flex flex-col justify-between p-8 md:p-12 lg:p-20 z-10 bg-background/80 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none border-b md:border-b-0 md:border-r border-white/10">
+            <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                className="object-cover transition-transform duration-700 group-hover/card:scale-110"
+            />
 
-                {/* Header Info */}
-                <motion.div style={{ opacity }} className="flex justify-between items-start">
-                    <span className="font-mono text-xs uppercase tracking-widest text-neutral-500">
-                        0{index + 1} / {PROJECTS.length}
-                    </span>
-                    <span className="font-mono text-xs uppercase tracking-widest text-emerald-500">
-                        {project.year}
-                    </span>
-                </motion.div>
+            {/* Overlay Info */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <div className="transform translate-y-4 group-hover/card:translate-y-0 transition-transform duration-300">
+                    <div className="flex justify-between items-end mb-2">
+                        <h3 className="text-xl font-bold text-white uppercase tracking-tight">{project.title}</h3>
+                        <ArrowUpRight className="text-emerald-500 w-5 h-5 mb-1 opacity-0 group-hover/card:opacity-100 transition-opacity delay-100" />
+                    </div>
 
-                {/* Main Title */}
-                <div className="flex flex-col gap-6">
-                    <h2 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-[0.9] text-white break-words">
-                        {project.title}
-                    </h2>
-
-                    <div className="flex flex-wrap gap-2 text-xs font-mono uppercase tracking-wider text-neutral-400">
-                        {project.tags.map((t: string) => (
-                            <span key={t} className="px-3 py-1 rounded-full border border-white/10 bg-white/5">
-                                {t}
+                    <div className="flex flex-wrap gap-2 mb-3">
+                        {project.tags.slice(0, 3).map((tag) => (
+                            <span key={tag} className="text-[10px] font-mono uppercase tracking-wider text-neutral-300 bg-white/10 px-2 py-1 rounded">
+                                {tag}
                             </span>
                         ))}
                     </div>
-                </div>
 
-                {/* Footer / Links */}
-                <motion.div style={{ opacity }} className="flex flex-col gap-4">
-                    <p className="text-lg text-neutral-400 font-light leading-relaxed max-w-md">
+                    <p className="text-xs text-neutral-400 line-clamp-2 leading-relaxed">
                         {project.desc}
                     </p>
-
-                    <div className="flex gap-6 mt-4">
-                        {project.link && (
-                            <Link href={project.link} target="_blank" className="group flex items-center gap-2 text-white hover:text-emerald-400 transition-colors">
-                                <span className="uppercase tracking-widest text-sm font-bold border-b border-white/20 pb-1 group-hover:border-emerald-400">Live Demo</span>
-                                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
-                            </Link>
-                        )}
-                        {project.github && (
-                            <Link href={project.github} target="_blank" className="group flex items-center gap-2 text-neutral-500 hover:text-white transition-colors">
-                                <Github className="w-4 h-4" />
-                                <span className="uppercase tracking-widest text-sm font-medium">Source</span>
-                            </Link>
-                        )}
-                    </div>
-                </motion.div>
-            </div>
-
-            {/* --- Scrolling Content Column (Right on Desktop) --- */}
-            <div className="w-full md:w-1/2 flex flex-col z-0">
-                {/* Featured Image (Huge) */}
-                <div className="h-[60vh] md:h-[80vh] w-full relative overflow-hidden group">
-                    <motion.div style={{ scale }} className="relative w-full h-full">
-                        <Image
-                            src={project.image}
-                            alt={project.title}
-                            fill
-                            className="object-cover"
-                        />
-                    </motion.div>
-                    {/* Overlay Gradient */}
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
-                </div>
-
-                {/* Editorial Details / Gallery Blocks */}
-                <div className="p-8 md:p-12 lg:p-20 grid grid-cols-1 gap-12 bg-neutral-950/50">
-                    <div className="space-y-4">
-                        <h4 className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-4">The Challenge</h4>
-                        <p className="text-neutral-300 leading-relaxed">
-                            Implementing high-performance rendering for complex geometries while maintaining 60 FPS on mobile devices.
-                            The architecture required a complete decouple of the physics engine from the main thread.
-                        </p>
-                    </div>
-
-                    <div className="space-y-4">
-                        <h4 className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-4">The Solution</h4>
-                        <p className="text-neutral-300 leading-relaxed">
-                            Leveraging WebWorkers for physics calculations and SharedArrayBuffers for state synchronization.
-                            The result is a zero-latency interactive experience that scales to thousands of entities.
-                        </p>
-                    </div>
-
-                    {/* Fake Gallery Mockup (Would be real images) */}
-                    <div className="grid grid-cols-2 gap-4 mt-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-700">
-                        <div className="aspect-square bg-neutral-900 border border-white/5 rounded-lg overflow-hidden relative">
-                            <div className="absolute inset-0 flex items-center justify-center text-xs font-mono text-neutral-700">ISO_01</div>
-                        </div>
-                        <div className="aspect-square bg-neutral-900 border border-white/5 rounded-lg overflow-hidden relative">
-                            <div className="absolute inset-0 flex items-center justify-center text-xs font-mono text-neutral-700">ISO_02</div>
-                        </div>
-                    </div>
                 </div>
             </div>
-        </section>
+        </Link>
     )
 }
