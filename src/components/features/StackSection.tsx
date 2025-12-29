@@ -5,6 +5,8 @@ import { useState } from 'react'
 import { useGamification } from '@/context/GamificationContext'
 import { cn } from '@/lib/utils'
 
+import { SKILLS } from '@/data/skills'
+
 export default function StackSection() {
     const { unlock } = useGamification()
     const [gravityBroken, setGravityBroken] = useState(false)
@@ -29,11 +31,7 @@ export default function StackSection() {
                     </span>
                 </h3>
                 <div className="space-y-8 relative">
-                    {[
-                        { name: "Frontend & CMS", skills: ["Next.js", "React", "Vue.js", "TypeScript", "TailwindCSS", "GSAP", "Three.js", "WordPress", "Shopify"] },
-                        { name: "Backend", skills: ["Node.js", "NestJS", "Express", "Rust", "Go", "PostgreSQL", "Prisma"] },
-                        { name: "DevOps & Quality", skills: ["Docker", "Vercel", "Git", "Figma", "Suite Atlassian", "Linear", "CI/CD", "Testing E2E/Unit"] }
-                    ].map((cat, i) => (
+                    {SKILLS.map((cat, i) => (
                         <motion.div
                             key={i}
                             initial={{ opacity: 0, y: 20 }}

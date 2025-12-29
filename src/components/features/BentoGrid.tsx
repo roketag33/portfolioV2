@@ -6,6 +6,7 @@ import { Calendar, Briefcase, Coffee, ArrowUpRight } from 'lucide-react'
 import { useState } from 'react'
 import { useGamification } from '@/context/GamificationContext'
 import { useVisualEffects } from '@/context/VisualEffectsContext'
+import { SKILLS } from '@/data/skills'
 
 // --- Design System: Swiss Minimalist ---
 // Principles: Grid based, High Contrast, Typography biased, geometric.
@@ -38,10 +39,18 @@ const MarqueeRow = ({ items, reverse = false }: { items: string[], reverse?: boo
     </div>
 )
 
+
+
+// ... (previous code)
+
 const StackMarquee = () => {
-    const stackBack = ["Node.js", "Postgres", "Docker", "AWS", "Redis", "GraphQL"]
-    const stackFront = ["React", "Next.js", "TypeScript", "Tailwind", "Three.js"]
-    const stackTools = ["Git", "Linux", "Figma", "K8s", "CI/CD"]
+    // Map categories from SKILLS to the marquee rows
+    // Row 1: Backend (Index 1)
+    const stackBack = SKILLS[1]?.skills || []
+    // Row 2: Frontend (Index 0)
+    const stackFront = SKILLS[0]?.skills || []
+    // Row 3: Tools/DevOps (Index 2)
+    const stackTools = SKILLS[2]?.skills || []
 
     return (
         <div className="flex flex-col h-full p-8 justify-between">
