@@ -62,6 +62,30 @@ export default function BlogList() {
         "42"
     ]
 
+    // State for hover effect
+    const [hoveredId, setHoveredId] = useState<string | null>(null)
+
+    // Typewriter Component
+    const TypewriterDate = ({ date }: { date: string }) => {
+        const [displayDate, setDisplayDate] = useState('')
+
+        useEffect(() => {
+            let i = 0
+            setDisplayDate('')
+            const interval = setInterval(() => {
+                if (i < date.length) {
+                    setDisplayDate(prev => prev + date.charAt(i))
+                    i++
+                } else {
+                    clearInterval(interval)
+                }
+            }, 50) // Speed of typing
+            return () => clearInterval(interval)
+        }, [date])
+
+        return <span>{displayDate}<span className="animate-pulse">_</span></span>
+    }
+
     useEffect(() => {
         if (isOracleMode) {
             const interval = setInterval(() => {
@@ -272,58 +296,79 @@ export default function BlogList() {
                 animate="show"
                 layout
                 className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+                onMouseLeave={() => setHoveredId(null)}
             >
                 {listPosts.map((post) => (
-                    <motion.article
+                    <div
                         key={post.slug}
-                        variants={item}
-                        layout
-                        className="group relative flex flex-col h-full bg-white/5 border border-white/10 p-5 rounded-2xl hover:bg-white/10 hover:border-white/20 hover:-translate-y-1 transition-all duration-300"
+                        className="relative group"
+                        onMouseEnter={() => setHoveredId(post.id || post.slug)}
                     >
-                        {post.coverImage && (
-                            <div className="aspect-[16/10] mb-5 rounded-xl overflow-hidden bg-black/20 relative">
-                                <img
-                                    src={post.coverImage}
-                                    alt={post.title}
-                                    className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
-                                />
-                            </div>
-                        )}
-                        <div className="flex-1 flex flex-col">
-                            <div className="flex justify-between items-center mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground/80">
-                                <span>
-                                    {typeof post.date === 'string'
-                                        ? post.date
-                                        : formatDistance(new Date(post.date!), new Date(), { addSuffix: true })}
-                                </span>
-                                <span>{post.readTime}</span>
-                            </div>
+                        <motion.article
+                            variants={{
+                                hidden: {
+                                    opacity: 0,
+                                    clipPath: "circle(0% at 50% 50%)",
+                                    filter: "blur(10px)"
+                                },
+                                show: {
+                                    opacity: 1,
+                                    clipPath: "circle(150% at 50% 50%)",
+                                    filter: "blur(0px)",
+                                    transition: {
+                                        duration: 0.8,
+                                        ease: [0.22, 1, 0.36, 1] // Custom ease
+                                    }
+                                }
+                            }}
+                            layout
+                            className={cn(
+                                "flex flex-col h-full bg-white/5 border border-white/10 p-5 rounded-2xl transition-all duration-500",
+                                hoveredId && hoveredId !== (post.id || post.slug) && "opacity-40 grayscale scale-95 blur-[1px]",
+                                hoveredId && hoveredId === (post.id || post.slug) && "scale-[1.02] border-primary/30 bg-white/10 shadow-2xl shadow-black/50 z-10"
+                            )}
+                        >
+                            {post.coverImage && (
+                                <div className="aspect-[16/10] mb-5 rounded-xl overflow-hidden bg-black/20 relative">
+                                    <img
+                                        src={post.coverImage}
+                                        alt={post.title}
+                                        className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
+                                    />
+                                </div>
+                            )}
+                            <div className="flex-1 flex flex-col">
+                                <div className="flex justify-between items-center mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground/80 font-mono">
+                                    <TypewriterDate date={typeof post.date === 'string' ? post.date : formatDistance(new Date(post.date!), new Date(), { addSuffix: true })} />
+                                    <span>{post.readTime}</span>
+                                </div>
 
-                            <h2 className="text-xl font-bold mb-3 leading-snug group-hover:text-primary transition-colors line-clamp-2">
-                                <Link
-                                    href={post.id ? `/blog/entry/${post.slug}` : `/blog/${post.slug}`}
-                                    className="before:absolute before:inset-0"
-                                >
-                                    {post.title}
-                                </Link>
-                            </h2>
+                                <h2 className="text-xl font-bold mb-3 leading-snug group-hover:text-primary transition-colors line-clamp-2">
+                                    <Link
+                                        href={post.id ? `/blog/entry/${post.slug}` : `/blog/${post.slug}`}
+                                        className="before:absolute before:inset-0"
+                                    >
+                                        {post.title}
+                                    </Link>
+                                </h2>
 
-                            <p className="text-muted-foreground text-sm line-clamp-3 mb-6">
-                                {post.excerpt}
-                            </p>
+                                <p className="text-muted-foreground text-sm line-clamp-3 mb-6">
+                                    {post.excerpt}
+                                </p>
 
-                            <div className="flex flex-wrap gap-2 mt-auto pt-4 border-t border-white/5">
-                                {post.tags?.slice(0, 3).map(tag => (
-                                    <Badge key={tag} variant="secondary" className="bg-white/5 hover:bg-white/10 text-[10px] px-2 h-5 text-muted-foreground">
-                                        {tag}
-                                    </Badge>
-                                ))}
-                                {post.tags && post.tags.length > 3 && (
-                                    <span className="text-[10px] text-muted-foreground self-center">+{post.tags.length - 3}</span>
-                                )}
+                                <div className="flex flex-wrap gap-2 mt-auto pt-4 border-t border-white/5">
+                                    {post.tags?.slice(0, 3).map(tag => (
+                                        <Badge key={tag} variant="secondary" className="bg-white/5 hover:bg-white/10 text-[10px] px-2 h-5 text-muted-foreground">
+                                            {tag}
+                                        </Badge>
+                                    ))}
+                                    {post.tags && post.tags.length > 3 && (
+                                        <span className="text-[10px] text-muted-foreground self-center">+{post.tags.length - 3}</span>
+                                    )}
+                                </div>
                             </div>
-                        </div>
-                    </motion.article>
+                        </motion.article>
+                    </div>
                 ))}
             </motion.div>
 
