@@ -150,8 +150,7 @@ function ProjectCard({ project, index, variant = 0 }: { project: Project, index:
             transition={{ duration: 0.8, delay: index * 0.05, ease: [0.21, 0.47, 0.32, 0.98] }}
         >
             <Link
-                href={project.link || project.github || '#'}
-                target="_blank"
+                href={`/work/${project.id}`}
                 className="block group/card relative"
             >
                 {/* Image Container - Colors Restored, Clean Shadow */}

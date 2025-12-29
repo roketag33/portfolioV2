@@ -8,6 +8,10 @@ export interface Project {
     link?: string
     github?: string
     tags: string[]
+    // Extended details
+    content?: string
+    features?: string[]
+    gallery?: string[]
 }
 
 export const PROJECTS: Project[] = [
@@ -19,7 +23,24 @@ export const PROJECTS: Project[] = [
         image: '/images/projects/fractal.png',
         year: '2025',
         github: 'https://github.com/roketag33/FractalGenerator',
-        tags: ['Rust', 'WASM', 'Math', 'Visualization']
+        tags: ['Rust', 'WASM', 'Math', 'Visualization'],
+        content: `
+            <p>The <strong>Fractal Generator</strong> is a high-performance exploration tool designed to visualize complex mathematical sets in real-time. Built with a core in <strong>Rust</strong> and compiled to <strong>WebAssembly</strong>, it delivers near-native performance directly in the browser.</p>
+            <p>Users can pan, zoom, and explore the infinite intricacy of the Mandelbrot, Julia, and Newton sets. The application allows for deep customization, including dynamic color palette switching, iteration count adjustment, and real-time parameter tuning.</p>
+            <p>This project bridges the gap between low-level systems programming and modern web technologies, showcasing the power of WASM for computational heavy lifting.</p>
+        `,
+        features: [
+            "Real-time rendering using Rust + WASM",
+            "Support for Mandelbrot, Julia, and Newton sets",
+            "Customizable color palettes and gradients",
+            "Infinite zoom capabilities with deep precision",
+            "Interactive parameter controls"
+        ],
+        gallery: [
+            "/images/projects/fractal.png",
+            "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2070&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1618172193763-c511deb635ca?q=80&w=2070&auto=format&fit=crop"
+        ]
     },
     {
         id: 'vaultword',
@@ -29,7 +50,22 @@ export const PROJECTS: Project[] = [
         image: '/images/projects/vaultword.png',
         year: '2025',
         github: 'https://github.com/roketag33/VaultWord',
-        tags: ['Tauri', 'React', 'TypeScript', 'Game']
+        tags: ['Tauri', 'React', 'TypeScript', 'Game'],
+        content: `
+            <p><strong>VaultWord</strong> is a logic-based puzzle game wrapped in a high-security aesthetic. The goal is simple yet challenging: decipher the correct password to unlock the vault before the security system locks you out.</p>
+            <p>Built using <strong>Tauri</strong>, this application combines the flexibility of React for the UI with the performance and security of Rust for the backend logic. It demonstrates how improved native interactions can be achieved using modern web-to-desktop bridges.</p>
+        `,
+        features: [
+            "Native desktop experience via Tauri (Rust)",
+            "Challenging word logic puzzles",
+            "Immersive cyber-security UI/UX",
+            "Progressive difficulty levels",
+            "Sound design and haptic feedback"
+        ],
+        gallery: [
+            "/images/projects/vaultword.png",
+            "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=2070&auto=format&fit=crop"
+        ]
     },
     {
         id: 'platformer',
@@ -39,7 +75,22 @@ export const PROJECTS: Project[] = [
         image: '/images/projects/platformer.png',
         year: '2025',
         github: 'https://github.com/roketag33/platformer.js',
-        tags: ['PixiJS', 'TypeScript', 'Game Engine']
+        tags: ['PixiJS', 'TypeScript', 'Game Engine'],
+        content: `
+            <p><strong>Platformer.js</strong> is a robust, modular game engine designed specifically for 2D platformers. It abstracts complex game loop mechanics, physics calculations, and collision detection into a clean, easy-to-use API.</p>
+            <p>Leveraging <strong>PixiJS</strong> for high-speed rendering, it ensures smooth 60fps gameplay even with many entities on screen. The engine includes a component-based entity system, making it easy to extend behavior for new enemies, items, or player abilities.</p>
+        `,
+        features: [
+            "High-performance rendering with PixiJS",
+            "Custom 2D physics and AABB collision",
+            "Component-Entity-System architecture",
+            "Tiled map importer",
+            "Sprite animation management"
+        ],
+        gallery: [
+            "/images/projects/platformer.png",
+            "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop"
+        ]
     },
     {
         id: 'hooly',
@@ -49,7 +100,22 @@ export const PROJECTS: Project[] = [
         image: '/images/projects/hooly.png',
         year: '2024',
         github: 'https://github.com/roketag33/hooly',
-        tags: ['Go', 'Backend', 'Geospatial']
+        tags: ['Go', 'Backend', 'Geospatial'],
+        content: `
+            <p><strong>Hooly</strong> solves the logistical chaos of managing mobile vendor spots in busy urban areas. It provides a real-time reservation system for food trucks and pop-up shops to secure prime locations.</p>
+            <p>The backend is powered by <strong>Go</strong> for high concurrency support, handling location tracking and bookings simultaneously. It helps city planners organize street commerce while giving vendors stability.</p>
+        `,
+        features: [
+            "Real-time geolocation tracking",
+            "Spot tracking and reservation system",
+            "Vendor dashboards for analytics",
+            "High-performance Go backend",
+            "Interactive map interface"
+        ],
+        gallery: [
+            "/images/projects/hooly.png",
+            "https://images.unsplash.com/photo-1565123409695-7b5ef63a2efb?q=80&w=2071&auto=format&fit=crop"
+        ]
     },
     {
         id: 'jeanneret',
@@ -59,7 +125,22 @@ export const PROJECTS: Project[] = [
         image: '/images/projects/jeanneret.png',
         year: '2024',
         github: 'https://github.com/roketag33/jeanneret',
-        tags: ['Design', 'Minimalism', 'Architecture']
+        tags: ['Design', 'Minimalism', 'Architecture'],
+        content: `
+            <p><strong>Jeanneret</strong> is a design system and UI kit paying homage to Charles-Édouard Jeanneret, better known as Le Corbusier. It emphasizes strict grids, brutalist typography, and the honest use of digital materials (whitespace, color, typography).</p>
+            <p>This project explores how modernist architectural principles translates to the web, creating interfaces that are stark, functional, yet incredibly expressive.</p>
+        `,
+        features: [
+            "Strict modular grid system",
+            "Brutalist typography scale",
+            "Accessible color palettes",
+            "Component library for React",
+            "Documentation site"
+        ],
+        gallery: [
+            "/images/projects/jeanneret.png",
+            "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
+        ]
     },
     {
         id: 'ponymarket',

@@ -9,6 +9,7 @@ interface HyperTextProps {
     duration?: number;
     framerProps?: Variants;
     className?: string;
+    as?: React.ElementType;
     animateOnLoad?: boolean;
     animateInView?: boolean;
 }
@@ -26,6 +27,7 @@ export default function HyperText({
         exit: { opacity: 0, y: 3 },
     },
     className,
+    as: Component = "h1",
     animateOnLoad = true,
     animateInView = false,
 }: HyperTextProps) {
@@ -75,12 +77,15 @@ export default function HyperText({
 
         if (animateInView && isInView) {
             triggerAnimation();
-        } else if (!animateInView) {
+        } else if (!animateInView && animateOnLoad) {
             triggerAnimation();
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [text, isInView, animateInView]);
+    }, [text, isInView, animateInView, animateOnLoad]);
+
+    // Create a motion version of the component
+    const MotionComponent = motion(Component);
 
     return (
         <div
@@ -90,13 +95,13 @@ export default function HyperText({
         >
             <AnimatePresence mode="wait">
                 {displayText.map((letter, i) => (
-                    <motion.h1
+                    <MotionComponent
                         key={i}
                         className={cn("font-mono", letter === " " ? "w-3" : "", className)}
                         {...framerProps}
                     >
                         {letter.toUpperCase()}
-                    </motion.h1>
+                    </MotionComponent>
                 ))}
             </AnimatePresence>
         </div>

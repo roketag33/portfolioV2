@@ -1,6 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import WorkCatalog from '@/components/features/WorkCatalog'
+import HyperText from '@/components/ui/hyper-text'
 
 export default function WorkPage() {
     return (
@@ -22,7 +23,13 @@ export default function WorkPage() {
                                         visible: { y: 0, rotateX: 0, opacity: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
                                     }}
                                 >
-                                    Selected
+                                    <HyperText
+                                        text="Selected"
+                                        as="span"
+                                        className="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-[0.8]"
+                                        animateOnLoad={false}
+                                        framerProps={{ initial: { opacity: 1 }, animate: { opacity: 1 } }}
+                                    />
                                 </motion.span>
                             </div>
                             <div className="overflow-hidden">
@@ -33,7 +40,13 @@ export default function WorkPage() {
                                         visible: { y: 0, rotateX: 0, opacity: 1, transition: { duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] } }
                                     }}
                                 >
-                                    Works
+                                    <HyperText
+                                        text="Works"
+                                        as="span"
+                                        className="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-[0.8] text-neutral-400"
+                                        animateOnLoad={false}
+                                        framerProps={{ initial: { opacity: 1 }, animate: { opacity: 1 } }}
+                                    />
                                 </motion.span>
                             </div>
                         </h1>
