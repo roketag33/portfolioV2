@@ -2498,6 +2498,11 @@
   dependencies:
     "@use-gesture/core" "10.3.1"
 
+"@vercel/analytics@^1.6.1":
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/@vercel/analytics/-/analytics-1.6.1.tgz#b4e16daf445cf6cd365a91e43d86e9e5b3428ddc"
+  integrity sha512-oH9He/bEM+6oKlv3chWuOOcp8Y6fo6/PSro8hEkgCW3pu9/OiCXiUpRUogDh3Fs3LH2sosDrx8CxeOLBEE+afg==
+
 "@vscode/markdown-it-katex@^1.1.0":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@vscode/markdown-it-katex/-/markdown-it-katex-1.1.2.tgz#6ec355c5ec82d019f13a511e2363525384c91155"

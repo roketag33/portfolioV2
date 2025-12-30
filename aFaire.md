@@ -10,11 +10,11 @@
 - [ ] [UI] Animations : Ajouter des animations sur les boutons et autres endroits (éviter la redondance)
 
 ## Features & Tech
-- [ ] [Analytics] Ajouter des metrics (visiteurs, temps passé, etc.)
+- [x] [Analytics] Ajouter des metrics (visiteurs, temps passé, etc.)
 - [ ] [Newsletter] Mettre en place un système de newsletter
 - [ ] [i18n] Ajouter les traductions FR/EN
-- [ ] [SEO] Réfléchir à des optimisations SEO
-- [ ] [Deployment] Déployer sur Vercel
+- [x] [SEO] Réfléchir à des optimisations SEO (Metadata added)
+- [x] [Deployment] Déployer sur Vercel (Analytics added, Build verified)
 
 ## Lab & Content
 - [ ] [Lab] Ajouter des expériences (Jeux type Snake/Morpion, Fractales, etc.) - Arrêter la 3D simple

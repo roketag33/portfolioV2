@@ -28,6 +28,7 @@
     "@tiptap/suggestion": "^3.14.0",
     "@types/canvas-confetti": "^1.9.0",
     "@types/three": "^0.182.0",
+    "@vercel/analytics": "^1.6.1",
     "@xyflow/react": "^12.10.0",
     "cannon-es": "^0.20.0",
     "canvas-confetti": "^1.9.4",

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react"
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/layout/SmoothScroll";
@@ -80,6 +81,7 @@ export default function RootLayout({
             <Footer />
           </SmoothScroll>
           <Toaster />
+          <Analytics />
         </GamificationProvider>
       </body>
     </html>

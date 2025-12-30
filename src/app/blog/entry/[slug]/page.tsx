@@ -8,6 +8,8 @@ import MermaidInitializer from '@/components/features/MermaidInitializer'
 import FlowHydrator from '@/components/features/FlowHydrator'
 import ExcalidrawHydrator from '@/components/features/ExcalidrawHydrator'
 
+import type { Metadata } from 'next'
+
 /* 
   NOTE: In a real app we would use a singleton Prisma Client 
   mapped to global logic to avoid connection exhaustion in dev. 
@@ -17,6 +19,31 @@ const prisma = new PrismaClient()
 
 interface Props {
     params: Promise<{ slug: string }>
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { slug } = await params
+    const post = await prisma.post.findUnique({
+        where: { slug },
+    })
+
+    if (!post) {
+        return {
+            title: 'Post Not Found',
+        }
+    }
+
+    return {
+        title: post.title,
+        description: post.excerpt || `Read this article on Alexandre's Blog.`,
+        openGraph: {
+            title: post.title,
+            description: post.excerpt || undefined,
+            type: 'article',
+            publishedTime: post.createdAt.toISOString(),
+            authors: ['Alexandre Sarrazin'],
+        }
+    }
 }
 
 export default async function BlogPostPage({ params }: Props) {
