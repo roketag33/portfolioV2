@@ -7,6 +7,8 @@ import { useState } from "react"
 import { toast } from "sonner"
 import { motion } from "framer-motion"
 import { Loader2, Send } from "lucide-react"
+import { SpotlightInput, SpotlightTextarea } from "@/components/ui/spotlight-input"
+import MagneticButton from "@/components/ui/magnetic-button"
 
 export function ContactForm() {
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -56,9 +58,8 @@ export function ContactForm() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                         <label htmlFor="name" className="text-sm font-medium text-white/70 uppercase tracking-widest">Name</label>
-                        <input
+                        <SpotlightInput
                             {...form.register("name")}
-                            className="w-full px-4 py-3 rounded-lg bg-black/20 border border-white/10 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                             placeholder="John Doe"
                         />
                         {form.formState.errors.name && (
@@ -68,9 +69,8 @@ export function ContactForm() {
 
                     <div className="space-y-2">
                         <label htmlFor="email" className="text-sm font-medium text-white/70 uppercase tracking-widest">Email</label>
-                        <input
+                        <SpotlightInput
                             {...form.register("email")}
-                            className="w-full px-4 py-3 rounded-lg bg-black/20 border border-white/10 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                             placeholder="john@example.com"
                         />
                         {form.formState.errors.email && (
@@ -81,9 +81,8 @@ export function ContactForm() {
 
                 <div className="space-y-2">
                     <label htmlFor="subject" className="text-sm font-medium text-white/70 uppercase tracking-widest">Subject</label>
-                    <input
+                    <SpotlightInput
                         {...form.register("subject")}
-                        className="w-full px-4 py-3 rounded-lg bg-black/20 border border-white/10 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                         placeholder="Project Opportunity..."
                     />
                     {form.formState.errors.subject && (
@@ -93,10 +92,8 @@ export function ContactForm() {
 
                 <div className="space-y-2">
                     <label htmlFor="message" className="text-sm font-medium text-white/70 uppercase tracking-widest">Message</label>
-                    <textarea
+                    <SpotlightTextarea
                         {...form.register("message")}
-                        rows={5}
-                        className="w-full px-4 py-3 rounded-lg bg-black/20 border border-white/10 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
                         placeholder="Tell me about your project..."
                     />
                     {form.formState.errors.message && (
@@ -104,20 +101,21 @@ export function ContactForm() {
                     )}
                 </div>
 
-                <button
+                <MagneticButton
                     type="submit"
+                    variant="primary"
                     disabled={isSubmitting}
-                    className="w-full py-4 rounded-full bg-white text-black font-bold uppercase tracking-widest hover:bg-white/90 focus:ring-2 focus:ring-white/50 focus:outline-none transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed group"
+                    className="w-full"
                 >
                     {isSubmitting ? (
                         <Loader2 className="w-5 h-5 animate-spin" />
                     ) : (
-                        <>
+                        <div className="flex items-center gap-2">
                             Send Message
                             <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                        </>
+                        </div>
                     )}
-                </button>
+                </MagneticButton>
             </form>
         </motion.div>
     )

@@ -12,9 +12,11 @@ interface MagneticButtonProps {
     variant?: 'primary' | 'secondary'
     href?: string
     external?: boolean
+    type?: "button" | "submit" | "reset"
+    disabled?: boolean
 }
 
-export default function MagneticButton({ children, className, onClick, variant = 'primary', href, external }: MagneticButtonProps) {
+export default function MagneticButton({ children, className, onClick, variant = 'primary', href, external, type = "button", disabled }: MagneticButtonProps) {
     const ref = useRef<HTMLDivElement>(null)
     const [position, setPosition] = useState({ x: 0, y: 0 })
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -60,15 +62,15 @@ export default function MagneticButton({ children, className, onClick, variant =
 
     return (
         <motion.div
-            className="relative group w-fit"
+            className={cn("relative group w-fit", disabled && "opacity-50 cursor-not-allowed")}
             style={{ position: 'relative' }}
             ref={ref}
-            onMouseMove={handleMouse}
+            onMouseMove={!disabled ? handleMouse : undefined}
             onMouseLeave={reset}
             animate={{ x: position.x, y: position.y }}
             transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
         >
-            {href ? (
+            {href && !disabled ? (
                 external ? (
                     <a href={href} target="_blank" rel="noopener noreferrer" onClick={onClick} className={baseClasses}>
                         {ButtonContent}
@@ -79,7 +81,7 @@ export default function MagneticButton({ children, className, onClick, variant =
                     </Link>
                 )
             ) : (
-                <button onClick={onClick} className={baseClasses}>
+                <button type={type} disabled={disabled} onClick={onClick} className={baseClasses}>
                     {ButtonContent}
                 </button>
             )}

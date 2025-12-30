@@ -18,26 +18,50 @@ export default function ContactPage() {
                 {/* Left Column: Info */}
                 <div className="space-y-12">
                     <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
+                        initial="initial"
+                        animate="animate"
+                        className="space-y-6"
                     >
-                        <h1 className="text-6xl md:text-8xl font-black uppercase leading-none mb-6">
-                            Let&apos;s <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">Talk</span>
-                        </h1>
-                        <p className="text-xl md:text-2xl text-white/60 font-light max-w-lg">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                        >
+                            <h1 className="text-6xl md:text-8xl font-black uppercase leading-none mb-6">
+                                Let&apos;s <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">Talk</span>
+                            </h1>
+                        </motion.div>
+
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1, duration: 0.8 }}
+                            className="text-xl md:text-2xl text-white/60 font-light max-w-lg"
+                        >
                             Have a project in mind or just want to chat?
                             Feel free to reach out. I&apos;m always open to discussing new ideas.
-                        </p>
+                        </motion.p>
                     </motion.div>
 
                     <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4 }}
+                        initial="hidden"
+                        animate="visible"
+                        variants={{
+                            hidden: { opacity: 0 },
+                            visible: {
+                                opacity: 1,
+                                transition: {
+                                    staggerChildren: 0.1,
+                                    delayChildren: 0.3
+                                }
+                            }
+                        }}
                         className="space-y-8"
                     >
-                        <div className="flex items-center gap-6 group cursor-pointer hover:bg-white/5 p-4 rounded-xl transition-colors -ml-4">
+                        <motion.div
+                            variants={{ hidden: { opacity: 0, x: -20 }, visible: { opacity: 1, x: 0 } }}
+                            className="flex items-center gap-6 group cursor-pointer hover:bg-white/5 p-4 rounded-xl transition-colors -ml-4"
+                        >
                             <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-primary transition-colors">
                                 <Mail className="w-5 h-5" />
                             </div>
@@ -45,9 +69,12 @@ export default function ContactPage() {
                                 <div className="text-sm text-white/40 uppercase tracking-widest">Email</div>
                                 <div className="text-xl font-medium">contact@roketag.com</div>
                             </div>
-                        </div>
+                        </motion.div>
 
-                        <div className="flex items-center gap-6 group cursor-pointer hover:bg-white/5 p-4 rounded-xl transition-colors -ml-4">
+                        <motion.div
+                            variants={{ hidden: { opacity: 0, x: -20 }, visible: { opacity: 1, x: 0 } }}
+                            className="flex items-center gap-6 group cursor-pointer hover:bg-white/5 p-4 rounded-xl transition-colors -ml-4"
+                        >
                             <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-primary transition-colors">
                                 <MapPin className="w-5 h-5" />
                             </div>
@@ -55,7 +82,7 @@ export default function ContactPage() {
                                 <div className="text-sm text-white/40 uppercase tracking-widest">Location</div>
                                 <div className="text-xl font-medium">Bordeaux, France</div>
                             </div>
-                        </div>
+                        </motion.div>
                     </motion.div>
 
                     <motion.div

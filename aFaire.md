@@ -5,6 +5,8 @@
 - [x] [Lab] Footer : Footer en double à régler
 - [x] [UI] Uniformiser les skills partout sur l'app (About et Home)
 - [x] [Global] Vérifier le responsive de toutes les pages
+- [x] [home]  enlever l'effet qui passe le texte du noir au gris au hover sur software enginer ca doit etre seulemenet noir avec l'animation de glitch
+- [x] [home] enlever le scroll en dessos de alexandre sarrazin 
 - [ ] [UI] Animations : Ajouter des animations sur les boutons et autres endroits (éviter la redondance)
 
 ## Features & Tech
@@ -25,9 +27,9 @@
 
 
 
-- [ ] [contact] améliorer le formulaire de contact
+- [x] [contact] améliorer le formulaire de contact
 - [ ] [contact] ajouter des achievements
-- [ ] [contact] ajouter des animations 
+- [x] [contact] ajouter des animations 
 
 
 
