@@ -1,15 +1,17 @@
 'use client'
-import Link from 'next/link'
+import { Link } from '@/i18n/routingConfig'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import dynamic from 'next/dynamic'
+import { useTranslations } from 'next-intl'
 
 // Dynamically import the portal overlay to ensure client-side rendering
 const MobileMenuOverlay = dynamic(() => import('./MobileMenuOverlay'), { ssr: false })
 
 export default function Header() {
+    const t = useTranslations('Navigation');
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -26,9 +28,9 @@ export default function Header() {
 
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex items-center gap-8">
-                    {['Work', 'About', 'Lab', 'Blog', 'Achievements'].map((item) => (
-                        <Link key={item} href={`/${item.toLowerCase()}`} className="group relative text-sm uppercase tracking-widest hover:text-primary transition-colors cursor-pointer block font-medium opacity-80 hover:opacity-100">
-                            {item}
+                    {['work', 'about', 'lab', 'blog', 'achievements'].map((item) => (
+                        <Link key={item} href={`/${item}`} className="group relative text-sm uppercase tracking-widest hover:text-primary transition-colors cursor-pointer block font-medium opacity-80 hover:opacity-100">
+                            {t(item)}
                             <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-foreground transition-all duration-300 group-hover:w-full" />
                         </Link>
                     ))}
@@ -37,7 +39,7 @@ export default function Header() {
                 <div className="flex items-center gap-4 z-50 relative">
                     <Link href="/contact" className="hidden md:block">
                         <Button className="rounded-full cursor-pointer bg-foreground text-background hover:bg-foreground/90 transition-colors px-6 font-medium shadow-sm">
-                            Contact
+                            {t('contact')}
                         </Button>
                     </Link>
 

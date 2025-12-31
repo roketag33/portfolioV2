@@ -1,14 +1,14 @@
 import { motion } from 'framer-motion'
-import Link from 'next/link'
+import { Link } from '@/i18n/routingConfig'
 import MagneticButton from '@/components/ui/magnetic-button'
 import HyperText from '@/components/ui/hyper-text'
-
-const title = "SOFTWARE\nENGINEER"
-
+import { useTranslations } from 'next-intl'
 import { useGamification } from '@/context/GamificationContext'
 
 export default function Hero() {
     const { unlock } = useGamification()
+    const t = useTranslations('Hero')
+    const title = t('title')
 
     return (
         <section className="h-screen w-full flex flex-col justify-center items-center relative overflow-hidden bg-background">
@@ -16,8 +16,8 @@ export default function Hero() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-primary/20 blur-[150px] rounded-full pointer-events-none" />
 
             <div className="z-10 text-center flex flex-col items-center">
-                <h1 className="text-[12vw] leading-[0.85] font-black tracking-tighter uppercase text-foreground mix-blend-overlay md:mix-blend-normal">
-                    {title.split('\n').map((line, i) => (
+                <h1 className="text-[12vw] leading-[0.85] font-black tracking-tighter uppercase text-foreground">
+                    {title.split('|').map((line, i) => (
                         <div key={i} className="overflow-hidden flex justify-center">
                             <motion.div
                                 initial={{ y: "100%" }}
@@ -27,8 +27,13 @@ export default function Hero() {
                             >
                                 <HyperText
                                     text={line}
-                                    className="text-[12vw] leading-[0.85] font-black tracking-tighter uppercase text-foreground mix-blend-overlay md:mix-blend-normal"
+                                    className="text-[5vw] md:text-[7vw] xl:text-[8vw] leading-[0.85] font-black tracking-tighter uppercase text-foreground"
                                     animateOnLoad={true}
+                                    framerProps={{
+                                        initial: { opacity: 1, y: 0 },
+                                        animate: { opacity: 1, y: 0 },
+                                        exit: { opacity: 1, y: 0 },
+                                    }}
                                 />
                             </motion.div>
                         </div>
@@ -42,7 +47,7 @@ export default function Hero() {
                     className="mt-6 text-lg md:text-xl text-muted-foreground uppercase tracking-widest max-w-lg cursor-pointer hover:text-primary transition-colors duration-300"
                     onClick={() => unlock('WHO_AM_I')}
                 >
-                    Alexandre Sarrazin
+                    {t('subtitle')}
                 </motion.p>
 
                 <motion.div
@@ -53,31 +58,17 @@ export default function Hero() {
                 >
                     <Link href="/work" className="block">
                         <MagneticButton variant="primary">
-                            My Works
+                            {t('cta_work')}
                         </MagneticButton>
                     </Link>
                     <Link href="/contact" className="block">
                         <MagneticButton variant="secondary">
-                            Contact
+                            {t('cta_contact')}
                         </MagneticButton>
                     </Link>
                 </motion.div>
             </div>
 
-            {/* Scroll Indicator */}
-            <motion.div
-                className="absolute bottom-10 flex flex-col items-center gap-2 text-muted-foreground"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 2, duration: 1 }}
-            >
-                <span className="text-xs uppercase tracking-widest font-light">Scroll</span>
-                <motion.div
-                    animate={{ y: [0, 5, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                    className="w-[1px] h-10 bg-gradient-to-b from-transparent via-primary to-transparent"
-                />
-            </motion.div>
         </section>
     )
 }

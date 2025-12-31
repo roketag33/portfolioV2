@@ -2,9 +2,10 @@
 import { useState } from 'react'
 import { PROJECTS } from '@/data/projects'
 import { cn } from '@/lib/utils'
-import Link from 'next/link'
+import { Link } from '@/i18n/routingConfig'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 interface WorkListProps {
     limit?: number
@@ -14,6 +15,7 @@ interface WorkListProps {
 }
 
 export default function WorkList({ limit, className, title = "Selected Projects", showHeader = true }: WorkListProps) {
+    const t = useTranslations('Work')
     const displayedProjects = limit ? PROJECTS.slice(0, limit) : PROJECTS
     const [focusedIndex, setFocusedIndex] = useState<number | null>(null)
 
@@ -115,8 +117,8 @@ export default function WorkList({ limit, className, title = "Selected Projects"
                 })}
                 {limit && (
                     <div className="md:hidden mt-8 flex justify-center w-full">
-                        <Link href="/work" className="group flex items-center gap-2 text-neutral-400 hover:text-white transition-colors">
-                            <span className="text-sm font-mono uppercase tracking-widest">View Archives</span>
+                        <Link href="/work" className="group flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+                            <span className="text-sm font-mono uppercase tracking-widest">{t('view_archives')}</span>
                             <ArrowUpRight className="w-4 h-4" />
                         </Link>
                     </div>
@@ -124,8 +126,8 @@ export default function WorkList({ limit, className, title = "Selected Projects"
             </div>
             {limit && (
                 <div className="hidden md:flex mt-12 justify-end container mx-auto">
-                    <Link href="/work" className="group flex items-center gap-2 text-neutral-500 hover:text-white transition-colors">
-                        <span className="text-xs font-mono uppercase tracking-widest">View All Projects</span>
+                    <Link href="/work" className="group flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+                        <span className="text-xs font-mono uppercase tracking-widest">{t('view_all')}</span>
                         <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                     </Link>
                 </div>

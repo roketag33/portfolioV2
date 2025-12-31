@@ -1,0 +1,79 @@
+{
+    "HomePage": {
+        "title": "Software Engineer | & Architect",
+        "Bento": {
+            "available_status": "Available for Hire",
+            "open_to_work": "Open to opportunities",
+            "tech": "Technology",
+            "years": "Years Exp.",
+            "projects": "Projects",
+            "clean_code": "Clean Code",
+            "refills": "Refills"
+        },
+        "About": {
+            "title": "About <highlight>Me</highlight>",
+            "description_part1": "I'm a software engineer passionate about building <strong>robust, scalable systems</strong>. My mission is to solve complex problems by bridging the gap <br></br> <span>between hardware and the cloud.</span>",
+            "description_part2": "From low-level IoT firmware to distributed microservices and mobile apps, I work as a Software <strong>Architect</strong> designing end-to-end systems. I obsess over performance, security, and clean code.",
+            "current_location": "Currently based in Bordeaux, working on next-gen web & IoT solutions."
+        }
+    },
+    "Navigation": {
+        "home": "Home",
+        "about": "About",
+        "work": "Work",
+        "lab": "Lab",
+        "blog": "Blog",
+        "achievements": "Achievements",
+        "contact": "Contact"
+    },
+    "Hero": {
+        "title": "Software Engineer | & Architect",
+        "badge_available_desktop": "Available for new opportunities",
+        "badge_available_mobile": "Open to work",
+        "scroll": "Scroll to explore",
+        "subtitle": "Crafting digital experiences with precision and passion.",
+        "cta_work": "View Work",
+        "cta_contact": "Contact Me"
+    },
+    "About": {
+        "title": "About Me.",
+        "subtitle_role": "Alternant",
+        "subtitle": "The journey of a passionate <role>Alternant</role>.<br>Always one foot in business, one foot in school.",
+        "experience": "Experience",
+        "xp_desc": "5 years of accumulated experience between apprenticeship, freelance and personal projects. Constant skill ramp-up.",
+        "passions": "Passions & Interests",
+        "freelance_title": "Freelance & Consulting",
+        "freelance_desc": "I put my technical expertise at the service of your projects. Available for short missions or long-term support.",
+        "freelance_cta_title": "A project in mind?",
+        "freelance_cta_desc": "Let's discuss your needs and build something unique.",
+        "freelance_cta_button": "Contact Me"
+    },
+    "Work": {
+        "title_selected": "Selected",
+        "title_works": "Works",
+        "desc_p1": "A collection of digital architectures and robust systems.",
+        "desc_p2": "Engineered for {perf}, designed for {humans}.",
+        "perf": "performance",
+        "humans": "humans",
+        "scroll_hint": "Scroll to explore the catalog",
+        "Filters": {
+            "all": "All",
+            "web_apps": "Web Apps",
+            "dev_tools": "Dev Tools",
+            "games": "Games & Creative",
+            "web_design": "Web Design",
+            "mobile": "Mobile"
+        },
+        "view_all": "View All Projects",
+        "view_archives": "View Archives"
+    },
+    "Footer": {
+        "title": "Let's build\nsomething unique.",
+        "email_copied": "Email copied to clipboard!",
+        "item_github": "GitHub",
+        "item_linkedin": "LinkedIn",
+        "rights": "All rights reserved.",
+        "terminal_hint": "Open Terminal",
+        "system_ready": "SYSTEM READY"
+    }
+}

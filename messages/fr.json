@@ -1,0 +1,79 @@
+{
+    "HomePage": {
+        "title": "Ingénieur Logiciel | & Architecte",
+        "Bento": {
+            "available_status": "Disponible",
+            "open_to_work": "Ouvert aux opportunités",
+            "tech": "Technologie",
+            "years": "Années Exp.",
+            "projects": "Projets",
+            "clean_code": "Clean Code",
+            "refills": "Cafés"
+        },
+        "About": {
+            "title": "À <highlight>Propos</highlight>",
+            "description_part1": "Je suis un ingénieur logiciel passionné par la construction de <strong>systèmes robustes et évolutifs</strong>. Ma mission est de résoudre des problèmes complexes en comblant le fossé <br></br> <span>entre le matériel et le cloud.</span>",
+            "description_part2": "Du firmware IoT bas niveau aux microservices distribués et applications mobiles, j'interviens comme <strong>Architecte</strong> logiciel pour concevoir des systèmes de bout en bout. Je suis obsédé par la performance, la sécurité et le code propre.",
+            "current_location": "Actuellement basé à Bordeaux, travaillant sur des solutions web & IoT de nouvelle génération."
+        }
+    },
+    "Navigation": {
+        "home": "Accueil",
+        "about": "À Propos",
+        "work": "Projets",
+        "lab": "Labo",
+        "blog": "Blog",
+        "achievements": "Succès",
+        "contact": "Contact"
+    },
+    "Hero": {
+        "title": "Ingénieur Logiciel | & Architecte",
+        "badge_available_desktop": "Disponible pour de nouvelles opportunités",
+        "badge_available_mobile": "Ouvert aux opportunités",
+        "scroll": "Faites défiler pour explorer",
+        "subtitle": "Création d'expériences numériques avec précision et passion.",
+        "cta_work": "Voir Projets",
+        "cta_contact": "Me Contacter"
+    },
+    "About": {
+        "title": "À Propos.",
+        "subtitle_role": "Alternant",
+        "subtitle": "Le parcours d'un <role>Alternant</role> passionné.<br>Toujours un pied en entreprise, un pied à l'école.",
+        "experience": "Expérience",
+        "xp_desc": "5 ans d'expérience cumulée entre alternance, freelance et projets personnels. Une montée en compétence constante.",
+        "passions": "Passions & Intérêts",
+        "freelance_title": "Freelance & Consulting",
+        "freelance_desc": "Je mets mon expertise technique au service de vos projets. Disponible pour des missions courtes ou de l'accompagnement long terme.",
+        "freelance_cta_title": "Un projet en tête ?",
+        "freelance_cta_desc": "Discutons de vos besoins et construisons quelque chose d'unique.",
+        "freelance_cta_button": "Me contacter"
+    },
+    "Work": {
+        "title_selected": "Projets",
+        "title_works": "Choisis",
+        "desc_p1": "Une collection d'architectures numériques et de systèmes robustes.",
+        "desc_p2": "Conçu pour la {perf}, pensé pour les {humans}.",
+        "perf": "performance",
+        "humans": "humains",
+        "scroll_hint": "Faites défiler pour explorer le catalogue",
+        "Filters": {
+            "all": "Tous",
+            "web_apps": "App. Web",
+            "dev_tools": "Outils Dev",
+            "games": "Jeux & Création",
+            "web_design": "Web Design",
+            "mobile": "Mobile"
+        },
+        "view_all": "Voir tous les projets",
+        "view_archives": "Voir archives"
+    },
+    "Footer": {
+        "title": "Créons quelque\nchose d'unique.",
+        "email_copied": "Email copié !",
+        "item_github": "GitHub",
+        "item_linkedin": "LinkedIn",
+        "rights": "Tous droits réservés.",
+        "terminal_hint": "Ouvrir le Terminal",
+        "system_ready": "SYSTÈME PRÊT"
+    }
+}

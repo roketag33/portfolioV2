@@ -5,11 +5,12 @@ import { useGamification } from '@/context/GamificationContext'
 import { useVisualEffects } from '@/context/VisualEffectsContext'
 
 
-import TextRevealByWord from '@/components/ui/text-reveal-by-word'
+import { useTranslations } from 'next-intl'
 
 export default function About() {
     const { unlock } = useGamification()
     const { toggleXRay } = useVisualEffects()
+    const t = useTranslations('HomePage.About')
 
     return (
         <section className="py-20 md:py-32 relative overflow-hidden">
@@ -26,21 +27,35 @@ export default function About() {
                             viewport={{ once: true }}
                             className="text-4xl md:text-6xl font-black uppercase tracking-tighter"
                         >
-                            About <span className="text-primary">Me</span>
+                            {t.rich('title', {
+                                highlight: (chunks) => <span className="text-primary">{chunks}</span>
+                            })}
                         </motion.h2>
 
                         <div className="space-y-6 text-muted-foreground text-lg leading-relaxed">
-                            <TextRevealByWord
-                                text="I'm a software engineer passionate about building robust, scalable systems. My mission is to solve complex problems by bridging the gap between hardware and the cloud."
-                                className="text-muted-foreground"
-                            />
+                            {/* We use standard rich text for full control over translation styling */}
+                            <p className="text-muted-foreground">
+                                {t.rich('description_part1', {
+                                    strong: (chunks) => <strong className="text-foreground font-bold">{chunks}</strong>,
+                                    span: (chunks) => <span className="text-neutral-500">{chunks}</span>,
+                                    br: () => <br />
+                                })}
+                            </p>
+
                             <p>
-                                From low-level IoT firmware to distributed microservices and mobile apps,
-                                I work as a Software <span onClick={() => { unlock('ARCHITECT_VISION'); toggleXRay() }} className="font-bold text-foreground cursor-help hover:text-blue-500 transition-colors">Architect</span> designing end-to-end systems. I obsesse over performance,
-                                security, and clean code.
+                                {t.rich('description_part2', {
+                                    strong: (chunks) => (
+                                        <span
+                                            onClick={() => { unlock('ARCHITECT_VISION'); toggleXRay() }}
+                                            className="font-bold text-foreground cursor-help hover:text-blue-500 transition-colors"
+                                        >
+                                            {chunks}
+                                        </span>
+                                    )
+                                })}
                             </p>
                             <p className="text-foreground font-medium">
-                                Currently based in Bordeaux, working on next-gen web & IoT solutions.
+                                {t('current_location')}
                             </p>
                         </div>
                     </div>

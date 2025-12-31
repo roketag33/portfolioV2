@@ -10,10 +10,12 @@ import PassionsSection from '@/components/features/PassionsSection'
 import StackSection from '@/components/features/StackSection'
 import GlitchText from '@/components/ui/glitch-text'
 import TextRevealByWord from '@/components/ui/text-reveal-by-word'
+import { useTranslations } from 'next-intl'
 
 
 
 export default function AboutPage() {
+    const t = useTranslations('About')
     const containerRef = useRef<HTMLDivElement>(null)
     const timelineRef = useRef<HTMLDivElement>(null)
 
@@ -48,7 +50,7 @@ export default function AboutPage() {
                             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                             className="text-6xl md:text-9xl font-black uppercase tracking-tighter mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/50 inline-block"
                         >
-                            About Me.
+                            {t('title')}
                         </motion.h1>
                     </div>
                     <motion.div
@@ -58,9 +60,10 @@ export default function AboutPage() {
                         className="max-w-2xl mx-auto"
                     >
                         <p className="text-2xl md:text-3xl font-light text-muted-foreground mb-4 leading-relaxed">
-                            Le parcours d&apos;un <span className="text-primary font-medium">Alternant</span> passionné.
-                            <br />
-                            <span className="text-lg md:text-xl opacity-80 mt-2 block">Toujours un pied en entreprise, un pied à l&apos;école.</span>
+                            {t.rich('subtitle', {
+                                role: (chunks) => <span className="text-primary font-medium">{chunks}</span>,
+                                br: () => <br />
+                            })}
                         </p>
                     </motion.div>
                 </div>
@@ -70,10 +73,10 @@ export default function AboutPage() {
                     <div className="text-center mb-16 flex flex-col items-center">
                         <h2 className="text-4xl md:text-5xl font-black uppercase mb-6 flex items-center justify-center gap-3">
                             <Briefcase className="text-primary w-8 h-8 md:w-12 md:h-12" />
-                            <GlitchText text="Expérience" />
+                            <GlitchText text={t('experience')} />
                         </h2>
                         <TextRevealByWord
-                            text="5 ans d'expérience cumulée entre alternance, freelance et projets personnels. Une montée en compétence constante."
+                            text={t('xp_desc')}
                             className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto"
                         />
                     </div>
@@ -242,10 +245,10 @@ export default function AboutPage() {
                                 <span className="w-2 h-2 rounded-full bg-green-500" /> Open to Work
                             </div>
                             <h2 className="text-4xl md:text-5xl font-black uppercase mb-8 leading-tight">
-                                Freelance <span className="text-primary">&</span> Consulting
+                                {t('freelance_title')}
                             </h2>
                             <p className="text-lg text-neutral-300 leading-relaxed mb-10 max-w-lg">
-                                Je mets mon expertise technique au service de vos projets. Disponible pour des missions courtes ou de l&apos;accompagnement long terme.
+                                {t('freelance_desc')}
                             </p>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
                                 {[
@@ -276,14 +279,14 @@ export default function AboutPage() {
                                 <div className="absolute inset-0 bg-gradient-to-br from-neutral-900/50 to-black pointer-events-none" />
 
                                 <div className="relative z-10 text-center">
-                                    <h3 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-400">Un projet en tête ?</h3>
-                                    <p className="text-neutral-400 mb-10 max-w-xs mx-auto text-lg">Discutons de vos besoins et construisons quelque chose d&apos;unique.</p>
+                                    <h3 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-400">{t('freelance_cta_title')}</h3>
+                                    <p className="text-neutral-400 mb-10 max-w-xs mx-auto text-lg">{t('freelance_cta_desc')}</p>
 
                                     {/* 5A - Swipe Fill Button */}
                                     <a href="/contact" className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-black text-white uppercase transition-colors duration-300 bg-neutral-900 rounded-full group/btn hover:text-black border border-white/20">
                                         <span className="absolute inset-0 w-full h-full bg-white -translate-x-full transition-transform duration-300 ease-out group-hover/btn:translate-x-0"></span>
                                         <span className="relative flex items-center gap-2">
-                                            Me contacter <Zap size={18} className="transition-transform group-hover/btn:translate-x-1" />
+                                            {t('freelance_cta_button')} <Zap size={18} className="transition-transform group-hover/btn:translate-x-1" />
                                         </span>
                                     </a>
                                 </div>
@@ -295,7 +298,7 @@ export default function AboutPage() {
                 {/* PASSIONS */}
                 <div className="mt-40 mb-20">
                     <h3 className="text-2xl font-black uppercase mb-12 flex items-center gap-3 justify-center md:justify-start">
-                        <Trophy className="text-yellow-500" /> Passions & Intérêts
+                        <Trophy className="text-yellow-500" /> {t('passions')}
                     </h3>
                     <PassionsSection />
                 </div>

@@ -12,7 +12,7 @@
 ## Features & Tech
 - [x] [Analytics] Ajouter des metrics (visiteurs, temps passé, etc.)
 - [ ] [Newsletter] Mettre en place un système de newsletter
-- [ ] [i18n] Ajouter les traductions FR/EN
+- [x] [i18n] Ajouter le support multilingue (FR/EN)
 - [x] [SEO] Réfléchir à des optimisations SEO (Metadata added)
 - [x] [Deployment] Déployer sur Vercel (Analytics added, Build verified)
 
@@ -36,3 +36,7 @@
 
 - [ ] [site] reflehcir au nom de domaines que je vais acheter et mettre en place un emails personnalisé avec le nom de domaines pour recevoir les demandes
 - [ ] [site] changer toute les images par des images propres 
+
+
+- [ ] [site] verifier tout les textes poour voir si ils ont uen clé de traduction et si elles sont traduites
+- [ ] [site] verrifier tout les textes en en et fr pour voir si ca casse pas le site 

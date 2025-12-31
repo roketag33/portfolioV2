@@ -44,6 +44,10 @@ export default function HyperText({
     };
 
     useEffect(() => {
+        setDisplayText(text.split(""));
+    }, [text]);
+
+    useEffect(() => {
         const interval = setInterval(() => {
             if (!trigger) {
                 clearInterval(interval);
@@ -55,7 +59,7 @@ export default function HyperText({
                         l === " "
                             ? l
                             : i <= interations.current
-                                ? text[i]
+                                ? text[i] || ""
                                 : alphabets[getRandomInt(26)]
                     )
                 );
@@ -93,14 +97,14 @@ export default function HyperText({
             className="overflow-hidden py-2 flex cursor-default scale-100"
             onMouseEnter={triggerAnimation}
         >
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
                 {displayText.map((letter, i) => (
                     <MotionComponent
                         key={i}
                         className={cn("font-mono", letter === " " ? "w-3" : "", className)}
                         {...framerProps}
                     >
-                        {letter.toUpperCase()}
+                        {letter?.toUpperCase()}
                     </MotionComponent>
                 ))}
             </AnimatePresence>

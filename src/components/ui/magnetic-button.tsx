@@ -3,7 +3,7 @@ import { useRef, useState, ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
-import Link from 'next/link'
+import { Link } from '@/i18n/routingConfig'
 
 interface MagneticButtonProps {
     children: ReactNode
@@ -55,7 +55,7 @@ export default function MagneticButton({ children, className, onClick, variant =
         "relative overflow-hidden rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background flex items-center justify-center",
         variant === 'primary'
             ? "bg-foreground text-background hover:bg-foreground/90"
-            : "border border-white/10 bg-white/10 hover:bg-white/20 text-white",
+            : "border border-neutral-200 dark:border-white/10 bg-neutral-100 dark:bg-white/10 hover:bg-neutral-200 dark:hover:bg-white/20 text-neutral-900 dark:text-white",
         "px-8 py-4 text-lg font-medium",
         className
     )

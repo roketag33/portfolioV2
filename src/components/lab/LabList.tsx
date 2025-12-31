@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/i18n/routingConfig';
 import { Project } from './types';
 import { useGamification } from '@/context/GamificationContext';
 import { useState, useEffect } from 'react';

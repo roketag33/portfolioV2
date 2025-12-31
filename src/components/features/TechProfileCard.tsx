@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useRef } from 'react'
-import Link from 'next/link'
+import { Link } from '@/i18n/routingConfig'
 import GlitchText from '@/components/ui/glitch-text'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { MapPin, Briefcase, Layers, Cpu, Globe, Server, Database } from 'lucide-react'

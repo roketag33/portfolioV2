@@ -3,11 +3,12 @@
 import { useRef, useMemo, useEffect, useState } from 'react'
 import { motion, useScroll, useTransform, MotionValue } from 'framer-motion'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '@/i18n/routingConfig'
 import { cn } from '@/lib/utils'
 import { ArrowUpRight } from 'lucide-react'
 import { PROJECTS, Project } from '@/data/projects'
 import { useGamification } from '@/context/GamificationContext'
+import { useTranslations } from 'next-intl'
 
 export default function WorkCatalog() {
     const containerRef = useRef<HTMLDivElement>(null)
@@ -56,8 +57,18 @@ export default function WorkCatalog() {
     }, [unlock])
 
     // Filter Logic
+    const t = useTranslations('Work.Filters')
     const [activeCategory, setActiveCategory] = useState<string>("All")
-    const categories = ["All", "Web Apps", "Dev Tools", "Games & Creative", "Web Design", "Mobile"]
+
+    // Mapping keys to exact data category strings
+    const categories = [
+        { id: "All", label: t('all') },
+        { id: "Web Apps", label: t('web_apps') },
+        { id: "Dev Tools", label: t('dev_tools') },
+        { id: "Games & Creative", label: t('games') },
+        { id: "Web Design", label: t('web_design') },
+        { id: "Mobile", label: t('mobile') }
+    ]
 
     const filteredProjects = useMemo(() => {
         if (activeCategory === "All") return PROJECTS
@@ -79,17 +90,17 @@ export default function WorkCatalog() {
             <div className="flex flex-wrap justify-center gap-6 mb-20 px-6">
                 {categories.map((cat) => (
                     <button
-                        key={cat}
-                        onClick={() => setActiveCategory(cat)}
+                        key={cat.id}
+                        onClick={() => setActiveCategory(cat.id)}
                         className={cn(
                             "relative px-2 py-1 text-sm font-mono uppercase tracking-wider transition-colors duration-300",
-                            activeCategory === cat
+                            activeCategory === cat.id
                                 ? "text-black font-bold"
                                 : "text-neutral-400 hover:text-neutral-600"
                         )}
                     >
-                        {cat}
-                        {activeCategory === cat && (
+                        {cat.label}
+                        {activeCategory === cat.id && (
                             <motion.div
                                 layoutId="activeFilter"
                                 className="absolute -bottom-2 left-0 right-0 h-0.5 bg-black"

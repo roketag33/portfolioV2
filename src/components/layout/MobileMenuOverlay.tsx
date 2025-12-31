@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import Link from 'next/link'
+import { Link } from '@/i18n/routingConfig'
 import { Button } from '@/components/ui/button'
 import { X } from 'lucide-react'
 import ClientPortal from '@/components/ui/client-portal'

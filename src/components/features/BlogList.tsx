@@ -1,6 +1,6 @@
 'use client'
 
-import Link from 'next/link'
+import { Link } from '@/i18n/routingConfig'
 import Image from 'next/image'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'

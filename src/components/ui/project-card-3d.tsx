@@ -2,7 +2,7 @@
 import React, { useRef } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from '@/i18n/routingConfig';
 
 interface ProjectCard3DProps {
     title: string;

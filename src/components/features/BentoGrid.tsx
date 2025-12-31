@@ -1,7 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Link from 'next/link'
+import { Link } from '@/i18n/routingConfig'
+import { useTranslations } from 'next-intl'
 import { Calendar, Briefcase, Coffee, ArrowUpRight } from 'lucide-react'
 import { useState } from 'react'
 import { useGamification } from '@/context/GamificationContext'
@@ -46,7 +47,7 @@ const MarqueeRow = ({ items, reverse = false }: { items: string[], reverse?: boo
 
 // ... (previous code)
 
-const StackMarquee = () => {
+const StackMarquee = ({ t }: { t: any }) => {
     // Map categories from SKILLS to the marquee rows
     // Row 1: Backend (Index 1)
     const stackBack = SKILLS[1]?.skills || []
@@ -59,7 +60,7 @@ const StackMarquee = () => {
         <div className="flex flex-col h-full p-8 justify-between">
             <div className="flex items-center gap-3 mb-6">
                 <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                <span className="text-xs text-neutral-400 font-mono uppercase tracking-[0.2em]">Technology</span>
+                <span className="text-xs text-neutral-400 font-mono uppercase tracking-[0.2em]">{t('tech')}</span>
             </div>
 
             <div className="flex flex-col justify-center flex-1 gap-6 opacity-80 group-hover:opacity-100 transition-opacity">
@@ -96,25 +97,28 @@ const MinimalMap = () => (
     </div>
 )
 
-const StatusBlock = () => (
-    <Link href="/contact" className="h-full flex items-center justify-between p-8 group cursor-pointer">
-        <div className="flex items-center gap-6">
-            <div className="relative flex items-center justify-center">
-                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <div className="absolute w-8 h-8 border border-emerald-500/20 rounded-full animate-[spin_4s_linear_infinite]" />
-            </div>
-            <BorderBeam size={100} duration={10} delay={0} colorFrom="#10b981" colorTo="#34d399" />
-
-            <div className="relative z-10">
-                <div className="text-sm font-medium text-white tracking-wide group-hover:text-emerald-400 transition-colors">
-                    <TextReveal text="Available for Hire" className="bg-transparent" />
+const StatusBlock = () => {
+    const t = useTranslations('HomePage.Bento')
+    return (
+        <Link href="/contact" className="h-full flex items-center justify-between p-8 group cursor-pointer">
+            <div className="flex items-center gap-6">
+                <div className="relative flex items-center justify-center">
+                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <div className="absolute w-8 h-8 border border-emerald-500/20 rounded-full animate-[spin_4s_linear_infinite]" />
                 </div>
-                <div className="text-[10px] text-neutral-400 font-mono uppercase tracking-widest mt-1">Open to opportunities</div>
+                <BorderBeam size={100} duration={10} delay={0} colorFrom="#10b981" colorTo="#34d399" />
+
+                <div className="relative z-10">
+                    <div className="text-sm font-medium text-white tracking-wide group-hover:text-emerald-400 transition-colors">
+                        <TextReveal text={t('available_status')} className="bg-transparent" />
+                    </div>
+                    <div className="text-[10px] text-neutral-400 font-mono uppercase tracking-widest mt-1">{t('open_to_work')}</div>
+                </div>
             </div>
-        </div>
-        <ArrowUpRight className="w-5 h-5 text-neutral-600 group-hover:text-emerald-400 transition-colors duration-500 transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-    </Link>
-)
+            <ArrowUpRight className="w-5 h-5 text-neutral-600 group-hover:text-emerald-400 transition-colors duration-500 transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+        </Link>
+    )
+}
 
 const SwissStat = ({ label, value, icon: Icon }: { label: string, value: string, icon: React.ComponentType<{ className?: string }> }) => (
     <div className="h-full flex flex-col justify-between p-6 hover:bg-white/[0.02] transition-colors cursor-default">
@@ -136,7 +140,7 @@ const SwissStat = ({ label, value, icon: Icon }: { label: string, value: string,
     </div>
 )
 
-const CleanCodeBlock = () => {
+const CleanCodeBlock = ({ t }: { t: any }) => {
     const { unlock } = useGamification()
     const { toggleDebug } = useVisualEffects()
     const [clicks, setClicks] = useState(0)
@@ -185,7 +189,7 @@ const CleanCodeBlock = () => {
                         transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                     />
                 </div>
-                <div className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest group-hover:text-white transition-colors">Clean Code</div>
+                <div className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest group-hover:text-white transition-colors">{t('clean_code')}</div>
             </div>
         </TiltCard>
     )
@@ -194,12 +198,14 @@ const CleanCodeBlock = () => {
 // --- Main Grid Component ---
 
 export default function BentoGrid() {
+    const t = useTranslations('HomePage.Bento')
+
     return (
         <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-4 md:grid-rows-3 gap-3 h-[600px] md:h-[500px]">
 
             {/* 1. Large Stack Block (2x2) */}
             <BentoCard className="col-span-2 row-span-2 md:col-span-2 md:row-span-2">
-                <StackMarquee />
+                <StackMarquee t={t} />
             </BentoCard>
 
             {/* 2. Minimal Map (1x2) */}
@@ -210,10 +216,10 @@ export default function BentoGrid() {
             {/* 3. Exp & Projects (Split Vertical 1x2) */}
             <div className="col-span-1 row-span-2 flex flex-col gap-3">
                 <BentoCard className="flex-1" delay={0.2}>
-                    <SwissStat label="Years Exp." value="5+" icon={Calendar} />
+                    <SwissStat label={t('years')} value="5+" icon={Calendar} />
                 </BentoCard>
                 <BentoCard className="flex-1" delay={0.3}>
-                    <SwissStat label="Projects" value="15+" icon={Briefcase} />
+                    <SwissStat label={t('projects')} value="15+" icon={Briefcase} />
                 </BentoCard>
             </div>
 
@@ -234,13 +240,13 @@ export default function BentoGrid() {
                     />
                     <div>
                         <div className="text-2xl font-light text-white">∞</div>
-                        <div className="text-[10px] text-neutral-500 font-mono uppercase tracking-widest mt-1">Refills</div>
+                        <div className="text-[10px] text-neutral-500 font-mono uppercase tracking-widest mt-1">{t('refills')}</div>
                     </div>
                 </div>
             </BentoCard>
 
             <BentoCard className="col-span-1" delay={0.6}>
-                <CleanCodeBlock />
+                <CleanCodeBlock t={t} />
             </BentoCard>
 
         </div>

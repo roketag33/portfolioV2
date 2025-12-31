@@ -2,8 +2,10 @@
 import { motion } from 'framer-motion'
 import WorkCatalog from '@/components/features/WorkCatalog'
 import HyperText from '@/components/ui/hyper-text'
+import { useTranslations } from 'next-intl'
 
 export default function WorkPage() {
+    const t = useTranslations('Work')
     return (
         <main className="min-h-screen bg-background text-foreground">
             {/* Introduction Section */}
@@ -24,7 +26,7 @@ export default function WorkPage() {
                                     }}
                                 >
                                     <HyperText
-                                        text="Selected"
+                                        text={t('title_selected')}
                                         as="span"
                                         className="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-[0.8]"
                                         animateOnLoad={false}
@@ -41,7 +43,7 @@ export default function WorkPage() {
                                     }}
                                 >
                                     <HyperText
-                                        text="Works"
+                                        text={t('title_works')}
                                         as="span"
                                         className="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-[0.8] text-neutral-400"
                                         animateOnLoad={false}
@@ -69,9 +71,12 @@ export default function WorkPage() {
                             }}
                         >
                             <p className="text-xl md:text-2xl font-light leading-relaxed text-neutral-600">
-                                A collection of digital architectures and robust systems.
-                                Engineered for <span className="text-emerald-600 font-medium">performance</span>,
-                                designed for <span className="text-black font-medium">humans</span>.
+                                {t('desc_p1')}
+                                <br />
+                                {t.rich('desc_p2', {
+                                    perf: (chunks) => <span className="text-emerald-600 font-medium">{chunks}</span>,
+                                    humans: (chunks) => <span className="text-black font-medium">{chunks}</span>
+                                })}
                             </p>
                         </motion.div>
 
@@ -91,7 +96,7 @@ export default function WorkPage() {
                             className="text-sm font-mono text-neutral-400 uppercase tracking-widest flex items-center gap-2"
                         >
                             <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                            Scroll to explore the catalog
+                            {t('scroll_hint')}
                         </motion.p>
                     </div>
                 </motion.div>
