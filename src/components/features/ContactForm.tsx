@@ -10,7 +10,10 @@ import { Loader2, Send } from "lucide-react"
 import { SpotlightInput, SpotlightTextarea } from "@/components/ui/spotlight-input"
 import MagneticButton from "@/components/ui/magnetic-button"
 
+import { useTranslations } from "next-intl"
+
 export function ContactForm() {
+    const t = useTranslations('Contact')
     const [isSubmitting, setIsSubmitting] = useState(false)
 
     const form = useForm<ContactFormValues>({
@@ -34,13 +37,13 @@ export function ContactForm() {
 
             if (!response.ok) throw new Error("Failed to send message")
 
-            toast.success("Message sent!", {
-                description: "Thanks for reaching out. I'll get back to you soon.",
+            toast.success(t('toast_success_title'), {
+                description: t('toast_success_desc'),
             })
             form.reset()
         } catch (error) {
-            toast.error("Error", {
-                description: "Something went wrong. Please try again.",
+            toast.error(t('toast_error_title'), {
+                description: t('toast_error_desc'),
             })
         } finally {
             setIsSubmitting(false)
@@ -57,10 +60,10 @@ export function ContactForm() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                        <label htmlFor="name" className="text-sm font-medium text-white/70 uppercase tracking-widest">Name</label>
+                        <label htmlFor="name" className="text-sm font-medium text-white/70 uppercase tracking-widest">{t('form_name_label')}</label>
                         <SpotlightInput
                             {...form.register("name")}
-                            placeholder="John Doe"
+                            placeholder={t('form_name_placeholder')}
                         />
                         {form.formState.errors.name && (
                             <p className="text-red-400 text-xs mt-1">{form.formState.errors.name.message}</p>
@@ -68,10 +71,10 @@ export function ContactForm() {
                     </div>
 
                     <div className="space-y-2">
-                        <label htmlFor="email" className="text-sm font-medium text-white/70 uppercase tracking-widest">Email</label>
+                        <label htmlFor="email" className="text-sm font-medium text-white/70 uppercase tracking-widest">{t('form_email_label')}</label>
                         <SpotlightInput
                             {...form.register("email")}
-                            placeholder="john@example.com"
+                            placeholder={t('form_email_placeholder')}
                         />
                         {form.formState.errors.email && (
                             <p className="text-red-400 text-xs mt-1">{form.formState.errors.email.message}</p>
@@ -80,10 +83,10 @@ export function ContactForm() {
                 </div>
 
                 <div className="space-y-2">
-                    <label htmlFor="subject" className="text-sm font-medium text-white/70 uppercase tracking-widest">Subject</label>
+                    <label htmlFor="subject" className="text-sm font-medium text-white/70 uppercase tracking-widest">{t('form_subject_label')}</label>
                     <SpotlightInput
                         {...form.register("subject")}
-                        placeholder="Project Opportunity..."
+                        placeholder={t('form_subject_placeholder')}
                     />
                     {form.formState.errors.subject && (
                         <p className="text-red-400 text-xs mt-1">{form.formState.errors.subject.message}</p>
@@ -91,10 +94,10 @@ export function ContactForm() {
                 </div>
 
                 <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium text-white/70 uppercase tracking-widest">Message</label>
+                    <label htmlFor="message" className="text-sm font-medium text-white/70 uppercase tracking-widest">{t('form_message_label')}</label>
                     <SpotlightTextarea
                         {...form.register("message")}
-                        placeholder="Tell me about your project..."
+                        placeholder={t('form_message_placeholder')}
                     />
                     {form.formState.errors.message && (
                         <p className="text-red-400 text-xs mt-1">{form.formState.errors.message.message}</p>
@@ -111,7 +114,7 @@ export function ContactForm() {
                         <Loader2 className="w-5 h-5 animate-spin" />
                     ) : (
                         <div className="flex items-center gap-2">
-                            Send Message
+                            {t('form_submit_button')}
                             <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </div>
                     )}

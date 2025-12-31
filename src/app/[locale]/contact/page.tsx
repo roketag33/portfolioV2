@@ -5,7 +5,11 @@ import { motion } from 'framer-motion'
 import { ContactForm } from '@/components/features/ContactForm'
 import { Mail, MapPin, Linkedin, Github } from 'lucide-react'
 
+import { useTranslations } from 'next-intl'
+
 export default function ContactPage() {
+    const t = useTranslations('Contact')
+
     return (
         <main className="min-h-screen bg-neutral-950 text-white relative overflow-hidden flex flex-col pt-32 pb-20 px-6">
             {/* Ambient Background */}
@@ -28,7 +32,7 @@ export default function ContactPage() {
                             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                         >
                             <h1 className="text-6xl md:text-8xl font-black uppercase leading-none mb-6">
-                                Let&apos;s <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">Talk</span>
+                                {t('title_start')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">{t('title_end')}</span>
                             </h1>
                         </motion.div>
 
@@ -38,8 +42,7 @@ export default function ContactPage() {
                             transition={{ delay: 0.1, duration: 0.8 }}
                             className="text-xl md:text-2xl text-white/60 font-light max-w-lg"
                         >
-                            Have a project in mind or just want to chat?
-                            Feel free to reach out. I&apos;m always open to discussing new ideas.
+                            {t('subtitle')}
                         </motion.p>
                     </motion.div>
 
@@ -66,7 +69,7 @@ export default function ContactPage() {
                                 <Mail className="w-5 h-5" />
                             </div>
                             <div>
-                                <div className="text-sm text-white/40 uppercase tracking-widest">Email</div>
+                                <div className="text-sm text-white/40 uppercase tracking-widest">{t('email_label')}</div>
                                 <div className="text-xl font-medium">contact@roketag.com</div>
                             </div>
                         </motion.div>
@@ -79,7 +82,7 @@ export default function ContactPage() {
                                 <MapPin className="w-5 h-5" />
                             </div>
                             <div>
-                                <div className="text-sm text-white/40 uppercase tracking-widest">Location</div>
+                                <div className="text-sm text-white/40 uppercase tracking-widest">{t('location_label')}</div>
                                 <div className="text-xl font-medium">Bordeaux, France</div>
                             </div>
                         </motion.div>

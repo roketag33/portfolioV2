@@ -5,7 +5,10 @@ import { useGamification } from '@/context/GamificationContext'
 import { useState, useRef } from 'react'
 import { cn } from '@/lib/utils'
 
+import { useTranslations } from 'next-intl'
+
 export default function BlogPage() {
+    const t = useTranslations('Blog')
     const { unlock } = useGamification()
     const [neonColor, setNeonColor] = useState<string>('')
 
@@ -58,7 +61,7 @@ export default function BlogPage() {
                             />
                         )}
 
-                        <span className="relative z-10">Thoughts</span> <br className="md:hidden" />
+                        <span className="relative z-10">{t('header_thoughts')}</span> <br className="md:hidden" />
                         <span
                             onClick={handleAmpersandClick}
                             className={cn(
@@ -72,7 +75,7 @@ export default function BlogPage() {
                         >
                             <span className={neonColor}>&</span>
                         </span>
-                        <br /><span className="relative z-10">Insights</span>
+                        <br /><span className="relative z-10">{t('header_insights')}</span>
                     </h1>
                     <p className="text-xl text-muted-foreground max-w-2xl">
                         Partage d'expériences sur le développement web, le design et l'architecture logicielle.

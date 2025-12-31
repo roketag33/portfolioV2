@@ -9,7 +9,10 @@ import { Trophy, Lock } from 'lucide-react'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 
+import { useTranslations } from 'next-intl'
+
 export default function AchievementsPage() {
+    const t = useTranslations('Achievements')
     const { unlocked, score, unlock } = useGamification()
     const allAchievements = Object.values(ACHIEVEMENTS)
 
@@ -31,7 +34,7 @@ export default function AchievementsPage() {
             <div className="w-full max-w-4xl mb-12 flex items-center justify-between">
                 <Link href="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
                     <ArrowLeft size={20} />
-                    Home
+                    {t('back_home')}
                 </Link>
                 <div
                     className="flex items-center gap-2 cursor-pointer select-none active:scale-95 transition-transform"
@@ -72,10 +75,10 @@ export default function AchievementsPage() {
                 className="text-center mb-16"
             >
                 <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4">
-                    Trophy Room
+                    {t('title')}
                 </h1>
                 <p className="text-xl text-muted-foreground">
-                    Your collection of digital milestones.
+                    {t('subtitle')}
                 </p>
             </motion.div>
 
@@ -144,7 +147,7 @@ export default function AchievementsPage() {
                             <div className="flex-1">
                                 <div className="flex justify-between items-start mb-1">
                                     <h3 className={`font-bold text-lg ${isSecret ? 'blur-sm' : ''}`}>
-                                        {isSecret ? 'Hidden Achievement' : achievement.title}
+                                        {isSecret ? t('hidden_achievement') : achievement.title}
                                     </h3>
                                     {isUnlocked && (
                                         <Badge variant="outline" className="border-primary/50 text-primary">

@@ -1,6 +1,7 @@
 'use client'
 
 import { Link } from '@/i18n/routingConfig'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
@@ -77,6 +78,7 @@ const TypewriterDate = ({ date, isHovered }: { date: string, isHovered: boolean 
 
 export default function BlogList() {
     const { unlock } = useGamification()
+    const t = useTranslations('Blog')
     const [posts, setPosts] = useState<Post[]>([])
     const [search, setSearch] = useState('')
     const [selectedTag, setSelectedTag] = useState<string | null>(null)
@@ -196,7 +198,6 @@ export default function BlogList() {
     return (
         <div className="space-y-12">
             {/* ... */}
-
             {/* Search & Filters */}
             <div className="space-y-6">
                 <div className="relative max-w-lg mx-auto md:mx-0 group">
@@ -212,7 +213,7 @@ export default function BlogList() {
                     )} />
 
                     <Input
-                        placeholder={isOracleMode ? oraclePlaceholders[placeholderIndex] : "Search for articles, insights..."}
+                        placeholder={isOracleMode ? oraclePlaceholders[placeholderIndex] : t('search_placeholder')}
                         className={cn(
                             "pl-10 transition-all rounded-full h-11 border-white/10 relative z-10",
                             isOracleMode
@@ -238,14 +239,14 @@ export default function BlogList() {
                 </div>
 
                 <div className="flex flex-wrap gap-2 items-center">
-                    <span className="text-sm font-medium text-muted-foreground mr-2">Topics:</span>
+                    <span className="text-sm font-medium text-muted-foreground mr-2">{t('topics')}</span>
                     <motion.div className="flex flex-wrap gap-2">
                         <Badge
                             variant={selectedTag === null ? "default" : "secondary"}
                             className={`cursor-pointer transition-all hover:scale-105 ${selectedTag === null ? 'bg-primary text-primary-foreground' : 'bg-white/5 hover:bg-white/10'}`}
                             onClick={() => handleTagClick(null)}
                         >
-                            All
+                            {t('all')}
                         </Badge>
                         {Array.from(new Set(posts.flatMap(p => p.tags || []))).map(tag => {
                             // Don't show gold border if we've already hit the target
@@ -268,7 +269,6 @@ export default function BlogList() {
                     </motion.div>
                 </div>
             </div>
-
 
             <AnimatePresence>
                 {/* Featured Post */}
@@ -298,7 +298,7 @@ export default function BlogList() {
                                     <div className="space-y-4 max-w-4xl">
                                         <div className="flex items-center gap-4 text-sm font-mono text-cyan-400">
                                             <span className="px-3 py-1 rounded-full bg-cyan-950/30 border border-cyan-500/30 backdrop-blur-md">
-                                                Featured
+                                                {t('featured')}
                                             </span>
                                             <span>{typeof featuredPost.date === 'string' ? featuredPost.date : formatDistance(new Date(featuredPost.date!), new Date(), { addSuffix: true })}</span>
                                             <span>{featuredPost.readTime}</span>
@@ -316,7 +316,6 @@ export default function BlogList() {
                     </motion.div>
                 )}
             </AnimatePresence>
-
 
             {/* Grid */}
             <motion.div
@@ -337,7 +336,6 @@ export default function BlogList() {
                             hoveredId && hoveredId === (post.id || post.slug) && "scale-[1.02] border-primary/30 bg-white/10 shadow-2xl shadow-black/50 z-10"
                         )}
                     >
-
                         {post.coverImage && (
                             <div className="aspect-[16/10] mb-5 rounded-xl overflow-hidden bg-black/20 relative">
                                 <img
@@ -394,7 +392,7 @@ export default function BlogList() {
                         onClick={() => { setPage(p => p - 1); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
                         className="rounded-full px-6"
                     >
-                        Previous
+                        {t('previous')}
                     </Button>
                     <div className="flex items-center gap-1 px-4">
                         {Array.from({ length: totalPages }).map((_, i) => (
@@ -411,7 +409,7 @@ export default function BlogList() {
                         onClick={() => { setPage(p => p + 1); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
                         className="rounded-full px-6"
                     >
-                        Next
+                        {t('next')}
                     </Button>
                 </div>
             )}

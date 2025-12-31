@@ -38,7 +38,7 @@
     "About": {
         "title": "About Me.",
         "subtitle_role": "Alternant",
-        "subtitle": "The journey of a passionate <role>Alternant</role>.<br>Always one foot in business, one foot in school.",
+        "subtitle": "The journey of a passionate <role>Alternant</role>.<newLine>Always one foot in business, one foot in school.</newLine>",
         "experience": "Experience",
         "xp_desc": "5 years of accumulated experience between apprenticeship, freelance and personal projects. Constant skill ramp-up.",
         "passions": "Passions & Interests",
@@ -52,9 +52,7 @@
         "title_selected": "Selected",
         "title_works": "Works",
         "desc_p1": "A collection of digital architectures and robust systems.",
-        "desc_p2": "Engineered for {perf}, designed for {humans}.",
-        "perf": "performance",
-        "humans": "humans",
+        "desc_p2": "Engineered for <perf>performance</perf>, designed for <humans>humans</humans>.",
         "scroll_hint": "Scroll to explore the catalog",
         "Filters": {
             "all": "All",
@@ -75,5 +73,42 @@
         "rights": "All rights reserved.",
         "terminal_hint": "Open Terminal",
         "system_ready": "SYSTEM READY"
+    },
+    "Blog": {
+        "title": "Blog | Thoughts & Insights",
+        "header_thoughts": "Thoughts",
+        "header_insights": "Insights",
+        "search_placeholder": "Search for articles, insights...",
+        "topics": "Topics:",
+        "all": "All",
+        "featured": "Featured",
+        "previous": "Previous",
+        "next": "Next"
+    },
+    "Achievements": {
+        "back_home": "Home",
+        "title": "Trophy Room",
+        "subtitle": "Your collection of digital milestones.",
+        "hidden_achievement": "Hidden Achievement"
+    },
+    "Contact": {
+        "title_start": "Let's",
+        "title_end": "Talk",
+        "subtitle": "Have a project in mind or just want to chat? Feel free to reach out. I'm always open to discussing new ideas.",
+        "email_label": "EMAIL",
+        "location_label": "LOCATION",
+        "form_name_label": "NAME",
+        "form_name_placeholder": "John Doe",
+        "form_email_label": "EMAIL",
+        "form_email_placeholder": "john@example.com",
+        "form_subject_label": "SUBJECT",
+        "form_subject_placeholder": "Project Opportunity...",
+        "form_message_label": "MESSAGE",
+        "form_message_placeholder": "Tell me about your project...",
+        "form_submit_button": "Send Message",
+        "toast_success_title": "Message sent!",
+        "toast_success_desc": "Thanks for reaching out. I'll get back to you soon.",
+        "toast_error_title": "Error",
+        "toast_error_desc": "Something went wrong. Please try again."
     }
 }

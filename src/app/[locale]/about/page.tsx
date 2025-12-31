@@ -62,7 +62,7 @@ export default function AboutPage() {
                         <p className="text-2xl md:text-3xl font-light text-muted-foreground mb-4 leading-relaxed">
                             {t.rich('subtitle', {
                                 role: (chunks) => <span className="text-primary font-medium">{chunks}</span>,
-                                br: () => <br />
+                                newLine: (chunks) => <><br />{chunks}</>
                             })}
                         </p>
                     </motion.div>

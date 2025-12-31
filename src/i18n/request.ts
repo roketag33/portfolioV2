@@ -15,7 +15,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
         messages: (await import(`../../messages/${locale}.json`)).default,
         onError(error) {
             if (error.code === IntlErrorCode.MISSING_MESSAGE) {
-                console.warn(`[next-intl] Missing translation for key: "${error.path}" in locale: "${locale}"`);
+                console.warn(`[next-intl] Missing translation for key: "${(error as any).path}" in locale: "${locale}"`);
             } else {
                 console.error(error);
             }

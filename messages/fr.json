@@ -38,7 +38,7 @@
     "About": {
         "title": "À Propos.",
         "subtitle_role": "Alternant",
-        "subtitle": "Le parcours d'un <role>Alternant</role> passionné.<br>Toujours un pied en entreprise, un pied à l'école.",
+        "subtitle": "Le parcours d'un <role>Alternant</role> passionné.<newLine>Toujours un pied en entreprise, un pied à l'école.</newLine>",
         "experience": "Expérience",
         "xp_desc": "5 ans d'expérience cumulée entre alternance, freelance et projets personnels. Une montée en compétence constante.",
         "passions": "Passions & Intérêts",
@@ -52,9 +52,7 @@
         "title_selected": "Projets",
         "title_works": "Choisis",
         "desc_p1": "Une collection d'architectures numériques et de systèmes robustes.",
-        "desc_p2": "Conçu pour la {perf}, pensé pour les {humans}.",
-        "perf": "performance",
-        "humans": "humains",
+        "desc_p2": "Conçu pour la <perf>performance</perf>, pensé pour les <humans>humains</humans>.",
         "scroll_hint": "Faites défiler pour explorer le catalogue",
         "Filters": {
             "all": "Tous",
@@ -75,5 +73,42 @@
         "rights": "Tous droits réservés.",
         "terminal_hint": "Ouvrir le Terminal",
         "system_ready": "SYSTÈME PRÊT"
+    },
+    "Blog": {
+        "title": "Blog | Réflexions & Insights",
+        "header_thoughts": "Réflexions",
+        "header_insights": "Insights",
+        "search_placeholder": "Rechercher des articles...",
+        "topics": "Sujets :",
+        "all": "Tous",
+        "featured": "À la une",
+        "previous": "Précédent",
+        "next": "Suivant"
+    },
+    "Achievements": {
+        "back_home": "Accueil",
+        "title": "Salle des Trophées",
+        "subtitle": "Votre collection de succès.",
+        "hidden_achievement": "Succès Masqué"
+    },
+    "Contact": {
+        "title_start": "Parlons",
+        "title_end": "Projets",
+        "subtitle": "Vous avez un projet en tête ou vous voulez simplement discuter ? N'hésitez pas à me contacter. Je suis toujours ouvert aux nouvelles idées.",
+        "email_label": "EMAIL",
+        "location_label": "LOCALISATION",
+        "form_name_label": "NOM",
+        "form_name_placeholder": "Jean Dupont",
+        "form_email_label": "EMAIL",
+        "form_email_placeholder": "jean@exemple.com",
+        "form_subject_label": "SUJET",
+        "form_subject_placeholder": "Opportunité de projet...",
+        "form_message_label": "MESSAGE",
+        "form_message_placeholder": "Parlez-moi de votre projet...",
+        "form_submit_button": "Envoyer le message",
+        "toast_success_title": "Message envoyé !",
+        "toast_success_desc": "Merci de m'avoir contacté. Je reviens vers vous très vite.",
+        "toast_error_title": "Erreur",
+        "toast_error_desc": "Une erreur est survenue. Veuillez réessayer."
     }
 }
