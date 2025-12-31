@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import { Environment, Float } from '@react-three/drei'
 import { useState, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
+import * as THREE from 'three'
 
 // Simple mesh level for preview (lighter than full physics)
 function LevelPreview() {

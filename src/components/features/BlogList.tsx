@@ -158,15 +158,7 @@ export default function BlogList() {
                     coverImage: p.coverImage
                 }))
 
-            // DEBUG: Inject Mock Data if only 1 post (Featured) exists, to verify Grid
-            if (formatted.length <= 1) {
-                console.log("DEBUG: Injecting mocks for grid verification")
-                formatted.push(
-                    { id: 'mock-1', slug: 'mock-1', title: 'AI Ethics in 2025', excerpt: 'Exploring the moral landscape of AGI...', date: new Date().toISOString(), readTime: '5 min', tags: ['AI', 'Ethics'], coverImage: null },
-                    { id: 'mock-2', slug: 'mock-2', title: 'React Server Components', excerpt: 'Deep dive into RSC architecture...', date: new Date().toISOString(), readTime: '8 min', tags: ['React', 'Web'], coverImage: null },
-                    { id: 'mock-3', slug: 'mock-3', title: 'The Future of CSS', excerpt: 'From Tailwind to native nesting...', date: new Date().toISOString(), readTime: '4 min', tags: ['CSS', 'Design'], coverImage: null }
-                )
-            }
+
 
             setPosts(formatted)
         })
