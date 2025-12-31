@@ -4,11 +4,12 @@
 
 import { NodeViewWrapper } from '@tiptap/react'
 import { ImageIcon } from 'lucide-react'
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
+import Image from 'next/image'
 
-const HeroComponent = ({ node, updateAttributes, editor }: any) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function HeroComponent({ node, updateAttributes, editor }: any) {
     const fileInputRef = useRef<HTMLInputElement>(null)
-    const [isHovered, setIsHovered] = useState(false)
     const isEditable = editor.isEditable
 
     const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,10 +41,11 @@ const HeroComponent = ({ node, updateAttributes, editor }: any) => {
     return (
         <NodeViewWrapper className="relative w-full h-64 md:h-96 my-8 rounded-xl overflow-hidden group select-none">
             {node.attrs.src ? (
-                <img
+                <Image
                     src={node.attrs.src}
                     alt="Hero"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    fill
+                    className="absolute inset-0 object-cover transition-transform duration-700 group-hover:scale-105"
                 />
             ) : (
                 <div className="absolute inset-0 bg-muted flex flex-col items-center justify-center text-muted-foreground transition-colors group-hover:bg-muted/80">
@@ -57,8 +59,6 @@ const HeroComponent = ({ node, updateAttributes, editor }: any) => {
             {isEditable && (
                 <div
                     className="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end min-h-[50%]"
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
                 >
                     <input
                         type="file"
@@ -81,4 +81,4 @@ const HeroComponent = ({ node, updateAttributes, editor }: any) => {
     )
 }
 
-export default HeroComponent
+

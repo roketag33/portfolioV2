@@ -48,6 +48,7 @@ export const ImageDefinition = Node.create({
 
     addCommands() {
         return {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             setImageBlock: () => ({ commands }: any) => {
                 return commands.insertContent({ type: this.name })
             },

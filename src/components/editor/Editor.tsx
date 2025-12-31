@@ -1,6 +1,6 @@
 'use client'
 
-import { useEditor, EditorContent } from '@tiptap/react'
+import { useEditor, EditorContent, JSONContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Placeholder from '@tiptap/extension-placeholder'
 import { all, createLowlight } from 'lowlight'
@@ -15,8 +15,8 @@ import { FlowExtension } from '@/components/editor/extensions/FlowExtension'
 import { ExcalidrawExtension } from './extensions/ExcalidrawExtension'
 
 interface EditorProps {
-    content?: string | object
-    onChange?: (content: object) => void
+    content?: string | JSONContent
+    onChange?: (content: JSONContent) => void
 }
 
 const lowlight = createLowlight(all)
@@ -43,7 +43,7 @@ export default function Editor({ content, onChange }: EditorProps) {
             ExcalidrawExtension,
             SlashCommand,
         ],
-        content: (content && ((typeof content === 'object' && 'type' in content) || typeof content === 'string')) ? content as any : '',
+        content: (content && ((typeof content === 'object' && 'type' in content) || typeof content === 'string')) ? content as JSONContent : '',
         editorProps: {
             attributes: {
                 class: 'prose prose-lg dark:prose-invert max-w-none focus:outline-none min-h-[500px]',
@@ -64,7 +64,7 @@ export default function Editor({ content, onChange }: EditorProps) {
                     // Defer to next tick to ensure editor is ready
                     setTimeout(() => {
                         if (editor.isEmpty && content) {
-                            editor.commands.setContent(content as any)
+                            editor.commands.setContent(content as JSONContent)
                         }
                     }, 0)
                 } catch (e) {

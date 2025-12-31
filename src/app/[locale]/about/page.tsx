@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
 import { TIMELINE_DATA } from '@/data/experience'
@@ -283,12 +284,12 @@ export default function AboutPage() {
                                     <p className="text-neutral-400 mb-10 max-w-xs mx-auto text-lg">{t('freelance_cta_desc')}</p>
 
                                     {/* 5A - Swipe Fill Button */}
-                                    <a href="/contact" className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-black text-white uppercase transition-colors duration-300 bg-neutral-900 rounded-full group/btn hover:text-black border border-white/20">
+                                    <Link href="/contact" className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-black text-white uppercase transition-colors duration-300 bg-neutral-900 rounded-full group/btn hover:text-black border border-white/20">
                                         <span className="absolute inset-0 w-full h-full bg-white -translate-x-full transition-transform duration-300 ease-out group-hover/btn:translate-x-0"></span>
                                         <span className="relative flex items-center gap-2">
                                             {t('freelance_cta_button')} <Zap size={18} className="transition-transform group-hover/btn:translate-x-1" />
                                         </span>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

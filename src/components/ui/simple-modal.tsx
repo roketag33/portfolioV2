@@ -1,7 +1,7 @@
 'use client'
 
 import { X } from 'lucide-react'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 
 interface SimpleModalProps {
@@ -12,7 +12,6 @@ interface SimpleModalProps {
 }
 
 export function SimpleModal({ isOpen, onClose, title, children }: SimpleModalProps) {
-    const overlayRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {

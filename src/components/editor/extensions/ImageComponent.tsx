@@ -3,8 +3,9 @@
 import { NodeViewWrapper } from '@tiptap/react'
 import { Upload, X } from 'lucide-react'
 import { useCallback, useRef } from 'react'
-import { cn } from '@/lib/utils'
 
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function ImageComponent(props: any) {
     const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -70,6 +71,7 @@ export default function ImageComponent(props: any) {
         <NodeViewWrapper className="my-8 group relative leading-none">
             <figure className="relative">
                 <div className="relative rounded-lg overflow-hidden border border-border bg-muted">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                         src={props.node.attrs.src}
                         alt={props.node.attrs.alt}

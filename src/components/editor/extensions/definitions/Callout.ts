@@ -40,12 +40,15 @@ export const CalloutDefinition = Node.create({
 
     addCommands() {
         return {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             setCallout: () => ({ commands }: any) => {
                 return commands.wrapIn(this.name)
             },
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             toggleCallout: () => ({ commands }: any) => {
                 return commands.toggleWrap(this.name)
             },
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             unsetCallout: () => ({ commands }: any) => {
                 return commands.lift(this.name)
             },

@@ -1,5 +1,5 @@
-import { Extension } from '@tiptap/core'
-import Suggestion from '@tiptap/suggestion'
+import { Extension, Editor, Range } from '@tiptap/core'
+import Suggestion, { SuggestionProps } from '@tiptap/suggestion'
 import { ReactRenderer } from '@tiptap/react'
 import tippy from 'tippy.js'
 import { CommandList } from './CommandList'
@@ -7,8 +7,8 @@ import {
     Heading1, Heading2, Heading3,
     List, ListOrdered,
     MessageSquare, Code,
-    Type, CheckSquare,
-    Quote, Image as ImageIcon, LayoutTemplate,
+    Type,
+    Image as ImageIcon,
     BarChart3,
     Network,
     PenTool
@@ -21,7 +21,7 @@ const getSuggestionItems = ({ query }: { query: string }) => {
             description: 'Upload an image with caption.',
             searchTerms: ['photo', 'picture', 'media'],
             icon: ImageIcon,
-            command: ({ editor, range }: any) => {
+            command: ({ editor, range }: CommandProps) => {
                 editor
                     .chain()
                     .focus()
@@ -37,8 +37,9 @@ const getSuggestionItems = ({ query }: { query: string }) => {
             description: 'Upload a large cover image.',
             searchTerms: ['image', 'cover', 'hero'],
             icon: ImageIcon,
-            command: ({ editor, range }: any) => {
-                editor.chain().focus().deleteRange(range).setHero().run()
+            command: ({ editor, range }: CommandProps) => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                (editor.chain().focus().deleteRange(range) as any).setHero().run()
             },
         },
         {
@@ -46,7 +47,7 @@ const getSuggestionItems = ({ query }: { query: string }) => {
             description: 'Add a code block with syntax highlighting.',
             searchTerms: ['code', 'snippet', 'dev'],
             icon: Code,
-            command: ({ editor, range }: any) => {
+            command: ({ editor, range }: CommandProps) => {
                 editor.chain().focus().deleteRange(range).toggleCodeBlock().run()
             },
         },
@@ -55,7 +56,7 @@ const getSuggestionItems = ({ query }: { query: string }) => {
             description: 'Just start typing with plain text.',
             searchTerms: ['p', 'paragraph'],
             icon: Type,
-            command: ({ editor, range }: any) => {
+            command: ({ editor, range }: CommandProps) => {
                 editor.chain().focus().deleteRange(range).toggleNode('paragraph', 'paragraph').run()
             },
         },
@@ -64,7 +65,7 @@ const getSuggestionItems = ({ query }: { query: string }) => {
             description: 'Big section heading.',
             searchTerms: ['title', 'big', 'large'],
             icon: Heading1,
-            command: ({ editor, range }: any) => {
+            command: ({ editor, range }: CommandProps) => {
                 editor.chain().focus().setTextSelection(range).deleteSelection().toggleHeading({ level: 1 }).run()
             },
         },
@@ -73,7 +74,7 @@ const getSuggestionItems = ({ query }: { query: string }) => {
             description: 'Medium section heading.',
             searchTerms: ['subtitle', 'medium'],
             icon: Heading2,
-            command: ({ editor, range }: any) => {
+            command: ({ editor, range }: CommandProps) => {
                 editor.chain().focus().setTextSelection(range).deleteSelection().toggleHeading({ level: 2 }).run()
             },
         },
@@ -82,7 +83,7 @@ const getSuggestionItems = ({ query }: { query: string }) => {
             description: 'Small section heading.',
             searchTerms: ['subtitle', 'small'],
             icon: Heading3,
-            command: ({ editor, range }: any) => {
+            command: ({ editor, range }: CommandProps) => {
                 editor.chain().focus().setTextSelection(range).deleteSelection().toggleHeading({ level: 3 }).run()
             },
         },
@@ -91,7 +92,7 @@ const getSuggestionItems = ({ query }: { query: string }) => {
             description: 'Create a simple bullet list.',
             searchTerms: ['unordered', 'point'],
             icon: List,
-            command: ({ editor, range }: any) => {
+            command: ({ editor, range }: CommandProps) => {
                 editor.chain().focus().setTextSelection(range).deleteSelection().toggleBulletList().run()
             },
         },
@@ -100,7 +101,7 @@ const getSuggestionItems = ({ query }: { query: string }) => {
             description: 'Create a list with numbering.',
             searchTerms: ['ordered'],
             icon: ListOrdered,
-            command: ({ editor, range }: any) => {
+            command: ({ editor, range }: CommandProps) => {
                 editor.chain().focus().deleteRange(range).toggleOrderedList().run()
             },
         },
@@ -109,8 +110,9 @@ const getSuggestionItems = ({ query }: { query: string }) => {
             description: 'Make a text stand out.',
             searchTerms: ['info', 'warning', 'alert'],
             icon: MessageSquare,
-            command: ({ editor, range }: any) => {
-                editor.chain().focus().deleteRange(range).setCallout().run()
+            command: ({ editor, range }: CommandProps) => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                (editor.chain().focus().deleteRange(range) as any).setCallout().run()
             },
         },
         {
@@ -118,7 +120,7 @@ const getSuggestionItems = ({ query }: { query: string }) => {
             description: 'Display 3 key metrics',
             searchTerms: ['stats', 'metrics', 'numbers'],
             icon: BarChart3,
-            command: ({ editor, range }: any) => {
+            command: ({ editor, range }: CommandProps) => {
                 editor
                     .chain()
                     .focus()
@@ -141,7 +143,7 @@ const getSuggestionItems = ({ query }: { query: string }) => {
             description: 'Diagrams & Charts',
             searchTerms: ['mermaid', 'diagram', 'chart', 'graph'],
             icon: Network,
-            command: ({ editor, range }: any) => {
+            command: ({ editor, range }: CommandProps) => {
                 editor.chain().focus().deleteRange(range).insertContent({ type: 'mermaid' }).run()
             },
         },
@@ -150,7 +152,7 @@ const getSuggestionItems = ({ query }: { query: string }) => {
             description: 'Interactive Drag & Drop Diagram',
             searchTerms: ['flow', 'chart', 'diagram', 'graph', 'node'],
             icon: Network,
-            command: ({ editor, range }: any) => {
+            command: ({ editor, range }: CommandProps) => {
                 editor.chain().focus().deleteRange(range).insertContent({ type: 'flow' }).run()
             },
         },
@@ -159,7 +161,7 @@ const getSuggestionItems = ({ query }: { query: string }) => {
             description: 'Freehand sketch and diagrams',
             searchTerms: ['sketch', 'draw', 'board'],
             icon: PenTool,
-            command: ({ editor, range }: any) => {
+            command: ({ editor, range }: CommandProps) => {
                 editor
                     .chain()
                     .focus()
@@ -181,12 +183,18 @@ const getSuggestionItems = ({ query }: { query: string }) => {
     })
 }
 
+interface CommandProps {
+    editor: Editor
+    range: Range
+}
+
 const renderSuggestion = () => {
-    let component: any
+    let component: ReactRenderer
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let popup: any
 
     return {
-        onStart: (props: any) => {
+        onStart: (props: SuggestionProps) => {
             component = new ReactRenderer(CommandList, {
                 props,
                 editor: props.editor,
@@ -196,8 +204,10 @@ const renderSuggestion = () => {
                 return
             }
 
-            popup = tippy('body', {
-                getReferenceClientRect: props.clientRect,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            popup = tippy(document.body as any, {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                getReferenceClientRect: props.clientRect as any,
                 appendTo: () => document.body,
                 content: component.element,
                 showOnCreate: true,
@@ -206,7 +216,7 @@ const renderSuggestion = () => {
                 placement: 'bottom-start',
             })
         },
-        onUpdate(props: any) {
+        onUpdate(props: SuggestionProps) {
             component.updateProps(props)
 
             if (!props.clientRect) {
@@ -217,13 +227,15 @@ const renderSuggestion = () => {
                 getReferenceClientRect: props.clientRect,
             })
         },
-        onKeyDown(props: any) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onKeyDown(props: { view: any; event: KeyboardEvent; range: Range }) {
             if (props.event.key === 'Escape') {
                 popup[0].hide()
                 return true
             }
 
-            return component.ref?.onKeyDown(props)
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            return (component.ref as any)?.onKeyDown(props)
         },
         onExit() {
             popup[0].destroy()
@@ -239,7 +251,8 @@ export const SlashCommand = Extension.create({
         return {
             suggestion: {
                 char: '/',
-                command: ({ editor, range, props }: any) => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                command: ({ editor, range, props }: { editor: Editor, range: Range, props: any }) => {
                     props.command({ editor, range })
                 },
             },

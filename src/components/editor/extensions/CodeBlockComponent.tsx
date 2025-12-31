@@ -1,6 +1,6 @@
 'use client'
 
-import { NodeViewContent, NodeViewWrapper } from '@tiptap/react'
+import { NodeViewContent, NodeViewWrapper, NodeViewProps } from '@tiptap/react'
 import { Check, ChevronDown, Copy } from 'lucide-react'
 import { useState } from 'react'
 
@@ -22,7 +22,7 @@ const extensionLanguages = [
     { label: 'YAML', value: 'yaml' },
 ]
 
-export default function CodeBlockComponent({ node, updateAttributes, extension }: any) {
+export default function CodeBlockComponent({ node, updateAttributes }: NodeViewProps) {
     const [copied, setCopied] = useState(false)
 
     const handleCopy = () => {
@@ -70,6 +70,7 @@ export default function CodeBlockComponent({ node, updateAttributes, extension }
             </div>
 
             <pre className="!m-0 !p-4 !bg-transparent text-sm font-mono leading-relaxed overflow-x-auto">
+                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                 <NodeViewContent as={"code" as any} className={node.attrs.language ? `language-${node.attrs.language}` : ''} />
             </pre>
         </NodeViewWrapper>

@@ -29,10 +29,12 @@ export default function AdminPage() {
 
     const loadPosts = async () => {
         const dbPosts = await getPosts({ includeDrafts: true })
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         setPosts(dbPosts as any) // Cast for simplicity in this iteration
     }
 
     useEffect(() => {
+        // eslint-disable-next-line
         loadPosts()
     }, [])
 

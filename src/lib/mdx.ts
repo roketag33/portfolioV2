@@ -60,7 +60,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
             readTime: data.readTime || '5 min read',
             content: content
         }
-    } catch (_error) {
+    } catch {
         return null
     }
 }

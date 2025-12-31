@@ -1,4 +1,5 @@
 'use client'
+import { JSONContent } from '@tiptap/core'
 
 import dynamic from 'next/dynamic'
 
@@ -11,7 +12,7 @@ const ContentRenderer = dynamic(() => import('./ContentRenderer'), {
     </div>
 })
 
-export default function BlogContentWrapper({ content }: { content: any }) {
+export default function BlogContentWrapper({ content }: { content: JSONContent }) {
     // Force remount when content changes to avoid Tiptap update issues
     return <ContentRenderer key={JSON.stringify(content)} content={content} />
 }

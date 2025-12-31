@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 
 export default function LiquidCursor() {
@@ -17,7 +17,7 @@ export default function LiquidCursor() {
         }
         window.addEventListener('mousemove', moveCursor)
         return () => window.removeEventListener('mousemove', moveCursor)
-    }, [])
+    }, [cursorX, cursorY])
 
     return (
         <>

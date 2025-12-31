@@ -1,5 +1,5 @@
 'use client'
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState, useCallback } from 'react'
 import { ACHIEVEMENTS, Achievement } from '@/lib/achievements'
 import AchievementToast from '@/components/features/AchievementToast'
 
@@ -37,7 +37,7 @@ export function GamificationProvider({ children }: { children: React.ReactNode }
 
     // ... (KONAMI and other effects unchanged) ...
 
-    const unlock = (id: string) => {
+    const unlock = useCallback((id: string) => {
         // If not loaded yet, retry shortly to avoid overwriting or missing checks
         if (!isLoaded) {
             setTimeout(() => unlock(id), 100)
@@ -59,14 +59,14 @@ export function GamificationProvider({ children }: { children: React.ReactNode }
             if (typeof window !== 'undefined') {
                 const audio = new Audio('/achievement.mp3')
                 audio.volume = 0.5
-                audio.play().catch(e => {
+                audio.play().catch(() => {
                     // Ignore loading errors or autoplay policy blocks
                 })
             }
-        } catch (e) {
+        } catch {
             // Ignore environment errors
         }
-    }
+    }, [isLoaded, unlocked])
 
     useEffect(() => {
         const konami = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a']
@@ -85,7 +85,7 @@ export function GamificationProvider({ children }: { children: React.ReactNode }
         }
         window.addEventListener('keydown', handler)
         return () => window.removeEventListener('keydown', handler)
-    }, [unlocked])
+    }, [unlocked, unlock])
 
     // CLICK_FRENZY Logic
     useEffect(() => {
@@ -110,7 +110,7 @@ export function GamificationProvider({ children }: { children: React.ReactNode }
             window.removeEventListener('click', clickHandler)
             clearTimeout(timeout)
         }
-    }, [unlocked])
+    }, [unlocked, unlock])
 
     // NIGHT_OWL Logic
     useEffect(() => {
@@ -118,7 +118,7 @@ export function GamificationProvider({ children }: { children: React.ReactNode }
         if (hour >= 1 && hour < 5) {
             unlock('NIGHT_OWL')
         }
-    }, [])
+    }, [unlock])
 
     // QA_TESTER Logic
     useEffect(() => {
@@ -135,7 +135,7 @@ export function GamificationProvider({ children }: { children: React.ReactNode }
         }
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
-    }, [])
+    }, [unlock])
 
     // SPEED_RUNNER Logic
     // We need to track page visits. Since we are in a Provider, we need access to pathname changes.

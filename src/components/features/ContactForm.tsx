@@ -41,7 +41,7 @@ export function ContactForm() {
                 description: t('toast_success_desc'),
             })
             form.reset()
-        } catch (error) {
+        } catch {
             toast.error(t('toast_error_title'), {
                 description: t('toast_error_desc'),
             })

@@ -1,4 +1,4 @@
-import { Node, mergeAttributes } from '@tiptap/core'
+import { Node } from '@tiptap/core'
 
 export const MermaidDefinition = Node.create({
     name: 'mermaid',
@@ -30,9 +30,8 @@ export const MermaidDefinition = Node.create({
         ]
     },
 
-    renderHTML({ HTMLAttributes }) {
-        // For server rendering, we output the raw code in a div.mermaid
-        // The client-side initializer will pick this up and render it.
-        return ['div', { class: 'mermaid' }, HTMLAttributes.code]
+    renderHTML({ node }) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return ['div', { class: 'mermaid' }, (node.attrs as any).code]
     },
 })

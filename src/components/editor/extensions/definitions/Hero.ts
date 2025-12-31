@@ -43,6 +43,7 @@ export const HeroDefinition = Node.create({
 
     addCommands() {
         return {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             setHero: () => ({ commands }: any) => {
                 return commands.insertContent({ type: this.name })
             },

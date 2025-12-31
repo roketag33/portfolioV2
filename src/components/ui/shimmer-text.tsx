@@ -1,5 +1,5 @@
 import React from "react"
-import { motion } from "framer-motion"
+import { motion, Transition } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 export default function ShimmerText({
@@ -9,7 +9,7 @@ export default function ShimmerText({
     text: string
     className?: string
 }) {
-    const [transition, setTransition] = React.useState<any>({
+    const [transition, setTransition] = React.useState<Transition>({
         repeat: Infinity,
         duration: 2,
         ease: "linear",

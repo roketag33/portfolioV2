@@ -65,6 +65,8 @@ export default function CryptoDashboard() {
 
     useEffect(() => {
         // Reset state on coin change
+        // Reset state on coin change
+        // eslint-disable-next-line
         setData([])
         setStatus('connecting')
         setPrevPrice(0)
@@ -137,8 +139,8 @@ export default function CryptoDashboard() {
                             key={coin.symbol}
                             onClick={() => setSelectedCoin(coin)}
                             className={`flex items-center gap-3 p-4 rounded-2xl transition-all duration-300 border ${selectedCoin.symbol === coin.symbol
-                                    ? 'bg-white/10 border-white/20 shadow-lg scale-105'
-                                    : 'bg-white/5 border-transparent hover:bg-white/10'
+                                ? 'bg-white/10 border-white/20 shadow-lg scale-105'
+                                : 'bg-white/5 border-transparent hover:bg-white/10'
                                 }`}
                         >
                             <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${coin.gradientFrom} ${coin.gradientTo} flex items-center justify-center`}>

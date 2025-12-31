@@ -1,11 +1,12 @@
 import { useState, useEffect, useCallback, useImperativeHandle, forwardRef } from 'react'
 import {
-    Heading1, Heading2, Heading3,
-    List, ListOrdered,
-    MessageSquare, Code,
-    Type, CheckSquare
+    // Heading1, Heading2, Heading3, // Unused
+    // List, ListOrdered, // Unused
+    // MessageSquare, Code, // Unused
+    // Type, CheckSquare // Unused
 } from 'lucide-react'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const CommandList = forwardRef((props: any, ref) => {
     const [selectedIndex, setSelectedIndex] = useState(0)
 
@@ -22,6 +23,7 @@ export const CommandList = forwardRef((props: any, ref) => {
     )
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setSelectedIndex(0)
     }, [props.items])
 
@@ -49,6 +51,7 @@ export const CommandList = forwardRef((props: any, ref) => {
     return (
         <div className="z-50 min-w-[200px] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2">
             {props.items.length ? (
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 props.items.map((item: any, index: number) => (
                     <button
                         key={index}

@@ -1,5 +1,5 @@
 import { Node } from '@tiptap/core'
-import { ReactNodeViewRenderer } from '@tiptap/react'
+// ReactNodeViewRenderer unused
 
 export const ExcalidrawDefinition = Node.create({
     name: 'excalidraw',

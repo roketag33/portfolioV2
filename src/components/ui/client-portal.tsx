@@ -7,10 +7,10 @@ export default function ClientPortal({ children }: { children: React.ReactNode }
     const [mounted, setMounted] = useState(false)
 
     useEffect(() => {
+        // eslint-disable-next-line
         setMounted(true)
         // Cleanup function not needed for simple body portal usually, 
         // but explicit removal is handled by React Portal.
-        return () => setMounted(false)
     }, [])
 
     if (!mounted) return null

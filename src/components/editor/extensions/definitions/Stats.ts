@@ -28,6 +28,7 @@ export const StatsDefinition = Node.create({
     renderHTML({ HTMLAttributes }) {
         const items = HTMLAttributes.items || []
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const cols = items.map((item: any) => [
             'div',
             { class: 'stats-item space-y-1' },

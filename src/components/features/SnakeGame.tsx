@@ -2,7 +2,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
-import { Trophy, RefreshCcw, X, Gamepad2 } from 'lucide-react'
+import { X, Gamepad2 } from 'lucide-react'
 import { useGamification } from '@/context/GamificationContext'
 
 const GRID_SIZE = 20
@@ -35,7 +35,7 @@ export default function SnakeGame({ fullScreen = false }: SnakeGameProps) {
     // Init High Score
     useEffect(() => {
         const saved = localStorage.getItem('snake_highscore')
-        if (saved) setHighScore(parseInt(saved))
+        if (saved) setHighScore(parseInt(saved)) // eslint-disable-line react-hooks/set-state-in-effect
 
         // Auto-start if fullscreen
         if (fullScreen) {

@@ -1,11 +1,19 @@
 'use client'
 
 import { NodeViewWrapper } from '@tiptap/react'
+import { NodeViewProps } from '@tiptap/core'
 import { BarChart3 } from 'lucide-react'
 
-export default function StatsComponent(props: any) {
+interface StatsItem {
+    label: string
+    value: string
+}
+
+export default function StatsComponent(props: NodeViewProps) {
+    const items = (props.node.attrs.items || []) as StatsItem[]
+
     const updateItem = (index: number, field: 'label' | 'value', value: string) => {
-        const newItems = [...props.node.attrs.items]
+        const newItems = [...items]
         newItems[index] = { ...newItems[index], [field]: value }
         props.updateAttributes({
             items: newItems
@@ -21,7 +29,7 @@ export default function StatsComponent(props: any) {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {props.node.attrs.items.map((item: any, index: number) => (
+                    {items.map((item, index) => (
                         <div key={index} className="space-y-2">
                             <input
                                 type="text"

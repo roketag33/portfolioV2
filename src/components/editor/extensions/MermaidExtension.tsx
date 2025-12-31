@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const MermaidComponent = ({ node, updateAttributes }: any) => {
     const [code, setCode] = useState(node.attrs.code)
     const [rendered, setRendered] = useState('')
@@ -32,6 +33,7 @@ const MermaidComponent = ({ node, updateAttributes }: any) => {
                 const { svg } = await mermaid.render(id, code)
                 setRendered(svg)
                 setError('')
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } catch (e: any) {
                 // Mermaid throws error for invalid syntax
                 console.error('Mermaid render error:', e)

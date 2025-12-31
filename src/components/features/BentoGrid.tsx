@@ -47,7 +47,7 @@ const MarqueeRow = ({ items, reverse = false }: { items: string[], reverse?: boo
 
 // ... (previous code)
 
-const StackMarquee = ({ t }: { t: any }) => {
+const StackMarquee = ({ t }: { t: (key: string) => string }) => {
     // Map categories from SKILLS to the marquee rows
     // Row 1: Backend (Index 1)
     const stackBack = SKILLS[1]?.skills || []
@@ -140,7 +140,7 @@ const SwissStat = ({ label, value, icon: Icon }: { label: string, value: string,
     </div>
 )
 
-const CleanCodeBlock = ({ t }: { t: any }) => {
+const CleanCodeBlock = ({ t }: { t: (key: string) => string }) => {
     const { unlock } = useGamification()
     const { toggleDebug } = useVisualEffects()
     const [clicks, setClicks] = useState(0)

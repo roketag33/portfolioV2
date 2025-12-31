@@ -1,6 +1,4 @@
-import { Extension } from '@tiptap/core'
-import { Plugin, PluginKey } from '@tiptap/pm/state'
-import { Decoration, DecorationSet } from '@tiptap/pm/view'
+// Imports removed as they were unused
 // import { getHighlighter } from 'shiki'
 
 // NOTE: Real-time Shiki in Tiptap is complex because it's async.

@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
+import { JSONContent } from '@tiptap/core'
 import { generateHTML } from '@tiptap/html'
 import StarterKit from '@tiptap/starter-kit'
 import { CalloutExtension } from '@/components/editor/extensions/CalloutExtension'
@@ -15,7 +16,7 @@ import { ExcalidrawExtension } from '@/components/editor/extensions/ExcalidrawEx
 // ... (in useMemo)
 
 interface ContentRendererProps {
-    content: any
+    content: JSONContent
 }
 
 export default function ContentRenderer({ content }: ContentRendererProps) {

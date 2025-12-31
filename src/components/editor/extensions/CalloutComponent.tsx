@@ -2,11 +2,11 @@
 
 
 
-import { NodeViewWrapper, NodeViewContent } from '@tiptap/react'
+import { NodeViewWrapper, NodeViewContent, NodeViewProps } from '@tiptap/react'
 import { Info, AlertTriangle, CheckCircle, AlertOctagon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-const CalloutComponent = ({ node, updateAttributes }: any) => {
+const CalloutComponent = ({ node, updateAttributes }: NodeViewProps) => {
     const type = node.attrs.type || 'info'
     const types = {
         info: { icon: Info, color: 'bg-blue-500/10 border-blue-500/50 text-blue-500' },

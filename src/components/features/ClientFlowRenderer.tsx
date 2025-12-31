@@ -1,13 +1,13 @@
 'use client'
 
-import { ReactFlow, Background, Controls } from '@xyflow/react'
+import { ReactFlow, Background, Controls, Node, Edge } from '@xyflow/react'
 import '@xyflow/react/dist/style.css'
 import { useEffect, useState, useMemo } from 'react'
 import CustomNode from '@/components/editor/extensions/CustomNode'
 
 interface ClientFlowRendererProps {
-    nodes: any[]
-    edges: any[]
+    nodes: Node[]
+    edges: Edge[]
 }
 
 export default function ClientFlowRenderer({ nodes: initialNodes, edges: initialEdges }: ClientFlowRendererProps) {
@@ -16,6 +16,7 @@ export default function ClientFlowRenderer({ nodes: initialNodes, edges: initial
     const nodeTypes = useMemo(() => ({ custom: CustomNode }), [])
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setIsMounted(true)
     }, [])
 

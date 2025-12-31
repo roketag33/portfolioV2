@@ -1,4 +1,5 @@
 import { generateHTML } from '@tiptap/html'
+import { JSONContent } from '@tiptap/core'
 import StarterKit from '@tiptap/starter-kit'
 import CodeBlock from '@tiptap/extension-code-block'
 import { CalloutDefinition } from '@/components/editor/extensions/definitions/Callout'
@@ -11,7 +12,7 @@ import { ExcalidrawDefinition } from '@/components/editor/extensions/definitions
 import { createHighlighter } from 'shiki'
 
 interface ServerContentRendererProps {
-    content: any // Tiptap JSON content
+    content: JSONContent // Tiptap JSON content
 }
 
 export async function ServerContentRenderer({ content }: ServerContentRendererProps) {
@@ -86,7 +87,7 @@ export async function ServerContentRenderer({ content }: ServerContentRendererPr
                             theme: 'one-dark-pro',
                         })
                         newHtml += `<div class="not-prose">${plain}</div>`
-                    } catch (e2) {
+                    } catch {
                         // Ultimate fallback: original HTML but ensures dark theme somewhat via parent class
                         newHtml += m.full
                     }

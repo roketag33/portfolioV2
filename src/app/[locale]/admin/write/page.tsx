@@ -20,8 +20,7 @@ function WriteContent() {
 
     const [title, setTitle] = useState('')
     const [excerpt, setExcerpt] = useState('')
-    const [tags, setTags] = useState('') // Comma separated (derived from selectedTags)
-    const [readTime, setReadTime] = useState('') // (derived from readTimeValue and readTimeUnit)
+    // Derived state for tags/readTime removed as they were unused
     const [content, setContent] = useState<any>(undefined)
     const [coverImage, setCoverImage] = useState('')
     const [loading, setLoading] = useState(false)
@@ -32,17 +31,18 @@ function WriteContent() {
     const [selectedTags, setSelectedTags] = useState<string[]>([])
 
     // Derived state for saving
-    useEffect(() => {
-        if (readTimeValue) {
-            setReadTime(`${readTimeValue} ${readTimeUnit}`)
-        } else {
-            setReadTime('')
-        }
-    }, [readTimeValue, readTimeUnit])
+    // Derived state for saving
+    // useEffect(() => {
+    //     if (readTimeValue) {
+    //         setReadTime(`${readTimeValue} ${readTimeUnit}`)
+    //     } else {
+    //         setReadTime('')
+    //     }
+    // }, [readTimeValue, readTimeUnit])
 
-    useEffect(() => {
-        setTags(selectedTags.join(','))
-    }, [selectedTags])
+    // useEffect(() => {
+    //     setTags(selectedTags.join(','))
+    // }, [selectedTags])
 
     // Load initial data
     useEffect(() => {
@@ -56,7 +56,6 @@ function WriteContent() {
                     // Parse tags
                     if (post.tags && Array.isArray(post.tags)) {
                         setSelectedTags(post.tags)
-                        setTags(post.tags.join(','))
                     }
 
                     // Parse read time (simple heuristic)
@@ -137,7 +136,7 @@ function WriteContent() {
                 // Force router push instead of full reload for smoother UX, but full reload is safer for Tiptap
                 router.push('/admin')
             }
-        } catch (error) {
+        } catch {
             toast.error('Something went wrong')
         } finally {
             setLoading(false)
@@ -169,7 +168,6 @@ function WriteContent() {
             if (json.excerpt) setExcerpt(json.excerpt)
             if (json.tags && Array.isArray(json.tags)) {
                 setSelectedTags(json.tags)
-                setTags(json.tags.join(','))
             }
             if (json.readTime) {
                 const [val, unit] = json.readTime.split(' ')
@@ -187,7 +185,7 @@ function WriteContent() {
 
             setShowSource(false)
             toast.success('Full article imported successfully')
-        } catch (e) {
+        } catch {
             toast.error('Invalid JSON content')
         }
     }

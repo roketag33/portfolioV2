@@ -63,7 +63,7 @@ export default function LabList({ projects, setHoveredProject }: LabListProps) {
 
         if (newClicks < 5) {
             // Light glitch
-            const glitched = original.split('').map((char, _) => {
+            const glitched = original.split('').map((char) => {
                 if (Math.random() < (newClicks * 0.1)) {
                     return chars[Math.floor(Math.random() * chars.length)]
                 }

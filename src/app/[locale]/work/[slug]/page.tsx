@@ -1,17 +1,17 @@
 'use client'
 
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowLeft, Github, ExternalLink, Calendar, Code2, Tag } from 'lucide-react'
+import { ArrowLeft, Github, ExternalLink, Code2, Tag } from 'lucide-react'
 import { PROJECTS } from '@/data/projects'
-import { cn } from '@/lib/utils'
+// import { cn } from '@/lib/utils'
 import MagneticButton from '@/components/ui/magnetic-button'
 
 export default function ProjectDetail() {
     const params = useParams()
-    const router = useRouter()
+    // const router = useRouter()
     const slug = params.slug as string
 
     const project = PROJECTS.find(p => p.id === slug)

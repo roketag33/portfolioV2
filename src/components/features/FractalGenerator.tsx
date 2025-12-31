@@ -115,6 +115,7 @@ function FractalScene({ fractalType, zoom, center, juliaC, onPan, onZoom }: Frac
             uColor2: { value: new THREE.Color('#6366f1') }, // Indigo
             uColor3: { value: new THREE.Color('#a855f7') }, // Purple
         }),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         []
     )
 
@@ -149,7 +150,7 @@ function FractalScene({ fractalType, zoom, center, juliaC, onPan, onZoom }: Frac
         onPan(dx, dy)
     }
 
-    const handleWheel = (e: any) => {
+    const handleWheel = (e: ThreeEvent<WheelEvent>) => {
         const factor = e.deltaY < 0 ? 1.1 : 0.9
         onZoom(factor)
     }

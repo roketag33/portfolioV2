@@ -4,7 +4,7 @@ import React from 'react'
 import FractalGenerator from '@/components/features/FractalGenerator'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+
 
 import ClientPortal from '@/components/ui/client-portal'
 // ... imports

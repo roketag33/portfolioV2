@@ -3,7 +3,6 @@
 import { memo, useState, useRef, useEffect } from 'react'
 import { Handle, Position, NodeResizer, NodeProps, useReactFlow } from '@xyflow/react'
 import { Input } from '@/components/ui/input'
-import { cn } from '@/lib/utils'
 
 const CustomNode = ({ id, data, selected }: NodeProps) => {
     const { setNodes } = useReactFlow()
@@ -17,6 +16,7 @@ const CustomNode = ({ id, data, selected }: NodeProps) => {
     const shape = data.shape || 'rounded' // rounded, circle, diamond, parallelogram, database, file
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setLabelText(data.label as string)
     }, [data.label])
 
@@ -46,7 +46,7 @@ const CustomNode = ({ id, data, selected }: NodeProps) => {
     }
 
     // Base Styles
-    let containerStyle: React.CSSProperties = {
+    const containerStyle: React.CSSProperties = {
         width: '100%',
         height: '100%',
         minWidth: '100px',
@@ -55,7 +55,7 @@ const CustomNode = ({ id, data, selected }: NodeProps) => {
     }
 
     // specific styles for the shape container
-    let shapeStyle: React.CSSProperties = {
+    const baseShapeStyle: React.CSSProperties = {
         backgroundColor: bgColor as string,
         border: `1px solid ${borderColor}`,
         color: textColor as string,
@@ -67,34 +67,16 @@ const CustomNode = ({ id, data, selected }: NodeProps) => {
         textAlign: 'center',
     }
 
-    let innerContentStyle: React.CSSProperties = {
+    const baseInnerContentStyle: React.CSSProperties = {
         padding: '10px',
         zIndex: 10,
         width: '100%',
     }
 
-    // Logic to modify styles based on shape
-    let ShapeRender = (
-        <div style={shapeStyle} className="shadow-sm">
-            <div style={innerContentStyle}>
-                {isEditing ? (
-                    <Input
-                        ref={inputRef}
-                        value={labelText}
-                        onChange={(e) => setLabelText(e.target.value)}
-                        onBlur={onSubmit}
-                        onKeyDown={onKeyDown}
-                        className="h-8 text-center bg-transparent border-none shadow-none focus-visible:ring-0 p-0 text-inherit font-inherit w-full"
-                    />
-                ) : (
-                    <span className="pointer-events-none select-none px-2 break-words max-w-full">
-                        {labelText}
-                    </span>
-                )}
-            </div>
-        </div>
-    )
+    const shapeStyle = { ...baseShapeStyle }
+    const innerContentStyle = { ...baseInnerContentStyle }
 
+    // Logic to modify styles based on shape
     if (shape === 'circle') {
         shapeStyle.borderRadius = '50%'
     } else if (shape === 'rounded') {
@@ -108,10 +90,12 @@ const CustomNode = ({ id, data, selected }: NodeProps) => {
         shapeStyle.borderRadius = '2px'
         innerContentStyle.transform = 'skew(20deg)'
     } else if (shape === 'file') {
-        // Improved File Shape causing a folded corner look
-        // We will render a custom SVG/Clip path combo
         shapeStyle.clipPath = 'polygon(0 0, 85% 0, 100% 15%, 100% 100%, 0 100%)'
-        // Add the "fold" using a pseudo-element logic by adding a sibling div
+    }
+
+    let ShapeRender: React.ReactNode
+
+    if (shape === 'file') {
         ShapeRender = (
             <div style={{ ...containerStyle }} className="shadow-sm filter drop-shadow-sm">
                 <div style={{ ...shapeStyle, position: 'absolute', top: 0, left: 0 }}>
@@ -139,9 +123,7 @@ const CustomNode = ({ id, data, selected }: NodeProps) => {
                         top: 0,
                         right: 0,
                         width: '15%',
-                        height: '15%', // Rough approximation, heavily depends on aspect ratio. 
-                        // Better to use fixed px or calc. Let's assume 100x60 base. 
-                        // 15% width is dynamic. 
+                        height: '15%',
                         backgroundColor: 'rgba(0,0,0,0.1)',
                         borderLeft: `1px solid ${borderColor}`,
                         borderBottom: `1px solid ${borderColor}`,
@@ -154,10 +136,10 @@ const CustomNode = ({ id, data, selected }: NodeProps) => {
     } else if (shape === 'database') {
         // Improved Database Shape using simpler CSS stacking
         // Base Cylinder
-        containerStyle.background = 'transparent';
+        const databaseContainerStyle = { ...containerStyle, background: 'transparent', display: 'flex', flexDirection: 'column' } as React.CSSProperties
 
         ShapeRender = (
-            <div style={{ ...containerStyle, display: 'flex', flexDirection: 'column' }} className="group">
+            <div style={databaseContainerStyle} className="group">
                 {/* Top Cap */}
                 <div style={{
                     height: '20%',
@@ -205,6 +187,28 @@ const CustomNode = ({ id, data, selected }: NodeProps) => {
                 </div>
             </div>
         )
+    } else {
+        // Default rendering for rounded, circle, diamond, parallelogram
+        ShapeRender = (
+            <div style={shapeStyle} className="shadow-sm">
+                <div style={innerContentStyle}>
+                    {isEditing ? (
+                        <Input
+                            ref={inputRef}
+                            value={labelText}
+                            onChange={(e) => setLabelText(e.target.value)}
+                            onBlur={onSubmit}
+                            onKeyDown={onKeyDown}
+                            className="h-8 text-center bg-transparent border-none shadow-none focus-visible:ring-0 p-0 text-inherit font-inherit w-full"
+                        />
+                    ) : (
+                        <span className="pointer-events-none select-none px-2 break-words max-w-full">
+                            {labelText}
+                        </span>
+                    )}
+                </div>
+            </div>
+        )
     }
 
     // Handle Styles - Small dots
@@ -237,30 +241,11 @@ const CustomNode = ({ id, data, selected }: NodeProps) => {
             <Handle type="source" position={Position.Left} id="l-out" style={{ ...handleStyle, top: '70%' }} />
 
             <div
-                style={shape === 'file' || shape === 'database' ? { width: '100%', height: '100%' } : shapeStyle}
                 onDoubleClick={() => setIsEditing(true)}
                 className="shadow-sm hover:shadow-md transition-shadow h-full w-full"
+                style={{ width: '100%', height: '100%' }}
             >
-                {shape !== 'file' && shape !== 'database' && (
-                    <div style={innerContentStyle} className="w-full h-full flex items-center justify-center">
-                        {isEditing ? (
-                            <Input
-                                ref={inputRef}
-                                value={labelText}
-                                onChange={(e) => setLabelText(e.target.value)}
-                                onBlur={onSubmit}
-                                onKeyDown={onKeyDown}
-                                className="h-8 text-center bg-transparent border-none shadow-none focus-visible:ring-0 p-0 text-inherit font-inherit w-full"
-                            />
-                        ) : (
-                            <span className="pointer-events-none select-none px-2 break-words max-w-full">
-                                {labelText}
-                            </span>
-                        )}
-                    </div>
-                )}
-                {shape === 'file' && ShapeRender}
-                {shape === 'database' && ShapeRender}
+                {ShapeRender}
             </div>
         </>
     )

@@ -78,7 +78,7 @@ export default function BlogPage() {
                         <br /><span className="relative z-10">{t('header_insights')}</span>
                     </h1>
                     <p className="text-xl text-muted-foreground max-w-2xl">
-                        Partage d'expériences sur le développement web, le design et l'architecture logicielle.
+                        Partage d&apos;expériences sur le développement web, le design et l&apos;architecture logicielle.
                     </p>
                 </motion.div>
 

@@ -85,7 +85,7 @@ export default function HyperText({
             triggerAnimation();
         }
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+         
     }, [text, isInView, animateInView, animateOnLoad]);
 
     // Create a motion version of the component

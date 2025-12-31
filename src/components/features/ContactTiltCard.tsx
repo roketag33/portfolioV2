@@ -3,7 +3,6 @@
 import React, { useRef, useState } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { Mail, MapPin, CheckCircle2, Copy } from 'lucide-react'
-import { cn } from '@/lib/utils'
 import { toast } from 'sonner'
 
 export function ContactTiltCard() {
