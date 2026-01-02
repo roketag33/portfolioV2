@@ -1,0 +1,14 @@
+{
+    "name": "retro-snake",
+    "version": "1.0.0",
+    "description": "Classic Snake game implementation with a modern twist.",
+    "main": "page.tsx",
+    "keywords": [
+        "game",
+        "snake",
+        "retro",
+        "arcade"
+    ],
+    "author": "Raketag33",
+    "license": "MIT"
+}

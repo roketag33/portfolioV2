@@ -1,0 +1,20 @@
+{
+    "name": "gravity-physics",
+    "version": "1.0.0",
+    "description": "Physics sandbox playground with variable gravity.",
+    "main": "page.tsx",
+    "keywords": [
+        "physics",
+        "3d",
+        "fiber",
+        "cannon"
+    ],
+    "author": "Raketag33",
+    "license": "MIT",
+    "dependencies": {
+        "@react-three/fiber": "latest",
+        "@react-three/cannon": "latest",
+        "@react-three/drei": "latest",
+        "three": "latest"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "neural-viz",
+    "version": "1.0.0",
+    "description": "Visualizing neural network layers and activations.",
+    "main": "page.tsx",
+    "keywords": [
+        "ai",
+        "neural-network",
+        "visualization",
+        "data"
+    ],
+    "author": "Raketag33",
+    "license": "MIT"
+}

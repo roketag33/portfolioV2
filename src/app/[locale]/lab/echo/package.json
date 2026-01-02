@@ -1,0 +1,14 @@
+{
+    "name": "echo-visualizer",
+    "version": "1.0.0",
+    "description": "Audio visualization experiment mapping sound to visual forms.",
+    "main": "page.tsx",
+    "keywords": [
+        "audio",
+        "visualizer",
+        "canvas",
+        "web-audio-api"
+    ],
+    "author": "Raketag33",
+    "license": "MIT"
+}

@@ -1,0 +1,14 @@
+{
+    "name": "fractal-explorer",
+    "version": "1.0.0",
+    "description": "Interactive fractal generator and explorer.",
+    "main": "page.tsx",
+    "keywords": [
+        "fractal",
+        "math",
+        "webgl",
+        "recursive"
+    ],
+    "author": "Raketag33",
+    "license": "MIT"
+}

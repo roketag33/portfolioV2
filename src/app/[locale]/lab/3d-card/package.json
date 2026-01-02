@@ -1,0 +1,19 @@
+{
+    "name": "3d-card-effect",
+    "version": "1.0.0",
+    "description": "A 3D perspective card interaction effect using React and CSS transforms.",
+    "main": "page.tsx",
+    "keywords": [
+        "react",
+        "3d",
+        "css",
+        "ui",
+        "animation"
+    ],
+    "author": "Raketag33",
+    "license": "MIT",
+    "dependencies": {
+        "react": "^18.0.0",
+        "framer-motion": "latest"
+    }
+}

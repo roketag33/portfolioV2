@@ -1,0 +1,14 @@
+{
+    "name": "lumina-light",
+    "version": "1.0.0",
+    "description": "Interactive lighting and particle effects demonstration.",
+    "main": "page.tsx",
+    "keywords": [
+        "light",
+        "particles",
+        "visual",
+        "creative-coding"
+    ],
+    "author": "Raketag33",
+    "license": "MIT"
+}

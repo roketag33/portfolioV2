@@ -1,0 +1,19 @@
+{
+    "name": "neon-platformer",
+    "version": "1.0.0",
+    "description": "A 2D/2.5D platformer game demo.",
+    "main": "page.tsx",
+    "keywords": [
+        "game",
+        "platformer",
+        "physics",
+        "react"
+    ],
+    "author": "Raketag33",
+    "license": "MIT",
+    "dependencies": {
+        "react": "^18.0.0",
+        "@react-three/rapier": "latest",
+        "ecctrl": "latest"
+    }
+}
