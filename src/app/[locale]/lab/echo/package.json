@@ -1,14 +1,24 @@
 {
-    "name": "echo-visualizer",
+    "name": "echo",
     "version": "1.0.0",
-    "description": "Audio visualization experiment mapping sound to visual forms.",
+    "description": "Echo Grid Audio Visualizer",
     "main": "page.tsx",
-    "keywords": [
-        "audio",
-        "visualizer",
-        "canvas",
-        "web-audio-api"
-    ],
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start"
+    },
+    "dependencies": {
+        "next": "16.0.10",
+        "react": "19.2.1",
+        "react-dom": "19.2.1",
+        "tone": "^15.1.22",
+        "three": "^0.182.0",
+        "@react-three/fiber": "^9.4.2",
+        "@react-three/drei": "^10.7.7",
+        "@react-three/postprocessing": "^3.0.4",
+        "lucide-react": "^0.561.0"
+    },
     "author": "Raketag33",
     "license": "MIT"
 }

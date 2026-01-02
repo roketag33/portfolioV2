@@ -1,14 +1,23 @@
 {
-    "name": "fractal-explorer",
+    "name": "fractal",
     "version": "1.0.0",
-    "description": "Interactive fractal generator and explorer.",
+    "description": "Fractal Generator",
     "main": "page.tsx",
-    "keywords": [
-        "fractal",
-        "math",
-        "webgl",
-        "recursive"
-    ],
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start"
+    },
+    "dependencies": {
+        "next": "16.0.10",
+        "react": "19.2.1",
+        "react-dom": "19.2.1",
+        "three": "^0.182.0",
+        "@react-three/fiber": "^9.4.2",
+        "@react-three/drei": "^10.7.7",
+        "lucide-react": "^0.561.0",
+        "framer-motion": "^12.23.26"
+    },
     "author": "Raketag33",
     "license": "MIT"
 }
