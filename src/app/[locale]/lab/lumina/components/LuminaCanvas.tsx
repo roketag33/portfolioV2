@@ -4,7 +4,7 @@ interface LuminaCanvasProps {
     color: string
     particleSize: number
     speed: number
-    canvasRef: React.RefObject<HTMLCanvasElement>
+    canvasRef: React.RefObject<HTMLCanvasElement | null>
 }
 
 interface Particle {
