@@ -2,61 +2,13 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts'
-import { ArrowLeft, TrendingUp, TrendingDown, Bitcoin, Activity, Zap, Coins, Globe } from 'lucide-react'
+import { ArrowLeft, TrendingUp, TrendingDown } from 'lucide-react'
 import Link from 'next/link'
-
-// Type for the price data point
-type PricePoint = {
-    time: string
-    price: number
-}
-
-const COINS = [
-    {
-        symbol: 'btcusdt',
-        name: 'Bitcoin',
-        display: 'BTC',
-        icon: Bitcoin,
-        gradientFrom: 'from-orange-500',
-        gradientTo: 'to-yellow-500'
-    },
-    {
-        symbol: 'ethusdt',
-        name: 'Ethereum',
-        display: 'ETH',
-        icon: Activity,
-        gradientFrom: 'from-indigo-500',
-        gradientTo: 'to-purple-500'
-    },
-    {
-        symbol: 'solusdt',
-        name: 'Solana',
-        display: 'SOL',
-        icon: Zap,
-        gradientFrom: 'from-emerald-500',
-        gradientTo: 'to-teal-500'
-    },
-    {
-        symbol: 'bnbusdt',
-        name: 'Binance Coin',
-        display: 'BNB',
-        icon: Coins,
-        gradientFrom: 'from-yellow-500',
-        gradientTo: 'to-amber-500'
-    },
-    {
-        symbol: 'xrpusdt',
-        name: 'Ripple',
-        display: 'XRP',
-        icon: Globe,
-        gradientFrom: 'from-blue-500',
-        gradientTo: 'to-cyan-500'
-    }
-]
+import CoinSidebar, { COINS, Coin } from './components/CoinSidebar'
+import PriceChart, { PricePoint } from './components/PriceChart'
 
 export default function CryptoDashboard() {
-    const [selectedCoin, setSelectedCoin] = useState(COINS[0])
+    const [selectedCoin, setSelectedCoin] = useState<Coin>(COINS[0])
     const [data, setData] = useState<PricePoint[]>([])
     const [currentPrice, setCurrentPrice] = useState(0)
     const [prevPrice, setPrevPrice] = useState(0)
@@ -65,8 +17,6 @@ export default function CryptoDashboard() {
 
     useEffect(() => {
         // Reset state on coin change
-        // Reset state on coin change
-        // eslint-disable-next-line
         setData([])
         setStatus('connecting')
         setPrevPrice(0)
@@ -133,26 +83,7 @@ export default function CryptoDashboard() {
             <div className="flex-1 flex flex-col md:flex-row gap-6 p-4 md:p-8 relative z-10 max-w-7xl mx-auto w-full">
 
                 {/* Coin Selector Sidebar */}
-                <div className="w-full md:w-64 flex flex-col gap-3">
-                    {COINS.map(coin => (
-                        <button
-                            key={coin.symbol}
-                            onClick={() => setSelectedCoin(coin)}
-                            className={`flex items-center gap-3 p-4 rounded-2xl transition-all duration-300 border ${selectedCoin.symbol === coin.symbol
-                                ? 'bg-white/10 border-white/20 shadow-lg scale-105'
-                                : 'bg-white/5 border-transparent hover:bg-white/10'
-                                }`}
-                        >
-                            <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${coin.gradientFrom} ${coin.gradientTo} flex items-center justify-center`}>
-                                <coin.icon className="w-5 h-5 text-white" />
-                            </div>
-                            <div className="text-left">
-                                <div className="font-bold text-sm tracking-wide">{coin.name}</div>
-                                <div className="text-xs text-neutral-500 font-mono">{coin.display}</div>
-                            </div>
-                        </button>
-                    ))}
-                </div>
+                <CoinSidebar selectedCoin={selectedCoin} onSelectCoin={setSelectedCoin} />
 
                 {/* Main View */}
                 <motion.div
@@ -189,52 +120,7 @@ export default function CryptoDashboard() {
                     </div>
 
                     {/* Chart Area */}
-                    <div className="h-[400px] w-full bg-black/20 rounded-2xl border border-white/5 p-4 relative overflow-hidden">
-                        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
-                        <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={data}>
-                                <defs>
-                                    <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor={isUp ? '#10b981' : '#f43f5e'} stopOpacity={0.3} />
-                                        <stop offset="95%" stopColor={isUp ? '#10b981' : '#f43f5e'} stopOpacity={0} />
-                                    </linearGradient>
-                                </defs>
-                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
-                                <XAxis
-                                    dataKey="time"
-                                    stroke="#64748b"
-                                    tick={{ fontSize: 12 }}
-                                    tickLine={false}
-                                    axisLine={false}
-                                    minTickGap={30}
-                                />
-                                <YAxis
-                                    domain={['auto', 'auto']}
-                                    stroke="#64748b"
-                                    tick={{ fontSize: 12 }}
-                                    tickFormatter={(value) => `$${value.toLocaleString()}`}
-                                    tickLine={false}
-                                    axisLine={false}
-                                    width={80}
-                                />
-                                <Tooltip
-                                    contentStyle={{ backgroundColor: '#0f172a', borderColor: 'rgba(255,255,255,0.1)', borderRadius: '12px' }}
-                                    itemStyle={{ color: '#fff' }}
-                                    formatter={(value: number | undefined) => [`$${(value || 0).toFixed(2)}`, 'Price']}
-                                />
-                                <Area
-                                    type="monotone"
-                                    dataKey="price"
-                                    stroke={isUp ? '#10b981' : '#f43f5e'}
-                                    strokeWidth={3}
-                                    fillOpacity={1}
-                                    fill="url(#colorPrice)"
-                                    animationDuration={500}
-                                    isAnimationActive={true}
-                                />
-                            </AreaChart>
-                        </ResponsiveContainer>
-                    </div>
+                    <PriceChart data={data} isUp={isUp} />
                 </motion.div>
             </div>
         </main>

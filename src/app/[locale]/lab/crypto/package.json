@@ -3,6 +3,19 @@
     "version": "1.0.0",
     "description": "Real-time cryptocurrency dashboard tracking market trends.",
     "main": "page.tsx",
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start"
+    },
+    "dependencies": {
+        "react": "19.2.1",
+        "react-dom": "19.2.1",
+        "next": "16.0.10",
+        "recharts": "^2.0.0",
+        "framer-motion": "^12.23.26",
+        "lucide-react": "^0.561.0"
+    },
     "keywords": [
         "crypto",
         "dashboard",
@@ -11,10 +24,5 @@
         "real-time"
     ],
     "author": "Raketag33",
-    "license": "MIT",
-    "dependencies": {
-        "react": "^18.0.0",
-        "recharts": "^2.0.0",
-        "axios": "^1.0.0"
-    }
+    "license": "MIT"
 }
