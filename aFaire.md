@@ -48,3 +48,6 @@
 
 - [x] [site]   verifier la securité sur le /admin
 - [ ] [site]   plein de jeux ne fonctione pas en mobile a cause de la gesture
+
+
+- [ ] [work] changer les images generer par ia pour utiliser les vraies images des projets   

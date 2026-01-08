@@ -124,7 +124,7 @@ function WriteContent() {
                     tags: selectedTags,
                     coverImage,
                     readTime: readTimeValue ? `${readTimeValue} ${readTimeUnit}` : '',
-                    content,
+                    content: content || { type: 'doc', content: [] },
                     published, // Use the passed published status
                 }),
             })

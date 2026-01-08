@@ -145,10 +145,10 @@ function Column({ projects, y, className, colIndex }: { projects: Project[], y: 
 
 function ProjectCard({ project, index, variant = 0 }: { project: Project, index: number, variant?: number }) {
     const variants = [
-        { initial: { opacity: 0, y: 100 }, whileInView: { opacity: 1, y: 0 } },
-        { initial: { opacity: 0, x: -50, y: 50 }, whileInView: { opacity: 1, x: 0, y: 0 } },
-        { initial: { opacity: 0, scale: 0.8 }, whileInView: { opacity: 1, scale: 1 } },
-        { initial: { opacity: 0, x: 50, y: 50 }, whileInView: { opacity: 1, x: 0, y: 0 } },
+        { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 } },
+        { initial: { opacity: 0, x: -20, y: 20 }, whileInView: { opacity: 1, x: 0, y: 0 } },
+        { initial: { opacity: 0, scale: 0.9 }, whileInView: { opacity: 1, scale: 1 } },
+        { initial: { opacity: 0, x: 20, y: 20 }, whileInView: { opacity: 1, x: 0, y: 0 } },
     ]
     const selectedVariant = variants[variant]
 
@@ -157,8 +157,8 @@ function ProjectCard({ project, index, variant = 0 }: { project: Project, index:
             layout // Enable layout animation for shuffling
             initial={selectedVariant.initial}
             whileInView={selectedVariant.whileInView}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, delay: index * 0.05, ease: [0.21, 0.47, 0.32, 0.98] }}
+            viewport={{ once: true, margin: "0px" }} // Trigger as soon as pixel enters
+            transition={{ duration: 0.4, delay: index * 0.02, ease: "easeOut" }} // Snappier
         >
             <Link
                 href={`/work/${project.id}`}
