@@ -26,17 +26,17 @@ export default function Footer() {
 
     return (
         <footer className="w-full py-12 px-6 border-t border-border/10 bg-background relative z-10">
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-8">
+            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-end gap-8">
                 <div>
                     <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 whitespace-pre-line">
                         {t('title')}
                     </h2>
-                    <button onClick={handleCopyEmail} className="text-xl text-primary hover:underline text-left">
+                    <button onClick={handleCopyEmail} className="text-xl text-primary hover:underline text-center md:text-left w-full md:w-auto">
                         contact@roketag.com
                     </button>
                 </div>
 
-                <div className="flex flex-col items-end gap-4">
+                <div className="flex flex-col items-center md:items-end gap-4">
                     <div className="flex gap-4">
                         <MagneticButton href="https://github.com/roketag33" external variant="primary" className="px-6 py-3 text-sm" onClick={handleSocial}>GitHub</MagneticButton>
                         <MagneticButton href="https://www.linkedin.com/in/alexandre-sarrazin-344b98210/" external variant="primary" className="px-6 py-3 text-sm" onClick={handleSocial}>LinkedIn</MagneticButton>

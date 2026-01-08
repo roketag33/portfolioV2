@@ -224,7 +224,7 @@ export default function LabList({ projects, setHoveredProject }: LabListProps) {
                                     </p>
                                 </div>
                             </div>
-                            <div className="col-span-3 md:col-span-2 text-right hidden md:block">
+                            <div className="col-span-3 md:col-span-2 text-right">
                                 <div className="flex flex-col items-end gap-1">
                                     {project.tech.map((t) => (
                                         <span key={t} className={cn(

@@ -27,7 +27,7 @@ export default function Hero() {
                             >
                                 <HyperText
                                     text={line}
-                                    className="text-[5vw] md:text-[7vw] xl:text-[8vw] leading-[0.85] font-black tracking-tighter uppercase text-foreground"
+                                    className="text-[10vw] md:text-[7vw] xl:text-[8vw] leading-[0.85] font-black tracking-tighter uppercase text-foreground"
                                     animateOnLoad={true}
                                     framerProps={{
                                         initial: { opacity: 1, y: 0 },

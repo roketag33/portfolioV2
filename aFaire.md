@@ -40,3 +40,11 @@
 
 - [ ] [site] verifier tout les textes poour voir si ils ont uen clé de traduction et si elles sont traduites
 - [ ] [site] verrifier tout les textes en en et fr pour voir si ca casse pas le site 
+
+
+
+- [ ] [site]  le responsive est pas bon sur tout les appareils mobile faut refaire une passe 
+
+
+- [ ] [site]   verifier la securité sur le /admin
+- [ ] [site]   plein de jeux ne fonctione pas en mobile a cause de la gesture

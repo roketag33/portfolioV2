@@ -84,7 +84,7 @@ const MinimalMap = () => (
                     <div className="w-1.5 h-1.5 bg-white rounded-full relative" />
                 </div>
             </div>
-            <div className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest px-2 py-1 border border-white/5 rounded">
+            <div className="text-xs font-mono text-neutral-500 uppercase tracking-widest px-2 py-1 border border-white/5 rounded">
                 GMT+1
             </div>
         </div>
@@ -112,7 +112,7 @@ const StatusBlock = () => {
                     <div className="text-sm font-medium text-white tracking-wide group-hover:text-emerald-400 transition-colors">
                         <TextReveal text={t('available_status')} className="bg-transparent" />
                     </div>
-                    <div className="text-[10px] text-neutral-400 font-mono uppercase tracking-widest mt-1">{t('open_to_work')}</div>
+                    <div className="text-xs text-neutral-400 font-mono uppercase tracking-widest mt-1">{t('open_to_work')}</div>
                 </div>
             </div>
             <ArrowUpRight className="w-5 h-5 text-neutral-600 group-hover:text-emerald-400 transition-colors duration-500 transform group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -134,7 +134,7 @@ const SwissStat = ({ label, value, icon: Icon }: { label: string, value: string,
                 </motion.span>
             </div>
             <div className="w-4 h-[1px] bg-white/20 my-3 group-hover:w-full transition-all duration-700 delay-100" />
-            <div className="text-[10px] text-neutral-400 font-mono uppercase tracking-widest">{label}</div>
+            <div className="text-xs text-neutral-300 font-mono uppercase tracking-widest">{label}</div>
         </div>
         <Icon className="w-4 h-4 text-neutral-700 group-hover:text-white/50 transition-colors self-end" />
     </div>
@@ -189,7 +189,7 @@ const CleanCodeBlock = ({ t }: { t: (key: string) => string }) => {
                         transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                     />
                 </div>
-                <div className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest group-hover:text-white transition-colors">{t('clean_code')}</div>
+                <div className="text-xs font-mono text-neutral-400 uppercase tracking-widest group-hover:text-white transition-colors">{t('clean_code')}</div>
             </div>
         </TiltCard>
     )
@@ -201,7 +201,7 @@ export default function BentoGrid() {
     const t = useTranslations('HomePage.Bento')
 
     return (
-        <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-4 md:grid-rows-3 gap-3 h-[600px] md:h-[500px]">
+        <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-4 md:grid-rows-3 gap-3 h-auto min-h-[800px] md:h-[500px]">
 
             {/* 1. Large Stack Block (2x2) */}
             <BentoCard className="col-span-2 row-span-2 md:col-span-2 md:row-span-2">
@@ -240,7 +240,7 @@ export default function BentoGrid() {
                     />
                     <div>
                         <div className="text-2xl font-light text-white">∞</div>
-                        <div className="text-[10px] text-neutral-500 font-mono uppercase tracking-widest mt-1">{t('refills')}</div>
+                        <div className="text-xs text-neutral-500 font-mono uppercase tracking-widest mt-1">{t('refills')}</div>
                     </div>
                 </div>
             </BentoCard>
