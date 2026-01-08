@@ -46,5 +46,5 @@
 - [ ] [site]  le responsive est pas bon sur tout les appareils mobile faut refaire une passe 
 
 
-- [ ] [site]   verifier la securité sur le /admin
+- [x] [site]   verifier la securité sur le /admin
 - [ ] [site]   plein de jeux ne fonctione pas en mobile a cause de la gesture
