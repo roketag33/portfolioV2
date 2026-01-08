@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { motion, useScroll, useSpring } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
 import { TIMELINE_DATA } from '@/data/experience'
 import { Briefcase, Zap, Trophy } from 'lucide-react'
@@ -12,6 +12,7 @@ import StackSection from '@/components/features/StackSection'
 import GlitchText from '@/components/ui/glitch-text'
 import TextRevealByWord from '@/components/ui/text-reveal-by-word'
 import { useTranslations } from 'next-intl'
+import { cn } from "@/lib/utils"
 
 
 
@@ -21,20 +22,9 @@ export default function AboutPage() {
     const timelineRef = useRef<HTMLDivElement>(null)
 
     // Data prep for Freelance Branch logic
-    const reversedTimeline = [...TIMELINE_DATA].reverse()
-    const bobyIndex = reversedTimeline.findIndex(item => item.work.company === 'Boby')
+    const timeline = TIMELINE_DATA
+    const bobyIndex = timeline.findIndex(item => item.work.company === 'Boby')
 
-    const { scrollYProgress } = useScroll({
-        target: timelineRef,
-        offset: ["start end", "end center"]
-    })
-
-    // ScaleY spring for smooth drawing
-    const scaleY = useSpring(scrollYProgress, {
-        stiffness: 100,
-        damping: 30,
-        restDelta: 0.001
-    })
 
     return (
         <div ref={containerRef} className="relative min-h-screen bg-black text-white selection:bg-primary/30">
@@ -83,15 +73,9 @@ export default function AboutPage() {
                     </div>
 
                     <div className="relative max-w-5xl mx-auto">
-                        {/* Central Timeline Line (Desktop) - SCROLL DRAWING */}
-                        <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2">
-                            <motion.div
-                                style={{ scaleY, transformOrigin: "top" }}
-                                className="w-full h-full bg-gradient-to-b from-primary/50 via-primary to-primary/50"
-                            />
-                        </div>
 
-                        {reversedTimeline.map((item, index) => (
+
+                        {timeline.map((item, index) => (
                             <SpotlightCard key={index} className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-8 md:gap-24 items-center mb-16 md:mb-24 last:mb-0 group rounded-3xl p-6 md:p-0 bg-white/[0.02] md:bg-transparent border border-white/5 md:border-none">
 
                                 {/* LEFT COLUMN: Work Experience */}
@@ -131,27 +115,41 @@ export default function AboutPage() {
                                 {/* CENTER: Timeline Point */}
                                 <div className="hidden md:flex flex-col items-center justify-center relative z-20 h-full">
 
+                                    {/* --- DYNAMIC LINES (Split Segment Logic) --- */}
 
+                                    {/* UPPER SEGMENT (From Top/Arrow to Center) */}
+                                    <div
+                                        className={cn(
+                                            "absolute left-1/2 -translate-x-1/2 z-0",
+                                            index <= bobyIndex
+                                                ? "w-[3px] border-x border-purple-500/60 bg-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.4)]"
+                                                : "w-px bg-white/10"
+                                        )}
+                                        style={{
+                                            top: index === 0 ? 'calc(50% - 24rem)' : '-3rem', // -24rem from Center for Arrow, -3rem for Gap overlap
+                                            bottom: '50%'
+                                        }}
+                                    />
 
-                                    {/* FREELANCE PERIOD GLOW LINE (Future Direction: Boby -> Present) */}
-                                    {index >= bobyIndex && (
-                                        <div
-                                            className="absolute w-[3px] border-x border-purple-500/60 bg-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.4)] left-1/2 -translate-x-1/2 z-0"
-                                            style={{
-                                                top: '50%',
-                                                bottom: index === reversedTimeline.length - 1 ? '0' : '-50vh'
-                                            }}
-                                        />
-                                    )}
+                                    {/* LOWER SEGMENT (From Center to Bottom) */}
+                                    <div
+                                        className={cn(
+                                            "absolute left-1/2 -translate-x-1/2 z-0",
+                                            index < bobyIndex
+                                                ? "w-[3px] border-x border-purple-500/60 bg-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.4)]"
+                                                : "w-px bg-white/10" // Boby and older get Gray down-line
+                                        )}
+                                        style={{
+                                            top: '50%',
+                                            bottom: index === timeline.length - 1 ? '50%' : '-3rem'
+                                        }}
+                                    />
 
-                                    {/* ARROW HEAD AT CURRENT/PRESENT NODE - Pointing DOWN (End of Line) */}
-                                    {index === reversedTimeline.length - 1 && index >= bobyIndex && (
-                                        <>
-                                            <div className="absolute top-full left-1/2 -translate-x-1/2 w-4 h-96 bg-black z-10" />
-                                            <div className="absolute top-full left-1/2 -translate-x-1/2 z-50">
-                                                <div className="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[10px] border-t-purple-500 drop-shadow-[0_0_8px_rgba(168,85,247,1)]" />
-                                            </div>
-                                        </>
+                                    {/* ARROW HEAD (Index 0 Only) */}
+                                    {index === 0 && (
+                                        <div className="absolute left-1/2 -translate-x-1/2 z-50" style={{ bottom: 'calc(50% + 24rem)' }}>
+                                            <div className="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-b-[10px] border-b-purple-500 drop-shadow-[0_0_8px_rgba(168,85,247,1)]" />
+                                        </div>
                                     )}
 
                                     {/* NODE RENDERING: Special Freelance Icon or Standard Dot */}

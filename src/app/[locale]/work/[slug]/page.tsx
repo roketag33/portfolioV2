@@ -37,8 +37,9 @@ export default function ProjectDetail() {
     return (
         <main className="min-h-screen bg-background text-foreground selection:bg-emerald-500/30">
             {/* Navigation */}
-            <nav className="fixed top-0 left-0 right-0 z-50 p-6 flex justify-between items-center mix-blend-difference text-white">
-                <Link href="/work" className="flex items-center gap-2 group">
+            {/* Navigation */}
+            <nav className="fixed top-24 left-0 z-40 px-6 flex items-center mix-blend-difference text-white pointer-events-none">
+                <Link href="/work" className="flex items-center gap-2 group pointer-events-auto">
                     <div className="bg-white/10 backdrop-blur-md p-2 rounded-full group-hover:bg-white/20 transition-colors">
                         <ArrowLeft className="w-5 h-5" />
                     </div>
