@@ -12,7 +12,7 @@
         },
         "About": {
             "title": "À <highlight>Propos</highlight>",
-            "description_part1": "Je suis un ingénieur logiciel passionné par la construction de <strong>systèmes robustes et évolutifs</strong>. Ma mission est de résoudre des problèmes complexes en comblant le fossé <br></br> <span>entre le matériel et le cloud.</span>",
+            "description_part1": "Je suis un ingénieur logiciel passionné par la construction de <strong>systèmes robustes et évolutifs</strong>. Ma mission est de résoudre des problèmes complexes en comblant le fossé <span>entre le matériel et le cloud.</span>",
             "description_part2": "Du firmware IoT bas niveau aux microservices distribués et applications mobiles, j'interviens comme <strong>Architecte</strong> logiciel pour concevoir des systèmes de bout en bout. Je suis obsédé par la performance, la sécurité et le code propre.",
             "current_location": "Actuellement basé à Bordeaux, travaillant sur des solutions web & IoT de nouvelle génération."
         }
