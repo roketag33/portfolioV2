@@ -60,10 +60,10 @@
 - [x] [work] Liens Github -> 404 (Redirection vers page projet interne ✅)
 - [ ] [about] Timeline : Flèche violette s'arrête bizarrement + Confusion clic rond
 - [x] [about] Hover texte : devient gris/moins visible (Corrigé par violet neon ✅)
-- [ ] [lab] Lumina : Animation décentrée
+- [x] [lab] Lumina : Animation décentrée ✅
 - [x] [lab] Neon Platformer : Contrôles cassés (sauf Espace), now 2D Auto-runner ✅
 - [ ] [blog] Pas d'articles (vide)
-- [ ] [contact] Impossible de copier l'email (Desktop & Mobile)
+- [x] [contact] Impossible de copier l'email (Desktop & Mobile) ✅
 
 ## Feedback Elena (Mobile)
 - [ ] [home] "Ingénieur" trop collé à gauche
@@ -71,7 +71,7 @@
 - [ ] [menu] Menu en Anglais (Manque trad)
 - [ ] [about] Manque espace entre phrases ou "&" mal placé
 - [ ] [about] Flèche violette disparue (Dommage)
-- [ ] [lab] Lumina Canvas ne marche pas / mal aligné
+- [x] [lab] Lumina Canvas ne marche pas / mal aligné ✅
 - [x] [lab] Neon Platformer broken (Fixed with 2D mode) ✅
 - [ ] [lab] Second Brain : Animation cachée par le texte
 - [ ] [footer] Lien Github : Comportement étrange mais pas d'erreur ?

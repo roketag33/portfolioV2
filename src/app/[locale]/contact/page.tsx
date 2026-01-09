@@ -3,11 +3,11 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { ContactForm } from '@/components/features/ContactForm'
-import { Mail, MapPin, Linkedin, Github } from 'lucide-react'
+import { Mail, MapPin, Linkedin, Github, Copy } from 'lucide-react'
 
 import { useTranslations } from 'next-intl'
 
-// @ts-ignore
+// @ts-expect-error
 import { toast } from 'sonner'
 
 export default function ContactPage() {
@@ -15,7 +15,7 @@ export default function ContactPage() {
 
     const handleCopyEmail = () => {
         navigator.clipboard.writeText('contact@roketag.com')
-        toast.success(t('toast_success_desc')) // or custom "Email copied!" message
+        toast.success("Email copied to clipboard!")
     }
 
     return (
@@ -71,14 +71,18 @@ export default function ContactPage() {
                     >
                         <motion.div
                             variants={{ hidden: { opacity: 0, x: -20 }, visible: { opacity: 1, x: 0 } }}
-                            className="flex items-center gap-6 group cursor-pointer hover:bg-white/5 p-4 rounded-xl transition-colors -ml-4"
+                            className="flex items-center gap-6 group cursor-pointer hover:bg-white/5 p-4 rounded-xl transition-colors -ml-4 active:scale-95 transition-transform"
                             onClick={handleCopyEmail}
                         >
-                            <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-primary transition-colors">
-                                <Mail className="w-5 h-5" />
+                            <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-primary transition-colors relative">
+                                <Mail className="w-5 h-5 group-hover:opacity-0 transition-opacity absolute" />
+                                <Copy className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity absolute" />
                             </div>
                             <div>
-                                <div className="text-sm text-white/40 uppercase tracking-widest">{t('email_label')}</div>
+                                <div className="text-sm text-white/40 uppercase tracking-widest flex items-center gap-2">
+                                    {t('email_label')}
+                                    <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded text-white/60 opacity-0 group-hover:opacity-100 transition-opacity">CLICK TO COPY</span>
+                                </div>
                                 <div className="text-xl font-medium">contact@roketag.com</div>
                             </div>
                         </motion.div>

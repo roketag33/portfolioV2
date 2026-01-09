@@ -97,8 +97,10 @@ export function LuminaCanvas({ color, particleSize, speed, canvasRef }: LuminaCa
     }, [color, particleSize, speed, canvasRef])
 
     const handleMouseMove = (e: React.MouseEvent) => {
-        mouse.current.x = e.clientX
-        mouse.current.y = e.clientY
+        if (!canvasRef.current) return
+        const rect = canvasRef.current.getBoundingClientRect()
+        mouse.current.x = e.clientX - rect.left
+        mouse.current.y = e.clientY - rect.top
         mouse.current.active = true
     }
 
@@ -113,15 +115,19 @@ export function LuminaCanvas({ color, particleSize, speed, canvasRef }: LuminaCa
             onMouseDown={handleMouseMove}
             onMouseUp={handleMouseUp}
             onTouchStart={(e) => {
+                if (!canvasRef.current) return
+                const rect = canvasRef.current.getBoundingClientRect()
                 const touch = e.touches[0]
-                mouse.current.x = touch.clientX
-                mouse.current.y = touch.clientY
+                mouse.current.x = touch.clientX - rect.left
+                mouse.current.y = touch.clientY - rect.top
                 mouse.current.active = true
             }}
             onTouchMove={(e) => {
+                if (!canvasRef.current) return
+                const rect = canvasRef.current.getBoundingClientRect()
                 const touch = e.touches[0]
-                mouse.current.x = touch.clientX
-                mouse.current.y = touch.clientY
+                mouse.current.x = touch.clientX - rect.left
+                mouse.current.y = touch.clientY - rect.top
                 mouse.current.active = true
             }}
             onTouchEnd={() => {
