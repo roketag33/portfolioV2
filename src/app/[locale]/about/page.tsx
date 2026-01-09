@@ -87,7 +87,7 @@ export default function AboutPage() {
                                     className="md:text-right relative z-20"
                                 >
                                     <div className="flex flex-col md:flex-row-reverse md:items-baseline gap-2 mb-2 justify-end">
-                                        <h3 className="text-2xl font-bold text-white group-hover:text-primary transition-colors duration-300">{item.work.role}</h3>
+                                        <h3 className="text-2xl font-bold text-white group-hover:text-purple-400 transition-colors duration-300">{item.work.role}</h3>
                                         <span className="text-sm font-mono text-neutral-400 whitespace-nowrap">@ {item.work.company}</span>
                                     </div>
                                     <p className="text-neutral-300 leading-relaxed mb-4 ml-auto max-w-lg">

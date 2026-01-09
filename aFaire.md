@@ -43,11 +43,35 @@
 
 
 
-- [ ] [site]  le responsive est pas bon sur tout les appareils mobile faut refaire une passe 
+- [ ] [site]  le responsive est pas bon sur tout les appareils mobile faut refaire une passe
+- [ ] [site]  ajouter plus de succes logique sur le site
 
 
 - [x] [site]   verifier la securité sur le /admin
-- [ ] [site]   plein de jeux ne fonctione pas en mobile a cause de la gesture
+- [ ] [site]   plein de jeux ne functione pas en mobile a cause de la gesture
 
 
 - [ ] [work] changer les images generer par ia pour utiliser les vraies images des projets   
+- [ ] [work] faire des vraies textes dans les pages des projets 
+
+- [ ] [all] est ce que si je prend un nom de domaine chez vercel je peux me faire des adrsse mail avec ? 
+
+## Feedback Elena (Desktop)
+- [x] [work] Liens Github -> 404 (Redirection vers page projet interne ✅)
+- [ ] [about] Timeline : Flèche violette s'arrête bizarrement + Confusion clic rond
+- [x] [about] Hover texte : devient gris/moins visible (Corrigé par violet neon ✅)
+- [ ] [lab] Lumina : Animation décentrée
+- [ ] [lab] Neon Platformer : Contrôles cassés (sauf Espace)
+- [ ] [blog] Pas d'articles (vide)
+- [ ] [contact] Impossible de copier l'email (Desktop & Mobile)
+
+## Feedback Elena (Mobile)
+- [ ] [home] "Ingénieur" trop collé à gauche
+- [ ] [home] Bouton "View Archives" au lieu de "View All" (Incohérence)
+- [ ] [menu] Menu en Anglais (Manque trad)
+- [ ] [about] Manque espace entre phrases ou "&" mal placé
+- [ ] [about] Flèche violette disparue (Dommage)
+- [ ] [lab] Lumina Canvas ne marche pas / mal aligné
+- [ ] [lab] Neon Platformer broken
+- [ ] [lab] Second Brain : Animation cachée par le texte
+- [ ] [footer] Lien Github : Comportement étrange mais pas d'erreur ?

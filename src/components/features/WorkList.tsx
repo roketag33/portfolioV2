@@ -35,7 +35,8 @@ export default function WorkList({ limit, className, title = "Selected Projects"
 
             <div className="w-full md:h-[600px] flex flex-col md:flex-row gap-6 md:gap-2 container mx-auto">
                 {displayedProjects.map((project, index) => {
-                    const href = project.github || project.link || '#'
+                    // Changed to internal link based on user feedback (was project.github)
+                    const href = `/work/${project.id}`
 
                     return (
                         <Link
