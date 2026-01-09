@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowLeft, TrendingUp, TrendingDown } from 'lucide-react'
-import Link from 'next/link'
+import { TrendingUp, TrendingDown } from 'lucide-react'
+import LabExitButton from '@/components/lab/LabExitButton'
 import CoinSidebar, { COINS, Coin } from './components/CoinSidebar'
 import PriceChart, { PricePoint } from './components/PriceChart'
 
@@ -68,16 +68,13 @@ export default function CryptoDashboard() {
             <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-cyan-600/20 rounded-full blur-[128px]" />
 
             {/* Nav */}
-            <nav className="p-6 relative z-10 flex justify-between items-center backdrop-blur-sm bg-white/5 border-b border-white/10">
-                <Link href="/lab" className="flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors">
-                    <ArrowLeft className="w-4 h-4" />
-                    Back to Lab
-                </Link>
-                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 border border-white/10 text-xs font-mono">
-                    <div className={`w-2 h-2 rounded-full ${status === 'connected' ? 'bg-emerald-500 animate-pulse' : 'bg-red-500'}`} />
-                    {status === 'connected' ? `LIVE FEED: ${selectedCoin.display}` : 'CONNECTING...'}
-                </div>
-            </nav>
+            <LabExitButton />
+
+            {/* Status - Keep it separate or top right */}
+            <div className="absolute top-6 right-6 z-20 flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 border border-white/10 text-xs font-mono backdrop-blur-md">
+                <div className={`w-2 h-2 rounded-full ${status === 'connected' ? 'bg-emerald-500 animate-pulse' : 'bg-red-500'}`} />
+                {status === 'connected' ? `LIVE FEED: ${selectedCoin.display}` : 'CONNECTING...'}
+            </div>
 
             {/* Dashboard Content */}
             <div className="flex-1 flex flex-col md:flex-row gap-6 p-4 md:p-8 relative z-10 max-w-7xl mx-auto w-full">

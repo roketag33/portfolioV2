@@ -15,7 +15,7 @@ export default function Hero() {
             {/* Ambient Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-primary/20 blur-[150px] rounded-full pointer-events-none" />
 
-            <div className="z-10 text-center flex flex-col items-center">
+            <div className="z-10 text-center flex flex-col items-center px-4">
                 <h1 className="text-[12vw] leading-[0.85] font-black tracking-tighter uppercase text-foreground">
                     {title.split('|').map((line, i) => (
                         <div key={i} className="overflow-hidden flex justify-center">

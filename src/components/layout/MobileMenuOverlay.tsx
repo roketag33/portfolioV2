@@ -12,7 +12,13 @@ interface MobileMenuOverlayProps {
     onClose: () => void;
 }
 
+// @ts-ignore
+import { useTranslations } from 'next-intl'
+
 export default function MobileMenuOverlay({ isOpen, onClose }: MobileMenuOverlayProps) {
+    const t = useTranslations('Navigation')
+    const tHero = useTranslations('Hero')
+
     // Lock scroll when open
     useEffect(() => {
         if (isOpen) {
@@ -22,6 +28,14 @@ export default function MobileMenuOverlay({ isOpen, onClose }: MobileMenuOverlay
         }
         return () => { document.body.style.overflow = 'unset' };
     }, [isOpen]);
+
+    const menuItems = [
+        { label: t('work'), href: '/work' },
+        { label: t('about'), href: '/about' },
+        { label: t('lab'), href: '/lab' },
+        { label: t('blog'), href: '/blog' },
+        { label: t('achievements'), href: '/achievements' },
+    ]
 
     return (
         <ClientPortal>
@@ -49,20 +63,20 @@ export default function MobileMenuOverlay({ isOpen, onClose }: MobileMenuOverlay
                         </div>
 
                         <nav className="flex flex-col items-center gap-8 md:gap-10 w-full px-6">
-                            {['Work', 'About', 'Lab', 'Blog', 'Achievements'].map((item, index) => (
+                            {menuItems.map((item, index) => (
                                 <motion.div
-                                    key={item}
+                                    key={item.href}
                                     initial={{ opacity: 0, y: 40 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.1 + index * 0.1, duration: 0.5, ease: "easeOut" }}
                                     className="w-full flex justify-center"
                                 >
                                     <Link
-                                        href={`/${item.toLowerCase()}`}
+                                        href={item.href}
                                         className="text-4xl md:text-5xl font-bold tracking-tighter text-white/70 hover:text-white transition-colors relative group py-2"
                                         onClick={onClose}
                                     >
-                                        {item}
+                                        {item.label}
                                         <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[3px] bg-indigo-500 transition-all duration-300 group-hover:w-full" />
                                     </Link>
                                 </motion.div>
@@ -74,7 +88,7 @@ export default function MobileMenuOverlay({ isOpen, onClose }: MobileMenuOverlay
                             >
                                 <Link href="/contact" onClick={onClose}>
                                     <Button size="lg" className="rounded-full text-xl px-10 py-6 mt-6 bg-white text-black hover:bg-white/90">
-                                        Let&apos;s Talk
+                                        {tHero('cta_contact')}
                                     </Button>
                                 </Link>
                             </motion.div>

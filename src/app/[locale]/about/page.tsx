@@ -212,8 +212,16 @@ export default function AboutPage() {
                                     transition={{ duration: 0.6, delay: index * 0.1 + 0.1 }}
                                     className="relative pl-8 md:pl-0 border-l md:border-l-0 border-white/10 md:border-none z-20"
                                 >
-                                    {/* Mobile Timeline Dot */}
-                                    <div className="md:hidden absolute -left-[5px] top-6 w-2.5 h-2.5 rounded-full bg-neutral-800 group-hover:bg-primary transition-colors" />
+                                    {/* Mobile Timeline Dot & Arrow */}
+                                    <div className="md:hidden absolute -left-[5px] top-6 flex flex-col items-center overflow-visible">
+                                        {index === 0 && (
+                                            <div className="absolute bottom-4 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[8px] border-b-purple-500 drop-shadow-[0_0_8px_rgba(168,85,247,1)]" />
+                                        )}
+                                        <div className={cn(
+                                            "w-2.5 h-2.5 rounded-full transition-colors",
+                                            index <= bobyIndex ? "bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.5)]" : "bg-neutral-800 group-hover:bg-primary"
+                                        )} />
+                                    </div>
 
                                     <div className="flex flex-col gap-1 mb-2">
                                         <h3 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">{item.school.name}</h3>

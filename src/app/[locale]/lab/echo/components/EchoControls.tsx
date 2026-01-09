@@ -1,6 +1,6 @@
 import React from 'react'
-import { Play, Square, Pause, Volume2, ArrowLeft } from 'lucide-react'
-import Link from 'next/link'
+import { Play, Square, Pause, Volume2 } from 'lucide-react'
+import LabExitButton from '@/components/lab/LabExitButton'
 
 const ROW_LABELS = ['Lead', 'Bass', 'Snare', 'Kick']
 const ROW_COLORS = ['#6366f1', '#8b5cf6', '#eab308', '#ef4444']
@@ -32,15 +32,7 @@ export function EchoControls({
 }: EchoControlsProps) {
     return (
         <>
-            <nav className="absolute top-0 left-0 right-0 p-6 z-20 flex justify-between items-center bg-transparent pointer-events-none">
-                <Link href="/lab" className="flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors pointer-events-auto">
-                    <ArrowLeft className="w-4 h-4" />
-                    Back (DAW Mode)
-                </Link>
-                <div className="flex items-center gap-4">
-                    <div className="text-[10px] text-neutral-500 uppercase tracking-widest hidden md:block">Echo Grid v3.0</div>
-                </div>
-            </nav>
+            <LabExitButton />
 
             <div className="w-full h-[50vh] md:h-[40vh] bg-[#0a0a0a] border-t border-neutral-800 flex flex-col z-10 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
                 {/* Transport Bar */}

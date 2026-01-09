@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
-import { Palette, Settings2, Trash2, Save, ArrowLeft } from 'lucide-react'
-import Link from 'next/link'
+import { Palette, Settings2, Trash2, Save, Maximize2, RotateCcw, Play, Pause, Settings, Info } from 'lucide-react'
+import { Link } from '@/i18n/routingConfig'
+import LabExitButton from '@/components/lab/LabExitButton'
 
 interface LuminaControlsProps {
     color: string
@@ -25,13 +26,7 @@ export function LuminaControls({
     return (
         <>
             {/* Header */}
-            <nav className="absolute top-0 left-0 right-0 p-6 z-10 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent pointer-events-none">
-                <Link href="/lab" className="flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors pointer-events-auto">
-                    <ArrowLeft className="w-4 h-4" />
-                    Back to Lab
-                </Link>
-                <div className="font-mono text-xs text-neutral-500 uppercase tracking-widest">Lumina Canvas v1.0</div>
-            </nav>
+            <LabExitButton />
 
             {/* Open Button */}
             {!isMenuOpen && (

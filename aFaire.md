@@ -61,7 +61,7 @@
 - [ ] [about] Timeline : Flèche violette s'arrête bizarrement + Confusion clic rond
 - [x] [about] Hover texte : devient gris/moins visible (Corrigé par violet neon ✅)
 - [ ] [lab] Lumina : Animation décentrée
-- [ ] [lab] Neon Platformer : Contrôles cassés (sauf Espace)
+- [x] [lab] Neon Platformer : Contrôles cassés (sauf Espace), now 2D Auto-runner ✅
 - [ ] [blog] Pas d'articles (vide)
 - [ ] [contact] Impossible de copier l'email (Desktop & Mobile)
 
@@ -72,6 +72,6 @@
 - [ ] [about] Manque espace entre phrases ou "&" mal placé
 - [ ] [about] Flèche violette disparue (Dommage)
 - [ ] [lab] Lumina Canvas ne marche pas / mal aligné
-- [ ] [lab] Neon Platformer broken
+- [x] [lab] Neon Platformer broken (Fixed with 2D mode) ✅
 - [ ] [lab] Second Brain : Animation cachée par le texte
 - [ ] [footer] Lien Github : Comportement étrange mais pas d'erreur ?

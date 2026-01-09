@@ -1,6 +1,6 @@
 import React from 'react'
-import { ArrowLeft, Box, Circle, Trash2, Gauge } from 'lucide-react'
-import Link from 'next/link'
+import { Box, Circle, Trash2, Gauge } from 'lucide-react'
+import LabExitButton from '@/components/lab/LabExitButton'
 
 interface GravityControlsProps {
     gravity: [number, number, number]
@@ -14,12 +14,7 @@ export function GravityControls({ gravity, setGravity, spawnMode, setSpawnMode, 
     return (
         <>
             {/* Header UI */}
-            <div className="absolute top-0 left-0 p-6 z-20 flex gap-6 items-center pointer-events-none">
-                <Link href="/lab" className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors pointer-events-auto">
-                    <ArrowLeft className="w-5 h-5" />
-                    <span className="font-bold tracking-wider">BACK TO LAB</span>
-                </Link>
-            </div>
+            <LabExitButton />
 
             {/* HUD / Controls */}
             <div className="absolute bottom-8 left-8 z-20 bg-black/50 backdrop-blur-md border border-white/10 p-6 rounded-2xl w-[320px]">

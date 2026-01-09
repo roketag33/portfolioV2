@@ -7,8 +7,16 @@ import { Mail, MapPin, Linkedin, Github } from 'lucide-react'
 
 import { useTranslations } from 'next-intl'
 
+// @ts-ignore
+import { toast } from 'sonner'
+
 export default function ContactPage() {
     const t = useTranslations('Contact')
+
+    const handleCopyEmail = () => {
+        navigator.clipboard.writeText('contact@roketag.com')
+        toast.success(t('toast_success_desc')) // or custom "Email copied!" message
+    }
 
     return (
         <main className="min-h-screen bg-neutral-950 text-white relative overflow-hidden flex flex-col pt-32 pb-20 px-6">
@@ -64,6 +72,7 @@ export default function ContactPage() {
                         <motion.div
                             variants={{ hidden: { opacity: 0, x: -20 }, visible: { opacity: 1, x: 0 } }}
                             className="flex items-center gap-6 group cursor-pointer hover:bg-white/5 p-4 rounded-xl transition-colors -ml-4"
+                            onClick={handleCopyEmail}
                         >
                             <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-primary transition-colors">
                                 <Mail className="w-5 h-5" />

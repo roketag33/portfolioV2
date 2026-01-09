@@ -4,8 +4,8 @@ import React, { useState, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Environment, PerspectiveCamera } from '@react-three/drei'
 import * as THREE from 'three'
-import { ArrowLeft, Type, Info, Box, Network } from 'lucide-react'
-import Link from 'next/link'
+import { Type, Info, Box, Network } from 'lucide-react'
+import LabExitButton from '@/components/lab/LabExitButton'
 import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
 import MarkmapView from './components/MarkmapView'
 import GraphSimulation, { GraphNode } from './components/GraphSimulation'
@@ -88,15 +88,12 @@ export default function KnowledgeGraphPage() {
     }, [markdown])
 
     return (
-        <main className="h-screen w-full bg-black text-white overflow-hidden flex font-sans">
+        <main className="h-screen w-full bg-black text-white overflow-hidden flex flex-col md:flex-row font-sans">
             {/* LEFT: Editor Panel */}
-            <div className="w-1/3 min-w-[350px] max-w-[500px] h-full bg-neutral-900 border-r border-neutral-800 flex flex-col z-10 shadow-2xl relative">
+            <div className="w-full h-[40vh] md:w-1/3 md:h-full min-w-[300px] md:min-w-[350px] max-w-none md:max-w-[500px] bg-neutral-900 border-b md:border-b-0 md:border-r border-neutral-800 flex flex-col z-10 shadow-2xl relative">
                 {/* Header */}
                 <div className="p-4 border-b border-neutral-800 flex items-center justify-between bg-neutral-900">
-                    <Link href="/lab" className="flex items-center gap-2 text-xs text-neutral-400 hover:text-white transition-colors">
-                        <ArrowLeft className="w-4 h-4" />
-                        Back
-                    </Link>
+                    <LabExitButton />
                     <div className="flex items-center gap-2">
                         <span className="text-xs font-bold tracking-wider text-indigo-400 uppercase">Input Data</span>
                     </div>

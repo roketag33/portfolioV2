@@ -112,6 +112,21 @@ export function LuminaCanvas({ color, particleSize, speed, canvasRef }: LuminaCa
             onMouseMove={handleMouseMove}
             onMouseDown={handleMouseMove}
             onMouseUp={handleMouseUp}
+            onTouchStart={(e) => {
+                const touch = e.touches[0]
+                mouse.current.x = touch.clientX
+                mouse.current.y = touch.clientY
+                mouse.current.active = true
+            }}
+            onTouchMove={(e) => {
+                const touch = e.touches[0]
+                mouse.current.x = touch.clientX
+                mouse.current.y = touch.clientY
+                mouse.current.active = true
+            }}
+            onTouchEnd={() => {
+                mouse.current.active = false
+            }}
             className="absolute inset-0 z-0 h-full w-full"
         />
     )
