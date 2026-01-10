@@ -167,5 +167,35 @@
             "school_desc": "Excellence, Rigueur et Apprentissage par la pratique.",
             "school_status": "Diplômé"
         }
+    },
+    "Lab": {
+        "abstract-matter": {
+            "title": "Abstract Matter",
+            "description": "Expérience interactive 3D de distorsion de géométrie et de matériaux."
+        },
+        "echo-grid": {
+            "title": "Echo Grid",
+            "description": "Séquenceur musical spatial 3D avec retour visuel."
+        },
+        "lumina-canvas": {
+            "title": "Lumina Canvas",
+            "description": "Système de particules génératif avec dynamique des fluides."
+        },
+        "crypto-pulse": {
+            "title": "Crypto Pulse",
+            "description": "Tableau de bord crypto en temps réel style glassmorphism."
+        },
+        "knowledge-graph": {
+            "title": "Graphe de Connaissances 3D",
+            "description": "Visualisez vos notes Markdown comme un univers 3D interactif."
+        },
+        "gravity-playground": {
+            "title": "Gravity Playground",
+            "description": "Bac à sable physique interactif avec contrôle dynamique de la gravité."
+        },
+        "neon-platformer": {
+            "title": "Néon Platformer",
+            "description": "Jeu de plateforme 2.5D Synthwave avec physique."
+        }
     }
 }

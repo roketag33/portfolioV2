@@ -167,5 +167,35 @@
             "school_desc": "Excellence, Rigor and Hands-on Learning.",
             "school_status": "Graduated"
         }
+    },
+    "Lab": {
+        "abstract-matter": {
+            "title": "Abstract Matter",
+            "description": "Interactive 3D geometry and material distortion experiment."
+        },
+        "echo-grid": {
+            "title": "Echo Grid",
+            "description": "3D spatial music sequencer with visual feedback."
+        },
+        "lumina-canvas": {
+            "title": "Lumina Canvas",
+            "description": "Generative particle art system with fluid dynamics."
+        },
+        "crypto-pulse": {
+            "title": "Crypto Pulse",
+            "description": "Real-time cryptocurrency dashboard with glassmorphism."
+        },
+        "knowledge-graph": {
+            "title": "3D Knowledge Graph",
+            "description": "Visualize Markdown notes as an interactive 3D force-directed universe."
+        },
+        "gravity-playground": {
+            "title": "Gravity Playground",
+            "description": "Interactive physics sandbox with dynamic gravity control."
+        },
+        "neon-platformer": {
+            "title": "Neon Platformer",
+            "description": "2.5D Synthwave Platformer with physics."
+        }
     }
 }

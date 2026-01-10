@@ -38,9 +38,14 @@
 - [ ] [site] changer toute les images par des images propres 
 
 
-- [ ] [site] verifier tout les textes poour voir si ils ont uen clé de traduction et si elles sont traduites
-- [ ] [site] verrifier tout les textes en en et fr pour voir si ca casse pas le site 
+- [/] **Admin / SEO / Global** <!-- id: 19 -->
+    - [ ] **Domaine** : Valider choix (alexandresarrazin.com ?) <!-- id: 20 -->
+    - [x] **Traductions Lab** : Extraire textes hardcodés dans `en.json` / `fr.json` <!-- id: 21 -->
+    - [ ] **Sitemap** : Ajouter routes dynamiques (Blog/Projets) <!-- id: 22 -->
+    - [ ] **Metadata** : Vérifier OpenGraph <!-- id: 23 -->
+    - [ ] **Email** : Configurer redirection ou provider (hors Vercel) <!-- id: 24 -->
 
+- [ ] Investigator Mobile UX Issues (Browser Verification) <!-- id: 18 -->
 
 
 - [ ] [site]  le responsive est pas bon sur tout les appareils mobile faut refaire une passe
