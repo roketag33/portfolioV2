@@ -118,13 +118,13 @@ export default function KnowledgeGraphPage() {
             {/* RIGHT: Visualization Area */}
             <div className="flex-grow relative bg-black">
                 {/* View Toggle UI */}
-                <div className="absolute top-6 right-6 z-20 flex flex-col items-end gap-2">
-                    <div className="text-right pointer-events-none mb-2">
+                <div className="absolute top-6 right-6 z-20 flex flex-col items-end gap-2 pointer-events-none">
+                    <div className="text-right mb-2">
                         <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-pink-400">Knowledge Graph</h1>
                         <p className="text-sm text-neutral-500">Interactive Visualization</p>
                     </div>
 
-                    <div className="flex bg-neutral-900/80 backdrop-blur-sm p-1 rounded-lg border border-white/10">
+                    <div className="flex bg-neutral-900/80 backdrop-blur-sm p-1 rounded-lg border border-white/10 pointer-events-auto">
                         <button
                             onClick={() => setViewMode('3d')}
                             className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm transition-all ${viewMode === '3d' ? 'bg-indigo-600 text-white shadow-lg' : 'hover:bg-white/10 text-neutral-400'}`}

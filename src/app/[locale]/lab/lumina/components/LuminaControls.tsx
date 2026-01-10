@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
-import { Palette, Settings2, Trash2, Save, Maximize2, RotateCcw, Play, Pause, Settings, Info } from 'lucide-react'
-import { Link } from '@/i18n/routingConfig'
+import { Palette, Settings2, Trash2, Save } from 'lucide-react'
 import LabExitButton from '@/components/lab/LabExitButton'
 
 interface LuminaControlsProps {

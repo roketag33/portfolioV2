@@ -110,5 +110,62 @@
         "toast_success_desc": "Thanks for reaching out. I'll get back to you soon.",
         "toast_error_title": "Error",
         "toast_error_desc": "Something went wrong. Please try again."
+    },
+    "Experience": {
+        "bpce": {
+            "year": "2025 - Present",
+            "company": "BPCE Solutions",
+            "role": "IT Expert Apprentice & Ops InnoLab",
+            "desc": "DevOps & AI: Container Management (Docker/Podman), Interface Dev (Chainlit) & InnoLab Tools.",
+            "stack": "Chainlit, Python, Docker, Podman, AI/LLM, Ops, MCP",
+            "school_name": "Sup de Vinci",
+            "school_degree": "Master IT Expert (M2)",
+            "school_desc": "Software Architecture, Management & IT Strategy. (Year 2/2)",
+            "school_status": "In Progress"
+        },
+        "elemate": {
+            "year": "2024 - 2025",
+            "company": "Elemate",
+            "role": "Full Stack Developer",
+            "desc": "B2B SaaS. Legacy Migration (jQuery → Vue.js) & From-scratch App Creation.",
+            "stack": "Vue.js, jQuery, Docker, SaaS",
+            "school_name": "Sup de Vinci",
+            "school_degree": "Master IT Expert (M1)",
+            "school_desc": "Master Cycle Start. Technical Deep Dive & Project Management.",
+            "school_status": "Validated"
+        },
+        "boby": {
+            "year": "2023 - 2024",
+            "company": "Boby",
+            "role": "Full Stack Developer",
+            "desc": "Start-up Immersion. Intensive Product Dev, QA Focus (E2E/Unit) & CI/CD.",
+            "stack": "Symfony, PHP, React, StimulusJS, Docker, Cypress",
+            "school_name": "Wild Code School",
+            "school_degree": "App Designer",
+            "school_desc": "Intensive Training \"Application Designer Developer\" (Bachelor Level).",
+            "school_status": "Graduated"
+        },
+        "aquitem": {
+            "year": "2021 - 2022",
+            "company": "AQUITEM",
+            "role": "Software Developer",
+            "desc": "App Support & Maintenance. Rigor & Technical Debt Management.",
+            "stack": "WinDev, SQL",
+            "school_name": "CESI",
+            "school_degree": "IT Developer",
+            "school_desc": "RNCP Level 5 Title. Solid foundations in algorithms and web development.",
+            "school_status": "Graduated"
+        },
+        "police": {
+            "year": "2018 - 2021",
+            "company": "Police Station",
+            "role": "Electrotechnician",
+            "desc": "Connected Systems Maintenance & Security. The genesis of my interest in IoT.",
+            "stack": "Hardware, Network",
+            "school_name": "Compagnons du Devoir",
+            "school_degree": "Vocational Bac MELEC",
+            "school_desc": "Excellence, Rigor and Hands-on Learning.",
+            "school_status": "Graduated"
+        }
     }
 }

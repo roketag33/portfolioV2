@@ -107,6 +107,7 @@ export default function EchoGridPage() {
             limiter.dispose();
             mainMeter.dispose();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {

@@ -28,9 +28,10 @@ export async function POST(req: Request) {
         })
 
         return NextResponse.json(post)
-    } catch (error: any) {
+    } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
         console.error('Save error:', error)
-        return NextResponse.json({ error: 'Failed to create post', details: error?.message }, { status: 500 })
+        return NextResponse.json({ error: 'Failed to create post', details: errorMessage }, { status: 500 })
     }
 }
 

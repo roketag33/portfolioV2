@@ -30,6 +30,7 @@ export default function SnakeGame({ fullScreen = false }: SnakeGameProps) {
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const saved = localStorage.getItem('snake_highscore')
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             if (saved) setHighScore(parseInt(saved))
         }
 

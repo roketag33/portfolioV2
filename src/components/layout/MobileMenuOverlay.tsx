@@ -12,7 +12,6 @@ interface MobileMenuOverlayProps {
     onClose: () => void;
 }
 
-// @ts-expect-error
 import { useTranslations } from 'next-intl'
 
 export default function MobileMenuOverlay({ isOpen, onClose }: MobileMenuOverlayProps) {

@@ -66,12 +66,12 @@
 - [x] [contact] Impossible de copier l'email (Desktop & Mobile) ✅
 
 ## Feedback Elena (Mobile)
-- [ ] [home] "Ingénieur" trop collé à gauche
-- [ ] [home] Bouton "View Archives" au lieu de "View All" (Incohérence)
-- [ ] [menu] Menu en Anglais (Manque trad)
-- [ ] [about] Manque espace entre phrases ou "&" mal placé
+- [x] [home] "Ingénieur" trop collé à gauche
+- [x] [home] Bouton "View Archives" au lieu de "View All" (Incohérence)
+- [x] [menu] Menu en Anglais (Manque trad)
+- [x] [about] Manque espace entre phrases ou "&" mal placé
 - [x] [about] Flèche violette disparue (Dommage) (Réintégré ✅)
 - [x] [lab] Lumina Canvas ne marche pas / mal aligné ✅
 - [x] [lab] Neon Platformer broken (Fixed with 2D mode) ✅
-- [ ] [lab] Second Brain : Animation cachée par le texte
-- [ ] [footer] Lien Github : Comportement étrange mais pas d'erreur ?
+- [x] [lab] Second Brain : Animation cachée par le texte
+- [x] [footer] Lien Github : Comportement étrange mais pas d'erreur ?

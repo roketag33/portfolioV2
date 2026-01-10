@@ -119,7 +119,7 @@ export default function WorkList({ limit, className, title = "Selected Projects"
                 {limit && (
                     <div className="md:hidden mt-8 flex justify-center w-full">
                         <Link href="/work" className="group flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
-                            <span className="text-sm font-mono uppercase tracking-widest">{t('view_archives')}</span>
+                            <span className="text-sm font-mono uppercase tracking-widest">{t('view_all')}</span>
                             <ArrowUpRight className="w-4 h-4" />
                         </Link>
                     </div>

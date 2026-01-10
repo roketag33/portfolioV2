@@ -73,7 +73,7 @@ const StackMarquee = ({ t }: { t: (key: string) => string }) => {
 }
 
 const MinimalMap = () => (
-    <div className="h-full flex flex-col justify-between p-8 relative">
+    <div className="h-full flex flex-col justify-between p-6 md:p-8 relative">
         {/* Abstract Dot Grid Map */}
         <div className="absolute inset-0 bg-[radial-gradient(#ffffff1a_1px,transparent_1px)] [background-size:20px_20px] opacity-30 group-hover:opacity-50 transition-opacity duration-700" />
 
@@ -90,7 +90,7 @@ const MinimalMap = () => (
         </div>
 
         <div className="relative z-10 pt-8">
-            <h4 className="text-3xl font-light tracking-tighter text-white">Bordeaux</h4>
+            <h4 className="text-2xl md:text-3xl font-light tracking-tighter text-white">Bordeaux</h4>
             <div className="w-8 h-[1px] bg-white/20 my-3" />
             <p className="text-neutral-400 text-xs font-mono uppercase tracking-widest">France</p>
         </div>

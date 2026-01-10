@@ -7,7 +7,6 @@ import { Mail, MapPin, Linkedin, Github, Copy } from 'lucide-react'
 
 import { useTranslations } from 'next-intl'
 
-// @ts-expect-error
 import { toast } from 'sonner'
 
 export default function ContactPage() {

@@ -2,7 +2,6 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Boxes, Layers, Droplet, Zap, Copy } from 'lucide-react'
 import Link from 'next/link'
-import { toast } from 'sonner'
 import { GeometryType, MaterialType } from './FloatingShape'
 
 interface ControlPanelProps {

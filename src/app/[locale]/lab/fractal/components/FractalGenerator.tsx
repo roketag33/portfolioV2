@@ -110,6 +110,7 @@ function FractalScene({ fractalType, zoom, center, juliaC, onPan, onZoom }: Frac
             uColor2: { value: new THREE.Color('#6366f1') }, // Indigo
             uColor3: { value: new THREE.Color('#a855f7') }, // Purple
         }),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         []
     )
 

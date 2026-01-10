@@ -202,30 +202,41 @@ export default function LabList({ projects, setHoveredProject }: LabListProps) {
                         <motion.div
                             variants={itemVariants}
                             className={cn(
-                                "grid grid-cols-12 gap-4 py-8 border-b items-center transition-colors relative",
+                                "flex flex-col md:grid md:grid-cols-12 gap-4 py-8 border-b items-start md:items-center transition-colors relative",
                                 isClassified ? "border-red-500/20 bg-red-950/10" : "border-white/5 group-hover:border-white/20"
                             )}
                         >
-                            <div className={cn("col-span-1 font-mono text-sm transition-colors", isClassified ? "text-red-500" : "text-neutral-600 group-hover:text-white")}>
-                                {isClassified ? ((index + 13) * 7919).toString(16).slice(-4).toUpperCase() : String(index + 1).padStart(2, '0')}
+                            {/* Mobile Top Row: Idx + Title */}
+                            <div className="flex w-full items-baseline justify-between md:contents">
+                                <div className={cn("font-mono text-sm transition-colors md:col-span-1", isClassified ? "text-red-500" : "text-neutral-600 group-hover:text-white")}>
+                                    {isClassified ? ((index + 13) * 7919).toString(16).slice(-4).toUpperCase() : String(index + 1).padStart(2, '0')}
+                                </div>
+
+                                {/* Mobile Year (Moved for better layout) */}
+                                <div className="md:hidden font-mono text-sm transition-colors text-neutral-500 group-hover:text-white">
+                                    {isClassified ? "Unknown" : project.year}
+                                </div>
                             </div>
-                            <div className="col-span-5 md:col-span-6">
+
+                            <div className="w-full md:col-span-5 md:mt-0">
                                 <h3 className={cn(
                                     "text-2xl md:text-4xl font-light tracking-tight flex items-center gap-4 transition-colors",
                                     isClassified ? "text-red-400 font-mono" : "text-neutral-300 group-hover:text-white"
                                 )}>
                                     {isClassified ? "REDACTED" : project.title}
-                                    {!isClassified && <ArrowUpRight className="w-5 h-5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-neutral-400" />}
+                                    {!isClassified && <ArrowUpRight className="hidden md:block w-5 h-5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-neutral-400" />}
                                 </h3>
                                 {/* Mobile Description */}
-                                <div className="block md:hidden mt-2">
+                                <div className="block md:hidden mt-3 pr-4">
                                     <p className="text-sm text-neutral-400 font-light leading-relaxed">
                                         {project.description}
                                     </p>
                                 </div>
                             </div>
-                            <div className="col-span-3 md:col-span-2 text-right">
-                                <div className="flex flex-col items-end gap-1">
+
+                            {/* Tech Stack - Mobile: Row, Desktop: Col Right */}
+                            <div className="w-full md:col-span-3 md:col-start-8 md:text-right mt-4 md:mt-0">
+                                <div className="flex flex-row md:flex-col flex-wrap md:items-end gap-2 md:gap-1">
                                     {project.tech.map((t) => (
                                         <span key={t} className={cn(
                                             "text-xs font-mono px-2 py-1 rounded-sm border transition-colors",
@@ -236,7 +247,8 @@ export default function LabList({ projects, setHoveredProject }: LabListProps) {
                                     ))}
                                 </div>
                             </div>
-                            <div className="col-span-3 text-right font-mono text-sm transition-colors text-neutral-500 group-hover:text-white">
+
+                            <div className="hidden md:block col-span-3 col-start-10 text-right font-mono text-sm transition-colors text-neutral-500 group-hover:text-white">
                                 {isClassified ? "Unknown" : project.year}
                             </div>
                         </motion.div>

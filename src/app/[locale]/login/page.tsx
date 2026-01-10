@@ -30,7 +30,7 @@ export default function LoginPage() {
             } else {
                 toast.error('Mot de passe incorrect')
             }
-        } catch (_) {
+        } catch {
             toast.error('Une erreur est survenue')
         } finally {
             setIsLoading(false)

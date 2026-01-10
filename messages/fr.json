@@ -110,5 +110,62 @@
         "toast_success_desc": "Merci de m'avoir contacté. Je reviens vers vous très vite.",
         "toast_error_title": "Erreur",
         "toast_error_desc": "Une erreur est survenue. Veuillez réessayer."
+    },
+    "Experience": {
+        "bpce": {
+            "year": "2025 - Présent",
+            "company": "BPCE Solutions",
+            "role": "Alternant Expert SI & Ops InnoLab",
+            "desc": "DevOps & IA : Gestion Conteneurs/Déploiement (Docker/Podman), Dev d'interfaces (Chainlit) & Outils InnoLab.",
+            "stack": "Chainlit, Python, Docker, Podman, AI/LLM, Ops, MCP",
+            "school_name": "Sup de Vinci",
+            "school_degree": "Master Expert SI (M2)",
+            "school_desc": "Architecture logicielle, Management & Stratégie SI. (Année 2/2)",
+            "school_status": "En cours"
+        },
+        "elemate": {
+            "year": "2024 - 2025",
+            "company": "Elemate",
+            "role": "Développeur Full Stack",
+            "desc": "SaaS B2B. Migration Legacy (jQuery → Vue.js) & Création d'applications from scratch.",
+            "stack": "Vue.js, jQuery, Docker, SaaS",
+            "school_name": "Sup de Vinci",
+            "school_degree": "Master Expert SI (M1)",
+            "school_desc": "Début du Cycle Master. Approfondissement Technique & Chef de projet.",
+            "school_status": "Validé"
+        },
+        "boby": {
+            "year": "2023 - 2024",
+            "company": "Boby",
+            "role": "Développeur Full Stack",
+            "desc": "Immersion start-up. Développement produit intensif, forte implication QA (E2E/Unit) & CI/CD.",
+            "stack": "Symfony, PHP, React, StimulusJS, Docker, Cypress",
+            "school_name": "Wild Code School",
+            "school_degree": "Concepteur d'Application",
+            "school_desc": "Formation intensive \"Concepteur Développeur d'Application\" (Bac+3/4).",
+            "school_status": "Diplômé"
+        },
+        "aquitem": {
+            "year": "2021 - 2022",
+            "company": "AQUITEM",
+            "role": "Développeur Logiciels",
+            "desc": "Support & Maintenance applicative. Rigueur et gestion de la dette technique.",
+            "stack": "WinDev, SQL",
+            "school_name": "CESI",
+            "school_degree": "Développeur Informatique",
+            "school_desc": "Titre RNCP Niv 5. Bases solides en algorithmique et développement web.",
+            "school_status": "Diplômé"
+        },
+        "police": {
+            "year": "2018 - 2021",
+            "company": "Hôtel de Police",
+            "role": "Électrotechnicien",
+            "desc": "Maintenance systèmes connectés & sécurité. La genèse de mon intérêt pour l'IoT.",
+            "stack": "Hardware, Réseau",
+            "school_name": "Compagnons du Devoir",
+            "school_degree": "Bac Pro MELEC",
+            "school_desc": "Excellence, Rigueur et Apprentissage par la pratique.",
+            "school_status": "Diplômé"
+        }
     }
 }
