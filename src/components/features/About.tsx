@@ -18,21 +18,21 @@ export default function About() {
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
             <div className="container relative z-10 px-6">
-                <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 items-center">
-                    {/* Text Content - Left 4 cols */}
-                    <div className="lg:col-span-4 space-y-8">
+                <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                    {/* Text Content - Left 3 cols */}
+                    <div className="lg:col-span-3 space-y-8">
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="text-4xl md:text-6xl font-black uppercase tracking-tighter"
+                            className="text-4xl md:text-5xl font-black uppercase tracking-tighter"
                         >
                             {t.rich('title', {
                                 highlight: (chunks) => <span className="text-primary">{chunks}</span>
                             })}
                         </motion.h2>
 
-                        <div className="space-y-6 text-muted-foreground text-lg leading-relaxed">
+                        <div className="space-y-6 text-muted-foreground text-base leading-relaxed">
                             {/* We use standard rich text for full control over translation styling */}
                             <p className="text-muted-foreground">
                                 {t.rich('description_part1', {
@@ -60,8 +60,8 @@ export default function About() {
                         </div>
                     </div>
 
-                    {/* Bento Grid - Right 8 cols */}
-                    <div className="lg:col-span-8">
+                    {/* Bento Grid - Right 9 cols */}
+                    <div className="lg:col-span-9 w-full">
                         <BentoGrid />
                     </div>
                 </div>
