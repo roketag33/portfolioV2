@@ -15,7 +15,7 @@ export default function Footer() {
 
     const handleCopyEmail = (e: React.MouseEvent) => {
         e.preventDefault()
-        navigator.clipboard.writeText('contact@roketag.com')
+        navigator.clipboard.writeText('contact@alexandresarrazin.fr')
         toast.success(t('email_copied'))
         unlock('COPYCAT')
     }
@@ -32,7 +32,7 @@ export default function Footer() {
                         {t('title')}
                     </h2>
                     <button onClick={handleCopyEmail} className="text-xl text-primary hover:underline text-center md:text-left w-full md:w-auto">
-                        contact@roketag.com
+                        contact@alexandresarrazin.fr
                     </button>
                 </div>
 

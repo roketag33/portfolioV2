@@ -13,7 +13,7 @@ export default function ContactPage() {
     const t = useTranslations('Contact')
 
     const handleCopyEmail = () => {
-        navigator.clipboard.writeText('contact@roketag.com')
+        navigator.clipboard.writeText('contact@alexandresarrazin.fr')
         toast.success("Email copied to clipboard!")
     }
 
@@ -82,7 +82,7 @@ export default function ContactPage() {
                                     {t('email_label')}
                                     <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded text-white/60 opacity-0 group-hover:opacity-100 transition-opacity">CLICK TO COPY</span>
                                 </div>
-                                <div className="text-xl font-medium">contact@roketag.com</div>
+                                <div className="text-xl font-medium">contact@alexandresarrazin.fr</div>
                             </div>
                         </motion.div>
 
