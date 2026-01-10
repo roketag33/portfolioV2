@@ -58,7 +58,7 @@
 
 ## Feedback Elena (Desktop)
 - [x] [work] Liens Github -> 404 (Redirection vers page projet interne ✅)
-- [ ] [about] Timeline : Flèche violette s'arrête bizarrement + Confusion clic rond
+- [x] [about] Timeline : Flèche violette s'arrête bizarrement + Confusion clic rond (Raccourci + cursor default ✅)
 - [x] [about] Hover texte : devient gris/moins visible (Corrigé par violet neon ✅)
 - [x] [lab] Lumina : Animation décentrée ✅
 - [x] [lab] Neon Platformer : Contrôles cassés (sauf Espace), now 2D Auto-runner ✅
@@ -70,7 +70,7 @@
 - [ ] [home] Bouton "View Archives" au lieu de "View All" (Incohérence)
 - [ ] [menu] Menu en Anglais (Manque trad)
 - [ ] [about] Manque espace entre phrases ou "&" mal placé
-- [ ] [about] Flèche violette disparue (Dommage)
+- [x] [about] Flèche violette disparue (Dommage) (Réintégré ✅)
 - [x] [lab] Lumina Canvas ne marche pas / mal aligné ✅
 - [x] [lab] Neon Platformer broken (Fixed with 2D mode) ✅
 - [ ] [lab] Second Brain : Animation cachée par le texte

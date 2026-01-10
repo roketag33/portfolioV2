@@ -126,7 +126,7 @@ export default function AboutPage() {
                                                 : "w-px bg-white/10"
                                         )}
                                         style={{
-                                            top: index === 0 ? 'calc(50% - 24rem)' : '-3rem', // -24rem from Center for Arrow, -3rem for Gap overlap
+                                            top: index === 0 ? 'calc(50% - 8rem)' : '-3rem', // Reduced to 8rem
                                             bottom: '50%'
                                         }}
                                     />
@@ -147,14 +147,14 @@ export default function AboutPage() {
 
                                     {/* ARROW HEAD (Index 0 Only) */}
                                     {index === 0 && (
-                                        <div className="absolute left-1/2 -translate-x-1/2 z-50" style={{ bottom: 'calc(50% + 24rem)' }}>
+                                        <div className="absolute left-1/2 -translate-x-1/2 z-50" style={{ bottom: 'calc(50% + 8rem)' }}>
                                             <div className="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-b-[10px] border-b-purple-500 drop-shadow-[0_0_8px_rgba(168,85,247,1)]" />
                                         </div>
                                     )}
 
                                     {/* NODE RENDERING: Special Freelance Icon or Standard Dot */}
                                     {index === bobyIndex ? (
-                                        <div className="relative flex items-center justify-center group/node z-40 w-8 h-8">
+                                        <div className="relative flex items-center justify-center group/node z-40 w-8 h-8 cursor-default">
                                             {/* Glowing Pulse Halo */}
                                             <div className="absolute inset-0 bg-purple-500/50 rounded-full blur-md animate-pulse" />
 
@@ -180,7 +180,7 @@ export default function AboutPage() {
                                             </div>
                                         </div>
                                     ) : (
-                                        <div className="flex items-center justify-center relative z-20 group/node w-6 h-6">
+                                        <div className="flex items-center justify-center relative z-20 group/node w-6 h-6 cursor-default">
                                             {/* LEFT WING: Start Year (Absolute) */}
                                             <div className="absolute right-[calc(100%-10px)] bg-neutral-900 border border-white/10 px-3 py-1 rounded-l-full border-r-0 text-[10px] font-mono text-neutral-400 z-10 pr-4 whitespace-nowrap group-hover/node:border-primary/50 group-hover/node:text-white transition-colors">
                                                 {item.year.split(' - ')[0]}
