@@ -25,9 +25,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Alexandre Sarrazin | Software Engineer & Architect",
+    default: "Alexandre Sarrazin | Ingénieur Logiciel & Architecte",
     template: "%s | Alexandre Sarrazin"
   },
+  metadataBase: new URL('https://www.alexandresarrazin.fr'),
   description: "Senior Software Engineer & Architect specializing in Cloud, IoT, Mobile, and Fullstack systems. Building scalable solutions from hardware to cloud.",
   // ... other metadata
 };

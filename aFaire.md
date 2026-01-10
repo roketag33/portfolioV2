@@ -39,11 +39,11 @@
 
 
 - [/] **Admin / SEO / Global** <!-- id: 19 -->
-    - [ ] **Domaine** : Valider choix (alexandresarrazin.com ?) <!-- id: 20 -->
+    - [x] **Domaine** : Acheté (`alexandresarrazin.fr`) <!-- id: 20 -->
     - [x] **Traductions Lab** : Extraire textes hardcodés dans `en.json` / `fr.json` <!-- id: 21 -->
+    - [x] **Configuration** : Mise à jour URLs sitemap/robots/metadata <!-- id: 25 -->
     - [ ] **Sitemap** : Ajouter routes dynamiques (Blog/Projets) <!-- id: 22 -->
-    - [ ] **Metadata** : Vérifier OpenGraph <!-- id: 23 -->
-    - [ ] **Email** : Configurer redirection ou provider (hors Vercel) <!-- id: 24 -->
+    - [ ] **Email** : Configurer DNS OVH pour Vercel <!-- id: 24 -->
 
 - [ ] Investigator Mobile UX Issues (Browser Verification) <!-- id: 18 -->
 

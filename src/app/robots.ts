@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: '/private/',
         },
-        sitemap: 'https://roketag.com/sitemap.xml',
+        sitemap: 'https://www.alexandresarrazin.fr/sitemap.xml',
     }
 }
