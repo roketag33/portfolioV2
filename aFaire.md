@@ -38,12 +38,11 @@
 - [ ] [site] changer toute les images par des images propres 
 
 
-- [/] **Admin / SEO / Global** <!-- id: 19 -->
-    - [x] **Domaine** : Acheté (`alexandresarrazin.fr`) <!-- id: 20 -->
+    - [x] **Domaine** : Actif et propagé (`alexandresarrazin.fr`) <!-- id: 20 -->
     - [x] **Traductions Lab** : Extraire textes hardcodés dans `en.json` / `fr.json` <!-- id: 21 -->
     - [x] **Configuration** : Mise à jour URLs sitemap/robots/metadata <!-- id: 25 -->
-    - [ ] **Sitemap** : Ajouter routes dynamiques (Blog/Projets) <!-- id: 22 -->
-    - [ ] **Email** : Configurer DNS OVH pour Vercel <!-- id: 24 -->
+    - [x] **Sitemap** : Ajouter routes dynamiques (Blog/Projets) <!-- id: 22 -->
+    - [x] **Email** : Configuré (ou instructions données pour OVH) <!-- id: 24 -->
 
 - [ ] Investigator Mobile UX Issues (Browser Verification) <!-- id: 18 -->
 
