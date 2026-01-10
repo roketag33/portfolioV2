@@ -19,8 +19,8 @@ export default function About() {
 
             <div className="container relative z-10 px-6">
                 <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 items-center">
-                    {/* Text Content - Left 5 cols */}
-                    <div className="lg:col-span-5 space-y-8">
+                    {/* Text Content - Left 4 cols */}
+                    <div className="lg:col-span-4 space-y-8">
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -60,8 +60,8 @@ export default function About() {
                         </div>
                     </div>
 
-                    {/* Bento Grid - Right 7 cols */}
-                    <div className="lg:col-span-7">
+                    {/* Bento Grid - Right 8 cols */}
+                    <div className="lg:col-span-8">
                         <BentoGrid />
                     </div>
                 </div>

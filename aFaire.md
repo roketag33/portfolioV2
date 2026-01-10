@@ -41,7 +41,7 @@
     - [x] **Domaine** : Actif et propagé (`alexandresarrazin.fr`) <!-- id: 20 -->
     - [x] **Traductions Lab** : Extraire textes hardcodés dans `en.json` / `fr.json` <!-- id: 21 -->
     - [x] **Configuration** : Mise à jour URLs sitemap/robots/metadata <!-- id: 25 -->
-    - [x] **Sitemap** : Ajouter routes dynamiques (Blog/Projets) <!-- id: 22 -->
+    - [x] **Metadata** : OpenGraph dynamique (`opengraph-image.tsx`) <!-- id: 23 -->
     - [x] **Email** : Configuré (ou instructions données pour OVH) <!-- id: 24 -->
 
 - [ ] Investigator Mobile UX Issues (Browser Verification) <!-- id: 18 -->
