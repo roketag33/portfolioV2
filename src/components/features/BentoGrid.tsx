@@ -121,7 +121,7 @@ const StatusBlock = () => {
 }
 
 const SwissStat = ({ label, value, icon: Icon }: { label: string, value: string, icon: React.ComponentType<{ className?: string }> }) => (
-    <div className="h-full flex flex-col justify-between p-6 hover:bg-white/[0.02] transition-colors cursor-default">
+    <div className="h-full flex flex-col justify-between p-6 hover:bg-white/[0.02] transition-colors cursor-pointer">
         <div>
             <div className="flex items-baseline gap-1 overflow-hidden">
                 <motion.span
@@ -216,10 +216,14 @@ export default function BentoGrid() {
             {/* 3. Exp & Projects (Split Vertical 1x2) */}
             <div className="col-span-1 row-span-2 flex flex-col gap-3">
                 <BentoCard className="flex-1" delay={0.2}>
-                    <SwissStat label={t('years')} value="5+" icon={Calendar} />
+                    <Link href="/about" className="block h-full w-full">
+                        <SwissStat label={t('years')} value="5+" icon={Calendar} />
+                    </Link>
                 </BentoCard>
                 <BentoCard className="flex-1" delay={0.3}>
-                    <SwissStat label={t('projects')} value="15+" icon={Briefcase} />
+                    <Link href="/work" className="block h-full w-full">
+                        <SwissStat label={t('projects')} value="15+" icon={Briefcase} />
+                    </Link>
                 </BentoCard>
             </div>
 
