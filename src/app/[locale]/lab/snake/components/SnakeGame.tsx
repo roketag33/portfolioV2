@@ -154,6 +154,37 @@ export default function SnakeGame({ fullScreen = false }: SnakeGameProps) {
 
     }, [snake, food, isArcadeOpen, fullScreen])
 
+    // Touch Handling (Swipe)
+    const touchStartRef = useRef<{ x: number, y: number } | null>(null)
+
+    const handleTouchStart = (e: React.TouchEvent) => {
+        touchStartRef.current = {
+            x: e.touches[0].clientX,
+            y: e.touches[0].clientY
+        }
+    }
+
+    const handleTouchEnd = (e: React.TouchEvent) => {
+        if (!touchStartRef.current) return
+
+        const deltaX = e.changedTouches[0].clientX - touchStartRef.current.x
+        const deltaY = e.changedTouches[0].clientY - touchStartRef.current.y
+        const absX = Math.abs(deltaX)
+        const absY = Math.abs(deltaY)
+
+        if (Math.max(absX, absY) > 20) { // Min swipe distance
+            if (absX > absY) {
+                // Horizontal
+                if (deltaX > 0 && direction.x === 0) setDirection({ x: 1, y: 0 })
+                if (deltaX < 0 && direction.x === 0) setDirection({ x: -1, y: 0 })
+            } else {
+                // Vertical
+                if (deltaY > 0 && direction.y === 0) setDirection({ x: 0, y: 1 })
+                if (deltaY < 0 && direction.y === 0) setDirection({ x: 0, y: -1 })
+            }
+        }
+    }
+
     const openArcade = () => {
         setIsArcadeOpen(true)
         resetGame()
@@ -177,7 +208,9 @@ export default function SnakeGame({ fullScreen = false }: SnakeGameProps) {
                     ref={canvasRef}
                     width={GRID_SIZE * CELL_SIZE}
                     height={GRID_SIZE * CELL_SIZE}
-                    className="rounded-lg bg-black"
+                    onTouchStart={handleTouchStart}
+                    onTouchEnd={handleTouchEnd}
+                    className="rounded-lg bg-black touch-none" // touch-none prevents page scroll
                 />
 
                 {gameOver && (
