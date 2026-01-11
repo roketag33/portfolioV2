@@ -24,8 +24,8 @@ export async function POST(req: Request) {
         }
 
         const data = await resend.emails.send({
-            from: 'Portfolio Contact <onboarding@resend.dev>', // Default Resend testing domain
-            to: ['contact@roketag.com'], // Replace with user's actual email eventually
+            from: 'Portfolio Contact <onboarding@resend.dev>', // Keep testing domain for now unless domain is verified in Resend
+            to: ['contact@alexandresarrazin.fr'],
             subject: `[Portfolio] ${subject}`,
             text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
         })
