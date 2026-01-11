@@ -1,10 +1,6 @@
-import { Resend } from 'resend'
-import { contactSchema } from '@/lib/schemas'
 import { NextResponse } from 'next/server'
-
-const resend = process.env.RESEND_API_KEY
-    ? new Resend(process.env.RESEND_API_KEY)
-    : null
+import { contactSchema } from '@/lib/schemas'
+import nodemailer from 'nodemailer'
 
 export async function POST(req: Request) {
     try {
@@ -17,21 +13,50 @@ export async function POST(req: Request) {
 
         const { name, email, subject, message } = result.data
 
-        if (!resend) {
-            // Mock success if no API key (for dev/demo)
-            console.log('MOCK EMAIL SEND (No Key):', { name, email, subject, message })
-            return NextResponse.json({ success: true, mock: true })
+        // Check if SMTP config is present
+        if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASSWORD) {
+            console.error('Missing SMTP Configuration')
+            return NextResponse.json({ error: 'Server Misconfiguration' }, { status: 500 })
         }
 
-        const data = await resend.emails.send({
-            from: 'Portfolio Contact <onboarding@resend.dev>', // Keep testing domain for now unless domain is verified in Resend
-            to: ['contact@alexandresarrazin.fr'],
-            subject: `[Portfolio] ${subject}`,
-            text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+        // Create Transporter (OVH SMTP)
+        const transporter = nodemailer.createTransport({
+            host: process.env.SMTP_HOST,
+            port: Number(process.env.SMTP_PORT) || 465,
+            secure: true, // true for 465, false for other ports
+            auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASSWORD,
+            },
         })
 
-        return NextResponse.json(data)
-    } catch {
+        // Verify connection
+        try {
+            await transporter.verify()
+        } catch (error) {
+            console.error('SMTP Connection Failed:', error)
+            return NextResponse.json({ error: 'Failed to connect to email server' }, { status: 500 })
+        }
+
+        // Send Email
+        await transporter.sendMail({
+            from: `"${name}" <${process.env.SMTP_USER}>`, // Valid OVH sender
+            to: process.env.SMTP_USER, // Send to yourself (contact@alexandresarrazin.fr)
+            replyTo: email, // Reply to the visitor's email
+            subject: `[Portfolio] ${subject}`,
+            text: `Message from: ${name} (${email})\n\n${message}`,
+            html: `
+                <h3>New Message from Portfolio</h3>
+                <p><strong>From:</strong> ${name} (<a href="mailto:${email}">${email}</a>)</p>
+                <p><strong>Subject:</strong> ${subject}</p>
+                <hr />
+                <p>${message.replace(/\n/g, '<br />')}</p>
+            `,
+        })
+
+        return NextResponse.json({ success: true })
+    } catch (error) {
+        console.error('Email Send Error:', error)
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
     }
 }
