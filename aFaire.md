@@ -7,11 +7,11 @@
 - [x] [Global] Vérifier le responsive de toutes les pages
 - [x] [home]  enlever l'effet qui passe le texte du noir au gris au hover sur software enginer ca doit etre seulemenet noir avec l'animation de glitch
 - [x] [home] enlever le scroll en dessos de alexandre sarrazin 
-- [ ] [UI] Animations : Ajouter des animations sur les boutons et autres endroits (éviter la redondance)
+- [x] [UI] Animations : Ajouter des animations sur les boutons et autres endroits (éviter la redondance)
 
 ## Features & Tech
 - [x] [Analytics] Ajouter des metrics (visiteurs, temps passé, etc.)
-- [ ] [Newsletter] Mettre en place un système de newsletter
+- [x] [Newsletter] Mettre en place un système de newsletter
 - [x] [i18n] Ajouter le support multilingue (FR/EN)
 - [x] [SEO] Réfléchir à des optimisations SEO (Metadata added)
 - [x] [Deployment] Déployer sur Vercel (Analytics added, Build verified)
@@ -34,7 +34,7 @@
 
 
 
-- [ x] [site] reflehcir au nom de domaines que je vais acheter et mettre en place un emails personnalisé avec le nom de domaines pour recevoir les demandes
+- [x] [site] reflehcir au nom de domaines que je vais acheter et mettre en place un emails personnalisé avec le nom de domaines pour recevoir les demandes
 - [ ] [site] changer toute les images par des images propres 
 
 
@@ -58,7 +58,7 @@
 - [ ] [work] changer les images generer par ia pour utiliser les vraies images des projets   
 - [ ] [work] faire des vraies textes dans les pages des projets 
 
-- [ ] [all] est ce que si je prend un nom de domaine chez vercel je peux me faire des adrsse mail avec ? 
+- [x ] [all] est ce que si je prend un nom de domaine chez vercel je peux me faire des adrsse mail avec ? 
 
 ## Feedback Elena (Desktop)
 - [x] [work] Liens Github -> 404 (Redirection vers page projet interne ✅)
