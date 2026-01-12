@@ -103,30 +103,42 @@ export async function ServerContentRenderer({ content }: ServerContentRendererPr
     }
 
     return (
-        <div
-            className="prose prose-lg dark:prose-invert max-w-none 
-            /* Text content constraint (readability) */
-            [&>p]:max-w-3xl [&>p]:mx-auto 
-            [&>h1]:max-w-3xl [&>h1]:mx-auto 
-            [&>h2]:max-w-3xl [&>h2]:mx-auto 
-            [&>h3]:max-w-3xl [&>h3]:mx-auto 
-            [&>h4]:max-w-3xl [&>h4]:mx-auto 
-            [&>ul]:max-w-3xl [&>ul]:mx-auto 
-            [&>ol]:max-w-3xl [&>ol]:mx-auto 
-            [&>li]:max-w-3xl [&>li]:mx-auto 
-            [&>blockquote]:max-w-3xl [&>blockquote]:mx-auto
+        <div className="font-newsreader selection:bg-primary/20 max-w-3xl mx-auto w-full">
+            <div
+                className="prose prose-lg dark:prose-invert max-w-none
+                /* Baseline styling for all content */
+                [&>p]:text-[21px] [&>p]:leading-[1.6] [&>p]:text-foreground/90 [&>p]:mb-8
+                [&>h1]:font-sans [&>h1]:font-bold [&>h1]:tracking-tight [&>h1]:text-4xl [&>h1]:mt-16 [&>h1]:mb-6
+                [&>h2]:font-sans [&>h2]:font-bold [&>h2]:mt-16 [&>h2]:mb-6 [&>h2]:text-3xl
+                [&>h3]:font-sans [&>h3]:font-bold [&>h3]:mt-12 [&>h3]:mb-4 [&>h3]:text-2xl
+                [&>ul]:mb-8 [&>ul]:pl-10
+                [&>ol]:mb-8 [&>ol]:pl-10
+                [&>blockquote]:border-l-[3px] [&>blockquote]:border-foreground [&>blockquote]:pl-8 [&>blockquote]:italic [&>blockquote]:text-3xl [&>blockquote]:my-12 [&>blockquote]:py-2 [&>blockquote]:text-foreground/80 [&>blockquote]:font-newsreader
 
-            /* Media and Code expansion */
-            [&_figure]:my-8 [&_figure]:mx-auto [&_figure]:block [&_figure]:max-w-5xl
-            [&_img]:rounded-lg [&_img]:shadow-md [&_img]:w-full
-            
-            /* Code blocks */
-            [&_pre]:!bg-stone-900 [&_pre]:!p-6 [&_pre]:rounded-xl [&_pre]:overflow-x-auto 
-            [&_pre]:border [&_pre]:border-white/10 [&_pre]:max-w-5xl [&_pre]:mx-auto [&_pre]:my-8
-            
-            /* Custom blocks (Excalidraw, Flow, etc) */
-            [&>div[data-type]]:max-w-6xl [&>div[data-type]]:mx-auto [&>div[data-type]]:w-full"
-            dangerouslySetInnerHTML={{ __html: htmlContent }}
-        />
+                /* First paragraph drop cap */
+                [&>p:first-of-type]:first-letter:text-[88px] 
+                [&>p:first-of-type]:first-letter:font-bold 
+                [&>p:first-of-type]:first-letter:float-left 
+                [&>p:first-of-type]:first-letter:mr-3 
+                [&>p:first-of-type]:first-letter:mt-3
+                [&>p:first-of-type]:first-letter:leading-[0.8]
+                [&>p:first-of-type]:first-letter:font-sans
+                [&>p:first-of-type]:first-letter:text-foreground
+
+                /* Interactive & Custom blocks - perfectly aligned with text baseline */
+                [&_figure]:my-12 [&_figure]:max-w-none
+                [&_img]:rounded-sm
+                
+                [&>.not-prose]:my-12 [&>.not-prose]:max-w-none
+                [&_pre]:!bg-stone-900 [&_pre]:!p-8 [&_pre]:!pl-0 [&_pre]:rounded-sm [&_pre]:overflow-x-auto 
+                [&_pre]:border [&_pre]:border-white/5 [&_pre]:text-sm [&_pre]:leading-relaxed
+                
+                [&>div[data-type]]:my-12 [&>div[data-type]]:max-w-none
+                /* Ensure Mermaid diagrams are left-aligned */
+                [&_.mermaid]:text-left [&_.mermaid_svg]:!mx-0 [&_.mermaid_svg]:!block
+                "
+                dangerouslySetInnerHTML={{ __html: htmlContent }}
+            />
+        </div>
     )
 }

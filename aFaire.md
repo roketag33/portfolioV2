@@ -23,7 +23,7 @@
 
 ## Architecture & Refactor
 - [ ] [Editor] Transformer l'éditeur d'article en librairie
-- [ ] [Blog] Améliorer le système d'article
+- [x] [Blog] Améliorer le système d'article
 
 
 
@@ -34,7 +34,7 @@
 
 
 
-- [ ] [site] reflehcir au nom de domaines que je vais acheter et mettre en place un emails personnalisé avec le nom de domaines pour recevoir les demandes
+- [ x] [site] reflehcir au nom de domaines que je vais acheter et mettre en place un emails personnalisé avec le nom de domaines pour recevoir les demandes
 - [ ] [site] changer toute les images par des images propres 
 
 
@@ -52,7 +52,7 @@
 
 
 - [x] [site]   verifier la securité sur le /admin
-- [ ] [site]   plein de jeux ne functione pas en mobile a cause de la gesture
+- [x] [site]   plein de jeux ne functione pas en mobile a cause de la gesture
 
 
 - [ ] [work] changer les images generer par ia pour utiliser les vraies images des projets   
@@ -66,7 +66,7 @@
 - [x] [about] Hover texte : devient gris/moins visible (Corrigé par violet neon ✅)
 - [x] [lab] Lumina : Animation décentrée ✅
 - [x] [lab] Neon Platformer : Contrôles cassés (sauf Espace), now 2D Auto-runner ✅
-- [ ] [blog] Pas d'articles (vide)
+- [x] [blog] Pas d'articles (vide)
 - [x] [contact] Impossible de copier l'email (Desktop & Mobile) ✅
 
 ## Feedback Elena (Mobile)
