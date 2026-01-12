@@ -219,7 +219,31 @@
         },
         "button-showcase": {
             "title": "Button Showcase",
-            "description": "Exploration of advanced UI interactions: Magnetic, Neon, Glitch..."
+            "description": "Exploration of advanced UI interactions: Magnetic, Neon, Glitch...",
+            "subtitle": "Interactive UI components playground",
+            "labels": {
+                "magnetic": "Magnetic",
+                "magnetic_action": "Hover Me",
+                "glow": "Neon Glow",
+                "glow_action": "Activate",
+                "cyber": "Cyber Glitch",
+                "cyber_action": "HACK_SYSTEM",
+                "liquify": "Liquify",
+                "liquify_action": "Click Me",
+                "soft": "Soft UI",
+                "soft_action": "Press Softly",
+                "spotlight": "Spotlight",
+                "spotlight_action": "Light It Up",
+                "cosmic": "Cosmic Border",
+                "cosmic_action": "Cosmic Link",
+                "tilt": "3D Tilt",
+                "tilt_action": "Hover 3D",
+                "pulse": "Sonar Pulse",
+                "pulse_action": "Alert",
+                "reveal": "Hover Reveal",
+                "reveal_action": "Start Journey",
+                "reveal_hidden": "Let's Go"
+            }
         }
     }
 }

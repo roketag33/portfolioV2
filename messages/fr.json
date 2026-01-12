@@ -219,7 +219,31 @@
         },
         "button-showcase": {
             "title": "Button Showcase",
-            "description": "Exploration d'interactions UI avancées : Magnétique, Néon, Glitch..."
+            "description": "Exploration d'interactions UI avancées : Magnétique, Néon, Glitch...",
+            "subtitle": "Playground de composants UI interactifs",
+            "labels": {
+                "magnetic": "Magnétique",
+                "magnetic_action": "Survole-moi",
+                "glow": "Néon Glow",
+                "glow_action": "Activer",
+                "cyber": "Cyber Glitch",
+                "cyber_action": "HACK_SYSTEM",
+                "liquify": "Liquify",
+                "liquify_action": "Clique",
+                "soft": "Soft UI",
+                "soft_action": "Douceur",
+                "spotlight": "Spotlight",
+                "spotlight_action": "Lumière",
+                "cosmic": "Bordure Cosmique",
+                "cosmic_action": "Lien Cosmique",
+                "tilt": "3D Tilt",
+                "tilt_action": "Survol 3D",
+                "pulse": "Sonar Pulse",
+                "pulse_action": "Alerte",
+                "reveal": "Hover Reveal",
+                "reveal_action": "Commencer",
+                "reveal_hidden": "C'est parti"
+            }
         }
     }
 }
