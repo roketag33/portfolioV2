@@ -57,7 +57,6 @@ export async function GET(request: Request) {
                         style={{
                             fontSize: 70,
                             fontWeight: 900,
-                            color: 'white',
                             lineHeight: 1.1,
                             marginBottom: 20,
                             backgroundImage: 'linear-gradient(90deg, #fff, #888)',
