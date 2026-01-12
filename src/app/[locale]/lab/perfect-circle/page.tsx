@@ -25,7 +25,7 @@ export default function PerfectCirclePage() {
     return (
         <main className="relative w-screen h-screen overflow-hidden bg-stone-50 dark:bg-stone-950">
             {/* Header / UI Layer */}
-            <div className="absolute top-6 left-6 z-40 pointer-events-none">
+            <div className="absolute top-24 left-6 z-40 pointer-events-none">
                 <Link href="/fr/lab" className="pointer-events-auto">
                     <Button variant="ghost" size="icon" className="group">
                         <ChevronLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform" />
@@ -33,7 +33,7 @@ export default function PerfectCirclePage() {
                 </Link>
             </div>
 
-            <div className="absolute top-6 right-6 z-40 pointer-events-none">
+            <div className="absolute top-24 right-6 z-40 pointer-events-none">
                 <Button
                     variant="ghost"
                     size="icon"

@@ -14,8 +14,32 @@ const LAB_ITEMS = [
         year: '2026',
         tech: ['Canvas API', 'Maths', 'Framer Motion'],
         link: '/lab/perfect-circle',
-        image: '/images/lumina-canvas.png', // Placeholder en attendant une vraie image ou générée
+        image: '/images/lumina-canvas.png', // Placeholder
         color: '#22c55e'
+    },
+    {
+        id: 'fractal-garden',
+        year: '2025',
+        tech: ['Recursion', 'Canvas', 'Maths'],
+        link: '/lab/fractal',
+        image: '/images/abstract-matter.webp', // Placeholder
+        color: '#f472b6'
+    },
+    {
+        id: 'retro-snake',
+        year: '2025',
+        tech: ['Game Loop', 'React', 'CRDT'],
+        link: '/lab/snake',
+        image: '/images/neon-platformer.png', // Placeholder
+        color: '#eab308'
+    },
+    {
+        id: 'galaxy-chaos',
+        year: '2026',
+        tech: ['R3F', 'InstancedMesh', 'Physics'],
+        link: '/lab/galaxy-chaos',
+        image: '/images/abstract-matter.webp', // Placeholder
+        color: '#8b5cf6'
     },
     {
         id: 'abstract-matter',

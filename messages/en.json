@@ -200,6 +200,18 @@
         "perfect-circle": {
             "title": "The Perfect Circle",
             "description": "Test your precision: draw a perfect circle and get judged by AI."
+        },
+        "fractal-garden": {
+            "title": "Fractal Garden",
+            "description": "Interactive exploration of recursive mathematical patterns."
+        },
+        "retro-snake": {
+            "title": "Retro Snake",
+            "description": "The classic game reimagined with a modern neon aesthetic."
+        },
+        "galaxy-chaos": {
+            "title": "Galaxy Chaos",
+            "description": "Interactive gravitational simulation of 10,000 particles. Become a black hole."
         }
     }
 }

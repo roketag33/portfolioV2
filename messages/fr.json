@@ -200,6 +200,14 @@
         "perfect-circle": {
             "title": "The Perfect Circle",
             "description": "Testez votre précision : dessinez un cercle parfait et soyez jugé par l'IA."
+        },
+        "fractal-garden": {
+            "title": "Jardin Fractal",
+            "description": "Exploration interactive de motifs mathématiques récursifs."
+        },
+        "retro-snake": {
+            "title": "Retro Snake",
+            "description": "Le classique revisité avec une esthétique néon moderne."
         }
     }
 }
