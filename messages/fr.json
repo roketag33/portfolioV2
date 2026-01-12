@@ -262,6 +262,75 @@
                 "neon": "09. Néon Pulsant",
                 "pullup": "10. Élévation de mots"
             }
+        },
+        "scroll-triggers": {
+            "title": "Scroll Triggers",
+            "description": "Expérience de storytelling immersive pilotée par le défilement.",
+            "back": "Retour au Lab",
+            "intro": "Le défilement n'est pas juste un moyen de navigation. C'est un mécanisme de narration.",
+            "parallaxDescription": "La parallaxe crée de la profondeur en déplaçant les calques à différentes vitesses.",
+            "velocity": {
+                "fast": "Vitesse",
+                "slow": "Scroll Trigger"
+            },
+            "pinning": {
+                "title": "Ancrage Sticky",
+                "desc": "Gardez le contexte visible tout en faisant défiler le contenu détaillé. Idéal pour le storytelling.",
+                "step1": "Étape 01 : Concept",
+                "step2": "Étape 02 : Exécution",
+                "step3": "Étape 03 : Livraison"
+            },
+            "mask": {
+                "hidden": "CACHÉ",
+                "reveal": "RÉVÉLÉ"
+            },
+            "cards": {
+                "title": "SÉLECTION",
+                "p1": {
+                    "title": "Horizon",
+                    "desc": "Exploration des limites."
+                },
+                "p2": {
+                    "title": "Structure",
+                    "desc": "Architecture de l'information."
+                },
+                "p3": {
+                    "title": "Mouvement",
+                    "desc": "La cinétique du web."
+                },
+                "p4": {
+                    "title": "Lumière",
+                    "desc": "Jeux d'ombres et de reflets."
+                }
+            },
+            "process": "FLUX STRUCTURÉ",
+            "colorShift": {
+                "title": "CHANGEMENT CHROMATIQUE",
+                "desc": "La couleur d'arrière-plan change de manière fluide en fonction de votre position de défilement, créant un changement d'ambiance immersif sans coupures brusques."
+            },
+            "horizontal": {
+                "c1": {
+                    "title": "Planification",
+                    "desc": "Définir des objectifs clairs et une feuille de route."
+                },
+                "c2": {
+                    "title": "Design",
+                    "desc": "Créer des interfaces intuitives et belles."
+                },
+                "c3": {
+                    "title": "Développement",
+                    "desc": "Construire avec du code propre et évolutif."
+                },
+                "c4": {
+                    "title": "Tests",
+                    "desc": "Assurer fiabilité et performance."
+                },
+                "c5": {
+                    "title": "Déploiement",
+                    "desc": "Livrer en production avec confiance."
+                }
+            },
+            "outro": "Vous avez atteint la fin."
         }
     }
 }

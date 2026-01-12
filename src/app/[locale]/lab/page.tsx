@@ -58,6 +58,14 @@ const LAB_ITEMS = [
         color: '#14b8a6'
     },
     {
+        id: 'scroll-triggers',
+        year: '2025',
+        tech: ['Scroll', 'Parallax', 'Sticky'],
+        link: '/lab/scroll-triggers',
+        image: '/images/typing-racer.png', // Placeholder
+        color: '#f43f5e'
+    },
+    {
         id: 'galaxy-chaos',
         year: '2026',
         tech: ['R3F', 'InstancedMesh', 'Physics'],

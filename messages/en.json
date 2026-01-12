@@ -262,6 +262,75 @@
                 "neon": "09. Pulsing Neon",
                 "pullup": "10. Word Pull Up"
             }
+        },
+        "scroll-triggers": {
+            "title": "Scroll Triggers",
+            "description": "Immersive storytelling experience driven by scroll interactions.",
+            "back": "Back to Lab",
+            "intro": "Scrolling is not just navigation. It is a storytelling mechanism.",
+            "parallaxDescription": "Parallax creates depth by moving layers at different speeds.",
+            "velocity": {
+                "fast": "Velocity",
+                "slow": "Scroll Trigger"
+            },
+            "pinning": {
+                "title": "Sticky Pinning",
+                "desc": "Keep context visible while scrolling through detailed content. Perfect for storytelling.",
+                "step1": "Step 01: Concept",
+                "step2": "Step 02: Execution",
+                "step3": "Step 03: Delivery"
+            },
+            "mask": {
+                "hidden": "HIDDEN",
+                "reveal": "REVEAL"
+            },
+            "cards": {
+                "title": "SELECTED WORKS",
+                "p1": {
+                    "title": "Horizon",
+                    "desc": "Exploring boundaries."
+                },
+                "p2": {
+                    "title": "Structure",
+                    "desc": "Information architecture."
+                },
+                "p3": {
+                    "title": "Motion",
+                    "desc": "Web kinetics."
+                },
+                "p4": {
+                    "title": "Light",
+                    "desc": "Shadows and reflections."
+                }
+            },
+            "process": "PROCESS FLOW",
+            "colorShift": {
+                "title": "COLOR SHIFT",
+                "desc": "The background color transitions smoothly based on your scroll position, creating an immersive atmosphere change without jarring cuts."
+            },
+            "horizontal": {
+                "c1": {
+                    "title": "Planning",
+                    "desc": "Define clear objectives and roadmap."
+                },
+                "c2": {
+                    "title": "Design",
+                    "desc": "Craft intuitive and beautiful interfaces."
+                },
+                "c3": {
+                    "title": "Development",
+                    "desc": "Build with clean, scalable code."
+                },
+                "c4": {
+                    "title": "Testing",
+                    "desc": "Ensure reliability and performance."
+                },
+                "c5": {
+                    "title": "Deployment",
+                    "desc": "Ship to production with confidence."
+                }
+            },
+            "outro": "You have reached the end."
         }
     }
 }
