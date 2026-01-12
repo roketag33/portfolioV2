@@ -1,49 +1,72 @@
 'use client'
 
-import React, { Suspense } from 'react'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { ChevronLeft } from 'lucide-react'
+import { useState } from 'react'
 import { Canvas } from '@react-three/fiber'
-import ParticleSystem from '@/components/lab/galaxy-chaos/ParticleSystem'
 import { OrbitControls } from '@react-three/drei'
+import ParticleSystem from '@/components/lab/galaxy-chaos/ParticleSystem'
+import { ChevronLeft } from 'lucide-react'
+import Link from 'next/link'
+import Controls from '@/components/lab/galaxy-chaos/Controls'
+
+// Initial Config matching "Stardust" tuning
+const INITIAL_CONFIG = {
+    count: 6000,
+    attractorStrength: 30,
+    damping: 0.99,
+    colorMode: 'stardust' as const
+}
 
 export default function GalaxyChaosPage() {
+    const [config, setConfig] = useState(INITIAL_CONFIG)
+
     return (
-        <main className="relative w-screen h-screen overflow-hidden bg-black text-white">
-            {/* Header / UI Layer */}
-            <div className="absolute top-24 left-6 z-40 pointer-events-none">
-                <Link href="/fr/lab" className="pointer-events-auto">
-                    <Button variant="ghost" size="icon" className="group text-white hover:bg-white/10">
-                        <ChevronLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform" />
-                    </Button>
+        <div className="w-full h-screen bg-black relative overflow-hidden">
+            {/* UI Overlay */}
+            <div className="absolute top-0 left-0 w-full p-6 z-10 flex justify-between pointer-events-none">
+                <Link href="/lab" className="pointer-events-auto text-white/50 hover:text-white transition-colors flex items-center gap-2">
+                    <ChevronLeft /> Back to Lab
                 </Link>
+                <div className="text-right">
+                    <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-cyan-400">
+                        GALAXY CHAOS
+                    </h1>
+                    <p className="text-xs text-white/40 font-mono">10k Particles. Physics. Chaos.</p>
+                </div>
             </div>
 
-            <div className="absolute top-24 right-6 z-40 pointer-events-none text-right opacity-70">
-                <h1 className="text-2xl font-bold tracking-widest uppercase">Galaxy Chaos</h1>
-                <p className="text-xs font-mono">10k Particles. Physics. Chaos.</p>
+            {/* Controls */}
+            <div className="pointer-events-auto">
+                <Controls config={config} setConfig={setConfig} />
             </div>
 
-            {/* Hint Overlay */}
-            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-center pointer-events-none opacity-50 animate-pulse">
-                <p className="text-sm font-light">Drag to Rotate • Scroll to Zoom </p>
-                <p className="text-xs font-mono mt-1">Move mouse to attract particles</p>
+            <div className="absolute bottom-6 left-6 z-10 text-white/30 text-xs font-mono max-w-xs pointer-events-none">
+                <p>MOUSE to Attract. SCROLL to Zoom. DRAG to Rotate.</p>
             </div>
 
             {/* 3D Scene */}
-            <div className="w-full h-full">
-                <Canvas camera={{ position: [0, 0, 50], fov: 60 }} gl={{ antialias: false, powerPreference: "high-performance" }}>
-                    <color attach="background" args={['#000000']} />
-                    <ambientLight intensity={0.5} />
+            <Canvas
+                camera={{ position: [0, 0, 50], fov: 75 }}
+                gl={{ antialias: false, powerPreference: "high-performance" }} // Perf opt
+                dpr={[1, 2]} // Quality scaling
+            >
+                <color attach="background" args={['#000000']} />
 
-                    <Suspense fallback={null}>
-                        <ParticleSystem />
-                    </Suspense>
+                <ParticleSystem
+                    count={config.count}
+                    attractorStrength={config.attractorStrength}
+                    damping={config.damping}
+                    colorMode={config.colorMode}
+                />
 
-                    <OrbitControls makeDefault enablePan={false} maxDistance={200} minDistance={10} />
-                </Canvas>
-            </div>
-        </main>
+                <OrbitControls
+                    enablePan={false}
+                    enableZoom={true}
+                    maxDistance={200}
+                    minDistance={10}
+                    autoRotate={true}
+                    autoRotateSpeed={0.5}
+                />
+            </Canvas>
+        </div>
     )
 }
