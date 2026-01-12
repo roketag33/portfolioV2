@@ -255,7 +255,12 @@
                 "typewriter": "02. Machine à écrire",
                 "mask": "03. Révélation Masquée",
                 "gradient": "04. Flux Dégradé",
-                "stagger": "05. Apparition Décalée"
+                "stagger": "05. Apparition Décalée",
+                "glitch": "06. Glitch RGB",
+                "wave": "07. Onde Sinusoïdale",
+                "blur": "08. Apparition Floue",
+                "neon": "09. Néon Pulsant",
+                "pullup": "10. Élévation de mots"
             }
         }
     }

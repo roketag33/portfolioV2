@@ -255,7 +255,12 @@
                 "typewriter": "02. Typewriter",
                 "mask": "03. Mask Reveal",
                 "gradient": "04. Gradient Flow",
-                "stagger": "05. Staggered Fade"
+                "stagger": "05. Staggered Fade",
+                "glitch": "06. RGB Glitch",
+                "wave": "07. Sine Wave",
+                "blur": "08. Blur In",
+                "neon": "09. Pulsing Neon",
+                "pullup": "10. Word Pull Up"
             }
         }
     }
