@@ -330,7 +330,25 @@
                     "desc": "Livrer en production avec confiance."
                 }
             },
-            "outro": "Vous avez atteint la fin."
+            "outro": "Vous avez atteint la fin.",
+            "ui-showcase": {
+                "title": "UI/UX Showcase",
+                "description": "Exploration d'interfaces utilisateur avancées et de concepts visuels.",
+                "fintech": {
+                    "title": "Neo-Bank",
+                    "desc": "Dashboard financier avec glassmorphism et visualisation de données.",
+                    "card_balance": "Solde Total",
+                    "transactions": "Transactions Récentes"
+                },
+                "fashion": {
+                    "title": "Luxe & Mode",
+                    "desc": "Élégance minimaliste et typographie éditoriale."
+                },
+                "agency": {
+                    "title": "Agence Brutaliste",
+                    "desc": "Design audacieux et cinétique."
+                }
+            }
         }
     }
 }

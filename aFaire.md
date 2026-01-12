@@ -18,8 +18,8 @@
 
 ## Lab & Content
 - [x] [Lab] Ajouter des expériences (Jeux type Snake/Morpion, Fractales, etc.) - Arrêter la 3D simple
-- [ ] [Lab] Ajouter des sets d'animations (scroll animations, etc.) - Voir pour sous-repos/modules
-- [ ] [Lab/Showcase] Ajouter des "Fake Interfaces" style Fiverr/Malt pour montrer des skills UI/UX avancés (animations, couleurs, techno)
+- [x] [Lab] Ajouter des sets d'animations (scroll animations, etc.) - Voir pour sous-repos/modules
+- [x] [Lab/Showcase] Ajouter des "Fake Interfaces" style Fiverr/Malt pour montrer des skills UI/UX avancés (animations, couleurs, techno)
 
 ## Architecture & Refactor
 - [ ] [Editor] Transformer l'éditeur d'article en librairie

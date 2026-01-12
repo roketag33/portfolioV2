@@ -330,7 +330,25 @@
                     "desc": "Ship to production with confidence."
                 }
             },
-            "outro": "You have reached the end."
+            "outro": "You have reached the end.",
+            "ui-showcase": {
+                "title": "UI/UX Showcase",
+                "description": "Exploration of advanced user interfaces and visual concepts.",
+                "fintech": {
+                    "title": "Neo-Bank",
+                    "desc": "Financial dashboard featuring glassmorphism and data visualization.",
+                    "card_balance": "Total Balance",
+                    "transactions": "Recent Transactions"
+                },
+                "fashion": {
+                    "title": "Luxury & Fashion",
+                    "desc": "Minimalist elegance and editorial typography."
+                },
+                "agency": {
+                    "title": "Brutalist Agency",
+                    "desc": "Bold design and kinetic typography."
+                }
+            }
         }
     }
 }

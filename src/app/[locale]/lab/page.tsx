@@ -66,6 +66,14 @@ const LAB_ITEMS = [
         color: '#f43f5e'
     },
     {
+        id: 'ui-showcase',
+        year: '2025', // Placeholder year
+        tech: ['UI', 'Components', 'Animations'], // Placeholder tech
+        link: '/lab/ui-showcase',
+        image: '/images/typing-racer.png', // Placeholder image
+        color: '#0ea5e9' // Placeholder color (blue-500 from the instruction's gradient)
+    },
+    {
         id: 'galaxy-chaos',
         year: '2026',
         tech: ['R3F', 'InstancedMesh', 'Physics'],

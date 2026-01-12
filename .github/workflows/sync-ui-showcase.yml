@@ -1,0 +1,44 @@
+name: Sync UI Showcase to Child Repo
+
+on:
+  push:
+    paths:
+      - 'src/app/[locale]/lab/ui-showcase/**'
+      - 'src/components/lab/ui-showcase/**'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Filter and Move Files
+        run: |
+          mkdir -p temp_deploy
+          
+          mkdir -p temp_deploy/src
+          
+          # Copy App Page
+          cp -r src/app/[locale]/lab/ui-showcase temp_deploy/src/page
+          
+          # Copy Components
+          cp -r src/components/lab/ui-showcase temp_deploy/src/components
+
+          # Create a README
+          echo "# UI/UX Showcase" > temp_deploy/README.md
+          echo "Advanced fake interfaces and concept designs built with React and Framer Motion." >> temp_deploy/README.md
+
+      - name: Push to Child Repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'temp_deploy'
+          destination-github-username: 'roketag33'
+          destination-repository-name: 'lab-ui-showcase'
+          user-email: alexandre.sarrazin@gmail.com
+          target-branch: main
+          create-target-branch-if-needed: true
