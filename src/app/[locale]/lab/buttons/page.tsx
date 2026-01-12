@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+// Trigger Sync
 import { useTranslations } from 'next-intl';
 import { ArrowLeft } from 'lucide-react';
 import { Link } from '@/i18n/routingConfig';

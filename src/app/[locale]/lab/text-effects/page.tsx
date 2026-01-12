@@ -1,5 +1,6 @@
 'use client';
 
+// Trigger Sync
 import { useTranslations } from 'next-intl';
 import { ArrowLeft, RefreshCw } from 'lucide-react';
 import { Link } from '@/i18n/routingConfig';
