@@ -244,6 +244,19 @@
                 "reveal_action": "Start Journey",
                 "reveal_hidden": "Let's Go"
             }
+        },
+        "text-effects": {
+            "title": "Text Effects",
+            "description": "Showcase of typographic animations: Scramble, Typewriter, Mask...",
+            "subtitle": "Typographic and kinetic experiments",
+            "replay": "Replay",
+            "sections": {
+                "scramble": "01. Scramble / Hacker",
+                "typewriter": "02. Typewriter",
+                "mask": "03. Mask Reveal",
+                "gradient": "04. Gradient Flow",
+                "stagger": "05. Staggered Fade"
+            }
         }
     }
 }

@@ -50,6 +50,14 @@ const LAB_ITEMS = [
         color: '#6366f1'
     },
     {
+        id: 'text-effects',
+        year: '2025',
+        tech: ['Typography', 'Framer Motion', 'Stagger'],
+        link: '/lab/text-effects',
+        image: '/images/typing-racer.png', // Placeholder
+        color: '#14b8a6'
+    },
+    {
         id: 'galaxy-chaos',
         year: '2026',
         tech: ['R3F', 'InstancedMesh', 'Physics'],

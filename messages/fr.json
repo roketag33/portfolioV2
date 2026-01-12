@@ -244,6 +244,19 @@
                 "reveal_action": "Commencer",
                 "reveal_hidden": "C'est parti"
             }
+        },
+        "text-effects": {
+            "title": "Text Effects",
+            "description": "Showcase d'animations typographiques : Scramble, Typewriter, Mask...",
+            "subtitle": "Expérimentations typographiques et cinétiques",
+            "replay": "Rejouer",
+            "sections": {
+                "scramble": "01. Scramble / Hacker",
+                "typewriter": "02. Machine à écrire",
+                "mask": "03. Révélation Masquée",
+                "gradient": "04. Flux Dégradé",
+                "stagger": "05. Apparition Décalée"
+            }
         }
     }
 }
