@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Geist, Geist_Mono, Newsreader } from "next/font/google";
 import "../globals.css";
 import SmoothScroll from "@/components/layout/SmoothScroll";
@@ -65,6 +66,7 @@ export default async function LocaleLayout({
             </SmoothScroll>
             <Toaster />
             <Analytics />
+            <SpeedInsights />
           </GamificationProvider>
         </NextIntlClientProvider>
       </body>
