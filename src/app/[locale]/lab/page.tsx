@@ -42,6 +42,14 @@ const LAB_ITEMS = [
         color: '#a78bfa' // Placeholder color
     },
     {
+        id: 'button-showcase',
+        year: '2025',
+        tech: ['Framer Motion', 'UI/UX', 'Components'],
+        link: '/lab/buttons',
+        image: '/images/typing-racer.png', // Placeholder
+        color: '#6366f1'
+    },
+    {
         id: 'galaxy-chaos',
         year: '2026',
         tech: ['R3F', 'InstancedMesh', 'Physics'],

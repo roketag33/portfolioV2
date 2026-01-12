@@ -216,6 +216,10 @@
         "typing-racer": {
             "title": "Typing Speed Racer",
             "description": "Test your typing speed and flow in a minimalist interface."
+        },
+        "button-showcase": {
+            "title": "Button Showcase",
+            "description": "Exploration of advanced UI interactions: Magnetic, Neon, Glitch..."
         }
     }
 }

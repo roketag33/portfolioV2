@@ -17,7 +17,7 @@
 - [x] [Deployment] Déployer sur Vercel (Analytics added, Build verified)
 
 ## Lab & Content
-- [ ] [Lab] Ajouter des expériences (Jeux type Snake/Morpion, Fractales, etc.) - Arrêter la 3D simple
+- [x] [Lab] Ajouter des expériences (Jeux type Snake/Morpion, Fractales, etc.) - Arrêter la 3D simple
 - [ ] [Lab] Ajouter des sets d'animations (scroll animations, etc.) - Voir pour sous-repos/modules
 - [ ] [Lab/Showcase] Ajouter des "Fake Interfaces" style Fiverr/Malt pour montrer des skills UI/UX avancés (animations, couleurs, techno)
 
