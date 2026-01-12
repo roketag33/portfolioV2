@@ -10,6 +10,14 @@ import { useTranslations } from 'next-intl';
 
 const LAB_ITEMS = [
     {
+        id: 'perfect-circle',
+        year: '2026',
+        tech: ['Canvas API', 'Maths', 'Framer Motion'],
+        link: '/lab/perfect-circle',
+        image: '/images/lumina-canvas.png', // Placeholder en attendant une vraie image ou générée
+        color: '#22c55e'
+    },
+    {
         id: 'abstract-matter',
         year: '2025',
         tech: ['R3F', 'Shaders', 'Physics'],

@@ -1,0 +1,40 @@
+name: Sync Perfect Circle Lab
+
+on:
+  push:
+    branches: [ master, main ]
+    paths:
+      - 'src/app/[locale]/lab/perfect-circle/**'
+      - 'src/components/lab/perfect-circle/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: pandoc/latex
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Install mustache (to update the date)
+        run:  apk add ruby && gem install mustache
+
+      - name: creates output directories
+        run:  mkdir -p build/src/app && mkdir -p build/src/components
+
+      - name: Copy Files
+        run: |
+          cp src/app/[locale]/lab/perfect-circle/page.tsx build/src/app/page.tsx
+          cp src/components/lab/perfect-circle/GameCanvas.tsx build/src/components/GameCanvas.tsx
+          cp src/components/lab/perfect-circle/ScoreBoard.tsx build/src/components/ScoreBoard.tsx
+          # Create a dummy README if strictly needed or assume it exists in target (we want to update code mainly)
+          
+      - name: Push to External Repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'build'
+          destination-github-username: 'roketag33'
+          destination-repository-name: 'lab-perfect-circle'
+          target-branch: main
+          user-name: roketag33
+          user-email: alexandre.sarrazin@outlook.com 

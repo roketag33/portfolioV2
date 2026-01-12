@@ -196,6 +196,10 @@
         "neon-platformer": {
             "title": "Neon Platformer",
             "description": "2.5D Synthwave Platformer with physics."
+        },
+        "perfect-circle": {
+            "title": "The Perfect Circle",
+            "description": "Test your precision: draw a perfect circle and get judged by AI."
         }
     }
 }
