@@ -212,6 +212,10 @@
         "galaxy-chaos": {
             "title": "Galaxy Chaos",
             "description": "Interactive gravitational simulation of 10,000 particles. Become a black hole."
+        },
+        "typing-racer": {
+            "title": "Typing Speed Racer",
+            "description": "Test your typing speed and flow in a minimalist interface."
         }
     }
 }

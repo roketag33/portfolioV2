@@ -49,6 +49,8 @@ export const TEXT_SAMPLES = [
     }
 ]
 
+export type TextSample = typeof TEXT_SAMPLES[0]
+
 export const getRandomText = () => {
     return TEXT_SAMPLES[Math.floor(Math.random() * TEXT_SAMPLES.length)]
 }

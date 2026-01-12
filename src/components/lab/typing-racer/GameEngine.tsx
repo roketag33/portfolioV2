@@ -6,7 +6,7 @@ import { getRandomText } from './TextGenerator'
 import { RotateCcw } from 'lucide-react'
 
 export default function GameEngine() {
-    const [currentSample, setCurrentSample] = useState(getRandomText())
+    const [currentSample, setCurrentSample] = useState<ReturnType<typeof getRandomText> | null>(null)
     const [input, setInput] = useState('')
     const [startTime, setStartTime] = useState<number | null>(null)
     const [wpm, setWpm] = useState(0)
@@ -18,6 +18,19 @@ export default function GameEngine() {
     const inputRef = useRef<HTMLInputElement>(null)
     const [isFocused, setIsFocused] = useState(false)
 
+    // Handle hydration mismatch by setting text only on client
+    useEffect(() => {
+        setCurrentSample(getRandomText())
+    }, [])
+
+    // Focus on load
+    useEffect(() => {
+        if (currentSample && inputRef.current) {
+            inputRef.current.focus()
+            setIsFocused(true)
+        }
+    }, [currentSample])
+
     // Reset game
     const resetGame = useCallback(() => {
         setCurrentSample(getRandomText())
@@ -26,7 +39,10 @@ export default function GameEngine() {
         setWpm(0)
         setAccuracy(100)
         setIsFinished(false)
-        if (inputRef.current) inputRef.current.focus()
+        if (inputRef.current) {
+            inputRef.current.focus()
+            setIsFocused(true)
+        }
     }, [])
 
     // Handle typing
@@ -86,6 +102,8 @@ export default function GameEngine() {
 
     // Render text with highlighting
     const renderText = () => {
+        if (!currentSample) return null
+
         return currentSample.text.split('').map((char, index) => {
             let color = 'text-white/20' // pending
             let extraClass = ''
@@ -96,6 +114,8 @@ export default function GameEngine() {
                 } else {
                     color = 'text-red-500' // error
                     extraClass = 'bg-red-500/20'
+                    // Show what was actually typed instead of expected char
+                    // Use input[index] but escape space if needed
                 }
             } else if (index === input.length) {
                 // Caret position
@@ -103,11 +123,22 @@ export default function GameEngine() {
             }
 
             return (
-                <span key={index} className={`${color} ${extraClass} transition-colors duration-100 ease-out font-mono text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-relaxed`}>
-                    {char}
+                <span key={index} className={`${color} ${extraClass} transition-colors duration-100 ease-out font-mono text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-relaxed relative`}>
+                    {/* If error, show what user typed. If space, show underscore */}
+                    {(index < input.length && input[index] !== char) ? (
+                        input[index] === ' ' ? '_' : input[index]
+                    ) : char}
                 </span>
             )
         })
+    }
+
+    if (!currentSample) {
+        return (
+            <div className="w-full flex justify-center items-center min-h-[60vh]">
+                <div className="text-white/20 animate-pulse font-mono">LOADING ENGINE...</div>
+            </div>
+        )
     }
 
     return (
