@@ -1,0 +1,39 @@
+name: Sync snake Lab
+
+on:
+  push:
+    branches: [ master, main ]
+    paths:
+      - 'src/app/[locale]/lab/snake/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: pandoc/latex
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Install mustache
+        run:  apk add ruby && gem install mustache
+
+      - name: creates output directories
+        run:  mkdir -p build/src/app
+
+      - name: Create README
+        run: echo "# snake Lab Experiment" > build/README.md
+
+      - name: Copy Files
+        run: |
+          cp -r src/app/[locale]/lab/snake/* build/src/app/
+          
+      - name: Push to External Repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'build'
+          destination-github-username: 'roketag33'
+          destination-repository-name: 'lab-snake'
+          target-branch: main
+          user-name: roketag33
+          user-email: alexandre.sarrazin@outlook.com 
