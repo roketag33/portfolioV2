@@ -1,7 +1,7 @@
 'use client';
 
-import { useScroll, useTransform, motion } from 'framer-motion';
-import { useRef } from 'react';
+import { useScroll, useTransform, motion, useSpring } from 'framer-motion';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
@@ -70,5 +70,37 @@ export default function FashionConcept() {
                 </div>
             </section>
         </div>
+    )
+}
+
+function MagneticButton({ children }: { children: React.ReactNode }) {
+    const ref = useRef<HTMLButtonElement>(null);
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+
+    const handleMouse = (e: React.MouseEvent<HTMLButtonElement>) => {
+        const { clientX, clientY } = e;
+        const { height, width, left, top } = ref.current!.getBoundingClientRect();
+        const middleX = clientX - (left + width / 2);
+        const middleY = clientY - (top + height / 2);
+        setPosition({ x: middleX, y: middleY });
+    };
+
+    const reset = () => {
+        setPosition({ x: 0, y: 0 });
+    };
+
+    const { x, y } = position;
+
+    return (
+        <motion.button
+            ref={ref}
+            onMouseMove={handleMouse}
+            onMouseLeave={reset}
+            animate={{ x, y }}
+            transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
+            className="px-12 py-6 rounded-full border border-neutral-900 text-neutral-900 uppercase tracking-widest text-sm hover:bg-neutral-900 hover:text-white transition-colors duration-300"
+        >
+            {children}
+        </motion.button>
     )
 }

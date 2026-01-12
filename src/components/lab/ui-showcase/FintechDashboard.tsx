@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import { ArrowUpRight, ArrowDownLeft, Wallet, CreditCard, MoreHorizontal, Bell } from 'lucide-react';
+import { ArrowUpRight, ArrowDownLeft, Wallet, CreditCard, MoreHorizontal, Bell, Shield, Zap, Gift } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 const data = [
@@ -254,7 +254,61 @@ export default function FintechDashboard() {
                     </motion.div>
                 </div>
 
-            </div>
+            </motion.div>
         </div>
+
+                {/* New Section: Why Us (Features) */ }
+    <div className="col-span-1 lg:col-span-3 py-12">
+        <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-2xl font-bold mb-8 text-center"
+        >
+            {t('why_us.title')}
+        </motion.h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+                { icon: Shield, key: 'f1', color: 'text-emerald-400', bg: 'bg-emerald-400/10' },
+                { icon: Zap, key: 'f2', color: 'text-yellow-400', bg: 'bg-yellow-400/10' },
+                { icon: Gift, key: 'f3', color: 'text-purple-400', bg: 'bg-purple-400/10' }
+            ].map((feature, i) => (
+                <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    whileHover={{ y: -5 }}
+                    className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 text-center group cursor-default"
+                >
+                    <div className={`w-12 h-12 mx-auto rounded-2xl ${feature.bg} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                        <feature.icon className={`w-6 h-6 ${feature.color}`} />
+                    </div>
+                    <h4 className="font-bold text-lg mb-2">{t(`why_us.${feature.key}`)}</h4>
+                    <p className="text-neutral-400 text-sm">{t(`why_us.d${i + 1}`)}</p>
+                </motion.div>
+            ))}
+        </div>
+    </div>
+
+    {/* New Section: CTA */ }
+    <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        className="col-span-1 lg:col-span-3 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-3xl p-12 text-center relative overflow-hidden"
+    >
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
+        <div className="relative z-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">{t('cta.title')}</h2>
+            <button className="px-8 py-3 bg-white text-blue-600 rounded-full font-bold text-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.5)] transition-shadow duration-300 transform hover:scale-105 active:scale-95">
+                {t('cta.button')}
+            </button>
+        </div>
+    </motion.div>
+
+            </div >
+        </div >
     );
 }
