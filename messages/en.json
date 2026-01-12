@@ -337,16 +337,63 @@
                 "fintech": {
                     "title": "Neo-Bank",
                     "desc": "Financial dashboard featuring glassmorphism and data visualization.",
+                    "welcome": "Welcome back, Alexandre",
                     "card_balance": "Total Balance",
-                    "transactions": "Recent Transactions"
+                    "spending_overview": "Spending Overview",
+                    "this_week": "this week",
+                    "virtual_card": "VIRTUAL CARD",
+                    "card_holder": "CARD HOLDER",
+                    "transactions": "Recent Transactions",
+                    "see_all": "See all",
+                    "market_trends": "Market Trends",
+                    "savings_goals": "Savings Goals",
+                    "goal_car": "Tesla Model 3",
+                    "goal_house": "Paris Apartment",
+                    "tx_types": {
+                        "apple": "Apple Store",
+                        "salary": "Salary Deposit",
+                        "uber": "Uber Drop",
+                        "netflix": "Netflix Sub"
+                    }
                 },
                 "fashion": {
                     "title": "Luxury & Fashion",
-                    "desc": "Minimalist elegance and editorial typography."
+                    "desc": "Minimalist elegance and editorial typography.",
+                    "collection": "Collection 2026",
+                    "elegance": "ELEGANCE",
+                    "redefined": "REDEFINED",
+                    "quote": "\"Fashion is not something that exists in dresses only.\"",
+                    "subquote": "Style is a simple way of saying complicated things.",
+                    "discover": "DISCOVER THE SEASON",
+                    "lookbook": "Lookbook",
+                    "chapter1": "Chapter 01: Dawn",
+                    "chapter2": "Chapter 02: Dusk",
+                    "footer_contact": "Press Inquiries"
                 },
                 "agency": {
                     "title": "Brutalist Agency",
-                    "desc": "Bold design and kinetic typography."
+                    "desc": "Bold design and kinetic typography.",
+                    "menu": {
+                        "work": "Work",
+                        "manifesto": "Manifesto",
+                        "contact": "Contact"
+                    },
+                    "marquee_break": "WE BREAK THINGS",
+                    "marquee_build": "WE BUILD THINGS",
+                    "cell_strategy": {
+                        "title": "Strategy",
+                        "desc": "Defining the chaos before it defines you."
+                    },
+                    "cell_design": {
+                        "title": "Design",
+                        "desc": "Making it pop, crackle, and snap."
+                    },
+                    "cell_dev": {
+                        "title": "Development",
+                        "desc": "Code that compiles with your soul."
+                    },
+                    "selected_works": "SELECTED WORKS",
+                    "footer_talk": "LET'S TALK"
                 }
             }
         }

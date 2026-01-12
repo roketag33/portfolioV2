@@ -16,10 +16,19 @@ const data = [
 ];
 
 const transactions = [
-    { id: 1, name: 'Apple Store', date: 'Today, 10:45 AM', amount: '-$120.50', type: 'debit', icon: '🍎' },
-    { id: 2, name: 'Salary Deposit', date: 'Yesterday, 9:00 AM', amount: '+$4,500.00', type: 'credit', icon: '💰' },
-    { id: 3, name: 'Uber Limit', date: 'Yesterday, 8:30 PM', amount: '-$24.00', type: 'debit', icon: '🚗' },
-    { id: 4, name: 'Netflix', date: 'Oct 24, 2025', amount: '-$15.00', type: 'debit', icon: '🎬' },
+    { id: 1, nameId: 'apple', date: 'Today, 10:45 AM', amount: '-$120.50', type: 'debit', icon: '🍎' },
+    { id: 2, nameId: 'salary', date: 'Yesterday, 9:00 AM', amount: '+$4,500.00', type: 'credit', icon: '💰' },
+    { id: 3, nameId: 'uber', date: 'Yesterday, 8:30 PM', amount: '-$24.00', type: 'debit', icon: '🚗' },
+    { id: 4, nameId: 'netflix', date: 'Oct 24, 2025', amount: '-$15.00', type: 'debit', icon: '🎬' },
+];
+
+const marketData = [
+    { name: 'Jan', value: 100 },
+    { name: 'Feb', value: 120 },
+    { name: 'Mar', value: 110 },
+    { name: 'Apr', value: 140 },
+    { name: 'May', value: 130 },
+    { name: 'Jun', value: 170 },
 ];
 
 export default function FintechDashboard() {
@@ -41,7 +50,7 @@ export default function FintechDashboard() {
                             <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral-400">
                                 {t('title')}
                             </h1>
-                            <p className="text-sm text-neutral-400">Welcome back, Alexandre</p>
+                            <p className="text-sm text-neutral-400">{t('welcome')}</p>
                         </div>
                         <button className="p-2 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 transition-colors">
                             <Bell className="w-5 h-5 text-neutral-300" />
@@ -61,7 +70,7 @@ export default function FintechDashboard() {
                                 <h2 className="text-5xl font-bold tracking-tight">$24,562.00</h2>
                                 <div className="flex items-center gap-2 mt-4 text-emerald-400 bg-emerald-400/10 px-3 py-1 rounded-full w-fit">
                                     <ArrowUpRight className="w-4 h-4" />
-                                    <span className="text-sm font-medium">+2.5% this week</span>
+                                    <span className="text-sm font-medium">+2.5% {t('this_week')}</span>
                                 </div>
                             </div>
                             <div className="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center shadow-lg shadow-cyan-500/20">
@@ -77,7 +86,7 @@ export default function FintechDashboard() {
                         transition={{ delay: 0.1 }}
                         className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 h-[300px]"
                     >
-                        <h3 className="text-lg font-semibold mb-6">Spending Overview</h3>
+                        <h3 className="text-lg font-semibold mb-6">{t('spending_overview')}</h3>
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={data}>
                                 <defs>
@@ -121,14 +130,14 @@ export default function FintechDashboard() {
 
                         <div className="relative z-10 flex flex-col justify-between h-full">
                             <div className="flex justify-between items-center">
-                                <span className="font-mono text-white/60">VIRTUAL</span>
+                                <span className="font-mono text-white/60">{t('virtual_card')}</span>
                                 <CreditCard className="w-6 h-6 text-white/80" />
                             </div>
                             <div>
                                 <p className="font-mono text-xl tracking-widest text-white mb-2">**** **** **** 4289</p>
                                 <div className="flex justify-between items-end">
                                     <div>
-                                        <p className="text-xs text-white/40 uppercase mb-1">Card Holder</p>
+                                        <p className="text-xs text-white/40 uppercase mb-1">{t('card_holder')}</p>
                                         <p className="font-medium text-white">ALEXANDRE S.</p>
                                     </div>
                                     <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md" />
@@ -146,7 +155,7 @@ export default function FintechDashboard() {
                     >
                         <div className="flex justify-between items-center mb-6">
                             <h3 className="text-lg font-semibold">{t('transactions')}</h3>
-                            <button className="text-sm text-neutral-400 hover:text-white transition-colors">See all</button>
+                            <button className="text-sm text-neutral-400 hover:text-white transition-colors">{t('see_all')}</button>
                         </div>
 
                         <div className="space-y-4">
@@ -157,7 +166,7 @@ export default function FintechDashboard() {
                                             {tx.icon}
                                         </div>
                                         <div>
-                                            <p className="font-medium text-white">{tx.name}</p>
+                                            <p className="font-medium text-white">{t(`tx_types.${tx.nameId}`)}</p>
                                             <p className="text-xs text-neutral-400">{tx.date}</p>
                                         </div>
                                     </div>
@@ -166,6 +175,81 @@ export default function FintechDashboard() {
                                     </p>
                                 </div>
                             ))}
+                        </div>
+                    </motion.div>
+                </div>
+
+                {/* New Section: Market & Goals (Full Width below) */}
+                <div className="col-span-1 lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6 pt-12">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8"
+                    >
+                        <h3 className="text-xl font-semibold mb-6 flex items-center gap-3">
+                            <ArrowUpRight className="text-emerald-400" /> {t('market_trends')}
+                        </h3>
+                        <div className="h-[200px] w-full">
+                            {/* Simple Line Chart placeholder or SVG */}
+                            <div className="flex items-end justify-between h-full gap-2 px-2">
+                                {marketData.map((d, i) => (
+                                    <motion.div
+                                        key={i}
+                                        initial={{ height: 0 }}
+                                        whileInView={{ height: `${d.value}px` }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: i * 0.1, spring: { stiffness: 300, damping: 30 } }}
+                                        className="w-full bg-blue-500/50 rounded-t-lg hover:bg-blue-400 transition-colors relative group"
+                                    >
+                                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                                            {d.value}
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 }}
+                        className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8"
+                    >
+                        <h3 className="text-xl font-semibold mb-6 flex items-center gap-3">
+                            <Wallet className="text-purple-400" /> {t('savings_goals')}
+                        </h3>
+                        <div className="space-y-8">
+                            <div>
+                                <div className="flex justify-between text-sm mb-2">
+                                    <span>{t('goal_car')}</span>
+                                    <span className="text-emerald-400">75%</span>
+                                </div>
+                                <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                                    <motion.div
+                                        initial={{ width: 0 }}
+                                        whileInView={{ width: '75%' }}
+                                        viewport={{ once: true }}
+                                        className="h-full bg-emerald-400 rounded-full"
+                                    />
+                                </div>
+                            </div>
+                            <div>
+                                <div className="flex justify-between text-sm mb-2">
+                                    <span>{t('goal_house')}</span>
+                                    <span className="text-amber-400">12%</span>
+                                </div>
+                                <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                                    <motion.div
+                                        initial={{ width: 0 }}
+                                        whileInView={{ width: '12%' }}
+                                        viewport={{ once: true }}
+                                        className="h-full bg-amber-400 rounded-full"
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </motion.div>
                 </div>

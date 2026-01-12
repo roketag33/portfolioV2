@@ -10,12 +10,12 @@ export default function BrutalistLanding() {
     return (
         <div className="bg-yellow-400 min-h-screen text-black font-mono selection:bg-black selection:text-yellow-400 overflow-x-hidden">
             {/* Massive Header */}
-            <header className="p-8 border-b-4 border-black flex justify-between items-center">
+            <header className="p-8 border-b-4 border-black flex justify-between items-center sticky top-0 bg-yellow-400 z-50">
                 <h1 className="text-4xl font-black uppercase tracking-tighter">AGENCY®</h1>
                 <nav className="hidden md:flex gap-8 text-xl font-bold uppercase">
-                    <a href="#" className="hover:underline decoration-4 underline-offset-4">Work</a>
-                    <a href="#" className="hover:underline decoration-4 underline-offset-4">Manifesto</a>
-                    <a href="#" className="hover:underline decoration-4 underline-offset-4">Contact</a>
+                    <a href="#" className="hover:underline decoration-4 underline-offset-4">{t('menu.work')}</a>
+                    <a href="#" className="hover:underline decoration-4 underline-offset-4">{t('menu.manifesto')}</a>
+                    <a href="#" className="hover:underline decoration-4 underline-offset-4">{t('menu.contact')}</a>
                 </nav>
                 <div className="w-8 h-8 bg-black rounded-full" />
             </header>
@@ -27,10 +27,10 @@ export default function BrutalistLanding() {
                     transition={{ repeat: Infinity, ease: "linear", duration: 10 }}
                     className="flex whitespace-nowrap"
                 >
-                    <span className="text-9xl font-black mx-8">WE BREAK THINGS</span>
-                    <span className="text-9xl font-black mx-8 stroke-text text-transparent" style={{ WebkitTextStroke: '4px black' }}>WE BUILD THINGS</span>
-                    <span className="text-9xl font-black mx-8">WE BREAK THINGS</span>
-                    <span className="text-9xl font-black mx-8 stroke-text text-transparent" style={{ WebkitTextStroke: '4px black' }}>WE BUILD THINGS</span>
+                    <span className="text-9xl font-black mx-8">{t('marquee_break')}</span>
+                    <span className="text-9xl font-black mx-8 stroke-text text-transparent" style={{ WebkitTextStroke: '4px black' }}>{t('marquee_build')}</span>
+                    <span className="text-9xl font-black mx-8">{t('marquee_break')}</span>
+                    <span className="text-9xl font-black mx-8 stroke-text text-transparent" style={{ WebkitTextStroke: '4px black' }}>{t('marquee_build')}</span>
                 </motion.div>
             </div>
 

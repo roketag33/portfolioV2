@@ -337,16 +337,63 @@
                 "fintech": {
                     "title": "Neo-Bank",
                     "desc": "Dashboard financier avec glassmorphism et visualisation de données.",
+                    "welcome": "Heureux de vous revoir, Alexandre",
                     "card_balance": "Solde Total",
-                    "transactions": "Transactions Récentes"
+                    "spending_overview": "Aperçu des Dépenses",
+                    "this_week": "cette semaine",
+                    "virtual_card": "CARTE VIRTUELLE",
+                    "card_holder": "TITULAIRE",
+                    "transactions": "Transactions Récentes",
+                    "see_all": "Voir tout",
+                    "market_trends": "Tendances du Marché",
+                    "savings_goals": "Objectifs d'Épargne",
+                    "goal_car": "Tesla Model 3",
+                    "goal_house": "Appartement Paris",
+                    "tx_types": {
+                        "apple": "Apple Store",
+                        "salary": "Virement Salaire",
+                        "uber": "Uber",
+                        "netflix": "Abonnement Netflix"
+                    }
                 },
                 "fashion": {
                     "title": "Luxe & Mode",
-                    "desc": "Élégance minimaliste et typographie éditoriale."
+                    "desc": "Élégance minimaliste et typographie éditoriale.",
+                    "collection": "Collection 2026",
+                    "elegance": "ÉLÉGANCE",
+                    "redefined": "REDÉFINIE",
+                    "quote": "\"La mode n'est pas quelque chose qui existe uniquement dans les vêtements.\"",
+                    "subquote": "Le style est une façon simple de dire des choses compliquées.",
+                    "discover": "DÉCOUVRIR LA SAISON",
+                    "lookbook": "Lookbook",
+                    "chapter1": "Chapitre 01: L'Aube",
+                    "chapter2": "Chapitre 02: Le Crépuscule",
+                    "footer_contact": "Demandes Presse"
                 },
                 "agency": {
                     "title": "Agence Brutaliste",
-                    "desc": "Design audacieux et cinétique."
+                    "desc": "Design audacieux et cinétique.",
+                    "menu": {
+                        "work": "Projets",
+                        "manifesto": "Manifeste",
+                        "contact": "Contact"
+                    },
+                    "marquee_break": "NOUS CASSONS TOUT",
+                    "marquee_build": "NOUS CRÉONS TOUT",
+                    "cell_strategy": {
+                        "title": "Stratégie",
+                        "desc": "Définir le chaos avant qu'il ne vous définisse."
+                    },
+                    "cell_design": {
+                        "title": "Design",
+                        "desc": "Faire crépiter, claquer et exploser."
+                    },
+                    "cell_dev": {
+                        "title": "Développement",
+                        "desc": "Du code qui compile avec votre âme."
+                    },
+                    "selected_works": "PROJETS RÉCENTS",
+                    "footer_talk": "DISCUTONS"
                 }
             }
         }
