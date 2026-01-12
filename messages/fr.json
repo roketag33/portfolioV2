@@ -212,6 +212,10 @@
         "galaxy-chaos": {
             "title": "Galaxy Chaos",
             "description": "Simulation gravitationnelle interactive de 10 000 particules. Devenez un trou noir."
+        },
+        "typingRacer": {
+            "title": "Typing Speed Racer",
+            "description": "Testez votre vitesse de frappe et votre flow dans une interface minimaliste."
         }
     }
 }

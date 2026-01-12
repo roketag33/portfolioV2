@@ -1,0 +1,48 @@
+name: Sync Typing Speed Racer to Child Repo
+
+on:
+  push:
+    paths:
+      - 'src/app/[locale]/lab/typing-racer/**'
+      - 'src/components/lab/typing-racer/**'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Filter and Move Files
+        run: |
+          mkdir -p temp_deploy
+          
+          # Copy files preserving structure for now
+          # We want to flatten relevant files into src/ in the target repo or keep structure?
+          # Let's keep a simple structure: src/components and src/pages
+          
+          mkdir -p temp_deploy/src
+          
+          # Copy App Page
+          cp -r src/app/[locale]/lab/typing-racer temp_deploy/src/page
+          
+          # Copy Components
+          cp -r src/components/lab/typing-racer temp_deploy/src/components
+
+          # Create a README
+          echo "# Typing Speed Racer" > temp_deploy/README.md
+          echo "Minimalist typing speed game built with React and Framer Motion." >> temp_deploy/README.md
+
+      - name: Push to Child Repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'temp_deploy'
+          destination-github-username: 'roketag33'
+          destination-repository-name: 'lab-typing-racer'
+          user-email: alexandre.sarrazin@gmail.com
+          target-branch: main
+          create-target-branch-if-needed: true

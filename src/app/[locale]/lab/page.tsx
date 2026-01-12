@@ -34,6 +34,14 @@ const LAB_ITEMS = [
         color: '#eab308'
     },
     {
+        id: 'typing-racer',
+        year: '2025', // Assuming year based on other items
+        tech: ['React', 'State Management', 'Typing'], // Placeholder tech
+        link: '/lab/typing-racer', // Placeholder link
+        image: '/images/typing-racer.png', // Placeholder image
+        color: '#a78bfa' // Placeholder color
+    },
+    {
         id: 'galaxy-chaos',
         year: '2026',
         tech: ['R3F', 'InstancedMesh', 'Physics'],
