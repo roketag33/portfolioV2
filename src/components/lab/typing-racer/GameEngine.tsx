@@ -47,6 +47,7 @@ export default function GameEngine() {
 
     // Handle typing
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (!currentSample) return
         const val = e.target.value
 
         // Start timer on first char
@@ -79,6 +80,7 @@ export default function GameEngine() {
     useEffect(() => {
         if (startTime && !isFinished) {
             const interval = setInterval(() => {
+                if (!currentSample) return
                 const durationMin = (Date.now() - startTime) / 60000
                 // Standard WPM = (all typed entries / 5) / time
                 const words = input.length / 5

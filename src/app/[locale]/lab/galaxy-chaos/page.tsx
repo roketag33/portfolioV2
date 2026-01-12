@@ -9,11 +9,18 @@ import Link from 'next/link'
 import Controls from '@/components/lab/galaxy-chaos/Controls'
 
 // Initial Config matching "Stardust" tuning
-const INITIAL_CONFIG = {
+interface Config {
+    count: number;
+    attractorStrength: number;
+    damping: number;
+    colorMode: 'stardust' | 'inferno' | 'matrix';
+}
+
+const INITIAL_CONFIG: Config = {
     count: 4000, // Safe default for mobile
     attractorStrength: 30,
     damping: 0.99,
-    colorMode: 'stardust' as const
+    colorMode: 'stardust'
 }
 
 export default function GalaxyChaosPage() {
