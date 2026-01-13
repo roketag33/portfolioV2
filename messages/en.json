@@ -435,6 +435,87 @@
                     "top": "DIGITAL CREATION • ART & CODE • DESIGN SYSTEM •",
                     "bottom": "BRAND STRATEGY • WEB DEVELOPMENT • UX/UI • "
                 }
+            },
+            "cyber": {
+                "back": "Back to Lab",
+                "title": "Cyber-Gaming HUD",
+                "desc": "Futuristic game interface with glitch effects and data visualization.",
+                "system_status": "SYSTEM STATUS",
+                "online": "ONLINE",
+                "security_level": "SECURITY LEVEL",
+                "high": "HIGH",
+                "active_users": "ACTIVE OPERATORS",
+                "mission_log": "MISSION LOG",
+                "mission_1": "Infiltrate Mainframe // Success",
+                "mission_2": "Decrypt Data Stream // Pending",
+                "mission_3": "Upload Virus Payload // Error",
+                "loadout": "LOADOUT",
+                "weapon_1": "Plasma Rifle",
+                "weapon_2": "Nano Shield",
+                "weapon_3": "Cyber Katana",
+                "stats": "STATISTICS",
+                "accuracy": "Accuracy",
+                "speed": "Speed",
+                "stealth": "Stealth"
+            },
+            "bento": {
+                "title": "Smart Home OS",
+                "desc": "Clean bento-grid interface for home automation.",
+                "greeting": "Good Evening, Alex",
+                "home": "My Smart Home",
+                "weather": "Weather",
+                "sunny": "Sunny",
+                "temperature": "Temperature",
+                "heating": "Heating On",
+                "lighting": "Lighting",
+                "music": "Now Playing",
+                "living_room": "Living Room",
+                "security": "Security System",
+                "cameras": "Cameras Active",
+                "song": "Midnight City",
+                "artist": "M83",
+                "energy": "Energy",
+                "back": "Back to Lab",
+                "power_usage": "Power Usage",
+                "kwh": "kWh today",
+                "nav": {
+                    "home": "Home",
+                    "rooms": "Rooms",
+                    "climate": "Climate",
+                    "security": "Security",
+                    "energy": "Energy",
+                    "settings": "Settings"
+                },
+                "rooms_list": {
+                    "living": "Living Room",
+                    "kitchen": "Kitchen",
+                    "bedroom": "Master Bedroom",
+                    "office": "Home Office",
+                    "active_devices": "{count} devices active"
+                },
+                "security_feeds": {
+                    "cameras": "Cameras",
+                    "front_door": "Front Door",
+                    "backyard": "Backyard",
+                    "live": "LIVE",
+                    "recording": "Recording",
+                    "unlocked": "UNLOCKED",
+                    "armed": "System Armed",
+                    "attention": "Attention Required"
+                },
+                "energy_stats": {
+                    "weekly": "Weekly Usage",
+                    "peak": "Peak Hours",
+                    "savings": "Est. Savings",
+                    "vs_last_week": "vs last week"
+                },
+                "weather_extended": {
+                    "forecast": "Forecast",
+                    "humidity": "Humidity",
+                    "wind": "Wind",
+                    "outside": "Outside"
+                },
+                "climate_target": "Target"
             }
         }
     }

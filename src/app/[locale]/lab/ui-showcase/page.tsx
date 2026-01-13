@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routingConfig';
-import { ArrowLeft, CreditCard, ShoppingBag, Zap } from 'lucide-react';
+import { ArrowLeft, CreditCard, ShoppingBag, Zap, Cpu, Home } from 'lucide-react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
@@ -25,6 +25,18 @@ const concepts = [
         icon: Zap,
         color: 'from-lime-400 to-yellow-400',
         delay: 0.3
+    },
+    {
+        id: 'cyber',
+        icon: Cpu,
+        color: 'from-cyan-500 to-fuchsia-500',
+        delay: 0.4
+    },
+    {
+        id: 'bento',
+        icon: Home,
+        color: 'from-indigo-400 to-cyan-400',
+        delay: 0.5
     }
 ];
 

@@ -435,6 +435,87 @@
                     "top": "CRÉATION NUMÉRIQUE • ART & CODE • DESIGN SYSTEM •",
                     "bottom": "STRATÉGIE DE MARQUE • DÉVELOPPEMENT WEB • UX/UI • "
                 }
+            },
+            "cyber": {
+                "back": "Retour au Lab",
+                "title": "Cyber-Gaming HUD",
+                "desc": "Interface de jeu futuriste avec effets de glitch et visualisation de données.",
+                "system_status": "ÉTAT SYSTÈME",
+                "online": "EN LIGNE",
+                "security_level": "NIVEAU SÉCURITÉ",
+                "high": "ÉLEVÉ",
+                "active_users": "OPÉRATEURS ACTIFS",
+                "mission_log": "JOURNAL DE MISSION",
+                "mission_1": "Infiltration Mainframe // Succès",
+                "mission_2": "Décryptage Flux Données // En cours",
+                "mission_3": "Upload Payload Virus // Erreur",
+                "loadout": "ÉQUIPEMENT",
+                "weapon_1": "Fusil Plasma",
+                "weapon_2": "Bouclier Nano",
+                "weapon_3": "Cyber Katana",
+                "stats": "STATISTIQUES",
+                "accuracy": "Précision",
+                "speed": "Vitesse",
+                "stealth": "Furtivité"
+            },
+            "bento": {
+                "title": "Smart Home OS",
+                "desc": "Interface bento-grid épurée pour la domotique.",
+                "greeting": "Bonsoir, Alex",
+                "home": "Ma Maison",
+                "weather": "Météo",
+                "sunny": "Ensoleillé",
+                "temperature": "Température",
+                "heating": "Chauffage",
+                "lighting": "Éclairage",
+                "music": "En lecture",
+                "living_room": "Salon",
+                "security": "Système Sécurité",
+                "cameras": "Caméras Actives",
+                "song": "Midnight City",
+                "artist": "M83",
+                "energy": "Énergie",
+                "back": "Retour au Lab",
+                "power_usage": "Conso. Énergie",
+                "kwh": "kWh ajd",
+                "nav": {
+                    "home": "Accueil",
+                    "rooms": "Pièces",
+                    "climate": "Climat",
+                    "security": "Sécurité",
+                    "energy": "Énergie",
+                    "settings": "Réglages"
+                },
+                "rooms_list": {
+                    "living": "Salon",
+                    "kitchen": "Cuisine",
+                    "bedroom": "Chambre Parentale",
+                    "office": "Bureau",
+                    "active_devices": "{count} appareils actifs"
+                },
+                "security_feeds": {
+                    "cameras": "Caméras",
+                    "front_door": "Porte Entrée",
+                    "backyard": "Jardin",
+                    "live": "DIRECT",
+                    "recording": "Enregistrement",
+                    "unlocked": "DÉVERROUILLÉ",
+                    "armed": "Système Armé",
+                    "attention": "Attention Requise"
+                },
+                "energy_stats": {
+                    "weekly": "Conso. Hebdo",
+                    "peak": "Heures Pleines",
+                    "savings": "Économies Est.",
+                    "vs_last_week": "vs semaine dernière"
+                },
+                "weather_extended": {
+                    "forecast": "Prévisions",
+                    "humidity": "Humidité",
+                    "wind": "Vent",
+                    "outside": "Extérieur"
+                },
+                "climate_target": "Cible"
             }
         }
     }
