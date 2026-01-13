@@ -69,7 +69,7 @@ export default function PerfectCirclePage() {
                                 Score = 100 * (1 - (Deviation / AvgRadius))
                             </div>
                             <p className="text-xs italic pt-2">
-                                * We also penalize if you don't close the loop!
+                                * We also penalize if you don&apos;t close the loop!
                             </p>
                         </div>
                         <Button className="w-full mt-4" onClick={() => setShowInfo(false)}>

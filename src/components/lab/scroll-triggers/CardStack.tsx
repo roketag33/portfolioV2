@@ -4,28 +4,7 @@ import { useScroll, useTransform, motion, MotionValue } from 'framer-motion';
 import { useRef } from 'react';
 import { useTranslations } from 'next-intl';
 
-const projects = [
-    {
-        title: "Matisse",
-        description: "A digital exploration of form and color.",
-        src: "bg-red-500",
-    },
-    {
-        title: "Picasso",
-        description: "Cubism in the modern web era.",
-        src: "bg-blue-500",
-    },
-    {
-        title: "Dali",
-        description: "Surrealism through code.",
-        src: "bg-orange-500",
-    },
-    {
-        title: "Van Gogh",
-        description: "Post-impressionist shader art.",
-        src: "bg-yellow-500",
-    }
-]
+
 
 export default function CardStack() {
     const t = useTranslations('Lab.scroll-triggers.cards');
@@ -73,7 +52,17 @@ export default function CardStack() {
     )
 }
 
-const Card = ({ i, title, description, src, progress, range, targetScale }: any) => {
+interface CardProps {
+    i: number;
+    title: string;
+    description: string;
+    src: string;
+    progress: MotionValue<number>;
+    range: [number, number];
+    targetScale: number;
+}
+
+const Card = ({ i, title, description, src, progress, range, targetScale }: CardProps) => {
     const container = useRef(null);
     const { scrollYProgress } = useScroll({
         target: container,

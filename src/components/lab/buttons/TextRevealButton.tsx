@@ -30,7 +30,7 @@ export default function TextRevealButton({ children = "Explore" }: { children?: 
                     initial={{ y: "150%" }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                 >
-                    Let's Go <ArrowRight className="w-4 h-4" />
+                    Let&apos;s Go <ArrowRight className="w-4 h-4" />
                 </motion.span>
             </div>
         </motion.button>

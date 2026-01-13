@@ -2,7 +2,19 @@
 
 import { motion } from 'framer-motion';
 
+import { useState, useEffect } from 'react';
+
 export default function LiquifyButton({ children = "Liquify" }: { children?: React.ReactNode }) {
+    const [bubbles, setBubbles] = useState<Array<{ x: number, y: number }>>([])
+
+    useEffect(() => {
+        setTimeout(() => {
+            setBubbles([...Array(5)].map(() => ({
+                x: Math.random() * 100 - 50,
+                y: Math.random() * 50 - 25
+            })))
+        }, 0)
+    }, [])
     return (
         <motion.button
             className="relative px-8 py-4 bg-indigo-600 text-white font-bold rounded-lg overflow-hidden group"
@@ -11,7 +23,7 @@ export default function LiquifyButton({ children = "Liquify" }: { children?: Rea
         >
             <span className="relative z-10">{children}</span>
             <div className="absolute inset-0 z-0">
-                {[...Array(5)].map((_, i) => (
+                {bubbles.map((bubble, i) => (
                     <motion.div
                         key={i}
                         className="absolute bg-white/20 rounded-full"
@@ -21,8 +33,8 @@ export default function LiquifyButton({ children = "Liquify" }: { children?: Rea
                                 width: [0, 100 + i * 50],
                                 height: [0, 100 + i * 50],
                                 opacity: [0.5, 0],
-                                x: Math.random() * 100 - 50,
-                                y: Math.random() * 50 - 25,
+                                x: bubble.x,
+                                y: bubble.y,
                                 transition: {
                                     duration: 0.8,
                                     repeat: Infinity,

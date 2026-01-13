@@ -1,6 +1,6 @@
 'use client';
 
-import { useScroll, useTransform, motion } from 'framer-motion';
+import { useScroll, useTransform, motion, MotionValue } from 'framer-motion';
 import { useRef } from 'react';
 import { useTranslations } from 'next-intl';
 
@@ -37,7 +37,14 @@ export default function PinningSection() {
     )
 }
 
-function ScrollCard({ text, color, progress, range }: any) {
+interface ScrollCardProps {
+    text: string;
+    color: string;
+    progress: MotionValue<number>; // Now available
+    range: [number, number];
+}
+
+function ScrollCard({ text, color, progress, range }: ScrollCardProps) {
     const opacity = useTransform(progress, [range[0], range[0] + 0.1, range[1] - 0.1, range[1]], [0, 1, 1, 0]);
     const y = useTransform(progress, [range[0], range[1]], [100, -100]);
 

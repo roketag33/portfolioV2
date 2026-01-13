@@ -25,15 +25,19 @@ export default function GameCanvas({ onScoreCalculated, isResetting }: GameCanva
     // Reset canvas when parent requests it
     useEffect(() => {
         if (isResetting) {
-            const canvas = canvasRef.current
-            const ctx = canvas?.getContext('2d')
-            if (canvas && ctx) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height)
-                setPoints([])
-                setFeedback('')
-                setCenter(null)
-                setRadius(null)
-            }
+            // Push reset to next tick to avoid synchronous setState warning
+            const timer = setTimeout(() => {
+                const canvas = canvasRef.current
+                const ctx = canvas?.getContext('2d')
+                if (canvas && ctx) {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height)
+                    setPoints([])
+                    setFeedback('')
+                    setCenter(null)
+                    setRadius(null)
+                }
+            }, 0)
+            return () => clearTimeout(timer)
         }
     }, [isResetting])
 

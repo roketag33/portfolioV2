@@ -19,7 +19,7 @@ interface ControlsProps {
 export default function Controls({ config, setConfig }: ControlsProps) {
     const [isOpen, setIsOpen] = useState(false); // Closed by default on load for cleaner look
 
-    const handleChange = (key: keyof Config, value: any) => {
+    const handleChange = (key: keyof Config, value: number | string) => {
         setConfig({ ...config, [key]: value });
     };
 
@@ -122,8 +122,8 @@ export default function Controls({ config, setConfig }: ControlsProps) {
                                             key={mode}
                                             onClick={() => handleChange('colorMode', mode)}
                                             className={`flex-1 overflow-hidden py-1.5 text-xs rounded-md transition-all ${config.colorMode === mode
-                                                    ? 'bg-indigo-500 text-white shadow-lg'
-                                                    : 'text-white/50 hover:text-white hover:bg-white/5'
+                                                ? 'bg-indigo-500 text-white shadow-lg'
+                                                : 'text-white/50 hover:text-white hover:bg-white/5'
                                                 }`}
                                         >
                                             {mode.charAt(0).toUpperCase() + mode.slice(1)}

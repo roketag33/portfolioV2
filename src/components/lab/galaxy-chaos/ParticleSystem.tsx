@@ -11,6 +11,17 @@ interface ParticleSystemProps {
     colorMode: 'stardust' | 'inferno' | 'matrix';
 }
 
+interface Particle {
+    x: number;
+    y: number;
+    z: number;
+    mx: number;
+    my: number;
+    mz: number;
+    speed: number;
+    color: THREE.Color;
+}
+
 export default function ParticleSystem({ count, attractorStrength, damping, colorMode }: ParticleSystemProps) {
     const mesh = useRef<THREE.InstancedMesh>(null)
     const { viewport } = useThree()
@@ -19,7 +30,10 @@ export default function ParticleSystem({ count, attractorStrength, damping, colo
 
     // Initialize particles
     // We memoize based on 'count' to recreate array only when count changes
-    const particles = useMemo(() => {
+    // Initialize particles using useRef to avoid impure Math.random during render
+    const particles = useRef<Particle[]>([])
+
+    useEffect(() => {
         const temp = []
         for (let i = 0; i < count; i++) {
             const t = Math.random() * 100
@@ -38,7 +52,7 @@ export default function ParticleSystem({ count, attractorStrength, damping, colo
                 color: new THREE.Color()
             })
         }
-        return temp
+        particles.current = temp
     }, [count])
 
     useFrame((state) => {
@@ -47,7 +61,9 @@ export default function ParticleSystem({ count, attractorStrength, damping, colo
         const targetX = (state.pointer.x * viewport.width) / 2
         const targetY = (state.pointer.y * viewport.height) / 2
 
-        particles.forEach((particle, i) => {
+        if (particles.current.length === 0) return
+
+        particles.current.forEach((particle, i) => {
             // Gravity Logic
             const dx = targetX - particle.x
             const dy = targetY - particle.y

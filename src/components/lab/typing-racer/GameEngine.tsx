@@ -18,16 +18,23 @@ export default function GameEngine() {
     const inputRef = useRef<HTMLInputElement>(null)
     const [isFocused, setIsFocused] = useState(false)
 
-    // Handle hydration mismatch by setting text only on client
+    // Handle initial load
     useEffect(() => {
-        setCurrentSample(getRandomText())
-    }, [])
+        if (!currentSample) {
+            setTimeout(() => setCurrentSample(getRandomText()), 0)
+        }
+    }, [currentSample])
 
     // Focus on load
     useEffect(() => {
-        if (currentSample && inputRef.current) {
+        if (currentSample && inputRef.current && !isFocused) {
             inputRef.current.focus()
-            setIsFocused(true)
+            // We don't necessarily need to track focus state in state if it causes issues,
+            // but if we do, we should check if it's already focused to avoid loop.
+            // However, the error is likely about the sync setState.
+            // Let's use a timeout to push it to the next tick, breaking the sync cycle.
+            const timer = setTimeout(() => setIsFocused(true), 0)
+            return () => clearTimeout(timer)
         }
     }, [currentSample])
 
