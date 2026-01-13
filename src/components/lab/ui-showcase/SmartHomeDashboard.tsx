@@ -31,8 +31,8 @@ const Sidebar = ({ active, onNavigate }: { active: NavItem, onNavigate: (i: NavI
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className={`
-                fixed bottom-0 left-0 right-0 h-20 bg-white/80 backdrop-blur-xl border-t border-white/50 z-40 flex flex-row justify-around items-center px-2 pb-2 
-                md:relative md:h-screen md:w-20 md:flex-col md:justify-start md:items-center md:border-r md:border-t-0 md:bg-white/60 md:pt-48 md:pb-8 lg:w-64 lg:items-start lg:px-0 lg:pb-0
+                fixed bottom-4 left-4 right-4 h-20 bg-white/70 backdrop-blur-2xl border border-white/40 shadow-2xl shadow-indigo-500/10 rounded-2xl z-40 flex flex-row justify-around items-center px-2 
+                md:sticky md:top-8 md:h-[calc(100vh-4rem)] md:w-24 md:flex-col md:justify-start md:items-center md:bg-white/40 md:ml-6 md:rounded-[2.5rem] md:border md:border-white/40 md:pt-12 md:pb-8 lg:w-72 lg:items-start lg:px-6
             `}
         >
             <div className="hidden lg:block px-6 mb-8 w-full">
@@ -55,7 +55,7 @@ const Sidebar = ({ active, onNavigate }: { active: NavItem, onNavigate: (i: NavI
                             }
                         `}
                     >
-                        <item.icon className={`w-6 h-6 md:w-5 md:h-5 relative z-10 ${active === item.id ? 'scale-110' : ''}`} />
+                        <item.icon className={`w-6 h-6 md:w-6 md:h-6 relative z-10 transition-transform duration-300 ${active === item.id ? 'scale-110' : 'group-hover:scale-110'}`} />
                         <span className="font-medium hidden lg:block relative z-10 text-sm">{item.label}</span>
 
                         {/* Mobile Active Indicator (Dot) */}
@@ -106,7 +106,7 @@ const Card = ({ children, className = '', title, icon: Icon, onClick }: { childr
         whileHover={{ scale: onClick ? 1.01 : 1, y: onClick ? -2 : 0 }}
         whileTap={{ scale: onClick ? 0.98 : 1 }}
         onClick={onClick}
-        className={`bg-white/60 backdrop-blur-2xl rounded-3xl p-6 shadow-sm border border-white/60 flex flex-col transition-all ${onClick ? 'cursor-pointer hover:shadow-md' : ''} ${className}`}
+        className={`bg-white/40 backdrop-blur-2xl rounded-[2.5rem] p-6 shadow-xl shadow-indigo-500/5 border border-white/40 flex flex-col transition-all duration-300 ${onClick ? 'cursor-pointer hover:shadow-2xl hover:shadow-indigo-500/10 hover:-translate-y-1' : ''} ${className}`}
     >
         {title && (
             <div className="flex items-center gap-2 mb-4 text-slate-500 text-sm font-semibold tracking-wide uppercase opacity-70">
@@ -204,7 +204,7 @@ const SecurityFeed = ({ label, isLive }: { label: string, isLive: boolean }) => 
 };
 
 const RoomItem = ({ name, devices, icon: Icon, color }: { name: string, devices: number, icon: React.ComponentType<{ className?: string }>, color: string }) => (
-    <div className="flex items-center justify-between p-4 bg-white/40 hover:bg-white/60 active:bg-white/80 transition-colors rounded-2xl cursor-pointer group">
+    <div className="flex items-center justify-between p-4 bg-white/60 hover:bg-white/90 active:bg-white transition-all rounded-[1.5rem] cursor-pointer group border border-transparent hover:border-white/60 hover:shadow-lg hover:shadow-indigo-500/5 hover:-translate-y-0.5">
         <div className="flex items-center gap-4">
             <div className={`w-12 h-12 rounded-2xl ${color} flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform`}>
                 <Icon className="w-6 h-6" />
@@ -233,7 +233,11 @@ const SmartHomeDashboard = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#F2F4F8] text-slate-800 font-sans selection:bg-indigo-100 selection:text-indigo-900 flex flex-col md:flex-row overflow-hidden relative">
+        <div className="min-h-screen bg-[#F0F2F5] text-slate-800 font-sans selection:bg-indigo-100 selection:text-indigo-900 flex flex-col md:flex-row relative overflow-visible">
+            <div className="fixed inset-0 pointer-events-none z-0">
+                <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-indigo-200/30 rounded-full blur-[120px]" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-violet-200/30 rounded-full blur-[120px]" />
+            </div>
             {/* Unified Back Button */}
             <motion.div
                 initial={{ opacity: 0 }}
@@ -246,7 +250,7 @@ const SmartHomeDashboard = () => {
                     className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/90 hover:text-black transition-all duration-300 text-sm font-medium tracking-widest uppercase cursor-pointer"
                 >
                     <ArrowLeft className="w-4 h-4" />
-                    <span>{t('back')}</span>
+                    <span>BACK</span>
                 </Link>
             </motion.div>
 
@@ -254,15 +258,16 @@ const SmartHomeDashboard = () => {
             <Sidebar active={activeTab} onNavigate={setActiveTab} />
 
             {/* Main Content Scrollable Area */}
-            <main className="flex-1 h-screen overflow-y-auto overflow-x-hidden">
-                <div className="max-w-7xl mx-auto p-4 md:p-8 pb-24">
+            <main className="flex-1 min-h-screen overflow-x-hidden">
+                <div className="max-w-7xl mx-auto p-4 pt-24 md:p-8 md:pt-32 pb-24">
 
                     {/* Header */}
                     <header className="flex justify-between items-end mb-8">
                         <div>
                             <motion.h1
                                 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                                className="text-4xl font-bold text-slate-900 tracking-tight"
+                                /* Added font-serif */
+                                className="text-5xl font-serif font-medium text-slate-900 tracking-tight"
                             >
                                 {t('greeting')}
                             </motion.h1>
@@ -278,10 +283,8 @@ const SmartHomeDashboard = () => {
                                 <CloudRain className="w-4 h-4 text-blue-500" />
                                 <span>{t('weather_extended.outside')}: 14°C</span>
                             </div>
-                            <div className="w-12 h-12 rounded-full bg-slate-200 overflow-hidden border-2 border-white shadow-sm cursor-pointer hover:ring-2 ring-indigo-500/50 transition-all">
-                                {/* Avatar placeholder */}
-                                {/* <img src="..." /> */}
-                                <div className="w-full h-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold">AS</div>
+                            <div className="w-12 h-12 rounded-2xl bg-white/50 backdrop-blur overflow-hidden border border-white/60 shadow-sm cursor-pointer hover:shadow-md transition-all group">
+                                <div className="w-full h-full bg-gradient-to-br from-indigo-100 to-violet-100 flex items-center justify-center text-indigo-600 font-bold group-hover:scale-110 transition-transform">AS</div>
                             </div>
                         </div>
                     </header>
@@ -292,7 +295,7 @@ const SmartHomeDashboard = () => {
                         {/* --- ROW 1: Status & Quick Controls --- */}
 
                         {/* Weather Card */}
-                        <Card className="md:col-span-2 row-span-2 !bg-gradient-to-br !from-blue-500 !to-indigo-600 !text-white !border-none relative overflow-hidden group">
+                        <Card className="md:col-span-2 row-span-2 !bg-gradient-to-br !from-blue-600 !to-violet-600 !text-white !border-none relative overflow-hidden group shadow-2xl shadow-blue-500/20">
                             <div className="absolute top-0 right-0 p-32 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:translate-y-[-40%] transition-transform duration-1000"></div>
                             <div className="flex flex-col justify-between h-full relative z-10">
                                 <div className="flex justify-between items-start">
@@ -334,9 +337,13 @@ const SmartHomeDashboard = () => {
                                     <div className="text-3xl font-bold">{temp}°C</div>
                                     <div className="text-xs text-slate-400 font-medium mt-1">{t('climate_target')}: 22°C</div>
                                 </div>
-                                <div className="flex gap-1 bg-slate-100 p-1 rounded-xl">
-                                    <button onClick={() => setTemp(t => t - 0.5)} className="w-10 h-10 rounded-lg hover:bg-white hover:shadow-sm flex items-center justify-center transition-all">-</button>
-                                    <button onClick={() => setTemp(t => t + 0.5)} className="w-10 h-10 rounded-lg hover:bg-white hover:shadow-sm flex items-center justify-center transition-all">+</button>
+                                <div className="flex gap-2 bg-slate-100/50 p-1.5 rounded-2xl">
+                                    <button onClick={() => setTemp(t => t - 0.5)} className="w-10 h-10 rounded-xl bg-white shadow-sm hover:shadow-md text-slate-600 hover:text-indigo-600 hover:scale-105 active:scale-95 flex items-center justify-center transition-all">
+                                        <span className="text-xl leading-none mb-0.5">-</span>
+                                    </button>
+                                    <button onClick={() => setTemp(t => t + 0.5)} className="w-10 h-10 rounded-xl bg-white shadow-sm hover:shadow-md text-slate-600 hover:text-indigo-600 hover:scale-105 active:scale-95 flex items-center justify-center transition-all">
+                                        <span className="text-xl leading-none mb-0.5">+</span>
+                                    </button>
                                 </div>
                             </div>
                         </Card>

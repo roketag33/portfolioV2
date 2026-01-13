@@ -75,7 +75,7 @@ const CyberDashboard = () => {
                     className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/90 hover:text-black transition-all duration-300 text-sm font-medium tracking-widest uppercase cursor-pointer"
                 >
                     <ArrowLeft className="w-4 h-4" />
-                    <span>{t('back')}</span>
+                    <span>BACK</span>
                 </Link>
             </motion.div>
 
