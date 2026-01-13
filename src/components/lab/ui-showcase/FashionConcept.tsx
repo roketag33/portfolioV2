@@ -1,6 +1,6 @@
 'use client';
 
-import { useScroll, useTransform, motion, useSpring } from 'framer-motion';
+import { useScroll, useTransform, motion, useSpring, Variants } from 'framer-motion';
 import { useRef, useState } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
@@ -16,7 +16,7 @@ export default function FashionConcept() {
     const ytext = useTransform(scrollYProgress, [0, 1], [0, 200]);
     const yimage = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
-    const fadeInUp = {
+    const fadeInUp: Variants = {
         hidden: { opacity: 0, y: 40 },
         visible: {
             opacity: 1,
@@ -28,7 +28,7 @@ export default function FashionConcept() {
         }
     };
 
-    const stagger = {
+    const stagger: Variants = {
         visible: { transition: { staggerChildren: 0.1 } }
     };
 

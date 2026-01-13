@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll } from 'framer-motion';
+import { motion, useScroll, Variants } from 'framer-motion';
 import { useRef } from 'react';
 import { useTranslations } from 'next-intl';
 
@@ -15,12 +15,12 @@ export default function BrutalistLanding() {
 
 
     // Animation Variants
-    const fadeInUp = {
+    const fadeInUp: Variants = {
         hidden: { opacity: 0, y: 40 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
     };
 
-    const stagger = {
+    const stagger: Variants = {
         visible: { transition: { staggerChildren: 0.1 } }
     };
 

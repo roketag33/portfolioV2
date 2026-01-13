@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 // import Image from 'next/image';
@@ -40,12 +40,12 @@ export default function FintechDashboard() {
     const marketData = [65, 45, 75, 55, 85, 65, 95];
 
     // Animation Variants
-    const fadeInUp = {
+    const fadeInUp: Variants = {
         hidden: { opacity: 0, y: 30 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
     };
 
-    const stagger = {
+    const stagger: Variants = {
         visible: { transition: { staggerChildren: 0.1 } }
     };
 

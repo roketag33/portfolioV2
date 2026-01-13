@@ -18,8 +18,12 @@ export default function LiquifyButton({ children = "Liquify" }: { children?: Rea
     return (
         <motion.button
             className="relative px-8 py-4 bg-indigo-600 text-white font-bold rounded-lg overflow-hidden group"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover="hover"
+            whileTap="tap"
+            variants={{
+                hover: { scale: 1.05 },
+                tap: { scale: 0.95 }
+            }}
         >
             <span className="relative z-10">{children}</span>
             <div className="absolute inset-0 z-0">
