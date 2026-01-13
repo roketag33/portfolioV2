@@ -1,314 +1,278 @@
-'use client';
+"use client";
 
+import React from 'react';
 import { motion } from 'framer-motion';
-import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import { ArrowUpRight, ArrowDownLeft, Wallet, CreditCard, MoreHorizontal, Bell, Shield, Zap, Gift } from 'lucide-react';
+import { } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+// import Image from 'next/image';
 
-const data = [
-    { name: 'Mon', value: 4000 },
-    { name: 'Tue', value: 3000 },
-    { name: 'Wed', value: 5000 },
-    { name: 'Thu', value: 2780 },
-    { name: 'Fri', value: 1890 },
-    { name: 'Sat', value: 2390 },
-    { name: 'Sun', value: 3490 },
-];
-
-const transactions = [
-    { id: 1, nameId: 'apple', date: 'Today, 10:45 AM', amount: '-$120.50', type: 'debit', icon: '🍎' },
-    { id: 2, nameId: 'salary', date: 'Yesterday, 9:00 AM', amount: '+$4,500.00', type: 'credit', icon: '💰' },
-    { id: 3, nameId: 'uber', date: 'Yesterday, 8:30 PM', amount: '-$24.00', type: 'debit', icon: '🚗' },
-    { id: 4, nameId: 'netflix', date: 'Oct 24, 2025', amount: '-$15.00', type: 'debit', icon: '🎬' },
-];
-
-const marketData = [
-    { name: 'Jan', value: 100 },
-    { name: 'Feb', value: 120 },
-    { name: 'Mar', value: 110 },
-    { name: 'Apr', value: 140 },
-    { name: 'May', value: 130 },
-    { name: 'Jun', value: 170 },
-];
+// --- Types ---
+type Transaction = {
+    id: number;
+    nameId: string; // Key for translation
+    date: string;
+    amount: string;
+    type: 'debit' | 'credit';
+    icon: string;
+};
 
 export default function FintechDashboard() {
     const t = useTranslations('Lab.ui-showcase.fintech');
 
+    // --- Data (Moved inside component for t()) ---
+    const data = [
+        { name: 'Jan', value: 65 },
+        { name: 'Feb', value: 59 },
+        { name: 'Mar', value: 80 },
+        { name: 'Apr', value: 81 },
+        { name: 'May', value: 56 },
+        { name: 'Jun', value: 55 },
+        { name: 'Jul', value: 40 },
+    ];
+
+    const transactions: Transaction[] = [
+        { id: 1, nameId: 'apple', date: t('dates.today') + ', 10:45 AM', amount: '-$120.50', type: 'debit', icon: '🍎' },
+        { id: 2, nameId: 'salary', date: t('dates.yesterday') + ', 9:00 AM', amount: '+$4,500.00', type: 'credit', icon: '💰' },
+        { id: 3, nameId: 'uber', date: t('dates.yesterday') + ', 8:30 PM', amount: '-$24.00', type: 'debit', icon: '🚗' },
+        { id: 4, nameId: 'netflix', date: 'Oct 24, 2025', amount: '-$15.00', type: 'debit', icon: '🎬' },
+    ];
+
+    const marketData = [65, 45, 75, 55, 85, 65, 95];
+
+    // Animation Variants
+    const fadeInUp = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+    };
+
+    const stagger = {
+        visible: { transition: { staggerChildren: 0.1 } }
+    };
+
     return (
-        <div className="w-full h-full min-h-screen bg-[#0f172a] text-white font-sans p-4 md:p-8 flex items-center justify-center overflow-hidden relative">
-            {/* Background Gradients */}
-            <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[120px] mix-blend-screen animate-pulse" />
-            <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-[120px] mix-blend-screen animate-pulse delay-1000" />
-
-            <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10">
-
-                {/* Left Column: Main Card & Chart */}
-                <div className="lg:col-span-2 space-y-6">
-                    {/* Header */}
-                    <header className="flex justify-between items-center mb-8">
-                        <div>
-                            <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral-400">
-                                {t('title')}
-                            </h1>
-                            <p className="text-sm text-neutral-400">{t('welcome')}</p>
-                        </div>
-                        <button className="p-2 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 transition-colors">
-                            <Bell className="w-5 h-5 text-neutral-300" />
-                        </button>
-                    </header>
-
-                    {/* Glass Card - Balance */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 relative overflow-hidden group"
-                    >
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                        <div className="relative z-10 flex justify-between items-start">
-                            <div>
-                                <p className="text-neutral-400 mb-2">{t('card_balance')}</p>
-                                <h2 className="text-5xl font-bold tracking-tight">$24,562.00</h2>
-                                <div className="flex items-center gap-2 mt-4 text-emerald-400 bg-emerald-400/10 px-3 py-1 rounded-full w-fit">
-                                    <ArrowUpRight className="w-4 h-4" />
-                                    <span className="text-sm font-medium">+2.5% {t('this_week')}</span>
-                                </div>
-                            </div>
-                            <div className="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center shadow-lg shadow-cyan-500/20">
-                                <Wallet className="w-6 h-6 text-white" />
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    {/* Chart Section */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 }}
-                        className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 h-[300px]"
-                    >
-                        <h3 className="text-lg font-semibold mb-6">{t('spending_overview')}</h3>
-                        <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={data}>
-                                <defs>
-                                    <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.3} />
-                                        <stop offset="95%" stopColor="#06b6d4" stopOpacity={0} />
-                                    </linearGradient>
-                                </defs>
-                                <Tooltip
-                                    contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155', borderRadius: '12px', color: '#fff' }}
-                                    itemStyle={{ color: '#fff' }}
-                                />
-                                <Area
-                                    type="monotone"
-                                    dataKey="value"
-                                    stroke="#06b6d4"
-                                    strokeWidth={3}
-                                    fillOpacity={1}
-                                    fill="url(#colorValue)"
-                                />
-                            </AreaChart>
-                        </ResponsiveContainer>
-                    </motion.div>
+        <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-emerald-500/30 pt-20">
+            {/* Nav */}
+            <nav className="flex items-center justify-between px-6 py-6 sticky top-0 bg-[#0a0a0a]/80 backdrop-blur-md z-40 border-b border-white/5">
+                <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center font-bold">N</div>
+                    <span className="font-bold tracking-tight">NeoBank</span>
                 </div>
-
-                {/* Right Column: Cards & Transactions */}
-                <div className="space-y-6">
-                    {/* Virtual Card */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="h-[220px] w-full bg-gradient-to-br from-[#1e293b] to-[#0f172a] rounded-3xl p-6 relative overflow-hidden border border-white/10 shadow-2xl"
-                        style={{
-                            backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")',
-                        }}
-                    >
-                        {/* Mesh Gradient Emulation */}
-                        <div className="absolute top-[-50%] right-[-50%] w-[100%] h-[100%] bg-purple-500/40 blur-[60px] rounded-full" />
-                        <div className="absolute bottom-[-20%] left-[-20%] w-[80%] h-[80%] bg-cyan-500/40 blur-[60px] rounded-full" />
-
-                        <div className="relative z-10 flex flex-col justify-between h-full">
-                            <div className="flex justify-between items-center">
-                                <span className="font-mono text-white/60">{t('virtual_card')}</span>
-                                <CreditCard className="w-6 h-6 text-white/80" />
-                            </div>
-                            <div>
-                                <p className="font-mono text-xl tracking-widest text-white mb-2">**** **** **** 4289</p>
-                                <div className="flex justify-between items-end">
-                                    <div>
-                                        <p className="text-xs text-white/40 uppercase mb-1">{t('card_holder')}</p>
-                                        <p className="font-medium text-white">ALEXANDRE S.</p>
-                                    </div>
-                                    <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md" />
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    {/* Recent Transactions */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 }}
-                        className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6"
-                    >
-                        <div className="flex justify-between items-center mb-6">
-                            <h3 className="text-lg font-semibold">{t('transactions')}</h3>
-                            <button className="text-sm text-neutral-400 hover:text-white transition-colors">{t('see_all')}</button>
-                        </div>
-
-                        <div className="space-y-4">
-                            {transactions.map((tx, i) => (
-                                <div key={tx.id} className="flex items-center justify-between group cursor-pointer">
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-10 h-10 rounded-full bg-white/5 border border-white/5 flex items-center justify-center text-lg group-hover:bg-white/10 transition-colors">
-                                            {tx.icon}
-                                        </div>
-                                        <div>
-                                            <p className="font-medium text-white">{t(`tx_types.${tx.nameId}`)}</p>
-                                            <p className="text-xs text-neutral-400">{tx.date}</p>
-                                        </div>
-                                    </div>
-                                    <p className={`font-medium ${tx.type === 'debit' ? 'text-white' : 'text-emerald-400'}`}>
-                                        {tx.amount}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-                    </motion.div>
+                <div className="hidden md:flex gap-8 text-sm text-neutral-400 font-medium">
+                    <a href="#" className="text-white">Dashboard</a>
+                    <a href="#" className="hover:text-white transition-colors">Transactions</a>
+                    <a href="#" className="hover:text-white transition-colors">Cards</a>
+                    <a href="#" className="hover:text-white transition-colors">Investments</a>
                 </div>
+                <div className="w-10 h-10 rounded-full bg-neutral-800 border border-white/10" />
+            </nav>
 
-                {/* New Section: Market & Goals (Full Width below) */}
-                <div className="col-span-1 lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6 pt-12">
+            <main className="p-4 md:p-8 max-w-7xl mx-auto space-y-8">
+                {/* Hero Section */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    {/* Balance Card */}
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        initial="hidden"
+                        whileInView="visible"
                         viewport={{ once: true }}
-                        className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8"
+                        variants={stagger}
+                        className="lg:col-span-2 space-y-8"
                     >
-                        <h3 className="text-xl font-semibold mb-6 flex items-center gap-3">
-                            <ArrowUpRight className="text-emerald-400" /> {t('market_trends')}
-                        </h3>
-                        <div className="h-[200px] w-full">
-                            {/* Simple Line Chart placeholder or SVG */}
-                            <div className="flex items-end justify-between h-full gap-2 px-2">
-                                {marketData.map((d, i) => (
-                                    <motion.div
-                                        key={i}
-                                        initial={{ height: 0 }}
-                                        whileInView={{ height: `${d.value}px` }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: i * 0.1, spring: { stiffness: 300, damping: 30 } }}
-                                        className="w-full bg-blue-500/50 rounded-t-lg hover:bg-blue-400 transition-colors relative group"
-                                    >
-                                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
-                                            {d.value}
+                        <motion.div variants={fadeInUp}>
+                            <h1 className="text-3xl md:text-4xl font-light text-neutral-400 mb-2">{t('welcome')}, Alexandre</h1>
+                            <p className="text-neutral-500 text-sm md:text-base">{t('dates.today')}</p>
+                        </motion.div>
+
+                        <motion.div variants={fadeInUp} className="p-6 md:p-8 rounded-3xl bg-gradient-to-br from-neutral-900 to-neutral-900/50 border border-white/5 relative overflow-hidden group">
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 group-hover:bg-emerald-500/20 transition-all duration-700" />
+
+                            <div className="relative z-10">
+                                <p className="text-neutral-400 mb-4 font-medium flex items-center gap-2">
+                                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                                    {t('total_balance')}
+                                </p>
+                                <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8">
+                                    $42,593<span className="text-emerald-500/50 text-3xl md:text-5xl">.00</span>
+                                </h2>
+
+                                <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
+                                    <button className="px-6 py-3 bg-white text-black rounded-xl font-bold hover:scale-105 active:scale-95 transition-all text-sm md:text-base">
+                                        {t('transfer')}
+                                    </button>
+                                    <button className="px-6 py-3 bg-white/5 text-white border border-white/10 rounded-xl font-medium hover:bg-white/10 transition-all text-sm md:text-base">
+                                        {t('request')}
+                                    </button>
+                                </div>
+                            </div>
+                        </motion.div>
+
+                        {/* Chart Area */}
+                        <motion.div variants={fadeInUp} className="p-6 md:p-8 rounded-3xl bg-neutral-900/50 border border-white/5 min-h-[300px] md:min-h-[400px]">
+                            <div className="flex items-center justify-between mb-8">
+                                <h3 className="text-xl font-semibold">{t('spending_overview')}</h3>
+                                <div className="flex gap-2">
+                                    {['1D', '1W', '1M', '1Y'].map((period) => (
+                                        <button
+                                            key={period}
+                                            className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${period === '1M' ? 'bg-emerald-500/20 text-emerald-400' : 'text-neutral-500 hover:text-white'
+                                                }`}
+                                        >
+                                            {period}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="h-48 md:h-64 flex items-end justify-between gap-1 md:gap-2">
+                                {data.map((d, i) => (
+                                    <div key={i} className="flex-1 flex flex-col justify-end group relative">
+                                        <div
+                                            className="w-full bg-emerald-500/20 rounded-t-sm group-hover:bg-emerald-400 transition-all duration-300 relative overflow-hidden"
+                                            style={{ height: `${d.value}%` }}
+                                        >
+                                            <div className="absolute inset-x-0 bottom-0 h-full bg-gradient-to-t from-emerald-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                                         </div>
-                                    </motion.div>
+                                        <p className="text-center text-[10px] md:text-xs text-neutral-500 mt-2 opacity-50 group-hover:opacity-100 transition-opacity">
+                                            {t(`months.${d.name.toLowerCase()}`)}
+                                        </p>
+                                    </div>
                                 ))}
                             </div>
-                        </div>
+                        </motion.div>
                     </motion.div>
+
+                    {/* Right Column */}
+                    <div className="space-y-8">
+                        {/* Cards */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            className="p-1 rounded-3xl bg-gradient-to-b from-white/10 to-transparent"
+                        >
+                            <div className="p-6 md:p-8 rounded-[22px] bg-neutral-900 backdrop-blur-xl relative overflow-hidden h-64 md:h-80 flex flex-col justify-between group">
+                                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 via-blue-500/10 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
+
+                                <div className="relative z-10 flex justify-between items-start">
+                                    <div className="w-12 h-8 rounded border border-white/20 flex items-center justify-center">
+                                        <div className="w-6 h-6 rounded-full bg-white/20 -ml-3" />
+                                        <div className="w-6 h-6 rounded-full bg-white/20 -ml-3" />
+                                    </div>
+                                    <span className="font-mono text-white/50">{t('virtual')}</span>
+                                </div>
+
+                                <div className="relative z-10">
+                                    <p className="font-mono text-lg md:text-xl tracking-widest mb-4">**** **** **** 4289</p>
+                                    <div className="flex justify-between items-end">
+                                        <div>
+                                            <p className="text-xs text-neutral-500 uppercase mb-1">Card Holder</p>
+                                            <p className="font-medium">ALEXANDRE S.</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-xs text-neutral-500 uppercase mb-1">Expires</p>
+                                            <p className="font-medium">12/28</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+
+                        {/* Recent Transactions */}
+                        <div className="p-6 md:p-8 rounded-3xl bg-neutral-900/50 border border-white/5">
+                            <h3 className="text-xl font-semibold mb-6">{t('recent_transactions')}</h3>
+                            <motion.div
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                variants={stagger}
+                                className="space-y-4"
+                            >
+                                {transactions.map((tx) => (
+                                    <motion.div variants={fadeInUp} key={tx.id} className="flex items-center justify-between group cursor-pointer hover:bg-white/5 p-2 md:p-0 rounded-xl md:rounded-none -mx-2 md:mx-0 transition-colors">
+                                        <div className="flex items-center gap-3 md:gap-4">
+                                            <div className="w-10 h-10 rounded-full bg-white/5 border border-white/5 flex items-center justify-center text-lg group-hover:bg-white/10 transition-colors shrink-0">
+                                                {tx.icon}
+                                            </div>
+                                            <div className="min-w-0">
+                                                <p className="font-medium text-white truncate">{t(`tx_types.${tx.nameId}`)}</p>
+                                                <p className="text-xs text-neutral-400">{tx.date}</p>
+                                            </div>
+                                        </div>
+                                        <p className={`font-medium whitespace-nowrap ${tx.type === 'debit' ? 'text-white' : 'text-emerald-400'}`}>
+                                            {tx.amount}
+                                        </p>
+                                    </motion.div>
+                                ))}
+                            </motion.div>
+                        </div >
+                    </div >
+                </div >
+
+                {/* Market Trends (Scroll Reveal) */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-8">
+                    <div className="p-6 rounded-2xl bg-neutral-900/30 border border-white/5">
+                        <h4 className="text-sm font-medium text-neutral-400 mb-2">{t('market_trends')}</h4>
+                        <div className="flex items-end gap-2 h-16">
+                            {marketData.map((d, i) => (
+                                <div key={i} className="flex-1 bg-emerald-500/20 rounded-sm hover:bg-emerald-500 transition-colors" style={{ height: `${d}%` }} />
+                            ))}
+                        </div>
+                    </div>
+                </div >
+
+                {/* Why Us Section */}
+                < div className="py-20 border-t border-white/5" >
+                    <div className="text-center mb-16">
+                        <motion.h2
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                            className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent"
+                        >
+                            {t('why_us.title')}
+                        </motion.h2>
+                    </div>
 
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        initial="hidden"
+                        whileInView="visible"
                         viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
-                        className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8"
+                        variants={stagger}
+                        className="grid grid-cols-1 md:grid-cols-3 gap-8"
                     >
-                        <h3 className="text-xl font-semibold mb-6 flex items-center gap-3">
-                            <Wallet className="text-purple-400" /> {t('savings_goals')}
-                        </h3>
-                        <div className="space-y-8">
-                            <div>
-                                <div className="flex justify-between text-sm mb-2">
-                                    <span>{t('goal_car')}</span>
-                                    <span className="text-emerald-400">75%</span>
+                        {[1, 2, 3].map((item) => (
+                            <motion.div variants={fadeInUp} key={item} className="p-8 rounded-3xl bg-neutral-900/50 border border-white/5 hover:border-emerald-500/30 transition-colors group">
+                                <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-2xl mb-6 text-emerald-500 group-hover:scale-110 transition-transform">
+                                    {['⚡️', '🛡️', '🌍'][item - 1]}
                                 </div>
-                                <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                                    <motion.div
-                                        initial={{ width: 0 }}
-                                        whileInView={{ width: '75%' }}
-                                        viewport={{ once: true }}
-                                        className="h-full bg-emerald-400 rounded-full"
-                                    />
-                                </div>
-                            </div>
-                            <div>
-                                <div className="flex justify-between text-sm mb-2">
-                                    <span>{t('goal_house')}</span>
-                                    <span className="text-amber-400">12%</span>
-                                </div>
-                                <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                                    <motion.div
-                                        initial={{ width: 0 }}
-                                        whileInView={{ width: '12%' }}
-                                        viewport={{ once: true }}
-                                        className="h-full bg-amber-400 rounded-full"
-                                    />
-                                </div>
-                            </div>
-                        </div>
+                                <h3 className="text-xl font-bold mb-4">{t(`why_us.f${item}`)}</h3>
+                                <p className="text-neutral-400 leading-relaxed">
+                                    {t(`why_us.d${item}`)}
+                                </p>
+                            </motion.div>
+                        ))}
                     </motion.div>
-                </div>
+                </div >
 
-            </motion.div>
-        </div>
-
-                {/* New Section: Why Us (Features) */ }
-    <div className="col-span-1 lg:col-span-3 py-12">
-        <motion.h3
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-2xl font-bold mb-8 text-center"
-        >
-            {t('why_us.title')}
-        </motion.h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-                { icon: Shield, key: 'f1', color: 'text-emerald-400', bg: 'bg-emerald-400/10' },
-                { icon: Zap, key: 'f2', color: 'text-yellow-400', bg: 'bg-yellow-400/10' },
-                { icon: Gift, key: 'f3', color: 'text-purple-400', bg: 'bg-purple-400/10' }
-            ].map((feature, i) => (
-                <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 20 }}
+                {/* CTA */}
+                < motion.div
+                    initial={{ opacity: 0, y: 50 }
+                    }
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    whileHover={{ y: -5 }}
-                    className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 text-center group cursor-default"
+                    transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
+                    className="rounded-[40px] bg-gradient-to-r from-emerald-600 to-emerald-900 p-8 md:p-12 text-center relative overflow-hidden"
                 >
-                    <div className={`w-12 h-12 mx-auto rounded-2xl ${feature.bg} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                        <feature.icon className={`w-6 h-6 ${feature.color}`} />
+                    <div className="relative z-10">
+                        <h2 className="text-3xl md:text-4xl font-bold mb-6">{t('cta.title')}</h2>
+                        <button className="px-8 py-4 bg-white text-black rounded-2xl font-bold hover:scale-105 transition-transform shadow-xl">
+                            {t('cta.button')}
+                        </button>
                     </div>
-                    <h4 className="font-bold text-lg mb-2">{t(`why_us.${feature.key}`)}</h4>
-                    <p className="text-neutral-400 text-sm">{t(`why_us.d${i + 1}`)}</p>
-                </motion.div>
-            ))}
-        </div>
-    </div>
-
-    {/* New Section: CTA */ }
-    <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        className="col-span-1 lg:col-span-3 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-3xl p-12 text-center relative overflow-hidden"
-    >
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
-        <div className="relative z-10">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">{t('cta.title')}</h2>
-            <button className="px-8 py-3 bg-white text-blue-600 rounded-full font-bold text-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.5)] transition-shadow duration-300 transform hover:scale-105 active:scale-95">
-                {t('cta.button')}
-            </button>
-        </div>
-    </motion.div>
-
-            </div >
+                    <div className="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
+                </motion.div >
+            </main >
         </div >
     );
 }
