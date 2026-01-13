@@ -340,12 +340,15 @@
                 "title": "Neo-Bank",
                 "desc": "Financial dashboard featuring glassmorphism and data visualization.",
                 "welcome": "Welcome back, Alexandre",
-                "card_balance": "Total Balance",
+                "total_balance": "Total Balance",
+                "transfer": "Transfer",
+                "request": "Request",
                 "spending_overview": "Spending Overview",
                 "this_week": "this week",
+                "virtual": "Virtual",
                 "virtual_card": "VIRTUAL CARD",
                 "card_holder": "CARD HOLDER",
-                "transactions": "Recent Transactions",
+                "recent_transactions": "Recent Transactions",
                 "see_all": "See all",
                 "market_trends": "Market Trends",
                 "savings_goals": "Savings Goals",
@@ -356,6 +359,32 @@
                     "salary": "Salary Deposit",
                     "uber": "Uber Drop",
                     "netflix": "Netflix Sub"
+                },
+                "dates": {
+                    "today": "Today",
+                    "yesterday": "Yesterday"
+                },
+                "why_us": {
+                    "title": "Why Choose Us?",
+                    "f1": "Maximum Security",
+                    "d1": "Your data is encrypted end-to-end.",
+                    "f2": "Lightning Speed",
+                    "d2": "Instant transactions anywhere in the world.",
+                    "f3": "Exclusive Rewards",
+                    "d3": "Earn cashback on every purchase."
+                },
+                "cta": {
+                    "title": "Ready to level up your finance?",
+                    "button": "Get Started Now"
+                },
+                "months": {
+                    "jan": "Jan",
+                    "feb": "Feb",
+                    "mar": "Mar",
+                    "apr": "Apr",
+                    "may": "May",
+                    "jun": "Jun",
+                    "jul": "Jul"
                 }
             },
             "fashion": {
@@ -366,36 +395,46 @@
                 "redefined": "REDEFINED",
                 "quote": "\"Fashion is not something that exists in dresses only.\"",
                 "subquote": "Style is a simple way of saying complicated things.",
-                "discover": "DISCOVER THE SEASON",
+                "discover": "DISCOVER SEASON",
                 "lookbook": "Lookbook",
                 "chapter1": "Chapter 01: Dawn",
                 "chapter2": "Chapter 02: Dusk",
-                "footer_contact": "Press Inquiries"
+                "look_dawn": "LOOK 01 / DAWN",
+                "look_dusk": "LOOK 02 / DUSK",
+                "manifesto_title": "Manifesto",
+                "manifesto_text": "Style is a simple way of saying complicated things. It is about elegance, projection, and the absolute refusal of the mundane.",
+                "magnetic_cta": "Explore the Collection",
+                "footer_contact": "FASHION HOUSE"
             },
             "agency": {
                 "title": "Brutalist Agency",
                 "desc": "Bold design and kinetic typography.",
-                "menu": {
-                    "work": "Work",
-                    "manifesto": "Manifesto",
-                    "contact": "Contact"
-                },
-                "marquee_break": "WE BREAK THINGS",
-                "marquee_build": "WE BUILD THINGS",
-                "cell_strategy": {
+                "hero_desc": "We create the digital chaos that defines your brand.",
+                "strategy": {
                     "title": "Strategy",
                     "desc": "Defining the chaos before it defines you."
                 },
-                "cell_design": {
+                "design": {
                     "title": "Design",
-                    "desc": "Making it pop, crackle, and snap."
+                    "desc": "Raw, bold, and impossible to ignore."
                 },
-                "cell_dev": {
+                "development": {
                     "title": "Development",
-                    "desc": "Code that compiles with your soul."
+                    "desc": "Robust code for seamless experiences."
                 },
-                "selected_works": "SELECTED WORKS",
-                "footer_talk": "LET'S TALK"
+                "capabilities": {
+                    "title": "Capabilities",
+                    "c1": "Art Direction",
+                    "c2": "Web Development",
+                    "c3": "Brand Identity",
+                    "c4": "Creative Content",
+                    "c5": "3D Experiences"
+                },
+                "contact_placeholder": "YOUR@EMAIL.HERE",
+                "marquee_capabilities": {
+                    "top": "DIGITAL CREATION • ART & CODE • DESIGN SYSTEM •",
+                    "bottom": "BRAND STRATEGY • WEB DEVELOPMENT • UX/UI • "
+                }
             }
         }
     }

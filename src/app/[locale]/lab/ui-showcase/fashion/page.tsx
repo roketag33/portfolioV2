@@ -13,14 +13,14 @@ export default function FashionPage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1 }}
-                className="absolute top-6 left-6 z-50"
+                className="fixed top-24 left-8 z-50 mix-blend-difference"
             >
                 <Link
                     href="/lab/ui-showcase"
-                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/10 text-white hover:bg-white/40 transition-all text-sm font-medium mix-blend-difference"
+                    className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/90 hover:text-black transition-all duration-300 text-sm font-medium tracking-widest uppercase cursor-pointer"
                 >
                     <ArrowLeft className="w-4 h-4" />
-                    Back
+                    <span>Back</span>
                 </Link>
             </motion.div>
 

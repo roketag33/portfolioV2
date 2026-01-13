@@ -340,12 +340,15 @@
                 "title": "Neo-Bank",
                 "desc": "Dashboard financier avec glassmorphism et visualisation de données.",
                 "welcome": "Heureux de vous revoir, Alexandre",
-                "card_balance": "Solde Total",
+                "total_balance": "Solde Total",
+                "transfer": "Virement",
+                "request": "Demander",
                 "spending_overview": "Aperçu des Dépenses",
                 "this_week": "cette semaine",
+                "virtual": "Virtuelle",
                 "virtual_card": "CARTE VIRTUELLE",
                 "card_holder": "TITULAIRE",
-                "transactions": "Transactions Récentes",
+                "recent_transactions": "Transactions Récentes",
                 "see_all": "Voir tout",
                 "market_trends": "Tendances du Marché",
                 "savings_goals": "Objectifs d'Épargne",
@@ -356,6 +359,32 @@
                     "salary": "Virement Salaire",
                     "uber": "Uber",
                     "netflix": "Abonnement Netflix"
+                },
+                "dates": {
+                    "today": "Aujourd'hui",
+                    "yesterday": "Hier"
+                },
+                "why_us": {
+                    "title": "Pourquoi nous choisir ?",
+                    "f1": "Sécurité Maximale",
+                    "d1": "Vos données sont cryptées de bout en bout.",
+                    "f2": "Vitesse Éclair",
+                    "d2": "Transactions instantanées partout dans le monde.",
+                    "f3": "Récompenses Exclusives",
+                    "d3": "Gagnez du cashback sur chaque achat."
+                },
+                "cta": {
+                    "title": "Prêt à passer au niveau supérieur ?",
+                    "button": "Commencer maintenant"
+                },
+                "months": {
+                    "jan": "Jan",
+                    "feb": "Fév",
+                    "mar": "Mar",
+                    "apr": "Avr",
+                    "may": "Mai",
+                    "jun": "Juin",
+                    "jul": "Juil"
                 }
             },
             "fashion": {
@@ -370,32 +399,42 @@
                 "lookbook": "Lookbook",
                 "chapter1": "Chapitre 01: L'Aube",
                 "chapter2": "Chapitre 02: Le Crépuscule",
-                "footer_contact": "Demandes Presse"
+                "look_dawn": "LOOK 01 / AUBE",
+                "look_dusk": "LOOK 02 / CRÉPUSCULE",
+                "manifesto_title": "Manifeste",
+                "manifesto_text": "Le style est une façon simple de dire des choses compliquées. C'est l'élégance, la projection et le refus absolu de la banalité.",
+                "magnetic_cta": "Explorer la Collection",
+                "footer_contact": "MAISON DE COUTURE"
             },
             "agency": {
                 "title": "Agence Brutaliste",
                 "desc": "Design audacieux et cinétique.",
-                "menu": {
-                    "work": "Projets",
-                    "manifesto": "Manifeste",
-                    "contact": "Contact"
-                },
-                "marquee_break": "NOUS CASSONS TOUT",
-                "marquee_build": "NOUS CRÉONS TOUT",
-                "cell_strategy": {
+                "hero_desc": "Nous créons le chaos numérique qui définit votre marque.",
+                "strategy": {
                     "title": "Stratégie",
                     "desc": "Définir le chaos avant qu'il ne vous définisse."
                 },
-                "cell_design": {
+                "design": {
                     "title": "Design",
-                    "desc": "Faire crépiter, claquer et exploser."
+                    "desc": "Brut, audacieux et impossible à ignorer."
                 },
-                "cell_dev": {
+                "development": {
                     "title": "Développement",
-                    "desc": "Du code qui compile avec votre âme."
+                    "desc": "Code robuste pour des expériences fluides."
                 },
-                "selected_works": "PROJETS RÉCENTS",
-                "footer_talk": "DISCUTONS"
+                "capabilities": {
+                    "title": "Capacités",
+                    "c1": "Direction Artistique",
+                    "c2": "Développement Web",
+                    "c3": "Identité de Marque",
+                    "c4": "Contenu Créatif",
+                    "c5": "Expériences 3D"
+                },
+                "contact_placeholder": "VOTRE@EMAIL.ICI",
+                "marquee_capabilities": {
+                    "top": "CRÉATION NUMÉRIQUE • ART & CODE • DESIGN SYSTEM •",
+                    "bottom": "STRATÉGIE DE MARQUE • DÉVELOPPEMENT WEB • UX/UI • "
+                }
             }
         }
     }
