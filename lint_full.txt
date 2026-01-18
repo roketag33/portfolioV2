@@ -1,0 +1,49 @@
+yarn run v1.22.22
+$ eslint
+(node:7156) ESLintIgnoreWarning: The ".eslintignore" file is no longer supported. Switch to using the "ignores" property in "eslint.config.js": https://eslint.org/docs/latest/use/configure/migration-guide#ignoring-files
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+C:\RealProject\Portfolio\src\app\[locale]\lab\button-showcase\page.tsx
+  4:10  warning  'useTranslations' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\RealProject\Portfolio\src\app\[locale]\lab\buttons\page.tsx
+  3:10  warning  'motion' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\RealProject\Portfolio\src\app\[locale]\lab\ui-showcase\bento\page.tsx
+  1:10  warning  'useTranslations' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\RealProject\Portfolio\src\app\[locale]\lab\ui-showcase\cyber\page.tsx
+  1:10  warning  'useTranslations' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\RealProject\Portfolio\src\components\lab\buttons\CyberButton.tsx
+   7:11  warning  'controls' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  24:11  warning  'skewVariants' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\RealProject\Portfolio\src\components\lab\buttons\MagneticButton.tsx
+  3:45  warning  'useTransform' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\RealProject\Portfolio\src\components\lab\galaxy-chaos\ParticleSystem.tsx
+  39:19  warning  't' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\RealProject\Portfolio\src\components\lab\perfect-circle\GameCanvas.tsx
+   4:10  warning  'motion' is defined but never used           @typescript-eslint/no-unused-vars
+   5:10  warning  'cn' is defined but never used               @typescript-eslint/no-unused-vars
+  22:12  warning  'center' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  23:12  warning  'radius' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  58:27  warning  'e' is defined but never used                @typescript-eslint/no-unused-vars
+
+C:\RealProject\Portfolio\src\components\lab\scroll-triggers\MaskReveal.tsx
+  16:11  warning  'clipPathSize' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\RealProject\Portfolio\src\components\lab\text-effects\ScrambleText.tsx
+  10:12  warning  'isHovered' is assigned a value but never used                                                               @typescript-eslint/no-unused-vars
+  10:23  warning  'setIsHovered' is assigned a value but never used                                                            @typescript-eslint/no-unused-vars
+  15:28  warning  'prev' is defined but never used                                                                             @typescript-eslint/no-unused-vars
+  37:8   warning  React Hook useEffect has a missing dependency: 'scramble'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\RealProject\Portfolio\src\components\lab\typing-racer\GameEngine.tsx
+  39:8  warning  React Hook useEffect has a missing dependency: 'isFocused'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+✖ 19 problems (0 errors, 19 warnings)
+
+Done in 6.18s.
