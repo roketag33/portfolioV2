@@ -14,7 +14,7 @@ const LAB_ITEMS = [
         year: '2026',
         tech: ['Canvas API', 'Maths', 'Framer Motion'],
         link: '/lab/perfect-circle',
-        image: '/images/lumina-canvas.png', // Placeholder
+        image: '/images/lab-previews/perfect-circle.png',
         color: '#22c55e'
     },
     {
@@ -22,7 +22,7 @@ const LAB_ITEMS = [
         year: '2025',
         tech: ['Recursion', 'Canvas', 'Maths'],
         link: '/lab/fractal',
-        image: '/images/abstract-matter.webp', // Placeholder
+        image: '/images/lab-previews/fractal-garden.png',
         color: '#f472b6'
     },
     {
@@ -30,23 +30,23 @@ const LAB_ITEMS = [
         year: '2025',
         tech: ['Game Loop', 'React', 'CRDT'],
         link: '/lab/snake',
-        image: '/images/neon-platformer.png', // Placeholder
+        image: '/images/lab-previews/retro-snake.png',
         color: '#eab308'
     },
     {
         id: 'typing-racer',
-        year: '2025', // Assuming year based on other items
-        tech: ['React', 'State Management', 'Typing'], // Placeholder tech
-        link: '/lab/typing-racer', // Placeholder link
-        image: '/images/typing-racer.png', // Placeholder image
-        color: '#a78bfa' // Placeholder color
+        year: '2025',
+        tech: ['React', 'State Management', 'Typing'],
+        link: '/lab/typing-racer',
+        image: '/images/lab-previews/typing-racer.png',
+        color: '#a78bfa'
     },
     {
         id: 'button-showcase',
         year: '2025',
         tech: ['Framer Motion', 'UI/UX', 'Components'],
         link: '/lab/buttons',
-        image: '/images/typing-racer.png', // Placeholder
+        image: '/images/lab-previews/button-showcase.png',
         color: '#6366f1'
     },
     {
@@ -54,7 +54,7 @@ const LAB_ITEMS = [
         year: '2025',
         tech: ['Typography', 'Framer Motion', 'Stagger'],
         link: '/lab/text-effects',
-        image: '/images/typing-racer.png', // Placeholder
+        image: '/images/lab-previews/text-effects.png',
         color: '#14b8a6'
     },
     {
@@ -62,23 +62,23 @@ const LAB_ITEMS = [
         year: '2025',
         tech: ['Scroll', 'Parallax', 'Sticky'],
         link: '/lab/scroll-triggers',
-        image: '/images/typing-racer.png', // Placeholder
+        image: '/images/lab-previews/scroll-triggers.png',
         color: '#f43f5e'
     },
     {
         id: 'ui-showcase',
-        year: '2025', // Placeholder year
-        tech: ['UI', 'Components', 'Animations'], // Placeholder tech
+        year: '2025',
+        tech: ['UI', 'Components', 'Animations'],
         link: '/lab/ui-showcase',
-        image: '/images/typing-racer.png', // Placeholder image
-        color: '#0ea5e9' // Placeholder color (blue-500 from the instruction's gradient)
+        image: '/images/lab-previews/ui-showcase.png',
+        color: '#0ea5e9'
     },
     {
         id: 'galaxy-chaos',
         year: '2026',
         tech: ['R3F', 'InstancedMesh', 'Physics'],
         link: '/lab/galaxy-chaos',
-        image: '/images/abstract-matter.webp', // Placeholder
+        image: '/images/lab-previews/galaxy-chaos.png',
         color: '#8b5cf6'
     },
     {
@@ -86,7 +86,7 @@ const LAB_ITEMS = [
         year: '2025',
         tech: ['R3F', 'Shaders', 'Physics'],
         link: '/lab/3d-card',
-        image: '/images/abstract-matter.webp',
+        image: '/images/lab-previews/abstract-matter.png',
         color: '#6366f1'
     },
     {
@@ -94,7 +94,7 @@ const LAB_ITEMS = [
         year: '2025',
         tech: ['Tone.js', 'Three.js', 'React'],
         link: '/lab/echo',
-        image: '/images/echo-grid.png',
+        image: '/images/lab-previews/echo-grid.png',
         color: '#ec4899'
     },
     {
@@ -102,7 +102,7 @@ const LAB_ITEMS = [
         year: '2025',
         tech: ['Canvas API', 'Physics', 'GenArt'],
         link: '/lab/lumina',
-        image: '/images/lumina-canvas.png',
+        image: '/images/lab-previews/lumina-canvas.png',
         color: '#06b6d4'
     },
     {
@@ -110,7 +110,7 @@ const LAB_ITEMS = [
         year: '2025',
         tech: ['WebSocket', 'Recharts', 'Next.js'],
         link: '/lab/crypto',
-        image: '/images/crypto-pulse.png',
+        image: '/images/lab-previews/crypto-pulse.png',
         color: '#10b981'
     },
     {
@@ -118,7 +118,7 @@ const LAB_ITEMS = [
         year: '2025',
         tech: ['R3F', 'Force Graph', 'Markdown'],
         link: '/lab/neural',
-        image: '/images/neural-nexus.png',
+        image: '/images/lab-previews/knowledge-graph.png',
         color: '#818cf8'
     },
     {
@@ -126,7 +126,7 @@ const LAB_ITEMS = [
         year: '2025',
         tech: ['Cannon.js', 'React Physics', 'R3F'],
         link: '/lab/gravity',
-        image: '/images/gravity-playground.png',
+        image: '/images/lab-previews/gravity-playground.png',
         color: '#f97316'
     },
     {
@@ -134,7 +134,7 @@ const LAB_ITEMS = [
         year: '2025',
         tech: ['Rapier', 'Ecctrl', 'R3F'],
         link: '/lab/platformer',
-        image: '/images/neon-platformer.png',
+        image: '/images/lab-previews/neon-platformer.png',
         color: '#2dd4bf'
     }
 ];
