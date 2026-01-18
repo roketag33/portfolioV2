@@ -4,6 +4,7 @@ import { toast } from 'sonner'
 import { usePathname } from '@/i18n/routingConfig'
 import MagneticButton from '@/components/ui/magnetic-button'
 import { useTranslations } from 'next-intl'
+import { NewsletterForm } from '@/components/features/NewsletterForm'
 
 export default function Footer() {
     const { unlock } = useGamification()
@@ -34,6 +35,7 @@ export default function Footer() {
                     <button onClick={handleCopyEmail} className="text-xl text-primary hover:underline text-center md:text-left w-full md:w-auto">
                         contact@alexandresarrazin.fr
                     </button>
+                    <NewsletterForm />
                 </div>
 
                 <div className="flex flex-col items-center md:items-end gap-4">

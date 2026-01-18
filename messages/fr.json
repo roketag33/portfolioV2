@@ -72,7 +72,13 @@
         "item_linkedin": "LinkedIn",
         "rights": "Tous droits réservés.",
         "terminal_hint": "Ouvrir le Terminal",
-        "system_ready": "SYSTÈME PRÊT"
+        "system_ready": "SYSTÈME PRÊT",
+        "Newsletter": {
+            "placeholder": "Votre email...",
+            "success": "Inscription réussie !",
+            "error": "Erreur lors de l'inscription.",
+            "cta": "S'inscrire"
+        }
     },
     "Blog": {
         "title": "Blog | Réflexions & Insights",

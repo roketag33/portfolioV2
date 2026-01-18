@@ -7,4 +7,8 @@ export const contactSchema = z.object({
     message: z.string().min(10, { message: "Message must be at least 10 characters." }),
 })
 
+export const newsletterSchema = z.object({
+    email: z.string().email({ message: "Invalid email address." }),
+})
+
 export type ContactFormValues = z.infer<typeof contactSchema>

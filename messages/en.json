@@ -72,7 +72,13 @@
         "item_linkedin": "LinkedIn",
         "rights": "All rights reserved.",
         "terminal_hint": "Open Terminal",
-        "system_ready": "SYSTEM READY"
+        "system_ready": "SYSTEM READY",
+        "Newsletter": {
+            "placeholder": "Your email...",
+            "success": "Subscribed successfully!",
+            "error": "Failed to subscribe.",
+            "cta": "Subscribe"
+        }
     },
     "Blog": {
         "title": "Blog | Thoughts & Insights",
