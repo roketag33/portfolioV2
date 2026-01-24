@@ -18,9 +18,9 @@
 - [x] [Deployment] Déployer sur Vercel (Analytics added, Build verified)
 
 ## Lab & Content
-- [ ] [Lab] Ajouter des expériences (Jeux type Snake/Morpion, Fractales, etc.) - Arrêter la 3D simple
-- [ ] [Lab] Ajouter des sets d'animations (scroll animations, etc.) - Voir pour sous-repos/modules
-- [ ] [Lab/Showcase] Ajouter des "Fake Interfaces" style Fiverr/Malt pour montrer des skills UI/UX avancés (animations, couleurs, techno)
+- [x] [Lab] Ajouter des expériences (Jeux type Snake/Morpion, Fractales, etc.) - Arrêter la 3D simple
+- [x] [Lab] Ajouter des sets d'animations (scroll animations, etc.) - Voir pour sous-repos/modules
+- [x] [Lab/Showcase] Ajouter des "Fake Interfaces" style Fiverr/Malt pour montrer des skills UI/UX avancés (animations, couleurs, techno)
 
 ## Architecture & Refactor
 - [ ] [Editor] Transformer l'éditeur d'article en librairie
@@ -69,3 +69,7 @@
 - [x] [lab] Neon Platformer broken (Fixed with 2D mode) ✅
 - [x] [lab] Second Brain : Animation cachée par le texte
 - [x] [footer] Lien Github : Comportement étrange mais pas d'erreur ?
+
+
+- [ ] [lab showcase] verifier le responsive des showcase d'app et d'animation 
+- [ ][all] ajouter au chargement du site une page de chargement comme sur les autres sites  awwwwards car sur cetaines pc ca rame un peu et en profiter pour afficher une  petite explications un peu misterieuse sur les achievement pour inciter a chercher

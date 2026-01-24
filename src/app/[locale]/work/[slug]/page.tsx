@@ -8,6 +8,7 @@ import { ArrowLeft, Github, ExternalLink, Code2, Tag } from 'lucide-react'
 import { PROJECTS } from '@/data/projects'
 // import { cn } from '@/lib/utils'
 import MagneticButton from '@/components/ui/magnetic-button'
+import ProjectGallery from '@/components/features/ProjectGallery'
 
 export default function ProjectDetail() {
     const params = useParams()
@@ -168,31 +169,7 @@ export default function ProjectDetail() {
 
                         {/* Gallery */}
                         {project.gallery && project.gallery.length > 0 && (
-                            <div className="space-y-8">
-                                <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                                    <span className="w-8 h-1 bg-emerald-500 rounded-full" />
-                                    Gallery
-                                </h3>
-                                <div className="grid grid-cols-1 gap-8">
-                                    {project.gallery.map((img, i) => (
-                                        <motion.div
-                                            key={i}
-                                            initial={{ opacity: 0, y: 50 }}
-                                            whileInView={{ opacity: 1, y: 0 }}
-                                            transition={{ delay: i * 0.1 }}
-                                            viewport={{ once: true }}
-                                            className="relative aspect-video rounded-xl overflow-hidden shadow-2xl border border-neutral-200 dark:border-neutral-800"
-                                        >
-                                            <Image
-                                                src={img}
-                                                alt={`${project.title} screenshot ${i + 1}`}
-                                                fill
-                                                className="object-cover hover:scale-105 transition-transform duration-700"
-                                            />
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </div>
+                            <ProjectGallery images={project.gallery} title={project.title} />
                         )}
                     </div>
                 </div>

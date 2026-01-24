@@ -164,8 +164,8 @@ function ProjectCard({ project, index, variant = 0 }: { project: Project, index:
                 href={`/work/${project.id}`}
                 className="block group/card relative"
             >
-                {/* Image Container - Colors Restored, Clean Shadow */}
-                <div className="relative aspect-[3/4] overflow-hidden bg-neutral-100 transition-all duration-700 shadow-sm group-hover/card:shadow-xl rounded-sm">
+                {/* Image Container - Video Ratio to show full screenshot */}
+                <div className="relative aspect-video overflow-hidden bg-neutral-100 transition-all duration-700 shadow-sm group-hover/card:shadow-xl rounded-sm">
                     <Image
                         src={project.image}
                         alt={project.title}
@@ -174,10 +174,10 @@ function ProjectCard({ project, index, variant = 0 }: { project: Project, index:
                     />
 
                     {/* Desktop Overlay - Dark Gradient for Text Contrast */}
-                    <div className="hidden md:flex absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex-col justify-end p-8">
+                    <div className="hidden md:flex absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex-col justify-end p-6">
                         <div className="transform translate-y-4 group-hover/card:translate-y-0 transition-transform duration-300">
                             <div className="flex justify-between items-end mb-2">
-                                <h3 className="text-xl font-bold text-white uppercase tracking-tight">{project.title}</h3>
+                                <h3 className="text-lg font-bold text-white uppercase tracking-tight">{project.title}</h3>
                                 <ArrowUpRight className="text-emerald-400 w-5 h-5 mb-1 opacity-0 group-hover/card:opacity-100 transition-opacity delay-100" />
                             </div>
 
@@ -189,7 +189,7 @@ function ProjectCard({ project, index, variant = 0 }: { project: Project, index:
                                 ))}
                             </div>
 
-                            <p className="text-xs text-neutral-200 line-clamp-3 leading-relaxed font-medium">
+                            <p className="text-xs text-neutral-300 line-clamp-2 leading-relaxed font-medium">
                                 {project.desc}
                             </p>
                         </div>
@@ -199,7 +199,7 @@ function ProjectCard({ project, index, variant = 0 }: { project: Project, index:
                 {/* Mobile Content */}
                 <div className="md:hidden flex flex-col pt-4 space-y-3">
                     <div className="flex justify-between items-center">
-                        <h3 className="text-2xl font-black text-white uppercase tracking-tighter">{project.title}</h3>
+                        <h3 className="text-xl font-black text-white uppercase tracking-tighter">{project.title}</h3>
                         <ArrowUpRight className="text-emerald-500 w-5 h-5" />
                     </div>
 
