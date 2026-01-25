@@ -12,6 +12,7 @@ import { GamificationProvider } from "@/context/GamificationContext";
 
 import Terminal from '@/components/features/Terminal'
 import SpeedRunner from '@/components/features/SpeedRunner'
+import LoadingScreen from '@/components/ui/LoadingScreen'
 import { Toaster } from 'sonner'
 
 const geistSans = Geist({
@@ -57,6 +58,7 @@ export default async function LocaleLayout({
       >
         <NextIntlClientProvider messages={messages}>
           <GamificationProvider>
+            <LoadingScreen />
             <SmoothScroll>
               <Header />
               <SpeedRunner />

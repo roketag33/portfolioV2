@@ -524,5 +524,10 @@
                 "climate_target": "Cible"
             }
         }
+    },
+    "LoadingScreen": {
+        "initializing": "Initialisation du système...",
+        "searching": "Recherche de protocoles cachés...",
+        "achievements_hint": "Secrets tapis dans l'ombre : {count}/{total}. Saurez-vous tous les trouver ?"
     }
 }

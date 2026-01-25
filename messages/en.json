@@ -524,5 +524,10 @@
                 "climate_target": "Target"
             }
         }
+    },
+    "LoadingScreen": {
+        "initializing": "System initializing...",
+        "searching": "Searching for hidden protocols...",
+        "achievements_hint": "Secrets lurking in the shadows: {count}/{total}. Can you find them all?"
     }
 }

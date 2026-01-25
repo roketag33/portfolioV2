@@ -44,9 +44,9 @@
 - [x] [site]   verifier la securité sur le /admin
 - [x] [site]   plein de jeux ne functione pas en mobile a cause de la gesture
 
-- [ ] [work] changer les images generer par ia pour utiliser les vraies images des projets   
-- [ ] [work] faire des vraies textes dans les pages des projets 
-- [ ] [site] changer toute les images par des images propres 
+- [x] [work] changer les images generer par ia pour utiliser les vraies images des projets   
+- [x] [work] faire des vraies textes dans les pages des projets 
+- [x] [site] changer toute les images par des images propres 
 
 - [x] [all] est ce que si je prend un nom de domaine chez vercel je peux me faire des adrsse mail avec ? 
 
@@ -72,4 +72,4 @@
 
 
 - [ ] [lab showcase] verifier le responsive des showcase d'app et d'animation 
-- [ ][all] ajouter au chargement du site une page de chargement comme sur les autres sites  awwwwards car sur cetaines pc ca rame un peu et en profiter pour afficher une  petite explications un peu misterieuse sur les achievement pour inciter a chercher
+- [x] [all] ajouter au chargement du site une page de chargement comme sur les autres sites  awwwwards car sur cetaines pc ca rame un peu et en profiter pour afficher une  petite explications un peu misterieuse sur les achievement pour inciter a chercher
