@@ -10,8 +10,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { GamificationProvider } from "@/context/GamificationContext";
 
-import Terminal from '@/components/features/Terminal'
-import SpeedRunner from '@/components/features/SpeedRunner'
+// import FeatureLoader from '@/components/layout/FeatureLoader'
 import LoadingScreen from '@/components/ui/LoadingScreen'
 import { Toaster } from 'sonner'
 
@@ -41,6 +40,13 @@ export const metadata: Metadata = {
   authors: [{ name: "Alexandre Sarrazin", url: "https://www.alexandresarrazin.fr" }],
   creator: "Alexandre Sarrazin",
   publisher: "Alexandre Sarrazin",
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en': '/en',
+      'fr': '/fr',
+    },
+  },
   formatDetection: {
     email: false,
     address: false,
@@ -52,13 +58,23 @@ export const metadata: Metadata = {
     url: 'https://www.alexandresarrazin.fr',
     siteName: 'Alexandre Sarrazin Portfolio',
     locale: 'fr_FR',
+    alternateLocale: 'en_US',
     type: 'website',
+    images: [
+      {
+        url: '/opengraph-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Alexandre Sarrazin - Portfolio',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: "Alexandre Sarrazin | Ingénieur Logiciel & Architecte",
     description: "Senior Software Engineer & Architect specializing in Cloud, IoT, Mobile, and Fullstack systems.",
-    creator: "@alex_sarrazin", // Assuming or placeholder
+    creator: "@alex_sarrazin",
+    images: ['/opengraph-image.png'],
   },
   robots: {
     index: true,
@@ -85,6 +101,9 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/icon" sizes="any" />
+      </head>
       <body
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} ${newsreader.variable} antialiased selection:bg-primary selection:text-primary-foreground`}
@@ -116,8 +135,7 @@ export default async function LocaleLayout({
             <LoadingScreen />
             <SmoothScroll>
               <Header />
-              <SpeedRunner />
-              <Terminal />
+              {/* <FeatureLoader /> */}
               {children}
               <Footer />
             </SmoothScroll>

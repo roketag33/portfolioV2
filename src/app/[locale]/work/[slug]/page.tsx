@@ -21,6 +21,27 @@ export default function ProjectDetail() {
     const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.2])
     const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.5])
 
+    // Structured Data for SEO
+    const jsonLd = project ? {
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        name: project.title,
+        description: project.desc,
+        image: project.image,
+        applicationCategory: 'Web Application', // Could be dynamic based on category
+        operatingSystem: 'Any',
+        offers: {
+            '@type': 'Offer',
+            price: '0',
+            priceCurrency: 'EUR'
+        },
+        author: {
+            '@type': 'Person',
+            name: 'Alexandre Sarrazin',
+            url: 'https://www.alexandresarrazin.fr'
+        }
+    } : null
+
     if (!project) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center bg-background text-foreground">
@@ -37,6 +58,12 @@ export default function ProjectDetail() {
 
     return (
         <main className="min-h-screen bg-background text-foreground selection:bg-emerald-500/30">
+            {jsonLd && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                />
+            )}
             {/* Navigation */}
             {/* Navigation */}
             <nav className="fixed top-24 left-0 z-40 px-6 flex items-center mix-blend-difference text-white pointer-events-none">

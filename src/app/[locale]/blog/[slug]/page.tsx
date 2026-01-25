@@ -16,8 +16,25 @@ export default async function BlogPost(props: { params: Promise<{ slug: string }
         notFound()
     }
 
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: post.title,
+        datePublished: post.date, // Assuming YYYY-MM-DD or compatible format
+        author: {
+            '@type': 'Person',
+            name: 'Alexandre Sarrazin',
+            url: 'https://www.alexandresarrazin.fr'
+        },
+        description: post.excerpt || post.content.substring(0, 150),
+    }
+
     return (
         <article className="min-h-screen pt-32 pb-20 px-6 bg-background text-foreground">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <BookwormTracker />
             <div className="max-w-3xl mx-auto">
                 <Link href="/blog" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-8 transition-colors">
