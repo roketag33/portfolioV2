@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl';
+// import { useTranslations } from 'next-intl';
 import CyberDashboard from '@/components/lab/ui-showcase/CyberDashboard';
 import { Metadata } from 'next';
 

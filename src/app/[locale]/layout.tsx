@@ -37,7 +37,40 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL('https://www.alexandresarrazin.fr'),
   description: "Senior Software Engineer & Architect specializing in Cloud, IoT, Mobile, and Fullstack systems. Building scalable solutions from hardware to cloud.",
-  // ... other metadata
+  keywords: ["Software Engineer", "Architect", "Fullstack", "IoT", "Cloud", "React", "Next.js", "TypeScript", "Node.js", "Freelance", "Bordeaux"],
+  authors: [{ name: "Alexandre Sarrazin", url: "https://www.alexandresarrazin.fr" }],
+  creator: "Alexandre Sarrazin",
+  publisher: "Alexandre Sarrazin",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    title: "Alexandre Sarrazin | Ingénieur Logiciel & Architecte",
+    description: "Senior Software Engineer & Architect specializing in Cloud, IoT, Mobile, and Fullstack systems.",
+    url: 'https://www.alexandresarrazin.fr',
+    siteName: 'Alexandre Sarrazin Portfolio',
+    locale: 'fr_FR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Alexandre Sarrazin | Ingénieur Logiciel & Architecte",
+    description: "Senior Software Engineer & Architect specializing in Cloud, IoT, Mobile, and Fullstack systems.",
+    creator: "@alex_sarrazin", // Assuming or placeholder
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default async function LocaleLayout({
@@ -56,6 +89,28 @@ export default async function LocaleLayout({
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} ${newsreader.variable} antialiased selection:bg-primary selection:text-primary-foreground`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Person',
+              name: 'Alexandre Sarrazin',
+              url: 'https://www.alexandresarrazin.fr',
+              jobTitle: 'Software Engineer & Architect',
+              description: 'Senior Software Engineer & Architect specializing in Cloud, IoT, Mobile, and Fullstack systems.',
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: 'Bordeaux',
+                addressCountry: 'FR'
+              },
+              sameAs: [
+                'https://github.com/roketag33',
+                'https://www.linkedin.com/in/alexandre-sarrazin-344b98210/'
+              ]
+            })
+          }}
+        />
         <NextIntlClientProvider messages={messages}>
           <GamificationProvider>
             <LoadingScreen />

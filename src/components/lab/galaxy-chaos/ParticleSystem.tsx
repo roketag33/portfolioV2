@@ -36,7 +36,7 @@ export default function ParticleSystem({ count, attractorStrength, damping, colo
     useEffect(() => {
         const temp = []
         for (let i = 0; i < count; i++) {
-            const t = Math.random() * 100
+            // const t = Math.random() * 100
 
             // Random spread - Massive spread for "space" feel
             const pX = (Math.random() - 0.5) * 200

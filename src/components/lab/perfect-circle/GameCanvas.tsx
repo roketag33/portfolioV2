@@ -1,8 +1,8 @@
 'use client'
 
 import { useRef, useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { cn } from '@/lib/utils'
+// import { motion } from 'framer-motion'
+// import { cn } from '@/lib/utils'
 
 interface Point {
     x: number
@@ -19,8 +19,8 @@ export default function GameCanvas({ onScoreCalculated, isResetting }: GameCanva
     const [isDrawing, setIsDrawing] = useState(false)
     const [points, setPoints] = useState<Point[]>([])
     const [feedback, setFeedback] = useState<string>('')
-    const [center, setCenter] = useState<Point | null>(null)
-    const [radius, setRadius] = useState<number | null>(null)
+    // const [center, setCenter] = useState<Point | null>(null)
+    // const [radius, setRadius] = useState<number | null>(null)
 
     // Reset canvas when parent requests it
     useEffect(() => {
@@ -33,8 +33,6 @@ export default function GameCanvas({ onScoreCalculated, isResetting }: GameCanva
                     ctx.clearRect(0, 0, canvas.width, canvas.height)
                     setPoints([])
                     setFeedback('')
-                    setCenter(null)
-                    setRadius(null)
                 }
             }, 0)
             return () => clearTimeout(timer)
@@ -55,12 +53,10 @@ export default function GameCanvas({ onScoreCalculated, isResetting }: GameCanva
         return () => window.removeEventListener('resize', handleResize)
     }, [])
 
-    const startDrawing = (e: React.MouseEvent | React.TouchEvent) => {
+    const startDrawing = () => {
         setIsDrawing(true)
         setPoints([])
         setFeedback('')
-        setCenter(null)
-        setRadius(null)
 
         const canvas = canvasRef.current
         if (canvas) {
@@ -123,7 +119,7 @@ export default function GameCanvas({ onScoreCalculated, isResetting }: GameCanva
         })
         const centerX = sumX / points.length
         const centerY = sumY / points.length
-        setCenter({ x: centerX, y: centerY })
+        // setCenter({ x: centerX, y: centerY })
 
         // 2. Calculate Mean Radius
         let sumRadius = 0
@@ -133,7 +129,7 @@ export default function GameCanvas({ onScoreCalculated, isResetting }: GameCanva
             return r
         })
         const meanRadius = sumRadius / points.length
-        setRadius(meanRadius)
+        // setRadius(meanRadius)
 
         // 3. Calculate Deviation (Variance from perfect circle)
         let sumDeviation = 0

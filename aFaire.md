@@ -14,7 +14,7 @@
 - [ ] [Newsletter] Mettre en place un système de newsletter
 - [x] [i18n] Ajouter le support multilingue (FR/EN)
 - [x] [SEO] Réfléchir à des optimisations SEO (Metadata added)
-- [ ] [SEO] Vérifier toutes les metadatas, le ranking SEO et ajouter un logo
+- [x] [SEO] Vérifier toutes les metadatas, le ranking SEO et ajouter un logo
 - [x] [Deployment] Déployer sur Vercel (Analytics added, Build verified)
 
 ## Lab & Content

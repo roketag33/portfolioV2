@@ -1,10 +1,10 @@
 'use client';
 
-import { motion, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 
 export default function CyberButton({ children = "CYBER::PUNK" }: { children?: React.ReactNode }) {
-    const controls = useAnimation();
+    // const controls = useAnimation();
     const [isHovered, setIsHovered] = useState(false);
 
     // Glitch animation variants
@@ -21,13 +21,13 @@ export default function CyberButton({ children = "CYBER::PUNK" }: { children?: R
         }
     };
 
-    const skewVariants = {
-        idle: { skewX: 0 },
-        hover: {
-            skewX: [0, 10, -10, 0],
-            transition: { duration: 0.2 }
-        }
-    }
+    // const skewVariants = {
+    //     idle: { skewX: 0 },
+    //     hover: {
+    //         skewX: [0, 10, -10, 0],
+    //         transition: { duration: 0.2 }
+    //     }
+    // }
 
     return (
         <motion.button

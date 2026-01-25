@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl';
+// import { useTranslations } from 'next-intl';
 import SmartHomeDashboard from '@/components/lab/ui-showcase/SmartHomeDashboard';
 import { Metadata } from 'next';
 

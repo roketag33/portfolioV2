@@ -36,7 +36,7 @@ export default function GameEngine() {
             const timer = setTimeout(() => setIsFocused(true), 0)
             return () => clearTimeout(timer)
         }
-    }, [currentSample])
+    }, [currentSample, isFocused])
 
     // Reset game
     const resetGame = useCallback(() => {

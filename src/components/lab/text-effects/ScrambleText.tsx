@@ -1,18 +1,18 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 
 const CHARS = '-_~`!@#$%^&*()+=[]{}|;:,.<>?';
 
 export default function ScrambleText({ text = "SCRAMBLE" }: { text: string }) {
     const [displayText, setDisplayText] = useState('');
-    const [isHovered, setIsHovered] = useState(false);
+    // const [isHovered, setIsHovered] = useState(false);
 
-    const scramble = () => {
+    const scramble = useCallback(() => {
         let iteration = 0;
         const interval = setInterval(() => {
-            setDisplayText(prev =>
+            setDisplayText(() =>
                 text
                     .split('')
                     .map((char, index) => {
@@ -30,11 +30,11 @@ export default function ScrambleText({ text = "SCRAMBLE" }: { text: string }) {
 
             iteration += 1 / 3;
         }, 30);
-    };
+    }, [text]);
 
     useEffect(() => {
         scramble();
-    }, [text]);
+    }, [scramble]);
 
     return (
         <motion.h1

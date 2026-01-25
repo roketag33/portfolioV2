@@ -13,7 +13,7 @@ export default function MaskReveal() {
         offset: ["start end", "end end"]
     });
 
-    const clipPathSize = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+    // const clipPathSize = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
     // Using a circle mask that grows
     const maskSize = useTransform(scrollYProgress, [0, 0.8], [0, 1500]);
 
