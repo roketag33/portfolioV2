@@ -1,10 +1,17 @@
 'use client'
+
+import dynamic from 'next/dynamic'
 import Hero from '@/components/features/Hero'
-import About from '@/components/features/About'
-import WorkList from '@/components/features/WorkList'
 import { useEffect } from 'react'
 import { useGamification } from '@/context/GamificationContext'
 import { VisualEffectsProvider } from '@/context/VisualEffectsContext'
+
+const About = dynamic(() => import('@/components/features/About'), {
+  loading: () => <div className="min-h-screen bg-background" /> // Placeholder to prevent CLS
+})
+const WorkList = dynamic(() => import('@/components/features/WorkList'), {
+  loading: () => <div className="min-h-[50vh] bg-background" />
+})
 
 export default function Home() {
   const { unlock } = useGamification()

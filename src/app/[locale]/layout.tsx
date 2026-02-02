@@ -1,6 +1,5 @@
-import type { Metadata } from "next";
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, getTranslations } from 'next-intl/server';
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Geist, Geist_Mono, Newsreader } from "next/font/google";
@@ -29,65 +28,74 @@ const newsreader = Newsreader({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "Alexandre Sarrazin | Ingénieur Logiciel & Architecte",
-    template: "%s | Alexandre Sarrazin"
-  },
-  metadataBase: new URL('https://www.alexandresarrazin.fr'),
-  description: "Senior Software Engineer & Architect specializing in Cloud, IoT, Mobile, and Fullstack systems. Building scalable solutions from hardware to cloud.",
-  keywords: ["Software Engineer", "Architect", "Fullstack", "IoT", "Cloud", "React", "Next.js", "TypeScript", "Node.js", "Freelance", "Bordeaux"],
-  authors: [{ name: "Alexandre Sarrazin", url: "https://www.alexandresarrazin.fr" }],
-  creator: "Alexandre Sarrazin",
-  publisher: "Alexandre Sarrazin",
-  alternates: {
-    canonical: '/',
-    languages: {
-      'en': '/en',
-      'fr': '/fr',
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
+
+  return {
+    title: {
+      default: "Alexandre Sarrazin | Ingénieur Logiciel & Architecte",
+      template: "%s | Alexandre Sarrazin"
     },
-  },
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  openGraph: {
-    title: "Alexandre Sarrazin | Ingénieur Logiciel & Architecte",
-    description: "Senior Software Engineer & Architect specializing in Cloud, IoT, Mobile, and Fullstack systems.",
-    url: 'https://www.alexandresarrazin.fr',
-    siteName: 'Alexandre Sarrazin Portfolio',
-    locale: 'fr_FR',
-    alternateLocale: 'en_US',
-    type: 'website',
-    images: [
-      {
-        url: '/opengraph-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Alexandre Sarrazin - Portfolio',
+    metadataBase: new URL('https://www.alexandresarrazin.fr'),
+    description: t('description'),
+    keywords: ["Software Engineer", "Architect", "Fullstack", "IoT", "Cloud", "React", "Next.js", "TypeScript", "Node.js", "Freelance", "Bordeaux"],
+    authors: [{ name: "Alexandre Sarrazin", url: "https://www.alexandresarrazin.fr" }],
+    creator: "Alexandre Sarrazin",
+    publisher: "Alexandre Sarrazin",
+    alternates: {
+      canonical: '/',
+      languages: {
+        'en': '/en',
+        'fr': '/fr',
       },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: "Alexandre Sarrazin | Ingénieur Logiciel & Architecte",
-    description: "Senior Software Engineer & Architect specializing in Cloud, IoT, Mobile, and Fullstack systems.",
-    creator: "@alex_sarrazin",
-    images: ['/opengraph-image.png'],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+    },
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+    openGraph: {
+      title: "Alexandre Sarrazin | Ingénieur Logiciel & Architecte",
+      description: t('description'),
+      url: 'https://www.alexandresarrazin.fr',
+      siteName: 'Alexandre Sarrazin Portfolio',
+      locale: locale === 'fr' ? 'fr_FR' : 'en_US',
+      alternateLocale: locale === 'fr' ? 'en_US' : 'fr_FR',
+      type: 'website',
+      images: [
+        {
+          url: '/opengraph-image.png',
+          width: 1200,
+          height: 630,
+          alt: 'Alexandre Sarrazin - Portfolio',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: "Alexandre Sarrazin | Ingénieur Logiciel & Architecte",
+      description: t('description'),
+      creator: "@alex_sarrazin",
+      images: ['/opengraph-image.png'],
+    },
+    robots: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
-  },
-};
+  };
+}
 
 export default async function LocaleLayout({
   children,
