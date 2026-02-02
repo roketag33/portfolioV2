@@ -42,7 +42,7 @@ export async function generateMetadata({
       template: "%s | Alexandre Sarrazin"
     },
     metadataBase: new URL('https://www.alexandresarrazin.fr'),
-    description: t('description'),
+    description: t('description') || "Senior Software Engineer & Architect",
     keywords: ["Software Engineer", "Architect", "Fullstack", "IoT", "Cloud", "React", "Next.js", "TypeScript", "Node.js", "Freelance", "Bordeaux"],
     authors: [{ name: "Alexandre Sarrazin", url: "https://www.alexandresarrazin.fr" }],
     creator: "Alexandre Sarrazin",
