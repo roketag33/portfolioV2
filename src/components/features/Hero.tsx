@@ -22,13 +22,13 @@ export default function Hero() {
                             <motion.div
                                 initial={{ y: "100%" }}
                                 animate={{ y: 0 }}
-                                transition={{ duration: 1.2, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                                transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                                 className="block"
                             >
                                 <HyperText
                                     text={line}
                                     className="text-[9vw] md:text-[7vw] xl:text-[8vw] leading-[0.85] font-black tracking-tighter uppercase text-foreground"
-                                    animateOnLoad={true}
+                                    animateOnLoad={false}
                                     framerProps={{
                                         initial: { opacity: 1, y: 0 },
                                         animate: { opacity: 1, y: 0 },
