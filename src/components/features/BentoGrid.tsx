@@ -90,7 +90,7 @@ const MinimalMap = () => (
         </div>
 
         <div className="relative z-10 pt-8">
-            <h4 className="text-2xl md:text-3xl font-light tracking-tighter text-white">Bordeaux</h4>
+            <p className="text-2xl md:text-3xl font-light tracking-tighter text-white">Bordeaux</p>
             <div className="w-8 h-[1px] bg-white/20 my-3" />
             <p className="text-neutral-400 text-xs font-mono uppercase tracking-widest">France</p>
         </div>

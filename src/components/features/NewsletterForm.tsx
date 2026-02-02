@@ -56,6 +56,7 @@ export function NewsletterForm() {
                 <button
                     type="submit"
                     disabled={isSubmitting}
+                    aria-label="S'inscrire à la newsletter"
                     className="absolute right-1 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-full bg-primary text-primary-foreground hover:scale-105 active:scale-95 disabled:opacity-50 disabled:hover:scale-100 transition-all"
                 >
                     {isSubmitting ? (

@@ -43,7 +43,7 @@ export default function Footer() {
                         <MagneticButton href="https://github.com/roketag33" external variant="primary" className="px-6 py-3 text-sm" onClick={handleSocial}>GitHub</MagneticButton>
                         <MagneticButton href="https://www.linkedin.com/in/alexandre-sarrazin-344b98210/" external variant="primary" className="px-6 py-3 text-sm" onClick={handleSocial}>LinkedIn</MagneticButton>
                     </div>
-                    <p className="text-xs text-muted-foreground uppercase opacity-50">
+                    <p className="text-xs text-muted-foreground uppercase">
                         {t('rights', { year: new Date().getFullYear() })}
                     </p>
                     <button

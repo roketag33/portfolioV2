@@ -20,7 +20,7 @@ export default function AchievementToast({ achievement, visible, onClose }: { ac
                     </div>
                     <div className="flex flex-col">
                         <span className="text-xs font-bold text-primary uppercase tracking-widest">Achievement Unlocked</span>
-                        <h4 className="text-sm font-bold text-white shadow-black drop-shadow-md">{achievement.title}</h4>
+                        <div className="text-sm font-bold text-white shadow-black drop-shadow-md">{achievement.title}</div>
                         <p className="text-xs text-zinc-400">{achievement.description}</p>
                     </div>
                 </motion.div>
