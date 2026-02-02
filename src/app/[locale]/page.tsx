@@ -1,5 +1,8 @@
 import HomeClient from './PageClient';
 
+// Force static generation to ensure metadata is in HTML, not streamed
+export const dynamic = 'force-static';
+
 const metaDescriptions: Record<string, string> = {
   en: "Senior Software Engineer & Architect specializing in Cloud, IoT, Mobile and Fullstack systems. Building scalable solutions from hardware to cloud.",
   fr: "Ingénieur Logiciel Senior & Architecte spécialisé Cloud, IoT, Mobile et systèmes Fullstack. Création de solutions évolutives du hardware au cloud."
