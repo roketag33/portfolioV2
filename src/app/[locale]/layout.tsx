@@ -59,6 +59,7 @@ export async function generateMetadata({
       address: false,
       telephone: false,
     },
+    manifest: '/manifest.json',
     openGraph: {
       title: "Alexandre Sarrazin | Ingénieur Logiciel & Architecte",
       description: t('description'),
@@ -109,9 +110,6 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/icon" sizes="any" />
-      </head>
       <body
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} ${newsreader.variable} antialiased selection:bg-primary selection:text-primary-foreground`}
