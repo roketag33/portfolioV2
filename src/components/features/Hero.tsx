@@ -56,16 +56,12 @@ export default function Hero() {
                     transition={{ delay: 1, duration: 0.5 }}
                     className="mt-10 flex gap-6"
                 >
-                    <Link href="/work" className="block">
-                        <MagneticButton variant="primary">
-                            {t('cta_work')}
-                        </MagneticButton>
-                    </Link>
-                    <Link href="/contact" className="block">
-                        <MagneticButton variant="secondary">
-                            {t('cta_contact')}
-                        </MagneticButton>
-                    </Link>
+                    <MagneticButton variant="primary" href="/work">
+                        {t('cta_work')}
+                    </MagneticButton>
+                    <MagneticButton variant="secondary" href="/contact">
+                        {t('cta_contact')}
+                    </MagneticButton>
                 </motion.div>
             </div>
 
