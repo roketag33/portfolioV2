@@ -139,7 +139,7 @@ export default async function LocaleLayout({
         />
         <NextIntlClientProvider messages={messages}>
           <GamificationProvider>
-            <LoadingScreen />
+            {/* <LoadingScreen /> */}
             <SmoothScroll>
               <Header />
               {/* <FeatureLoader /> */}
