@@ -28,13 +28,18 @@ const newsreader = Newsreader({
   subsets: ["latin"],
 });
 
+// Hardcoded metadata to ensure static SEO generation
+const metaDescriptions: Record<string, string> = {
+  en: "Senior Software Engineer & Architect specializing in Cloud, IoT, Mobile and Fullstack systems. Building scalable solutions from hardware to cloud.",
+  fr: "Ingénieur Logiciel Senior & Architecte spécialisé Cloud, IoT, Mobile et systèmes Fullstack. Création de solutions évolutives du hardware au cloud."
+};
+
 export async function generateMetadata({
   params
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'Metadata' });
 
   return {
     title: {
@@ -42,27 +47,30 @@ export async function generateMetadata({
       template: "%s | Alexandre Sarrazin"
     },
     metadataBase: new URL('https://www.alexandresarrazin.fr'),
-    description: t('description') || "Senior Software Engineer & Architect",
+    description: metaDescriptions[locale] || metaDescriptions['en'],
     keywords: ["Software Engineer", "Architect", "Fullstack", "IoT", "Cloud", "React", "Next.js", "TypeScript", "Node.js", "Freelance", "Bordeaux"],
     authors: [{ name: "Alexandre Sarrazin", url: "https://www.alexandresarrazin.fr" }],
     creator: "Alexandre Sarrazin",
     publisher: "Alexandre Sarrazin",
-    alternates: {
-      canonical: '/',
-      languages: {
-        'en': '/en',
-        'fr': '/fr',
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
       },
     },
-    formatDetection: {
-      email: false,
-      address: false,
-      telephone: false,
+    icons: {
+      icon: '/favicon.ico',
+      apple: '/apple-icon.png',
     },
     manifest: '/manifest.json',
     openGraph: {
       title: "Alexandre Sarrazin | Ingénieur Logiciel & Architecte",
-      description: t('description'),
+      description: metaDescriptions[locale] || metaDescriptions['en'],
       url: 'https://www.alexandresarrazin.fr',
       siteName: 'Alexandre Sarrazin Portfolio',
       locale: locale === 'fr' ? 'fr_FR' : 'en_US',
@@ -80,20 +88,9 @@ export async function generateMetadata({
     twitter: {
       card: 'summary_large_image',
       title: "Alexandre Sarrazin | Ingénieur Logiciel & Architecte",
-      description: t('description'),
+      description: metaDescriptions[locale] || metaDescriptions['en'],
       creator: "@alex_sarrazin",
       images: ['/opengraph-image.png'],
-    },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
     },
   };
 }
