@@ -20,7 +20,7 @@ export default function Hero() {
                     {title.split('|').map((line, i) => (
                         <div key={i} className="overflow-hidden flex justify-center">
                             <motion.div
-                                initial={{ y: "100%" }}
+                                initial={{ y: i === 0 ? 0 : "100%" }}
                                 animate={{ y: 0 }}
                                 transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                                 className="block"

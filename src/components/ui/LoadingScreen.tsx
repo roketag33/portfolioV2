@@ -20,12 +20,12 @@ export default function LoadingScreen() {
 
         // Sequence of "fake" loading steps
         const timers = [
-            setTimeout(() => setStep(1), 800),  // "Initializing..."
-            setTimeout(() => setStep(2), 2000), // "Searching..."
+            setTimeout(() => setStep(1), 400),  // "Initializing..."
+            setTimeout(() => setStep(2), 800), // "Searching..."
             setTimeout(() => {
                 setIsLoading(false);
                 document.body.style.overflow = '';
-            }, 3500) // Finish
+            }, 1200) // Finish
         ];
 
         return () => {
