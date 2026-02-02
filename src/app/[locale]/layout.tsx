@@ -12,6 +12,7 @@ import { GamificationProvider } from "@/context/GamificationContext";
 // import FeatureLoader from '@/components/layout/FeatureLoader'
 import LoadingScreen from '@/components/ui/LoadingScreen'
 import { Toaster } from 'sonner'
+import { LazyMotion, domAnimation } from 'framer-motion'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -140,12 +141,14 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <GamificationProvider>
             {/* <LoadingScreen /> */}
-            <SmoothScroll>
-              <Header />
-              {/* <FeatureLoader /> */}
-              {children}
-              <Footer />
-            </SmoothScroll>
+            <LazyMotion features={domAnimation}>
+              <SmoothScroll>
+                <Header />
+                {/* <FeatureLoader /> */}
+                {children}
+                <Footer />
+              </SmoothScroll>
+            </LazyMotion>
             <Toaster />
             <Analytics />
             <SpeedInsights />

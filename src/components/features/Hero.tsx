@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { Link } from '@/i18n/routingConfig'
 import MagneticButton from '@/components/ui/magnetic-button'
 import HyperText from '@/components/ui/hyper-text'
@@ -19,7 +19,7 @@ export default function Hero() {
                 <h1 className="text-[12vw] leading-[0.85] font-black tracking-tighter uppercase text-foreground">
                     {title.split('|').map((line, i) => (
                         <div key={i} className="overflow-hidden flex justify-center">
-                            <motion.div
+                            <m.div
                                 initial={{ y: i === 0 ? 0 : "100%" }}
                                 animate={{ y: 0 }}
                                 transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
@@ -35,12 +35,12 @@ export default function Hero() {
                                         exit: { opacity: 1, y: 0 },
                                     }}
                                 />
-                            </motion.div>
+                            </m.div>
                         </div>
                     ))}
                 </h1>
 
-                <motion.p
+                <m.p
                     initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
                     animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
                     transition={{ delay: 0.8, duration: 1 }}
@@ -48,9 +48,9 @@ export default function Hero() {
                     onClick={() => unlock('WHO_AM_I')}
                 >
                     {t('subtitle')}
-                </motion.p>
+                </m.p>
 
-                <motion.div
+                <m.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 1, duration: 0.5 }}
@@ -62,7 +62,7 @@ export default function Hero() {
                     <MagneticButton variant="secondary" href="/contact">
                         {t('cta_contact')}
                     </MagneticButton>
-                </motion.div>
+                </m.div>
             </div>
 
         </section>

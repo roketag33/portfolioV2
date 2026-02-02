@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, Variants, useInView } from "framer-motion";
+import { AnimatePresence, m, Variants, useInView } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface HyperTextProps {
@@ -85,11 +85,11 @@ export default function HyperText({
             triggerAnimation();
         }
 
-         
+
     }, [text, isInView, animateInView, animateOnLoad]);
 
     // Create a motion version of the component
-    const MotionComponent = motion(Component);
+    const MotionComponent = m(Component);
 
     return (
         <div

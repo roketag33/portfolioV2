@@ -1,6 +1,6 @@
 'use client'
 import { Link } from '@/i18n/routingConfig'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
@@ -16,7 +16,7 @@ export default function Header() {
 
     return (
         <>
-            <motion.header
+            <m.header
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -52,7 +52,7 @@ export default function Header() {
                         {isOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
                 </div>
-            </motion.header>
+            </m.header>
 
             {/* Portal Overlay */}
             <MobileMenuOverlay isOpen={isOpen} onClose={() => setIsOpen(false)} />
