@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import Hero from '@/components/features/Hero'
+import LazyView from '@/components/ui/LazyView'
 import { useEffect } from 'react'
 import { useGamification } from '@/context/GamificationContext'
 import { VisualEffectsProvider } from '@/context/VisualEffectsContext'
@@ -35,8 +36,12 @@ export default function Home() {
     <main className="min-h-screen bg-background text-foreground">
       <VisualEffectsProvider>
         <Hero />
-        <About />
-        <WorkList limit={3} showHeader={false} />
+        <LazyView>
+          <About />
+        </LazyView>
+        <LazyView>
+          <WorkList limit={3} showHeader={false} />
+        </LazyView>
       </VisualEffectsProvider>
     </main>
   )
