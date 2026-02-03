@@ -22,7 +22,7 @@ export default function Hero() {
                             <m.div
                                 initial={{ y: i === 0 ? 0 : "100%" }}
                                 animate={{ y: 0 }}
-                                transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                                transition={{ duration: 0.8, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
                                 className="block"
                             >
                                 <HyperText
@@ -43,7 +43,7 @@ export default function Hero() {
                 <m.p
                     initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
                     animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-                    transition={{ delay: 0.8, duration: 1 }}
+                    transition={{ delay: 0.2, duration: 0.5 }}
                     className="mt-6 text-lg md:text-xl text-muted-foreground uppercase tracking-widest max-w-lg cursor-pointer hover:text-primary transition-colors duration-300"
                     onClick={() => unlock('WHO_AM_I')}
                 >
@@ -53,7 +53,7 @@ export default function Hero() {
                 <m.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 1, duration: 0.5 }}
+                    transition={{ delay: 0.4, duration: 0.5 }}
                     className="mt-10 flex gap-6"
                 >
                     <MagneticButton variant="primary" href="/work">
