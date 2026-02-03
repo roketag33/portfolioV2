@@ -44,7 +44,7 @@ export default function Hero() {
                     initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
                     animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
                     transition={{ delay: 0.8, duration: 1 }}
-                    className="mt-6 text-lg md:text-xl text-neutral-400 uppercase tracking-widest max-w-lg cursor-pointer hover:text-primary transition-colors duration-300"
+                    className="mt-6 text-lg md:text-xl text-neutral-300 uppercase tracking-widest max-w-lg cursor-pointer hover:text-primary transition-colors duration-300"
                     onClick={() => unlock('WHO_AM_I')}
                 >
                     {t('subtitle')}
