@@ -8,9 +8,12 @@ import { Textarea } from '@/components/ui/textarea'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
+import { Button } from '@/components/ui/button'
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const MermaidComponent = ({ node, updateAttributes }: any) => {
+const MermaidComponent = ({ node, updateAttributes, editor }: any) => {
     const [code, setCode] = useState(node.attrs.code)
+    const [showCode, setShowCode] = useState(false)
     const [rendered, setRendered] = useState('')
     const [error, setError] = useState('')
     const ref = useRef<HTMLDivElement>(null)
@@ -70,14 +73,30 @@ const MermaidComponent = ({ node, updateAttributes }: any) => {
 
                 {error && <div className="text-red-400 text-sm mb-2 font-mono">{error}</div>}
 
+                {/* Code Editor Toggle */}
+                {editor.isEditable && (
+                    <div className="flex justify-end mb-2">
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => setShowCode(!showCode)}
+                            className="text-xs text-muted-foreground h-6"
+                        >
+                            {showCode ? 'Hide Code' : 'Edit Diagram'}
+                        </Button>
+                    </div>
+                )}
+
                 {/* Code Editor */}
-                <Textarea
-                    value={code}
-                    onChange={handleChange}
-                    className="font-mono text-sm bg-black/50 border-none resize-y"
-                    placeholder="Enter Mermaid syntax (e.g. graph TD; A-->B;)"
-                    rows={5}
-                />
+                {editor.isEditable && showCode && (
+                    <Textarea
+                        value={code}
+                        onChange={handleChange}
+                        className="font-mono text-sm bg-black/50 border-none resize-y"
+                        placeholder="Enter Mermaid syntax (e.g. graph TD; A-->B;)"
+                        rows={5}
+                    />
+                )}
             </Card>
         </NodeViewWrapper>
     )

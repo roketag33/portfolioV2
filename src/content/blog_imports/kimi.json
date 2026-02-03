@@ -1,0 +1,519 @@
+{
+    "title": "Kimi 2.5 : La Guerre du Contexte Infini a Commencé",
+    "excerpt": "Alors que Google et Anthropic se battent pour le million de tokens, Moonshot AI change la donne avec Kimi 2.5 et son 'Context Caching' qui rend l'infini accessible.",
+    "tags": [
+        "Kimi",
+        "LLM",
+        "Context Window",
+        "Moonshot AI"
+    ],
+    "readTime": "7 min",
+    "content": {
+        "type": "doc",
+        "content": [
+            {
+                "type": "heading",
+                "attrs": {
+                    "level": 1
+                },
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "L'Obsession de la Mémoire"
+                    }
+                ]
+            },
+            {
+                "type": "paragraph",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "Si 2023 était l'année de la qualité des modèles (GPT-4), 2024 et 2025 sont incontestablement celles de la "
+                    },
+                    {
+                        "type": "text",
+                        "marks": [
+                            {
+                                "type": "bold"
+                            }
+                        ],
+                        "text": "fenêtre de contexte"
+                    },
+                    {
+                        "type": "text",
+                        "text": "."
+                    }
+                ]
+            },
+            {
+                "type": "paragraph",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "Combien d'informations une IA peut-elle \"garder en tête\" simultanément ?"
+                    }
+                ]
+            },
+            {
+                "type": "bulletList",
+                "content": [
+                    {
+                        "type": "listItem",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "marks": [
+                                            {
+                                                "type": "bold"
+                                            }
+                                        ],
+                                        "text": "GPT-4"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " a commencé à 8k, puis 32k, puis 128k."
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "listItem",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "marks": [
+                                            {
+                                                "type": "bold"
+                                            }
+                                        ],
+                                        "text": "Claude 3"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " est monté à 200k."
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "listItem",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "marks": [
+                                            {
+                                                "type": "bold"
+                                            }
+                                        ],
+                                        "text": "Gemini 1.5 Pro"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " a brisé le plafond de verre avec 1 million, puis 2 millions de tokens."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "paragraph",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "Mais un challenger inattendu est venu bousculer les géants : "
+                    },
+                    {
+                        "type": "text",
+                        "marks": [
+                            {
+                                "type": "bold"
+                            }
+                        ],
+                        "text": "Moonshot AI"
+                    },
+                    {
+                        "type": "text",
+                        "text": " avec son modèle "
+                    },
+                    {
+                        "type": "text",
+                        "marks": [
+                            {
+                                "type": "bold"
+                            }
+                        ],
+                        "text": "Kimi"
+                    },
+                    {
+                        "type": "text",
+                        "text": "."
+                    }
+                ]
+            },
+            {
+                "type": "heading",
+                "attrs": {
+                    "level": 2
+                },
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "Kimi 2.5 : 2 Millions de Tokens et au-delà"
+                    }
+                ]
+            },
+            {
+                "type": "paragraph",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "Kimi 2.5 n'est pas juste un autre LLM. C'est une démonstration de force sur l'architecture \"Long Context\". Avec une capacité annoncée allant jusqu'à "
+                    },
+                    {
+                        "type": "text",
+                        "marks": [
+                            {
+                                "type": "bold"
+                            }
+                        ],
+                        "text": "10 millions de tokens"
+                    },
+                    {
+                        "type": "text",
+                        "text": " (via certaines bêtas), Kimi permet de charger littéralement des bibliothèques entières dans le prompt."
+                    }
+                ]
+            },
+            {
+                "type": "paragraph",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "Mais la taille ne fait pas tout. Le problème des grandes fenêtres de contexte, c'est :"
+                    }
+                ]
+            },
+            {
+                "type": "orderedList",
+                "content": [
+                    {
+                        "type": "listItem",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "marks": [
+                                            {
+                                                "type": "bold"
+                                            }
+                                        ],
+                                        "text": "La Latence"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " : Traiter 1 million de tokens prend du temps."
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "listItem",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "marks": [
+                                            {
+                                                "type": "bold"
+                                            }
+                                        ],
+                                        "text": "Le Coût"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " : Payer pour relire 1 million de tokens à chaque requête est ruineux."
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "listItem",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "marks": [
+                                            {
+                                                "type": "bold"
+                                            }
+                                        ],
+                                        "text": "L'Attention"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " : Le modèle perd-il le fil au milieu de 500 pages ?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "heading",
+                "attrs": {
+                    "level": 2
+                },
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "La Solution Secrète : Context Caching"
+                    }
+                ]
+            },
+            {
+                "type": "paragraph",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "C'est là que Kimi (et Gemini) innovent. Au lieu de recalculer les poids de l'attention pour tout le document à chaque question, ils introduisent le "
+                    },
+                    {
+                        "type": "text",
+                        "marks": [
+                            {
+                                "type": "bold"
+                            }
+                        ],
+                        "text": "Context Caching"
+                    },
+                    {
+                        "type": "text",
+                        "text": "."
+                    }
+                ]
+            },
+            {
+                "type": "callout",
+                "attrs": {
+                    "type": "success"
+                },
+                "content": [
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 3
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Le Concept du \"Prompt Cache\""
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Imaginez que vous uploadez la documentation technique complète de React (environ 2Mo de texte)."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "marks": [
+                                    {
+                                        "type": "bold"
+                                    }
+                                ],
+                                "text": "Sans Cache :"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Chaque fois que vous posez une question, le modèle relit tout. Coût : $$$$. Temps : Lent."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "marks": [
+                                    {
+                                        "type": "bold"
+                                    }
+                                ],
+                                "text": "Avec Cache (Kimi) :"
+                            },
+                            {
+                                "type": "text",
+                                "text": " Le modèle \"gèle\" l'état de sa mémoire après la lecture. Les questions suivantes ne coûtent que le prix de la question elle-même. Coût : ¢. Temps : Instantané."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "paragraph",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "Cette technologie transforme les LLM de \"processeurs de texte\" en véritables \"bases de connaissances dynamiques\"."
+                    }
+                ]
+            },
+            {
+                "type": "heading",
+                "attrs": {
+                    "level": 2
+                },
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "Pourquoi c'est important ?"
+                    }
+                ]
+            },
+            {
+                "type": "paragraph",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "Kimi 2.5 prouve que les startups agiles peuvent rivaliser avec les infrastructures de Google ou Microsoft sur des verticaux précis."
+                    }
+                ]
+            },
+            {
+                "type": "paragraph",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "Pour les développeurs, cela ouvre des portes incroyables :"
+                    }
+                ]
+            },
+            {
+                "type": "bulletList",
+                "content": [
+                    {
+                        "type": "listItem",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "marks": [
+                                            {
+                                                "type": "bold"
+                                            }
+                                        ],
+                                        "text": "Analyse de Codebase"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " : Donner tout le code source d'un projet legacy à l'IA pour qu'elle le comprenne globalement."
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "listItem",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "marks": [
+                                            {
+                                                "type": "bold"
+                                            }
+                                        ],
+                                        "text": "Droit et Finance"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " : Analyser des années de jurisprudence ou de rapports financiers en une seule pass."
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "listItem",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "marks": [
+                                            {
+                                                "type": "bold"
+                                            }
+                                        ],
+                                        "text": "Assistants Personnels"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " : Une IA qui se souvient de "
+                                    },
+                                    {
+                                        "type": "text",
+                                        "marks": [
+                                            {
+                                                "type": "italic"
+                                            }
+                                        ],
+                                        "text": "toutes"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " vos conversations, sans avoir à résumer ou compresser l'information, car elle garde tout en cache."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "paragraph",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "L'avenir n'est peut-être pas aux modèles plus intelligents, mais aux modèles qui ont simplement... plus de mémoire."
+                    }
+                ]
+            }
+        ]
+    }
+}

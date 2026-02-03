@@ -1,0 +1,329 @@
+{
+    "title": "RLM : Pourquoi la Récursivité est le Futur de l'IA",
+    "excerpt": "Au-delà des Transformers classiques, les Recursive Language Models (RLM) promettent d'apporter le raisonnement complexe et la planification aux modèles de langage.",
+    "tags": [
+        "RLM",
+        "Reasoning",
+        "System 2",
+        "AI Research"
+    ],
+    "readTime": "6 min",
+    "content": {
+        "type": "doc",
+        "content": [
+            {
+                "type": "heading",
+                "attrs": {
+                    "level": 1
+                },
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "Le Plafond de Verre des Transformers"
+                    }
+                ]
+            },
+            {
+                "type": "paragraph",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "Les LLM actuels (GPT-4, Llama 3) sont des prouesses statistiques. Ils prédisent le prochain mot avec une précision effrayante. Cependant, ils ont une faille fondamentale : ils \"pensent\" de manière linéaire."
+                    }
+                ]
+            },
+            {
+                "type": "paragraph",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "C'est ce qu'on appelle la pensée "
+                    },
+                    {
+                        "type": "text",
+                        "marks": [
+                            {
+                                "type": "bold"
+                            }
+                        ],
+                        "text": "Système 1"
+                    },
+                    {
+                        "type": "text",
+                        "text": " (rapide, intuitive, mais sujette aux erreurs). Pour résoudre des problèmes complexes (mathématiques avancées, codage d'architecture logicielle, découverte scientifique), nous avons besoin du "
+                    },
+                    {
+                        "type": "text",
+                        "marks": [
+                            {
+                                "type": "bold"
+                            }
+                        ],
+                        "text": "Système 2"
+                    },
+                    {
+                        "type": "text",
+                        "text": " : lent, délibératif, et logique."
+                    }
+                ]
+            },
+            {
+                "type": "heading",
+                "attrs": {
+                    "level": 2
+                },
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "Entrez les RLM (Recursive Language Models)"
+                    }
+                ]
+            },
+            {
+                "type": "paragraph",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "L'idée des RLM est d'introduire une boucle de rétroaction cognitive. Au lieu de générer une réponse d'un trait, le modèle :"
+                    }
+                ]
+            },
+            {
+                "type": "orderedList",
+                "content": [
+                    {
+                        "type": "listItem",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "marks": [
+                                            {
+                                                "type": "bold"
+                                            }
+                                        ],
+                                        "text": "Génère une sous-pensée"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " ou une étape intermédiaire."
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "listItem",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "marks": [
+                                            {
+                                                "type": "bold"
+                                            }
+                                        ],
+                                        "text": "Évalue"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " la validité de cette étape."
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "listItem",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "marks": [
+                                            {
+                                                "type": "bold"
+                                            }
+                                        ],
+                                        "text": "Affine ou Corrige"
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": " avant de passer à l'étape suivante."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "callout",
+                "attrs": {
+                    "type": "warning"
+                },
+                "content": [
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 3
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Pensée Linéaire vs Récursive"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Dans un LLM classique, une erreur au début de la génération se propage jusqu'à la fin (effet boule de neige). Dans un RLM, le modèle peut \"revenir en arrière\" (backtrack) s'il se rend compte qu'il a pris une mauvaise direction, simulant ainsi un véritable processus de réflexion."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "heading",
+                "attrs": {
+                    "level": 2
+                },
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "Les Initiatives Actuelles"
+                    }
+                ]
+            },
+            {
+                "type": "paragraph",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "Des projets comme "
+                    },
+                    {
+                        "type": "text",
+                        "marks": [
+                            {
+                                "type": "bold"
+                            }
+                        ],
+                        "text": "Strawberry (OpenAI o1)"
+                    },
+                    {
+                        "type": "text",
+                        "text": " ou les recherches de Google DeepMind sur le "
+                    },
+                    {
+                        "type": "text",
+                        "marks": [
+                            {
+                                "type": "bold"
+                            }
+                        ],
+                        "text": "Tree of Thoughts (ToT)"
+                    },
+                    {
+                        "type": "text",
+                        "text": " sont les pionniers de ce mouvement."
+                    }
+                ]
+            },
+            {
+                "type": "paragraph",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "Ces modèles utilisent le \"temps de calcul\" (compute-time) au moment de l'inférence. Ils \"réfléchissent\" avant de répondre. Cela signifie que pour des questions difficiles, ils peuvent prendre 10, 20 voire 60 secondes avant de sortir le premier token, mais la qualité de la réponse est exponentiellement supérieure."
+                    }
+                ]
+            },
+            {
+                "type": "heading",
+                "attrs": {
+                    "level": 2
+                },
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "L'Impact sur le Développement"
+                    }
+                ]
+            },
+            {
+                "type": "paragraph",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "Pour nous, développeurs, cela signifie l'arrivée d'agents capables de :"
+                    }
+                ]
+            },
+            {
+                "type": "bulletList",
+                "content": [
+                    {
+                        "type": "listItem",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "text": "Planifier des refontes d'architecture complètes sans halluciner."
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "listItem",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "text": "Déboguer des problèmes de race-conditions complexes en explorant plusieurs hypothèses."
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "listItem",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "text": "Écrire des programmes entiers de A à Z avec une cohérence maintenue du début à la fin."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "paragraph",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "La récursivité n'est pas juste un concept de code, c'est la structure même de l'intelligence supérieure."
+                    }
+                ]
+            }
+        ]
+    }
+}
