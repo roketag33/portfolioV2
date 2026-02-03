@@ -19,7 +19,7 @@ export async function generateMetadata({
     title: "Alexandre Sarrazin | Ingénieur Logiciel & Architecte",
     description: metaDescriptions[locale] || metaDescriptions['en'],
     alternates: {
-      canonical: 'https://www.alexandresarrazin.fr',
+      canonical: locale === 'en' ? 'https://www.alexandresarrazin.fr/en' : `https://www.alexandresarrazin.fr/${locale}`,
       languages: {
         'en': 'https://www.alexandresarrazin.fr/en',
         'fr': 'https://www.alexandresarrazin.fr/fr',

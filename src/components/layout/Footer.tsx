@@ -43,12 +43,12 @@ export default function Footer() {
                         <MagneticButton href="https://github.com/roketag33" external variant="primary" className="px-6 py-3 text-sm" onClick={handleSocial}>GitHub</MagneticButton>
                         <MagneticButton href="https://www.linkedin.com/in/alexandre-sarrazin-344b98210/" external variant="primary" className="px-6 py-3 text-sm" onClick={handleSocial}>LinkedIn</MagneticButton>
                     </div>
-                    <p className="text-xs text-muted-foreground uppercase">
+                    <p className="text-xs text-neutral-400 uppercase">
                         {t('rights', { year: new Date().getFullYear() })}
                     </p>
                     <button
                         onClick={() => window.dispatchEvent(new Event('portfolio:toggle-terminal'))}
-                        className="text-[10px] items-center gap-2 text-muted-foreground/60 hover:text-primary transition-colors font-mono hidden md:flex"
+                        className="text-[10px] items-center gap-2 text-neutral-500 hover:text-primary transition-colors font-mono hidden md:flex"
                         title={t('terminal_hint')}
                     >
                         <span>v2.0.4</span>

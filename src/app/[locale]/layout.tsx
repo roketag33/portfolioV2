@@ -110,7 +110,6 @@ export default async function LocaleLayout({
     <html lang={locale} suppressHydrationWarning>
       <head>
         <meta name="description" content={metaDescriptions[locale] || metaDescriptions['en']} />
-        <link rel="canonical" href={`https://www.alexandresarrazin.fr/${locale}`} />
       </head>
       <body
         suppressHydrationWarning
