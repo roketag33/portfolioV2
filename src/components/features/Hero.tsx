@@ -41,8 +41,8 @@ export default function Hero() {
                 </h1>
 
                 <m.p
-                    initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
-                    animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2, duration: 0.5 }}
                     className="mt-6 text-lg md:text-xl text-muted-foreground uppercase tracking-widest max-w-lg cursor-pointer hover:text-primary transition-colors duration-300"
                     onClick={() => unlock('WHO_AM_I')}
